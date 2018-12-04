@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>aspnet-ShareTravelSystem.Web-F7B8FC5B-A038-47A1-BD19-C128D7737249</UserSecretsId>
+    <UserSecretsId>aspnet-ShareTravelSystem.Web-AD851293-C83D-4D5C-A2D2-32DCFFE05AE9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
