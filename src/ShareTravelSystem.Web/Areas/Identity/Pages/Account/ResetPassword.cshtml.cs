@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ShareTravelSystem.Web.Areas.Identity.Data;
+using ShareTravelSystem.Data.Models;
 
 namespace ShareTravelSystem.Web.Areas.Identity.Pages.Account
 {

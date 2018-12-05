@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ShareTravelSystem.Web.Areas.Identity.Data;
+using ShareTravelSystem.Data.Models;
 
-namespace ShareTravelSystem.Web.Models
+namespace ShareTravelSystem.Data
 {
     public class ShareTravelSystemContext : IdentityDbContext<ShareTravelSystemUser>
     {

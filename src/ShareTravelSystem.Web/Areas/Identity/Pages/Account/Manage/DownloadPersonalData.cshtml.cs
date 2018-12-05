@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using ShareTravelSystem.Web.Areas.Identity.Data;
+using ShareTravelSystem.Data.Models;
 
 namespace ShareTravelSystem.Web.Areas.Identity.Pages.Account.Manage
 {
