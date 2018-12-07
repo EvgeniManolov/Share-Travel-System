@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace ShareTravelSystem.Data.Models
+﻿namespace ShareTravelSystem.Data.Models
 {
-    // Add profile data for application users by adding properties to the ShareTravelSystemUser class
+    using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
+
     public class ShareTravelSystemUser : IdentityUser
     {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();
     }
 }

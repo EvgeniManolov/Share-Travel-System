@@ -16,4 +16,14 @@
     <ProjectReference Include="..\ShareTravelSystem.Data\ShareTravelSystem.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Models\Account\RegisterViewModel.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>

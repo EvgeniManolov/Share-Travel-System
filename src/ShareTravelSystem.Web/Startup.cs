@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShareTravelSystem.Data.Models;
 using ShareTravelSystem.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace ShareTravelSystem.Web
 {
@@ -32,7 +33,8 @@ namespace ShareTravelSystem.Web
             services.AddDbContext<ShareTravelSystemContext>(options =>
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ShareTravelSystemUser>(
+
+            services.AddIdentity<ShareTravelSystemUser, Role>(
                 options =>
                 {
                     options.Password.RequiredLength = 6;
@@ -41,7 +43,8 @@ namespace ShareTravelSystem.Web
                     options.Password.RequireUppercase = false;
                     options.Password.RequireDigit = false;
                 })
-                .AddEntityFrameworkStores<ShareTravelSystemContext>();
+                .AddEntityFrameworkStores<ShareTravelSystemContext>()
+                .AddDefaultTokenProviders(); 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
