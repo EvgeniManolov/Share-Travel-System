@@ -1,5 +1,6 @@
 ﻿namespace ShareTravelSystem.Data.Models
 {
+    using ShareTravelSystem.Web.Areas.Identity.Data;
     using System;
 
     public class Announcement

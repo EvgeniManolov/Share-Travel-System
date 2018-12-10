@@ -2,28 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <UserSecretsId>aspnet-ShareTravelSystem.Web-AD851293-C83D-4D5C-A2D2-32DCFFE05AE9</UserSecretsId>
+    <UserSecretsId>aspnet-ShareTravelSystem.Web-021C7DE3-6171-4033-8575-0F27D5728A52</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\ShareTravelSystem.Data.Models\ShareTravelSystem.Data.Models.csproj" />
     <ProjectReference Include="..\ShareTravelSystem.Data\ShareTravelSystem.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Models\Account\RegisterViewModel.cs">
+    <Content Update="wwwroot\css\site.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Data.Models;
+    using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Threading.Tasks;
 
     public class AccountController : Controller

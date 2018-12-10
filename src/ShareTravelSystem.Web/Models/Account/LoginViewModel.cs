@@ -1,8 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace ShareTravelSystem.Web.Models
+﻿namespace ShareTravelSystem.Web.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class LoginViewModel
     {
         [Required]

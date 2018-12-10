@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ShareTravelSystem.Data;
+using ShareTravelSystem.Web.Models;
 
 namespace ShareTravelSystem.Data.Migrations
 {
@@ -133,26 +133,7 @@ namespace ShareTravelSystem.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ShareTravelSystem.Data.Models.Announcement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AuthorId");
-
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Announcements");
-                });
-
-            modelBuilder.Entity("ShareTravelSystem.Data.Models.ShareTravelSystemUser", b =>
+            modelBuilder.Entity("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -166,10 +147,6 @@ namespace ShareTravelSystem.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -217,7 +194,7 @@ namespace ShareTravelSystem.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ShareTravelSystem.Data.Models.ShareTravelSystemUser")
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -225,7 +202,7 @@ namespace ShareTravelSystem.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ShareTravelSystem.Data.Models.ShareTravelSystemUser")
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -238,7 +215,7 @@ namespace ShareTravelSystem.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ShareTravelSystem.Data.Models.ShareTravelSystemUser")
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -246,17 +223,10 @@ namespace ShareTravelSystem.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ShareTravelSystem.Data.Models.ShareTravelSystemUser")
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ShareTravelSystem.Data.Models.Announcement", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Data.Models.ShareTravelSystemUser", "Author")
-                        .WithMany("Announcements")
-                        .HasForeignKey("AuthorId");
                 });
 #pragma warning restore 612, 618
         }
