@@ -1,0 +1,12 @@
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.deps.json
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csprojAssemblyReference.cache
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csproj.CoreCompileInputs.cache
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.AssemblyInfoInputs.cache
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.AssemblyInfo.cs
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.Models.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.Models.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csproj.CopyComplete
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.pdb
