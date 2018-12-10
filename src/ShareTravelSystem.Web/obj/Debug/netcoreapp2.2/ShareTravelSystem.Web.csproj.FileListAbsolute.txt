@@ -67,3 +67,5 @@ C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.We
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.Data.Models.pdb
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.Data.pdb
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\wwwroot\css\site.css
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.g.cshtml.cs
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\obj\Debug\netcoreapp2.2\Razor\Views\Account\Register.g.cshtml.cs
