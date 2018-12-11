@@ -11,16 +11,14 @@
     public class AccountController : Controller
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;
-        private readonly RoleManager<Role> roleManager;
         private readonly SignInManager<ShareTravelSystemUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public AccountController(
             UserManager<ShareTravelSystemUser> userManager,
-            RoleManager<Role> roleManager,
             SignInManager<ShareTravelSystemUser> signInManager)
         {
             this.userManager = userManager;
-            this.roleManager = roleManager;
             this.signInManager = signInManager;
         }
 

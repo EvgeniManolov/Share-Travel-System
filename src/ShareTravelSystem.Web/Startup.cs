@@ -17,6 +17,8 @@ using ShareTravelSystem.Data.Models;
 using ShareTravelSystem.Web.Models;
 using ShareTravelSystem.Web.Areas.Identity.Data;
 using System.Data;
+using Microsoft.Extensions.Logging;
+using ShareTravelSystem.Web.Middlewares.Extensions;
 
 namespace ShareTravelSystem.Web
 {
@@ -44,7 +46,7 @@ namespace ShareTravelSystem.Web
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ShareTravelSystemUser>(
+            services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
                 options =>
                 {
                     options.Password.RequiredLength = 6;
@@ -60,7 +62,7 @@ namespace ShareTravelSystem.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env ,IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -74,6 +76,8 @@ namespace ShareTravelSystem.Web
                 app.UseHsts();
             }
 
+            // Middleware for seed roles
+            app.UseSeedRoles();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
