@@ -17,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ShareTravelSystem.Data.Models\ShareTravelSystem.Data.Models.csproj" />
     <ProjectReference Include="..\ShareTravelSystem.Data\ShareTravelSystem.Data.csproj" />
+    <ProjectReference Include="..\ShareTravelSystem.Services\ShareTravelSystem.Services.csproj" />
+    <ProjectReference Include="..\ShareTravelSystem.ViewModels\ShareTravelSystem.ViewModels.csproj" />
   </ItemGroup>
 
 

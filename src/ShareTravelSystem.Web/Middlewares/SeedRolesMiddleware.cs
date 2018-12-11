@@ -20,7 +20,7 @@
        
         public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider, UserManager<ShareTravelSystemUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var dbContext = serviceProvider.GetService<ShareTravelSystemContext>();
+            var dbContext = serviceProvider.GetService<ShareTravelSystemDbContext>();
        
             if (!dbContext.Roles.Any())
             {

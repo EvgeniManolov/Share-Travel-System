@@ -10,3 +10,15 @@ C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Da
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csproj.CopyComplete
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.dll
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.pdb
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.deps.json
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.dll
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.pdb
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.Models.dll
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\bin\Debug\netstandard2.0\ShareTravelSystem.Data.Models.pdb
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csprojAssemblyReference.cache
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csproj.CoreCompileInputs.cache
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.AssemblyInfoInputs.cache
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.AssemblyInfo.cs
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.csproj.CopyComplete
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.dll
+C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data\obj\Debug\netstandard2.0\ShareTravelSystem.Data.pdb

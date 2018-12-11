@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ShareTravelSystem.Web.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using ShareTravelSystem.Data.Models;
-using ShareTravelSystem.Web.Models;
-using ShareTravelSystem.Web.Areas.Identity.Data;
-using System.Data;
-using Microsoft.Extensions.Logging;
-using ShareTravelSystem.Web.Middlewares.Extensions;
-
-namespace ShareTravelSystem.Web
+﻿namespace ShareTravelSystem.Web
 {
+    using System;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using ShareTravelSystem.Web.Models;
+    using ShareTravelSystem.Web.Areas.Identity.Data;
+    using Microsoft.Extensions.Logging;
+    using ShareTravelSystem.Web.Middlewares.Extensions;
+    using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Services;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -42,9 +36,11 @@ namespace ShareTravelSystem.Web
             });
 
 
-            services.AddDbContext<ShareTravelSystemContext>(options =>
+            services.AddDbContext<ShareTravelSystemDbContext>(options =>
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IAccountService, AccountService>();
 
             services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
                 options =>
@@ -55,7 +51,7 @@ namespace ShareTravelSystem.Web
                     options.Password.RequireUppercase = false;
                     options.Password.RequireDigit = false;
                 })
-                .AddEntityFrameworkStores<ShareTravelSystemContext>()
+                .AddEntityFrameworkStores<ShareTravelSystemDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

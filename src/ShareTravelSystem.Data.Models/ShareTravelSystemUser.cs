@@ -11,6 +11,8 @@
 
         public string LastName { get; set; }
 
+        public string Address { get; set; }
+
         public ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();
     }
 }
