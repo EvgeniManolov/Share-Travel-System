@@ -18,3 +18,15 @@ C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Services\bin\Deb
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Services\obj\Debug\netstandard2.0\ShareTravelSystem.Services.csproj.CopyComplete
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Services\obj\Debug\netstandard2.0\ShareTravelSystem.Services.dll
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Services\obj\Debug\netstandard2.0\ShareTravelSystem.Services.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Services.deps.json
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Services.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Services.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Data.Models.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.ViewModels.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Data.Models.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.ViewModels.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\obj\Debug\netstandard2.0\ShareTravelSystem.Services.csproj.CopyComplete
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\obj\Debug\netstandard2.0\ShareTravelSystem.Services.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\obj\Debug\netstandard2.0\ShareTravelSystem.Services.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Data.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Services\bin\Debug\netstandard2.0\ShareTravelSystem.Data.pdb

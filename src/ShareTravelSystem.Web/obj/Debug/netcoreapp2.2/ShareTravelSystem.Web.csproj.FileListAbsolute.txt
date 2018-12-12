@@ -144,3 +144,9 @@ C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Web\bin\Debug\ne
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.ViewModels.pdb
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.Services.dll
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.Services.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.Services.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.ViewModels.dll
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.Services.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\ShareTravelSystem.ViewModels.pdb
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\obj\Debug\netcoreapp2.2\Razor\Views\Announcement\Create.g.cshtml.cs
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Web\bin\Debug\netcoreapp2.2\wwwroot\css\custom.css

@@ -141,6 +141,8 @@ namespace ShareTravelSystem.Data.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
+                    b.Property<string>("Title");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");

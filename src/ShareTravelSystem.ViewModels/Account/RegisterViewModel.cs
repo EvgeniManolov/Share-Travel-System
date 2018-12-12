@@ -31,6 +31,11 @@
         public string LastName { get; set; }
 
         [Required]
+        [StringLength(20, ErrorMessage = "Phone Number must be less than 20 symbols long.")]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [StringLength(150, ErrorMessage = "First Name must be less than 150 symbols long.")]
         [Display(Name = "Address")]
         public string Address { get; set; }

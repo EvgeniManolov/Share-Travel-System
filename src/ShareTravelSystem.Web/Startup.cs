@@ -41,6 +41,7 @@
                     this.Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAnnouncementService, AnnouncementService>();
 
             services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
                 options =>

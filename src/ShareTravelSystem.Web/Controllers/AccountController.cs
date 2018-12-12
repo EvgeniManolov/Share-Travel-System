@@ -82,7 +82,8 @@
                                                        Email = model.Email,
                                                        FirstName = model.FirstName,
                                                        LastName = model.LastName,
-                                                       Address = model.Address};
+                                                       Address = model.Address,
+                                                       PhoneNumber = model.PhoneNumber};
 
                 var result = await this.userManager.CreateAsync(user, model.Password);
 
@@ -105,6 +106,9 @@
 
             return View(model);
         }
+        
+
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
