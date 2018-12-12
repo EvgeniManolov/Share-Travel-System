@@ -2,19 +2,30 @@
 {
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
+    using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Models;
 
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IAnnouncementService announcementService;
+
+        public HomeController(IAnnouncementService announcementService)
         {
-            return View();
+            this.announcementService = announcementService;
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
-            return View();
+            var announcements = this.announcementService.GetAllAnnouncements();
+            var result = new DisplayAllAnnouncementsViewModel
+            {
+                Announcements = announcements
+            }
+            ;
+            return View(result);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

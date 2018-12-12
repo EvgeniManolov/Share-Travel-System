@@ -7,6 +7,8 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Models;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class AnnouncementService : IAnnouncementService
     {
@@ -20,7 +22,7 @@
             this.userManager = userManager;
         }
 
-        public  void Create(CreateAnnouncementViewModel model, string userid)
+        public void Create(CreateAnnouncementViewModel model, string userid)
         {
 
             this.db.Announcements.Add(new Announcement
@@ -33,6 +35,17 @@
 
 
             this.db.SaveChanges();
+        }
+
+        public List<DisplayAnnouncementViewModel> GetAllAnnouncements()
+        {
+            return this.db.Announcements.OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
+            {
+                Content = x.Content,
+                Title = x.Title,
+                CreateDate = x.CreateDate,
+                Author = x.Author.ToString()
+            }).Take(4).ToList();
         }
     }
 }

@@ -1722,7 +1722,7 @@
       ]
     },
     "Microsoft.AspNetCore.Authorization/2.2.0": {
-      "sha512": "suxW8TRGnI8aaRTB0NNHZ0scC7VBk3spNrwNHufiLOlS44PXTpLzK7mDUpte6B3uuWY00e+8FSudQWu92Be8Pg==",
+      "sha512": "/L0W8H3jMYWyaeA9gBJqS/tSWBegP9aaTM0mjRhxTttBY9z4RVDRYJ2CwPAmAXIuPr3r1sOw+CS8jFVRGHRezQ==",
       "type": "package",
       "path": "microsoft.aspnetcore.authorization/2.2.0",
       "files": [
@@ -1735,7 +1735,7 @@
       ]
     },
     "Microsoft.AspNetCore.Authorization.Policy/2.2.0": {
-      "sha512": "t1pMuggj4d/NqMa/lwyTCKfdtDSShefHQg4K4PpeYMZPXH1Im7VQB2F3HaPSYOubNXv8Vhk//C1dJI5LkJNgEg==",
+      "sha512": "aJCo6niDRKuNg2uS2WMEmhJTooQUGARhV2ENQ2tO5443zVHUo19MSgrgGo9FIrfD+4yKPF8Q+FF33WkWfPbyKw==",
       "type": "package",
       "path": "microsoft.aspnetcore.authorization.policy/2.2.0",
       "files": [
@@ -1906,7 +1906,7 @@
       ]
     },
     "Microsoft.AspNetCore.Mvc.Abstractions/2.2.0": {
-      "sha512": "KvSgkNkWnK4Ikmz1QmFOD32PynAvVibY6piwcRysgWFLuzkjgERVJ6YNOR6/Tegnb79+xG7GzP92bA7RKFl+sw==",
+      "sha512": "ET6uZpfVbGR1NjCuLaLy197cQ3qZUjzl7EG5SL4GfJH/c9KRE89MMBrQegqWsh0w1iRUB/zQaK0anAjxa/pz4g==",
       "type": "package",
       "path": "microsoft.aspnetcore.mvc.abstractions/2.2.0",
       "files": [
@@ -1919,7 +1919,7 @@
       ]
     },
     "Microsoft.AspNetCore.Mvc.Core/2.2.0": {
-      "sha512": "Wh2wexgnnkn/f2cKSiGi/TDTMCe7KI5MgzYLAAjohkQu1oWlHWVMwlkMr5mJVZA3Es+msmKT9ogjfTt+KWq1uQ==",
+      "sha512": "ALiY4a6BYsghw8PT5+VU593Kqp911U3w9f/dH9/ZoI3ezDsDAGiObqPu/HP1oXK80Ceu0XdQ3F0bx5AXBeuN/Q==",
       "type": "package",
       "path": "microsoft.aspnetcore.mvc.core/2.2.0",
       "files": [
@@ -1932,7 +1932,7 @@
       ]
     },
     "Microsoft.AspNetCore.Mvc.DataAnnotations/2.2.0": {
-      "sha512": "C6NxfP/WBLeJuEN1OCUjcb4KsDOwAiOrM2gJ80DrRD5QYP5R8tCJm4udHIFRrUI8jQ324sGSJ5xpV800BgHAFQ==",
+      "sha512": "WOw4SA3oT47aiU7ZjN/88j+b79YU6VftmHmxK29Km3PTI7WZdmw675QTcgWfsjEX4joCB82v7TvarO3D0oqOyw==",
       "type": "package",
       "path": "microsoft.aspnetcore.mvc.dataannotations/2.2.0",
       "files": [
@@ -1945,7 +1945,7 @@
       ]
     },
     "Microsoft.AspNetCore.ResponseCaching.Abstractions/2.2.0": {
-      "sha512": "2dnJ/buvvPVxqz2G0wQGTyJRodqRbD2PyUIqFJW2WQd9a6q4pE8SmSUVrkhke3DKiDUheeJc0t7sqTomImCfRg==",
+      "sha512": "CIHWEKrHzZfFp7t57UXsueiSA/raku56TgRYauV/W1+KAQq6vevz60zjEKaazt3BI76zwMz3B4jGWnCwd8kwQw==",
       "type": "package",
       "path": "microsoft.aspnetcore.responsecaching.abstractions/2.2.0",
       "files": [
@@ -1958,7 +1958,7 @@
       ]
     },
     "Microsoft.AspNetCore.Routing/2.2.0": {
-      "sha512": "blQPe49jTy6pK8VZ6vinCD8upuUs7FdXVbuZa+IjsXOpxdMYBCVFvXUrJBl87kXuaTi0M8fQuERamMF6a/eskA==",
+      "sha512": "jAhDBy0wryOnMhhZTtT9z63gJbvCzFuLm8yC6pHzuVu9ZD1dzg0ltxIwT4cfwuNkIL/TixdKsm3vpVOpG8euWQ==",
       "type": "package",
       "path": "microsoft.aspnetcore.routing/2.2.0",
       "files": [
@@ -1973,7 +1973,7 @@
       ]
     },
     "Microsoft.AspNetCore.Routing.Abstractions/2.2.0": {
-      "sha512": "dqnRARq+DBBH0mgYStRhKyapkPnIu1+sTgesv9dFVrsbN3IKlpTuAaRwAC1G9sHo2MVi5J5EMOtscDgmqnjhUg==",
+      "sha512": "lRRaPN7jDlUCVCp9i0W+PB0trFaKB0bgMJD7hEJS9Uo4R9MXaMC8X2tJhPLmeVE3SGDdYI4QNKdVmhNvMJGgPQ==",
       "type": "package",
       "path": "microsoft.aspnetcore.routing.abstractions/2.2.0",
       "files": [
@@ -2120,7 +2120,7 @@
       ]
     },
     "Microsoft.EntityFrameworkCore.Design/2.2.0": {
-      "sha512": "mcsUEzg1bWvPgj/isz7aabDy41x+x8WBTmSF+JFsDGe3K5ZElWT2FSr3LLmkXk/5BLWJ3f9SDe0YR55u3ZgHrw==",
+      "sha512": "cl26EJJogpPN8/Fd1L4hXfiiVgJoWw0XZ+e/723SjSDDZLnd8gRY7zzhCb2OA7XbURUxkwidozJ97qH8+36XUQ==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.design/2.2.0",
       "files": [
@@ -2150,7 +2150,7 @@
       ]
     },
     "Microsoft.EntityFrameworkCore.SqlServer/2.2.0": {
-      "sha512": "rCGBF6Hab9633Dh2xtiAcJnDxf2CjaBrGyoagoCoYHH5Ftbdw5zX/e9ABgif5ngzh7DsrBcgxK/3gHBZ2n+TGA==",
+      "sha512": "6wGv0oqusLfjfznd9hpbkeKs5vNYJ9UDyFMj+u2cHyZZZOKcGhtANXFqS5JusDWQmYfkX3tDZSRFIr+3zdCU8Q==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.sqlserver/2.2.0",
       "files": [
@@ -2326,7 +2326,7 @@
       ]
     },
     "Microsoft.Extensions.Localization/2.2.0": {
-      "sha512": "pTFKFSEPCni5Wq3/CamUtt52/BcJW+sRLevSEWci9vPB/0UVS225MeddXIeePsySLK/g/4w/hS7qaYsLbqe68w==",
+      "sha512": "3nBQLeBrcd4Rgd9vQi4gF5NgAWxnQrHekjjwlgww4wyLNfJDizjiex2resOLoAuAgy3y2IIAWjOpbr0UKR2ykw==",
       "type": "package",
       "path": "microsoft.extensions.localization/2.2.0",
       "files": [
@@ -2339,7 +2339,7 @@
       ]
     },
     "Microsoft.Extensions.Localization.Abstractions/2.2.0": {
-      "sha512": "+hSkcuST/PvRHFfNUyVn/v0JreREgAfTVWaqNVoz9qrVw2pD1bw4Sq9B+TKl3qBT+7c2p+TAir54VtXcF9BzMg==",
+      "sha512": "FQzXG/lYR9UOM2zHpqsjTRpp3EghIYo3FCsQpfmtbp+glPaU0WXZfNmMjyqBRmMj1Sq93fPnC+G9zzYRauuRQA==",
       "type": "package",
       "path": "microsoft.extensions.localization.abstractions/2.2.0",
       "files": [
@@ -2443,12 +2443,11 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -2700,7 +2699,7 @@
       ]
     },
     "runtime.native.System.Data.SqlClient.sni/4.5.0": {
-      "sha512": "AJfX7owAAkMjWQYhoml5IBfXh8UyYPjktn8pK0BFGAdKgBS7HqMz1fw5vdzfZUWfhtTPDGCjgNttt46ZyEmSjg==",
+      "sha512": "zmr7mxqvG7M7qWzPTHQEF0jIOo65vqsnaJ2s7AyZ9JQaSJ3rfXZ7vPGszw1EbvRATu6zsFMdpQeq1g7oaNocOg==",
       "type": "package",
       "path": "runtime.native.system.data.sqlclient.sni/4.5.0",
       "files": [
@@ -3022,7 +3021,7 @@
       ]
     },
     "System.Data.SqlClient/4.6.0": {
-      "sha512": "gwItUWW1BMCckicFO85c8frFaMK8SGqYn5IeA3GSX4Lmid+CjXETfoHz7Uv+Vx6L0No7iRc/7cBL8gd6o9k9/g==",
+      "sha512": "cppLAiY36su7Hr9dOaeDXRkndLKtnh7HgQgOfAgV0oN764BQXShll7yBZ8OwPtdYUSuwTT0re7eDQPGhwnojVQ==",
       "type": "package",
       "path": "system.data.sqlclient/4.6.0",
       "files": [
@@ -5554,23 +5553,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emanolov\\.nuget\\packages\\": {},
+    "C:\\Users\\john\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Services\\ShareTravelSystem.Services.csproj",
+      "projectUniqueName": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Services\\ShareTravelSystem.Services.csproj",
       "projectName": "ShareTravelSystem.Services",
-      "projectPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Services\\ShareTravelSystem.Services.csproj",
-      "packagesPath": "C:\\Users\\emanolov\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Services\\obj\\",
+      "projectPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Services\\ShareTravelSystem.Services.csproj",
+      "packagesPath": "C:\\Users\\john\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\emanolov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\john\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5578,21 +5577,19 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://172.16.3.3:2048/nuget": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.telerik.com/nuget": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj": {
-              "projectPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj"
+            "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj"
             },
-            "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data\\ShareTravelSystem.Data.csproj": {
-              "projectPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data\\ShareTravelSystem.Data.csproj"
+            "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data\\ShareTravelSystem.Data.csproj": {
+              "projectPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data\\ShareTravelSystem.Data.csproj"
             },
-            "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.ViewModels\\ShareTravelSystem.ViewModels.csproj": {
-              "projectPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.ViewModels\\ShareTravelSystem.ViewModels.csproj"
+            "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.ViewModels\\ShareTravelSystem.ViewModels.csproj": {
+              "projectPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.ViewModels\\ShareTravelSystem.ViewModels.csproj"
             }
           }
         }

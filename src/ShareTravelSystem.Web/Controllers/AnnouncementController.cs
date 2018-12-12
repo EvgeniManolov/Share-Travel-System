@@ -31,7 +31,7 @@
             string currentUserId = this.userManager.GetUserId(this.User);
             this.announcements.Create(model, currentUserId);
 
-            return this.View();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
 
         }
     }

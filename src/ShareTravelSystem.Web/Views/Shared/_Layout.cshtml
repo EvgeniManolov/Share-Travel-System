@@ -16,7 +16,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -40,8 +40,12 @@
                     </li>
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Announcement" asp-action="Create">Create Announcements</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Announcements</a>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                <a class="dropdown-item" asp-controller="Announcement" asp-action="Create">Create Announcement</a>
+                                <a class="dropdown-item" asp-controller="Announcement" asp-action="All">All Announcements</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Offer</a>
@@ -56,12 +60,12 @@
             </div>
         </nav>
     </header>
-        <main role="main">
-            @RenderBody()
-        </main>
+    <main role="main">
+        @RenderBody()
+    </main>
     @*<footer class="container">
-        <p>&copy; Share Travel System 2018 - 2019</p>
-    </footer>*@
+            <p>&copy; Share Travel System 2018 - 2019</p>
+        </footer>*@
 
 
     <footer class="border-top footer text-muted bg-primary ">

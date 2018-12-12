@@ -1,34 +1,50 @@
-﻿@{
+﻿@model ShareTravelSystem.ViewModels.DisplayAllAnnouncementsViewModel
+@using Microsoft.AspNetCore.Identity
+@using ShareTravelSystem.Web.Areas.Identity.Data;
+@{
     ViewData["Title"] = "Home Page";
 }
-
-
+@inject SignInManager<ShareTravelSystemUser> SignInManager
+@inject UserManager<ShareTravelSystemUser> UserManager
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
+    </div>
     <div class="container">
-        <h1 class="display-3">Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <h4 class="mt-0">Latest news</h4>
+        <hr />
+        <!-- Example row of columns -->
+        <div class="card-deck">
+            @foreach (var announcement in @Model.Announcements)
+            {
+                <div class="card bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">@announcement.Title</h5>
+                        <p class="card-text">@announcement.Content</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
+                    </div>
+                </div>
+            }
+        </div>
+        <hr>
+    </div> <!-- /container -->
+}
+else
+{
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
     </div>
-</div>
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
-    <hr>
-</div> <!-- /container -->
+}
