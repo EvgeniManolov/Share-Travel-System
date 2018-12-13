@@ -15,4 +15,3 @@ C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data.Models\obj\
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data.Models\obj\Debug\netstandard2.0\ShareTravelSystem.Data.Models.dll
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data.Models\obj\Debug\netstandard2.0\ShareTravelSystem.Data.Models.pdb
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Data.Models\obj\Debug\netstandard2.0\ShareTravelSystem.Data.Models.csprojAssemblyReference.cache
-C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.Data.Models\obj\Debug\netstandard2.0\ShareTravelSystem.Data.Models.csprojAssemblyReference.cache

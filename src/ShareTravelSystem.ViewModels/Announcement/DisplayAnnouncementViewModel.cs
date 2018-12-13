@@ -5,6 +5,7 @@
 
     public class DisplayAnnouncementViewModel
     {
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Title")]

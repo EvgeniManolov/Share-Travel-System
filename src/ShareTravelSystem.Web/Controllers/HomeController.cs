@@ -17,7 +17,7 @@
 
         public IActionResult Index()
         {
-            var announcements = this.announcementService.GetAllAnnouncements();
+            var announcements = this.announcementService.GetIndexAnnouncements();
             var result = new DisplayAllAnnouncementsViewModel
             {
                 Announcements = announcements

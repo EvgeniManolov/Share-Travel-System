@@ -37,15 +37,49 @@
             this.db.SaveChanges();
         }
 
-        public List<DisplayAnnouncementViewModel> GetAllAnnouncements()
+        public List<DisplayAnnouncementViewModel> GetIndexAnnouncements()
         {
             return this.db.Announcements.OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
             {
+                Id = x.Id,
                 Content = x.Content,
                 Title = x.Title,
                 CreateDate = x.CreateDate,
                 Author = x.Author.ToString()
             }).Take(4).ToList();
+        }
+
+        public List<DisplayAnnouncementViewModel> GetAllAnnouncements()
+        {
+            return this.db.Announcements.OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
+            {
+                Id = x.Id,
+                Content = x.Content,
+                Title = x.Title,
+                CreateDate = x.CreateDate,
+                Author = x.Author.ToString()
+            }).ToList();
+        }
+
+        public List<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId)
+        {
+            return this.db.Announcements.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
+            {
+                Id = x.Id,
+                Content = x.Content,
+                Title = x.Title,
+                CreateDate = x.CreateDate,
+                Author = x.Author.ToString()
+            }).ToList();
+        }
+
+        public void Delete(int announcementId)
+        {
+            var announcement = this.db.Announcements.FirstOrDefault(p => p.Id == announcementId);
+
+            this.db.Announcements.Remove(announcement);
+
+            this.db.SaveChanges();
         }
     }
 }

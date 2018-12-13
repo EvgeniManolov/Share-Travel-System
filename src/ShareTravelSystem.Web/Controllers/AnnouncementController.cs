@@ -9,12 +9,12 @@
     public class AnnouncementController : Controller
     {
 
-        private readonly IAnnouncementService announcements;
+        private readonly IAnnouncementService announcementService;
         private readonly UserManager<ShareTravelSystemUser> userManager;
 
-        public AnnouncementController(IAnnouncementService announcements, UserManager<ShareTravelSystemUser> userManager)
+        public AnnouncementController(IAnnouncementService announcementService, UserManager<ShareTravelSystemUser> userManager)
         {
-            this.announcements = announcements;
+            this.announcementService = announcementService;
             this.userManager = userManager;
         }
 
@@ -29,10 +29,41 @@
         public IActionResult Create(CreateAnnouncementViewModel model, string returnUrl = null)
         {
             string currentUserId = this.userManager.GetUserId(this.User);
-            this.announcements.Create(model, currentUserId);
+            this.announcementService.Create(model, currentUserId);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
 
+        }
+
+        public IActionResult All()
+        {
+            var announcements = this.announcementService.GetAllAnnouncements();
+            var result = new DisplayAllAnnouncementsViewModel
+            {
+                Announcements = announcements
+            }
+            ;
+            return View(result);
+        }
+
+        public IActionResult MyAnnouncements()
+        {
+
+            string currentUserId = this.userManager.GetUserId(this.User);
+            var announcements = this.announcementService.GetMyAnnouncements(currentUserId);
+            var result = new DisplayAllAnnouncementsViewModel
+            {
+                Announcements = announcements
+            }
+            ;
+            return View(result);
+        }
+
+        
+        public IActionResult Delete(int id)
+        {
+            this.announcementService.Delete(id);
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

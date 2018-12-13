@@ -9,8 +9,7 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Linq;
     using System.Threading.Tasks;
-
-    [Route("[controller]/[action]")]
+    
     public class AccountController : Controller
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;

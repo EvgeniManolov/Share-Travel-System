@@ -1,6 +1,4 @@
-﻿#registerButton {
-    color: ;
-    background-color: transparent;
-    background-image: none;
-    border-color: #75CAEB;
+﻿.card-deck .card {
+    min-width: 250px !important;
 }
+
