@@ -21,16 +21,18 @@
         <h4 class="mt-0">Latest news</h4>
         <hr />
         <!-- Example row of columns -->
-        <div class="card-deck row">
+        <div class="card-deck">
             @foreach (var announcement in @Model.Announcements)
             {
-                <div class="card bg-secondary col-3">
-                    <div class="card-body">
-                        <h5 class="card-title "><strong>@announcement.Title</strong></h5>
-                        <p class="card-text ">@announcement.Content</p>
-                    </div>
-                    <div class="card-footer row">
-                        <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
+                <div class="col-3">
+                    <div class="card bg-secondary mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title "><strong>@announcement.Title</strong></h5>
+                            <p class="card-text ">@announcement.Content</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
+                        </div>
                     </div>
                 </div>
             }

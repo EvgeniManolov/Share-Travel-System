@@ -59,7 +59,13 @@
             return View(result);
         }
 
-        
+        public IActionResult Details(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+
         public IActionResult Delete(int id)
         {
             this.announcementService.Delete(id);

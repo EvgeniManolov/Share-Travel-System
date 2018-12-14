@@ -6,7 +6,6 @@ C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.Vi
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.ViewModels\bin\Debug\netstandard2.0\ShareTravelSystem.ViewModels.pdb
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.dll
 C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.pdb
-C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.csprojAssemblyReference.cache
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\bin\Debug\netstandard2.0\ShareTravelSystem.ViewModels.deps.json
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\bin\Debug\netstandard2.0\ShareTravelSystem.ViewModels.dll
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\bin\Debug\netstandard2.0\ShareTravelSystem.ViewModels.pdb
@@ -16,3 +15,4 @@ C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\obj\D
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.dll
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.pdb
 C:\Users\john\Desktop\Share-Travel-System\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.csprojAssemblyReference.cache
+C:\Users\emanolov\Desktop\Share-Travel-System.git\trunk\src\ShareTravelSystem.ViewModels\obj\Debug\netstandard2.0\ShareTravelSystem.ViewModels.csprojAssemblyReference.cache
