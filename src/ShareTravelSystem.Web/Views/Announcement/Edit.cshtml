@@ -1,0 +1,24 @@
+﻿@model ShareTravelSystem.ViewModels.EditAnnouncementViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h1 class="text-center">Edit Announcement</h1>
+<hr class="hr-2 bg-dark" />
+<form class="mx-auto half-width" method="post" asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" placeholder="Title..." value="@Model.Title" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <input asp-for="Content" class="form-control" placeholder="Content..." value="@Model.Content" />
+    </div>
+    <hr class="hr-2 bg-dark half-width mt-4" />
+    <div class="button-holder mt-2 d-flex w-25 mx-auto justify-content-between">
+        <button type="submit" class="btn chushka-bg-color">Edit</button>
+        <a asp-controller="Announcement" asp-action="Details" asp-route-id="@Model.Id" class="btn chushka-bg-color">Cancel</a>
+    </div>
+</form>

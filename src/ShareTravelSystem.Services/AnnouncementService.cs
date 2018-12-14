@@ -4,6 +4,7 @@
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.ViewModels;
+    using ShareTravelSystem.ViewModels.Announcement;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Models;
     using System;
@@ -78,6 +79,37 @@
             var announcement = this.db.Announcements.FirstOrDefault(p => p.Id == announcementId);
 
             this.db.Announcements.Remove(announcement);
+
+            this.db.SaveChanges();
+        }
+
+        public DetailsAnnouncementViewModel DetailsAnnouncementById(int id)
+        {
+            return this.db.Announcements.Where(a => a.Id == id).Select(a => new DetailsAnnouncementViewModel
+            {
+                Id = a.Id,
+                Title = a.Title,
+                Content = a.Content,
+                CreateDate = a.CreateDate,
+                Author = a.Author.UserName.ToString()
+            }).FirstOrDefault();
+        }
+
+        public EditAnnouncementViewModel EditAnnouncementById(int id)
+        {
+            return this.db.Announcements.Where(a => a.Id == id).Select(a => new EditAnnouncementViewModel
+            {
+                Title = a.Title,
+                Content = a.Content
+            }).FirstOrDefault();
+        }
+
+        public void EditAnnouncement(EditAnnouncementViewModel model)
+        {
+            var announcement = this.db.Announcements.FirstOrDefault(p => p.Id == model.Id);
+
+            announcement.Title = model.Title;
+            announcement.Content = model.Content;
 
             this.db.SaveChanges();
         }

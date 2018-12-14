@@ -1569,12 +1569,11 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -3631,23 +3630,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emanolov\\.nuget\\packages\\": {},
+    "C:\\Users\\john\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj",
+      "projectUniqueName": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj",
       "projectName": "ShareTravelSystem.Data.Models",
-      "projectPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj",
-      "packagesPath": "C:\\Users\\emanolov\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emanolov\\Desktop\\Share-Travel-System.git\\trunk\\src\\ShareTravelSystem.Data.Models\\obj\\",
+      "projectPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data.Models\\ShareTravelSystem.Data.Models.csproj",
+      "packagesPath": "C:\\Users\\john\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\john\\Desktop\\Share-Travel-System\\src\\ShareTravelSystem.Data.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\emanolov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\john\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3655,9 +3654,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://172.16.3.3:2048/nuget": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.telerik.com/nuget": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {

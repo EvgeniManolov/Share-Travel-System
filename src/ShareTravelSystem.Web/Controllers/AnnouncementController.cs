@@ -61,15 +61,29 @@
 
         public IActionResult Details(int id)
         {
-            ViewBag.id = id;
-            return View();
+            var model = this.announcementService.DetailsAnnouncementById(id);
+            return View(model);
         }
 
+        public IActionResult Edit(int id)
+
+        {
+            var model = this.announcementService.EditAnnouncementById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        public IActionResult Edit(EditAnnouncementViewModel model)
+        {
+            this.announcementService.EditAnnouncement(model);
+            return this.RedirectToAction("All", "Announcement");
+        }
 
         public IActionResult Delete(int id)
         {
             this.announcementService.Delete(id);
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("All", "Announcement");
         }
     }
 }
