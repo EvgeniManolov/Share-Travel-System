@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ShareTravelSystem.Data.Models
 {
-    class Town
+    public class Town
     {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+
+        public ICollection<Offer> TownsAsDepartureTown { get; set; } = new List<Offer>();
+
+
+        public ICollection<Offer> TownsAsDestinationTown { get; set; } = new List<Offer>();
     }
 }
