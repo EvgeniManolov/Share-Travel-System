@@ -1,10 +1,12 @@
 ﻿namespace ShareTravelSystem.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Areas.Identity.Data;
+    using X.PagedList;
 
     public class AnnouncementController : Controller
     {
@@ -35,7 +37,8 @@
 
         }
 
-        public IActionResult All()
+        [HttpGet]
+        public IActionResult All(int? page)
         {
             var announcements = this.announcementService.GetAllAnnouncements();
             var result = new DisplayAllAnnouncementsViewModel
@@ -43,9 +46,10 @@
                 Announcements = announcements
             }
             ;
-            return View(result);
+            return this.View(result);
         }
 
+        [HttpGet]
         public IActionResult MyAnnouncements()
         {
 
@@ -59,12 +63,14 @@
             return View(result);
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var model = this.announcementService.DetailsAnnouncementById(id);
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
 
         {
@@ -73,13 +79,13 @@
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
         public IActionResult Edit(EditAnnouncementViewModel model)
         {
             this.announcementService.EditAnnouncement(model);
             return this.RedirectToAction("All", "Announcement");
         }
 
+        
         public IActionResult Delete(int id)
         {
             this.announcementService.Delete(id);

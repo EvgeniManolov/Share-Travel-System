@@ -65,6 +65,7 @@
             return View(model);
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {

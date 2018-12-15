@@ -15,6 +15,7 @@
             this.announcementService = announcementService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var announcements = this.announcementService.GetIndexAnnouncements();

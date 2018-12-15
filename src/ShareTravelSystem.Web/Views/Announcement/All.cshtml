@@ -1,4 +1,6 @@
 ﻿@model ShareTravelSystem.ViewModels.DisplayAllAnnouncementsViewModel
+
+@using System.Linq;
 @{
     ViewData["Title"] = "All Announcement";
 }
@@ -8,6 +10,11 @@
     <hr />
     <!-- Example row of columns -->
     <div class="card-deck">
+        @if (@Model.Announcements.Count() == 0)
+        {
+
+            <h2>No announcements</h2>
+        }
         @foreach (var announcement in @Model.Announcements)
         {
             <div class="col-3">
