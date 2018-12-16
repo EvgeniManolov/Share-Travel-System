@@ -13,8 +13,8 @@
 
         public DateTime CreateDate { get; set; }
 
-        public ShareTravelSystemUser Author { get; set; }
-
         public string AuthorId { get; set; }
+
+        public ShareTravelSystemUser Author { get; set; }
     }
 }

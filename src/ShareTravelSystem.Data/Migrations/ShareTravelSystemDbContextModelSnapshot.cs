@@ -199,11 +199,15 @@ namespace ShareTravelSystem.Data.Migrations
 
                     b.Property<string>("Comment");
 
+                    b.Property<int>("OfferId");
+
                     b.Property<int>("Rate");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("OfferId");
 
                     b.ToTable("Reviews");
                 });
@@ -352,6 +356,11 @@ namespace ShareTravelSystem.Data.Migrations
                     b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
                         .WithMany("Reviews")
                         .HasForeignKey("AuthorId");
+
+                    b.HasOne("ShareTravelSystem.Data.Models.Offer", "Offer")
+                        .WithMany("Reviews")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

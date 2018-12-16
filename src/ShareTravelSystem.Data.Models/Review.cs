@@ -1,7 +1,7 @@
-﻿using ShareTravelSystem.Web.Areas.Identity.Data;
-
-namespace ShareTravelSystem.Data.Models
+﻿namespace ShareTravelSystem.Data.Models
 {
+    using ShareTravelSystem.Web.Areas.Identity.Data;
+
     public class Review
     {
         public int Id { get; set; }
@@ -12,6 +12,10 @@ namespace ShareTravelSystem.Data.Models
 
         public ShareTravelSystemUser  Author { get; set; }
 
-        public string AuthorId { get; set; }
+        public string AuthorId { get; set; } 
+
+        public int OfferId { get; set; }
+
+        public Offer Offer { get; set; }
     }
 }

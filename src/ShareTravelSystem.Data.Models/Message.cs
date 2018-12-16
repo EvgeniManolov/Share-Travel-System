@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.Data.Models
+﻿namespace ShareTravelSystem.Data.Models
 {
-    class Message
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    public class Message
     {
     }
 }

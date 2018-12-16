@@ -1,10 +1,84 @@
-﻿
+﻿@model ShareTravelSystem.ViewModels.Offer.CreateOfferViewModel
 
 @{
     ViewData["Title"] = "Create Offer";
 }
 
+<div class="container">
+    <div class="card mt-5">
+
+        <h5 class="card-header info-color white-text text-center py-4 bg-primary">
+            <strong class="text-white">Create Offer</strong>
+        </h5>
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+            <form class="text-center" style="color: #757575;" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+
+                <fieldset class="form-group">
+                    <legend>Offer Type</legend>
+                    <div class="text-center">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input text-md-left" name="type" id="LookingFor" value="LookingFor" checked="">
+                                Looking for a place
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input text-md-left" name="type" id="Suggest" value="Suggest">
+                                Suggest a place
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="md-form">
+                            <input asp-for="DepartureTown" class="form-control mt-4" placeholder="DepartureTown" />
+                            <span asp-validation-for="DepartureTown" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="md-form">
+                            <input asp-for="DestinationTown" class="form-control mt-4" placeholder="DestinationTown" />
+                            <span asp-validation-for="DestinationTown" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="md-form">
+                            <input asp-for="Seat" class="form-control mt-4" placeholder="Seats" />
+                            <span asp-validation-for="Seat" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="md-form">
+                            <input asp-for="Price" class="form-control mt-4" type="number" min="0.00" max="10000.00" step="0.01" placeholder="Price per Seat" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row mt-3">
+                    <div class="col-6">
+                        <input asp-for="DepartureDate" placeholder="DepartureDate" class="form-control" type="text" onfocus="(this.type='datetime-local')" id="date" />
+                        <span asp-validation-for="DepartureDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="md-form">
+                    <textarea asp-for="Description" class="form-control mt-4" placeholder="Description" rows="4"></textarea>
+                    <span asp-validation-for="DepartureDate" class="text-danger"></span>
+                </div>
+                <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
+
+
 

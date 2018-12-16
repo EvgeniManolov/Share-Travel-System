@@ -13,7 +13,9 @@
         public string Address { get; set; }
 
         public ICollection<Announcement> Announcements { get; set; } = new List<Announcement>();
+
         public ICollection<Offer> Offers { get; set; } = new List<Offer>();
+
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
