@@ -42,6 +42,7 @@
 
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAnnouncementService, AnnouncementService>();
+            services.AddTransient<IOfferService, OfferService>();
 
             services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
                 options =>

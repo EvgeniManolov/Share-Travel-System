@@ -26,23 +26,18 @@ namespace ShareTravelSystem.Web.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            }
-
-            base.OnModelCreating(builder);
+            
 
             base.OnModelCreating(builder);
             builder.Entity<Offer>()
             .HasOne<Town>(s => s.DepartureTown)
             .WithMany(g => g.TownsAsDepartureTown)
-            .HasForeignKey(s => s.DepartureTownId);
+            .HasForeignKey(s => s.DepartureTownId).OnDelete(DeleteBehavior.Restrict); 
 
             builder.Entity<Offer>()
                         .HasOne<Town>(s => s.DestinationTown)
                         .WithMany(g => g.TownsAsDestinationTown)
-                        .HasForeignKey(s => s.DestinationTownId);
+                        .HasForeignKey(s => s.DestinationTownId).OnDelete(DeleteBehavior.Restrict); 
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);

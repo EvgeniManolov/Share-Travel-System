@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShareTravelSystem.Data.Models
 {
+    [Table("Towns")]
     public class Town
     {
         public int Id { get; set; }

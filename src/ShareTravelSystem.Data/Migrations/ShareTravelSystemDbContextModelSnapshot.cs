@@ -150,6 +150,77 @@ namespace ShareTravelSystem.Data.Migrations
                     b.ToTable("Announcements");
                 });
 
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Offer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ArriveDate");
+
+                    b.Property<string>("AuthorId");
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<DateTime>("DepartureDate");
+
+                    b.Property<int>("DepartureTownId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("DestinationTownId");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("Seat");
+
+                    b.Property<int>("TotalRating");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("DepartureTownId");
+
+                    b.HasIndex("DestinationTownId");
+
+                    b.ToTable("Offers");
+                });
+
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AuthorId");
+
+                    b.Property<string>("Comment");
+
+                    b.Property<int>("Rate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Town", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Towns");
+                });
+
             modelBuilder.Entity("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", b =>
                 {
                     b.Property<string>("Id")
@@ -256,6 +327,30 @@ namespace ShareTravelSystem.Data.Migrations
                 {
                     b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
                         .WithMany("Announcements")
+                        .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Offer", b =>
+                {
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                        .WithMany("Offers")
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("ShareTravelSystem.Data.Models.Town", "DepartureTown")
+                        .WithMany("TownsAsDepartureTown")
+                        .HasForeignKey("DepartureTownId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("ShareTravelSystem.Data.Models.Town", "DestinationTown")
+                        .WithMany("TownsAsDestinationTown")
+                        .HasForeignKey("DestinationTownId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Review", b =>
+                {
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                        .WithMany("Reviews")
                         .HasForeignKey("AuthorId");
                 });
 #pragma warning restore 612, 618
