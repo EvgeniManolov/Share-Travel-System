@@ -156,8 +156,6 @@ namespace ShareTravelSystem.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("ArriveDate");
-
                     b.Property<string>("AuthorId");
 
                     b.Property<DateTime>("CreateDate");

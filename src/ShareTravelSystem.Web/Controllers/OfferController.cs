@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels.Offer;
     using ShareTravelSystem.Web.Areas.Identity.Data;
 
     public class OfferController : Controller
@@ -19,6 +20,13 @@
 
         [HttpGet]
         public IActionResult Create(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateOfferViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
