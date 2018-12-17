@@ -28,8 +28,10 @@
         [HttpPost]
         public IActionResult Create(CreateOfferViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            string currentUserId = this.userManager.GetUserId(this.User);
+            this.offerService.Create(model, currentUserId);
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

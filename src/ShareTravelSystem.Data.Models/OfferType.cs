@@ -2,7 +2,7 @@
 {
     public enum OfferType
     {
-        Предлагам = 1,
-        Търся = 2,
+        Suggest = 1,
+        LookingFor = 2,
     }
 }
