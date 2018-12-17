@@ -2,9 +2,11 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.ViewModels.Offer;
     using ShareTravelSystem.Web.Areas.Identity.Data;
+    using System.Collections.Generic;
 
     public class OfferController : Controller
     {
@@ -21,7 +23,8 @@
         [HttpGet]
         public IActionResult Create(string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            List<Town> towns = this.offerService.GetAllTowns();
+            ViewData["Towns"] = towns;
             return View();
         }
 

@@ -1,4 +1,5 @@
 ﻿@model ShareTravelSystem.ViewModels.Offer.CreateOfferViewModel
+@inject ShareTravelSystemDbContext db
 
 @{
     ViewData["Title"] = "Create Offer";
@@ -34,19 +35,26 @@
                 </fieldset>
                 <div class="form-row">
                     <div class="col">
-                        <div class="md-form">
-                            <input asp-for="DepartureTown" class="form-control mt-4" placeholder="DepartureTown" />
-                            <span asp-validation-for="DepartureTown" class="text-danger"></span>
-                        </div>
+                        <select class="form-control col-12 justify-content-center" name="username">
+                            <option value="" selected disabled hidden>--Choose DepartureTown--</option>
+
+                            @foreach (var town in db.Towns)
+                            {
+                                <option type="text" name="DepartureTown">@town.Name</option>
+                            }
+                        </select>
                     </div>
                     <div class="col">
-                        <div class="md-form">
-                            <input asp-for="DestinationTown" class="form-control mt-4" placeholder="DestinationTown" />
-                            <span asp-validation-for="DestinationTown" class="text-danger"></span>
-                        </div>
+                        <select class="form-control col-12 justify-content-center" name="username">
+                            <option value="" selected disabled hidden>--Choose DestinationTown--</option>
+
+                            @foreach (var town in db.Towns)
+                            {
+                                <option type="text" name="DestinationTown">@town.Name</option>
+                            }
+                        </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="col">
                         <div class="md-form">

@@ -16,10 +16,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Resources\towns.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

@@ -10,6 +10,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
 
     public class OfferService : IOfferService
     {
@@ -31,11 +32,7 @@
                 throw new Exception("Invalid offer type");
                 //  return this.BadRequestErrorWithView("Invalid offer type."); -- да имплементирам errors
             }
-
-            string townsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\towns.json");
-
-            string json = File.ReadAllText(townsPath);
-            var playerList = JsonConvert.DeserializeObject<List<Town>>(json);
+            
 
             Town departureTown = new Town { Name = model.DepartureTown };
             Town destinationTown = new Town { Name = model.DestinationTown };
@@ -57,6 +54,11 @@
 
 
             this.db.SaveChanges();
+        }
+
+        public List<Town> GetAllTowns()
+        {
+            return this.db.Towns.ToList();
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿@model List<ShareTravelSystem.Data.Models.Town>
+
+@{
+    ViewData["Title"] = "All Towns";
+    var index = 1;
+}
+
+<div class="container">
+    <h3 class="text-left">Manage Towns</h3>
+
+    <table class="table table-hover w-50 ">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var town in @Model)
+            {
+                @if (index % 2 == 0)
+                {
+                    <tr class="table-primary">
+                        <th scope="row">@town.Id</th>
+                        <td>@town.Name</td>
+                        <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
+                        <td><button type="button" class="btn btn-danger">Edit</button></td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="table-secondary">
+                        <th scope="row">@town.Id</th>
+                        <td>@town.Name</td>
+                        <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
+                        <td><button type="button" class="btn btn-danger">Edit</button></td>
+                    </tr>
+                }
+                index++;
+            }
+
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+

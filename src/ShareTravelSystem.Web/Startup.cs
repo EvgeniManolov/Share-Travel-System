@@ -43,6 +43,7 @@
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAnnouncementService, AnnouncementService>();
             services.AddTransient<IOfferService, OfferService>();
+            services.AddTransient<ITownService, TownService>();
 
             services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
                 options =>
