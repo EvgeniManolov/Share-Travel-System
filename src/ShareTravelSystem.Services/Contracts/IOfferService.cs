@@ -9,5 +9,7 @@
         void Create(CreateOfferViewModel model, string userId);
 
         List<Town> GetAllTowns();
+
+        List<DisplayOfferViewModel> GetAllOffers();
     }
 }

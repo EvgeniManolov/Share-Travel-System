@@ -1,0 +1,44 @@
+﻿@model ShareTravelSystem.ViewModels.Offer.DisplayAllOffersViewModel
+
+@{
+    ViewData["Title"] = "All Offers";
+}
+<div class="container">
+    @if (@Model.Offers.Count() == 0)
+    {
+
+        <h2>No Offers</h2>
+    }
+    @foreach (var offer in @Model.Offers)
+    {
+        <div class="card w-25">
+            <h3 class="card-header">@offer.Type</h3>
+            <div class="card-body">
+                <h5 class="card-title">From @offer.DepartureTown to @offer.DestinationTown</h5>
+                <h6 class="card-subtitle text-muted">On : @offer.DepartureDate</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">@offer.Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Seats: @offer.Seat</li>
+                <li class="list-group-item">Price per seat: @offer.Price</li>
+                <li class="list-group-item">Author: @offer.Author</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+            <div class="card-footer text-muted">
+                2 days ago
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+

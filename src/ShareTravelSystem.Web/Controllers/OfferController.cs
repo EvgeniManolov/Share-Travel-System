@@ -36,5 +36,18 @@
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+        [HttpGet]
+        public IActionResult All(int? page)
+        {
+
+            var offers = this.offerService.GetAllOffers();
+            var result = new DisplayAllOffersViewModel
+            {
+                Offers = offers
+            }
+            ;
+            return this.View(result);
+        }
     }
 }

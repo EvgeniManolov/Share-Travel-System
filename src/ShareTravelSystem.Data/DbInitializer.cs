@@ -14,8 +14,7 @@ namespace ShareTravelSystem.Data
         public static void Initialize(ShareTravelSystemDbContext context)
         {
             // context.Database.EnsureCreated();
-
-            // Look for any students.
+            
             if (context.Towns.Any())
             {
                 return;

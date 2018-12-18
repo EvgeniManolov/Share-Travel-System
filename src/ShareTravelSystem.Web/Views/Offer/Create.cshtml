@@ -1,8 +1,10 @@
 ﻿@model ShareTravelSystem.ViewModels.Offer.CreateOfferViewModel
 @inject ShareTravelSystemDbContext db
+@using ShareTravelSystem.Data.Models
 
 @{
     ViewData["Title"] = "Create Offer";
+    var towns = ViewData["Towns"];
 }
 
 <div class="container">
@@ -36,22 +38,29 @@
                 <div class="form-row">
                     <div class="col">
                         <select class="form-control col-12 justify-content-center" name="username">
-                            <option class="text-muted"  value="" selected disabled hidden >-- Choose DepartureTown --</option>
+                            <option class="text-muted" value="" selected disabled hidden>-- Choose DepartureTown --</option>
                             @foreach (var town in db.Towns.OrderBy(x => x.Name))
                             {
                                 <option type="text" name="DepartureTown">@town.Name</option>
                             }
                         </select>
                     </div>
-                    <div class="col">
-                        <select class="form-control col-12 justify-content-center" name="username">
-                            <option value="" selected disabled hidden>-- Choose DestinationTown --</option>
-                            @foreach (var town in db.Towns.OrderBy(x => x.Name))
-                            {
-                                <option type="text" name="DestinationTown">@town.Name</option>
-                            }
+                    @*<div class="col">
+                        <label asp-for="DestinationTown"></label>
+                        <select asp-for="DestinationTown" asp-items="@(new SelectList(ViewData["Town"] as List<Town>, "Name"))" class="form-control">
+                            <option></option>
                         </select>
-                    </div>
+                        <span asp-validation-for="DestinationTown" class="text-danger"></span>
+                    </div>*@
+                    <div class="col">
+                            <select class="form-control col-12 justify-content-center" name="username">
+                                <option value="" selected disabled hidden>-- Choose DestinationTown --</option>
+                                @foreach (var town in db.Towns.OrderBy(x => x.Name))
+                                {
+                                    <option type="text" name="DestinationTown">@town.Name</option>
+                                }
+                            </select>
+                        </div>
                 </div>
                 <div class="form-row">
                     <div class="col">
