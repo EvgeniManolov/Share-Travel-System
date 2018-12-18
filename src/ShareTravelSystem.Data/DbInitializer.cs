@@ -31,6 +31,7 @@ namespace ShareTravelSystem.Data
                 var currentTown = new Town { Name = town.Name };
                 context.Towns.Add(currentTown);
             }
+            context.Towns.AddRange(townsList);
             context.SaveChanges();
         }
     }

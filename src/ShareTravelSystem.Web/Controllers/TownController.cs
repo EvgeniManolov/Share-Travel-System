@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShareTravelSystem.Data.Models;
 using ShareTravelSystem.Services.Contracts;
+using ShareTravelSystem.ViewModels.Town;
 using ShareTravelSystem.Web.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,34 @@ namespace ShareTravelSystem.Web.Controllers
             List<Town> towns = this.townService.GetAllTowns();
 
             return View(towns);
+        }
+
+        [HttpGet]
+        public IActionResult Create(string returnUrl = null)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CrateTownViewModel model, string returnUrl = null)
+        {
+            this.townService.Create(model);
+
+            return RedirectToAction(nameof(TownController.All), "Town");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var town = this.townService.GetTownById(id);
+            return View(town);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            
+            return View();
         }
     }
 }

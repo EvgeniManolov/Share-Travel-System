@@ -1,0 +1,56 @@
+﻿@model ShareTravelSystem.ViewModels.Town.EditTownViewModel
+
+@{
+    ViewData["Title"] = "Edit Town";
+}
+
+<h2>Edit Town with ID: @Model.Id</h2>
+<form>
+    <div class="form-group row">
+        <div class="col-3">
+            <input class="form-control" placeholder="Name" value="@Model.Name">
+        </div>
+        <div class="col-1">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+        </div>
+        <div class="col-1">
+            <a asp-controller="Town" asp-action="Delete" data-id="@Model.Id" id="deleteId" class="btn btn-outline-success">Delete</a>
+        </div>
+        <div class="col-1">
+            <button type="submit" class="btn btn-outline-success">Back</button>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script type="text/javascript">
+
+        $('.deleteId').on('click', function () {
+            debugger;
+            var id = parseInt(this.getAttribute("data-id"));
+
+            $.ajax({
+                type: "POST",
+                url: "/Town/Delete/",
+                data: JSON.stringify({ id: id }),
+                contentType: "application/json; charset=utf-8",
+                processData: "true",
+                cache: false,
+            })
+                .done(function (response, textStatus, jqXHR) {
+                    // do something here
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    // do something here
+                });
+
+    </script>
+}
+
+
+@*@section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }*@

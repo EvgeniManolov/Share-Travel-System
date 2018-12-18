@@ -22,10 +22,9 @@
                 @if (index % 2 == 0)
                 {
                     <tr class="table-primary">
-                        <th scope="row">@town.Id</th>
+                        <td scope="row">@town.Id</td>
                         <td>@town.Name</td>
-                        <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
-                        <td><button type="button" class="btn btn-danger">Edit</button></td>
+                        <td><a href="@Url.Action("Edit","Town", new { id = town.Id})" class="btn btn-outline-danger">Edit</a></td>
                     </tr>
                 }
                 else
@@ -33,9 +32,10 @@
                     <tr class="table-secondary">
                         <th scope="row">@town.Id</th>
                         <td>@town.Name</td>
-                        <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
-                        <td><button type="button" class="btn btn-danger">Edit</button></td>
+                            <td><a href="@Url.Action("Edit","Town", new { id = town.Id})"  class="btn btn-outline-danger">Edit</a></td>
+                        
                     </tr>
+                    
                 }
                 index++;
             }
