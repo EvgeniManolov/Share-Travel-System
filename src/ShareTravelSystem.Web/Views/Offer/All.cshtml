@@ -1,41 +1,44 @@
 ﻿@model ShareTravelSystem.ViewModels.Offer.DisplayAllOffersViewModel
-
 @{
     ViewData["Title"] = "All Offers";
 }
 <div class="container">
-    @if (@Model.Offers.Count() == 0)
-    {
+    <div class="card-deck">
+        @if (@Model.Offers.Count() == 0)
+        {
 
-        <h2>No Offers</h2>
-    }
-    @foreach (var offer in @Model.Offers)
-    {
-        <div class="card w-25">
-            <h3 class="card-header">@offer.Type</h3>
-            <div class="card-body">
-                <h5 class="card-title">From @offer.DepartureTownName to @offer.DestinationTownName</h5>
-                <h6 class="card-subtitle text-muted">On : @offer.DepartureDate</h6>
+            <h2>No Offers</h2>
+        }
+
+        @foreach (var offer in @Model.Offers)
+        {
+            <div class="col-4">
+                <div class="card-body">
+                    <h3 class="card-header bg-primary text-white"><strong>@offer.Type place</strong></h3>
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>From :</strong> @offer.DepartureTownName <br /> <strong>To :</strong> @offer.DestinationTownName</h5>
+                        <h6 class="card-subtitle "><strong>On :</strong> @offer.DepartureDate</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Description :</strong> <br />@offer.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Seats :</strong> @offer.Seat</li>
+                        <li class="list-group-item"><strong>Price per seat :</strong> @offer.Price</li>
+                        <li class="list-group-item"><strong>Author :</strong> @offer.Author</li>
+                    </ul>
+                    <div class="card-body text-muted">
+                        Post on: @offer.CreateDate
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a asp-controller="Offer" asp-action="Preview" asp-route-id="@offer.Id" class="card-link">Preview</a>
+                        <a href="#" class="card-link">Chat with Author</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="card-text">@offer.Description</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Seats: @offer.Seat</li>
-                <li class="list-group-item">Price per seat: @offer.Price</li>
-                <li class="list-group-item">Author: @offer.Author</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>
-
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

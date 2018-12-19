@@ -1,9 +1,10 @@
 ﻿namespace ShareTravelSystem.ViewModels
 {
+    using ShareTravelSystem.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class DisplayAnnouncementViewModel
+    public class DisplayAnnouncementViewModel : IMapFrom<Data.Models.Announcement>
     {
         public int Id { get; set; }
 

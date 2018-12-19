@@ -1,5 +1,6 @@
 ﻿namespace ShareTravelSystem.Services
 {
+    using AutoMapper.QueryableExtensions;
     using Microsoft.AspNetCore.Identity;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
@@ -40,38 +41,18 @@
 
         public List<DisplayAnnouncementViewModel> GetIndexAnnouncements()
         {
-            return this.db.Announcements.OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
-            {
-                Id = x.Id,
-                Content = x.Content,
-                Title = x.Title,
-                CreateDate = x.CreateDate,
-                Author = x.Author.ToString()
-            }).Take(4).ToList();
+            return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().Take(4).ToList();
         }
 
         public List<DisplayAnnouncementViewModel> GetAllAnnouncements()
         {
-            return this.db.Announcements.OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
-            {
-                Id = x.Id,
-                Content = x.Content,
-                Title = x.Title,
-                CreateDate = x.CreateDate,
-                Author = x.Author.ToString()
-            }).ToList();
+            return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
+
         }
 
         public List<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId)
         {
-            return this.db.Announcements.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreateDate).Select(x => new DisplayAnnouncementViewModel
-            {
-                Id = x.Id,
-                Content = x.Content,
-                Title = x.Title,
-                CreateDate = x.CreateDate,
-                Author = x.Author.ToString()
-            }).ToList();
+            return this.db.Announcements.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
         }
 
         public void Delete(int announcementId)
@@ -85,23 +66,12 @@
 
         public DetailsAnnouncementViewModel DetailsAnnouncementById(int id)
         {
-            return this.db.Announcements.Where(a => a.Id == id).Select(a => new DetailsAnnouncementViewModel
-            {
-                Id = a.Id,
-                Title = a.Title,
-                Content = a.Content,
-                CreateDate = a.CreateDate,
-                Author = a.Author.UserName.ToString()
-            }).FirstOrDefault();
+            return this.db.Announcements.Where(a => a.Id == id).ProjectTo<DetailsAnnouncementViewModel>().FirstOrDefault();
         }
 
         public EditAnnouncementViewModel EditAnnouncementById(int id)
         {
-            return this.db.Announcements.Where(a => a.Id == id).Select(a => new EditAnnouncementViewModel
-            {
-                Title = a.Title,
-                Content = a.Content
-            }).FirstOrDefault();
+            return this.db.Announcements.Where(a => a.Id == id).ProjectTo<EditAnnouncementViewModel>().FirstOrDefault();
         }
 
         public void EditAnnouncement(EditAnnouncementViewModel model)

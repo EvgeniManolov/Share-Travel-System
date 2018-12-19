@@ -7,6 +7,7 @@
     using ShareTravelSystem.ViewModels.Offer;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class OfferController : Controller
     {
@@ -23,7 +24,7 @@
         [HttpGet]
         public IActionResult Create(string returnUrl = null)
         {
-            List<Town> towns = this.offerService.GetAllTowns();
+            List<Town> towns = this.offerService.GetAllTowns().ToList();
             ViewData["Towns"] = towns;
             return View();
         }
@@ -48,6 +49,13 @@
             }
             ;
             return this.View(result);
+        }
+
+        [HttpGet]
+        public IActionResult Preview()
+        {
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

@@ -1,18 +1,17 @@
-﻿
-namespace ShareTravelSystem.ViewModels.Offer
+﻿namespace ShareTravelSystem.ViewModels.Offer
 {
-    using ShareTravelSystem.Common;
     using System;
-    using ShareTravelSystem.Data.Models;
-    using AutoMapper;
+    using System.ComponentModel.DataAnnotations;
 
     public class CreateOfferViewModel 
     {
         public string Type { get; set; }
 
-        public string DepartureTown { get; set; }
+        [Display(Name = "DepartureName")]
+        public int DepartureTownId { get; set; }
 
-        public string DestinationTown { get; set; }
+        [Display(Name = "DestinationName")]
+        public int DestinationTownId { get; set; }
 
         public int Seat { get; set; }
 

@@ -38,8 +38,8 @@
             }
 
 
-            int departureTownId = this.db.Towns.Where(t => t.Name == model.DepartureTown).Select(x => x.Id).FirstOrDefault();
-            int destinationTownId = this.db.Towns.Where(t => t.Name == model.DestinationTown).Select(x => x.Id).FirstOrDefault();
+            int departureTownId = this.db.Towns.Where(t => t.Id == model.DepartureTownId).Select(x => x.Id).FirstOrDefault();
+            int destinationTownId = this.db.Towns.Where(t => t.Id == model.DestinationTownId).Select(x => x.Id).FirstOrDefault();
 
             this.db.Offers.Add(new Offer
             {

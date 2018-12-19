@@ -7,3 +7,18 @@
 7. Да сложа проверка ако добавям град, който го има
 8. Вкарва ми данните по няколко пъти
 9. Да си вкарам IServiceCollection да ми добавя автоматично сервиси и маппер
+
+10.  public string ShortDescription
+        {
+            get
+            {
+                if (this.Description?.Length > 50)
+                {
+                    return this.Description.Substring(0, 50) + "...";
+                }
+                else
+                {
+                    return this.Description;
+                }
+            }
+        }

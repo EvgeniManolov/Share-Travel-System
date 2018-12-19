@@ -24,6 +24,10 @@ namespace ShareTravelSystem.ViewModels.Offer
         public DateTime DepartureDate { get; set; }
 
         [Required]
+        [Display(Name = "CreateDate")]
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
+
+        [Required]
         [Display(Name = "Description")]
         public string Description { get; set; }
 
@@ -39,7 +43,7 @@ namespace ShareTravelSystem.ViewModels.Offer
         [Required]
         [Display(Name = "DestinationTownName")]
         public string DestinationTownName { get; set; }
-        
+
         [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }

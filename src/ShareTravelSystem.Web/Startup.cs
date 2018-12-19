@@ -17,6 +17,7 @@
     using ShareTravelSystem.Services;
     using AutoMapper;
     using ShareTravelSystem.Web.Infrastructure.Mapping;
+    using ShareTravelSystem.Web.Infrastructure.Extensions;
 
     public class Startup
     {
@@ -42,12 +43,9 @@
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDomainServices();
             Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             services.AddAutoMapper();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IAnnouncementService, AnnouncementService>();
-            services.AddTransient<IOfferService, OfferService>();
-            services.AddTransient<ITownService, TownService>();
 
             services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
                 options =>

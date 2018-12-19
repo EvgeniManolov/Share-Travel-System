@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels.Announcement
+﻿namespace ShareTravelSystem.ViewModels.Announcement
 {
-    public class DetailsAnnouncementViewModel
+    using ShareTravelSystem.Common;
+    using System;
+
+    public class DetailsAnnouncementViewModel : IMapFrom<Data.Models.Announcement>
     {
         public int Id { get; set; }
 
