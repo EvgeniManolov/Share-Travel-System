@@ -10,6 +10,6 @@
 
         List<Town> GetAllTowns();
 
-        List<DisplayOfferViewModel> GetAllOffers();
+        ICollection<DisplayOfferViewModel> GetAllOffers();
     }
 }

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShareTravelSystem.Common\ShareTravelSystem.Common.csproj" />
     <ProjectReference Include="..\ShareTravelSystem.Data.Models\ShareTravelSystem.Data.Models.csproj" />
     <ProjectReference Include="..\ShareTravelSystem.Data\ShareTravelSystem.Data.csproj" />
     <ProjectReference Include="..\ShareTravelSystem.ViewModels\ShareTravelSystem.ViewModels.csproj" />

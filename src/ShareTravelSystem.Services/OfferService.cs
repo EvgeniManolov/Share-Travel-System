@@ -12,6 +12,9 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using ShareTravelSystem.Common;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     public class OfferService : IOfferService
     {
@@ -35,9 +38,8 @@
             }
 
 
-            Town departureTown = new Town { Name = model.DepartureTown };
-            Town destinationTown = new Town { Name = model.DestinationTown };
-            this.db.Towns.AddRange(departureTown, destinationTown);
+            int departureTownId = this.db.Towns.Where(t => t.Name == model.DepartureTown).Select(x => x.Id).FirstOrDefault();
+            int destinationTownId = this.db.Towns.Where(t => t.Name == model.DestinationTown).Select(x => x.Id).FirstOrDefault();
 
             this.db.Offers.Add(new Offer
             {
@@ -47,8 +49,8 @@
                 Description = model.Description,
                 Seat = model.Seat,
                 Type = type,
-                DepartureTownId = departureTown.Id,
-                DestinationTownId = destinationTown.Id,
+                DepartureTownId = departureTownId,
+                DestinationTownId = destinationTownId,
                 TotalRating = 0,
                 Price = model.Price
             });
@@ -57,25 +59,16 @@
             this.db.SaveChanges();
         }
 
-        public List<DisplayOfferViewModel> GetAllOffers()
+        public ICollection<DisplayOfferViewModel> GetAllOffers()
         {
-            return this.db.Offers.Include(t => t.DepartureTown).Include(t => t.DestinationTown).OrderByDescending(t => t.CreateDate).Select(x => new DisplayOfferViewModel
-            {
-                Id = x.Id,
-                Type = x.Type.ToString(),
-                Author = x.Author.ToString(),
-                DepartureDate = x.DepartureDate,
-                Description = x.Description,
-                Seat = x.Seat,
-                DepartureTown = this.db.Towns.Where(t => t.Id == x.DepartureTownId).Select(a => a.Name).FirstOrDefault(),
-                DestinationTown = x.DestinationTown.Name,
-                Price = x.Price
-            }).ToList();
-    }
+            ICollection<DisplayOfferViewModel> result = this.db.Offers.OrderByDescending(t => t.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
+            
+            return result;
+        }
 
-    public List<Town> GetAllTowns()
-    {
-        return this.db.Towns.ToList();
+        public List<Town> GetAllTowns()
+        {
+            return this.db.Towns.ToList();
+        }
     }
-}
 }

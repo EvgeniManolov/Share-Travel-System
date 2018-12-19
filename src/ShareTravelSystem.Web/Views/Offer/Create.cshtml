@@ -37,7 +37,7 @@
                 </fieldset>
                 <div class="form-row">
                     <div class="col">
-                        <select class="form-control col-12 justify-content-center" name="username">
+                        <select class="form-control col-12 justify-content-center" name="DepartureTown">
                             <option class="text-muted" value="" selected disabled hidden>-- Choose DepartureTown --</option>
                             @foreach (var town in db.Towns.OrderBy(x => x.Name))
                             {
@@ -53,7 +53,7 @@
                         <span asp-validation-for="DestinationTown" class="text-danger"></span>
                     </div>*@
                     <div class="col">
-                            <select class="form-control col-12 justify-content-center" name="username">
+                            <select class="form-control col-12 justify-content-center" name="DestinationTown">
                                 <option value="" selected disabled hidden>-- Choose DestinationTown --</option>
                                 @foreach (var town in db.Towns.OrderBy(x => x.Name))
                                 {

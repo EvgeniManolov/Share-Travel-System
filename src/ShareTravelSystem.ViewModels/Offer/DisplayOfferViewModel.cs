@@ -1,10 +1,13 @@
 ﻿
 namespace ShareTravelSystem.ViewModels.Offer
 {
+    using ShareTravelSystem.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using ShareTravelSystem.Data.Models;
+    using AutoMapper;
 
-    public class DisplayOfferViewModel
+    public class DisplayOfferViewModel : IMapFrom<Offer>
     {
         public int Id { get; set; }
 
@@ -30,15 +33,21 @@ namespace ShareTravelSystem.ViewModels.Offer
         public int Seat { get; set; }
 
         [Required]
-        [Display(Name = "DepartureTown")]
-        public string DepartureTown { get; set; }
+        [Display(Name = "DepartureTownName")]
+        public string DepartureTownName { get; set; }
 
         [Required]
-        [Display(Name = "DestinationTown")]
-        public string DestinationTown { get; set; }
+        [Display(Name = "DestinationTownName")]
+        public string DestinationTownName { get; set; }
         
         [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
+
+        //public void Configure(Profile mapper)
+        //{
+        //    mapper.CreateMap<Offer, DisplayOfferViewModel>()
+        //         .ForMember(om => om.DepartureTownName, cfg => cfg.MapFrom(o => o.DepartureTown.Name));
+        //}
     }
 }
