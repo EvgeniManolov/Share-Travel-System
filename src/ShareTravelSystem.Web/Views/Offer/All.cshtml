@@ -13,16 +13,16 @@
         @foreach (var offer in @Model.Offers)
         {
             <div class="col-4">
-                <div class="card-body">
-                    <h3 class="card-header bg-primary text-white"><strong>@offer.Type place</strong></h3>
+                <div class="card-body" id="offerId">
+                    <h3 class="card-header bg-primary text-white text-center mt-2" id="offerId"><strong>@offer.Type place</strong></h3>
                     <div class="card-body">
                         <h5 class="card-title"><strong>From :</strong> @offer.DepartureTownName <br /> <strong>To :</strong> @offer.DestinationTownName</h5>
-                        <h6 class="card-subtitle "><strong>On :</strong> @offer.DepartureDate</h6>
+                        <h6 class="card-subtitle "><strong><br />On :</strong> @offer.DepartureDate</h6>
                     </div>
                     <div class="card-body">
                         <p class="card-text"><strong>Description :</strong> <br />@offer.Description</p>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush bg-primary">
                         <li class="list-group-item"><strong>Seats :</strong> @offer.Seat</li>
                         <li class="list-group-item"><strong>Price per seat :</strong> @offer.Price</li>
                         <li class="list-group-item"><strong>Author :</strong> @offer.Author</li>
@@ -30,9 +30,9 @@
                     <div class="card-body text-muted">
                         Post on: @offer.CreateDate
                     </div>
-                    <div class="card-footer text-muted">
-                        <a asp-controller="Offer" asp-action="Preview" asp-route-id="@offer.Id" class="card-link">Preview</a>
-                        <a href="#" class="card-link">Chat with Author</a>
+                    <div class="card-footer text-muted bg-primary text-center" id="offerId">
+                        <a asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id" class="card-link text-white text-left"><strong>Preview</strong></a>
+                        <a href="#" class="card-link text-white"><strong>Chat with Author</strong></a>
                     </div>
                 </div>
             </div>

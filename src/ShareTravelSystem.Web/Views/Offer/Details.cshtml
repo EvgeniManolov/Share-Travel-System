@@ -1,0 +1,36 @@
+﻿@model ShareTravelSystem.ViewModels.Offer.DetailsOfferViewModel
+@{
+    ViewData["Title"] = "All Offers";
+}
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<div class="Container">
+    <div class="col-4">
+        <div class="card-body" id="offerId">
+            <h3 class="card-header bg-primary text-white text-center mt-2" id="offerId"><strong>@Model.Type place</strong></h3>
+            <div class="card-body">
+                <h5 class="card-title"><strong>From :</strong> @Model.DepartureTownName <br /> <strong>To :</strong> @Model.DestinationTownName</h5>
+                <h6 class="card-subtitle "><strong><br />On :</strong> @Model.DepartureDate</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Description :</strong> <br />@Model.Description</p>
+            </div>
+            <ul class="list-group list-group-flush bg-primary">
+                <li class="list-group-item"><strong>Seats :</strong> @Model.Seat</li>
+                <li class="list-group-item"><strong>Price per seat :</strong> @Model.Price</li>
+                <li class="list-group-item"><strong>Rating :</strong> @Model.TotalRating</li>
+                <li class="list-group-item"><strong>Author :</strong> @Model.Author</li>
+            </ul>
+            <div class="card-body text-muted">
+                Post on: @Model.CreateDate
+            </div>
+            <div class="card-footer text-muted bg-primary text-center" id="offerId">
+                <a href="#" class="card-link text-white"><strong>Edit</strong></a>
+            </div>
+        </div>
+    </div>
+</div>

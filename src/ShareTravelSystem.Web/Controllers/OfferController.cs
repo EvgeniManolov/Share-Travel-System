@@ -52,10 +52,10 @@
         }
 
         [HttpGet]
-        public IActionResult Preview()
+        public IActionResult Details(int id)
         {
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            var model = this.offerService.GetOfferById(id);
+            return View(model);
         }
     }
 }

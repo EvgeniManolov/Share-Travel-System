@@ -11,5 +11,7 @@
         List<Town> GetAllTowns();
 
         ICollection<DisplayOfferViewModel> GetAllOffers();
+
+        DetailsOfferViewModel GetOfferById(int id);
     }
 }

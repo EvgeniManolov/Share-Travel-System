@@ -59,10 +59,17 @@
             this.db.SaveChanges();
         }
 
+        public DetailsOfferViewModel GetOfferById(int offerId)
+        {
+            DetailsOfferViewModel offer = this.db.Offers.Where(t => t.Id == offerId).ProjectTo<DetailsOfferViewModel>().SingleOrDefault();
+
+            return offer;
+        }
+
         public ICollection<DisplayOfferViewModel> GetAllOffers()
         {
             ICollection<DisplayOfferViewModel> result = this.db.Offers.OrderByDescending(t => t.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
-            
+
             return result;
         }
 
