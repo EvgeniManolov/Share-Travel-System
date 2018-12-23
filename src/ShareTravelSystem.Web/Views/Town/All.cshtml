@@ -46,36 +46,28 @@
 
         </tbody>
     </table>
-    @*<div class="buttons">
-            <a class="btn bg-primary btn-left"><i class="fal fa-arrow-alt-square-left text-white">&lArr;</i></a>
-            <span class="page"></span>
-            <a class="btn bg-primary"><i class="fal fa-arrow-alt-square-right  text-white">&rArr;</i></a>
-        </div>*@
 
 </div>
 
 @{
-
-
     int itemsPerPage = Model.Size;
     int itemsCount = Model.Count;
 
     int currentPage = Model.Page;
 
-    //int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
-    int pageUp = 5;
+    int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
     int pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
 
-    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Page));
+    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
 
 
-    <p>Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
 }
 
-<div>
-    <a class="btn btn-default" asp-controller="Town" asp-action="All" asp-all-route-data="@(new Dictionary<string, string> { { "page", pageDown.ToString()} })">&#8678;</a>
+<div class="text-center">
+    <a  href="/Town/All?page=@pageDown.ToString()">&#8678;</a>
     <span class="btn btn-default">@Model.Page</span>
-    <a class="btn btn-default" asp-controller="Town" asp-action="All" asp-all-route-data="@(new Dictionary<string, string> { { "page", pageUp.ToString()} })">&#8680;</a>
+    <a href="/Town/All?page=@pageUp.ToString()">&#8680;</a>
 </div>
 
 

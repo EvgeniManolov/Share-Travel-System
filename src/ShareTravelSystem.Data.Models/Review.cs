@@ -8,8 +8,6 @@
 
         public string Comment { get; set; }
 
-        public int Rate { get; set; }
-
         public ShareTravelSystemUser  Author { get; set; }
 
         public string AuthorId { get; set; } 
