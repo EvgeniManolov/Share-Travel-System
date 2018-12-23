@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShareTravelSystem.Data.Models;
 using ShareTravelSystem.Services.Contracts;
+using ShareTravelSystem.ViewModels;
 using ShareTravelSystem.ViewModels.Town;
 using ShareTravelSystem.Web.Areas.Identity.Data;
 using System;
@@ -23,9 +24,12 @@ namespace ShareTravelSystem.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult All(string returnUrl = null)
+        public IActionResult All(int page)
         {
-            List<Town> towns = this.townService.GetAllTowns();
+            var asd = HttpContext.Request;
+            if (page == 0) page = 1;
+            int size = 10;
+            TownPaginationModel towns = this.townService.GetAllTowns(size, page);
 
             return View(towns);
         }
@@ -54,7 +58,7 @@ namespace ShareTravelSystem.Web.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            
+
             return View();
         }
     }

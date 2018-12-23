@@ -57,5 +57,12 @@
             var model = this.offerService.GetOfferById(id);
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = this.offerService.GetOfferToEdit(id);
+            return View(model);
+        }
     }
 }

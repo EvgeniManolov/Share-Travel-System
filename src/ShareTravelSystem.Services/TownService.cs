@@ -1,8 +1,10 @@
 ﻿namespace ShareTravelSystem.Services
 {
+    using AutoMapper.QueryableExtensions;
     using Microsoft.AspNetCore.Identity;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Town;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Models;
@@ -28,9 +30,13 @@
             db.SaveChanges();
         }
 
-        public List<Town> GetAllTowns()
+        public TownPaginationModel GetAllTowns(int size, int page)
         {
-            return this.db.Towns.ToList();
+
+            var towns = this.db.Towns.ProjectTo<DisplayTownViewModel>().ToList();
+            var count = towns.Count();
+            towns = towns.Skip((page - 1) * size).Take(size).ToList();
+            return new TownPaginationModel { Size = size, Page = page, Count = count, Towns = towns };
         }
 
         public EditTownViewModel GetTownById(int id)
@@ -41,5 +47,7 @@
                 Name = t.Name
             }).FirstOrDefault();
         }
+
+
     }
 }

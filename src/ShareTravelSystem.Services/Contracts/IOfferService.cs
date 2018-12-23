@@ -8,10 +8,12 @@
     {
         void Create(CreateOfferViewModel model, string userId);
 
-        List<Town> GetAllTowns();
+        IEnumerable<Town> GetAllTowns();
 
-        ICollection<DisplayOfferViewModel> GetAllOffers();
+        IEnumerable<DisplayOfferViewModel> GetAllOffers();
 
         DetailsOfferViewModel GetOfferById(int id);
+
+        DisplayEditOfferViewModel GetOfferToEdit(int id);
     }
 }

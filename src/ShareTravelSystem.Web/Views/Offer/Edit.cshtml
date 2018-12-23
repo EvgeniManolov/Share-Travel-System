@@ -1,0 +1,109 @@
+﻿@model ShareTravelSystem.ViewModels.Offer.DisplayEditOfferViewModel
+
+@using ShareTravelSystem.Data.Models
+@using System.Linq;
+
+@{
+    ViewData["Title"] = "Edit Offer";
+    var town = new Town { Id = Model.OfferModel.DepartureTownId, Name = Model.OfferModel.DepartureTownName };
+}
+
+<div class="container">
+    <div class="card mt-5">
+
+        <h5 class="card-header info-color white-text text-center py-4 bg-primary">
+            <strong class="text-white">Create offer</strong>
+        </h5>
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+            <form class="text-center" style="color: #757575;" method="post" asp-action="Edit">
+
+                <fieldset class="form-group">
+                    <legend>Type Offer</legend>
+                    <div class="text-center">
+                        @if (Model.OfferModel.Type == "Search")
+                        {
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Search" value="Search" checked="">
+                                    Search place
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Suggest" value="Suggest">
+                                    Suggest place
+                                </label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Search" value="Search">
+                                    Search place
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Suggest" value="Suggest" checked="">
+                                    Suggest place
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </fieldset>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="OfferModel.DepartureTownId"></label>
+                        <select asp-for="OfferModel.DepartureTownId" asp-items="@(new SelectList(Model.Towns.OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
+                            <option value="@Model.OfferModel.DepartureTownId">@Model.OfferModel.DepartureTownName</option>
+                        </select>
+                        <span asp-validation-for="OfferModel.DepartureTownId" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="OfferModel.DestinationTownId"></label>
+                        <select asp-for="OfferModel.DestinationTownId" asp-items="@(new SelectList(Model.Towns.OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
+                            <option value="@Model.OfferModel.DestinationTownId">@Model.OfferModel.DestinationTownName</option>
+                        </select>
+                        <span asp-validation-for="OfferModel.DestinationTownId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label asp-for="OfferModel.Seat" class="mt-3"></label>
+                        <input asp-for="OfferModel.Seat" class="form-control mt-0" value="@Model.OfferModel.Seat" />
+                        <span asp-validation-for="OfferModel.Seat" class="text-danger"></span>
+
+                    </div>
+                    <div class="col">
+                        <label asp-for="OfferModel.Price" class="mt-3"></label>
+                        <input asp-for="OfferModel.Price" class="form-control mt-0" type="number" min="0.00" max="10000.00" step="0.01" value="@Model.OfferModel.Price" />
+                        <span asp-validation-for="OfferModel.Price" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="form-row mt-3">
+                    <div class="col-6">
+                        <label asp-for="OfferModel.DepartureDate" class="mt-2"></label>
+                        <input asp-for="OfferModel.DepartureDate" class="form-control" type="text" onfocus="(this.type='datetime-local')" id="date" value="@Model.OfferModel.DepartureDate" />
+                        <span asp-validation-for="OfferModel.DepartureDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="md-form">
+                    <label asp-for="OfferModel.Description" class="mt-3"></label>
+                    <textarea asp-for="OfferModel.Description" class="form-control mt-0" rows="4" value="@Model.OfferModel.Description"></textarea>
+                    <span asp-validation-for="OfferModel.Description" class="text-danger"></span>
+                </div>
+                <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5" type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+

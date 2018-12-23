@@ -52,7 +52,5 @@ namespace ShareTravelSystem.ViewModels.Offer
         [Required]
         [Display(Name = "TotalRating")]
         public int TotalRating { get; set; }
-
-
     }
 }

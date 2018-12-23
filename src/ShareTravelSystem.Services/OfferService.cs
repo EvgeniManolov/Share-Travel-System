@@ -66,16 +66,30 @@
             return offer;
         }
 
-        public ICollection<DisplayOfferViewModel> GetAllOffers()
+        public IEnumerable<DisplayOfferViewModel> GetAllOffers()
         {
-            ICollection<DisplayOfferViewModel> result = this.db.Offers.OrderByDescending(t => t.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
+            IEnumerable<DisplayOfferViewModel> result = this.db.Offers.OrderByDescending(t => t.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
 
             return result;
         }
 
-        public List<Town> GetAllTowns()
+        public IEnumerable<Town> GetAllTowns()
         {
             return this.db.Towns.ToList();
         }
+
+
+
+        public DisplayEditOfferViewModel GetOfferToEdit(int id)
+        {
+            EditOfferViewModel model = this.db.Offers.Where(o => o.Id == id).ProjectTo<EditOfferViewModel>().SingleOrDefault();
+            DisplayEditOfferViewModel result = new DisplayEditOfferViewModel
+            {
+                OfferModel = model,
+                Towns = this.db.Towns.ToList()
+            };
+            return result;
+        }
+
     }
 }

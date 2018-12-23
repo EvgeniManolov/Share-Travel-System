@@ -1,9 +1,13 @@
-﻿@model List<ShareTravelSystem.Data.Models.Town>
+﻿@model ShareTravelSystem.ViewModels.TownPaginationModel
 
 @{
     ViewData["Title"] = "All Towns";
     var index = 1;
+
+
+
 }
+
 
 <div class="container">
     <h3 class="text-left">Manage Towns</h3>
@@ -17,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var town in @Model)
+            @foreach (var town in Model.Towns)
             {
                 @if (index % 2 == 0)
                 {
@@ -32,20 +36,54 @@
                     <tr class="table-secondary">
                         <th scope="row">@town.Id</th>
                         <td>@town.Name</td>
-                            <td><a href="@Url.Action("Edit","Town", new { id = town.Id})"  class="btn btn-outline-danger">Edit</a></td>
-                        
+                        <td><a href="@Url.Action("Edit","Town", new { id = town.Id})" class="btn btn-outline-danger">Edit</a></td>
+
                     </tr>
-                    
+
                 }
                 index++;
             }
 
         </tbody>
     </table>
+    @*<div class="buttons">
+            <a class="btn bg-primary btn-left"><i class="fal fa-arrow-alt-square-left text-white">&lArr;</i></a>
+            <span class="page"></span>
+            <a class="btn bg-primary"><i class="fal fa-arrow-alt-square-right  text-white">&rArr;</i></a>
+        </div>*@
+
 </div>
+
+@{
+
+
+    int itemsPerPage = Model.Size;
+    int itemsCount = Model.Count;
+
+    int currentPage = Model.Page;
+
+    //int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
+    int pageUp = 5;
+    int pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
+
+    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Page));
+
+
+    <p>Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+}
+
+<div>
+    <a class="btn btn-default" asp-controller="Town" asp-action="All" asp-all-route-data="@(new Dictionary<string, string> { { "page", pageDown.ToString()} })">&#8678;</a>
+    <span class="btn btn-default">@Model.Page</span>
+    <a class="btn btn-default" asp-controller="Town" asp-action="All" asp-all-route-data="@(new Dictionary<string, string> { { "page", pageUp.ToString()} })">&#8680;</a>
+</div>
+
+
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
+
 
 
 

@@ -29,7 +29,7 @@
                 Post on: @Model.CreateDate
             </div>
             <div class="card-footer text-muted bg-primary text-center" id="offerId">
-                <a href="#" class="card-link text-white"><strong>Edit</strong></a>
+                <a asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id" class="card-link text-white">Edit</a>
             </div>
         </div>
     </div>

@@ -39,18 +39,18 @@
             this.db.SaveChanges();
         }
 
-        public List<DisplayAnnouncementViewModel> GetIndexAnnouncements()
+        public IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements()
         {
             return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().Take(4).ToList();
         }
 
-        public List<DisplayAnnouncementViewModel> GetAllAnnouncements()
+        public IEnumerable<DisplayAnnouncementViewModel> GetAllAnnouncements()
         {
             return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
 
         }
 
-        public List<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId)
+        public IEnumerable<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId)
         {
             return this.db.Announcements.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
         }

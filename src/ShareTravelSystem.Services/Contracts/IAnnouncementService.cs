@@ -9,11 +9,11 @@
     {
         void Create(CreateAnnouncementViewModel model, string userId);
 
-        List<DisplayAnnouncementViewModel> GetAllAnnouncements();
+        IEnumerable<DisplayAnnouncementViewModel> GetAllAnnouncements();
 
-        List<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId);
+        IEnumerable<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId);
 
-        List<DisplayAnnouncementViewModel> GetIndexAnnouncements();
+        IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements();
 
         void Delete(int productId);
 
