@@ -6,6 +6,8 @@ namespace ShareTravelSystem.ViewModels.Offer
     using System.ComponentModel.DataAnnotations;
     using ShareTravelSystem.Data.Models;
     using AutoMapper;
+    using System.Collections.Generic;
+    using ShareTravelSystem.ViewModels.Review;
 
     public class DetailsOfferViewModel : IMapFrom<Offer>
     {
@@ -52,5 +54,7 @@ namespace ShareTravelSystem.ViewModels.Offer
         [Required]
         [Display(Name = "TotalRating")]
         public int TotalRating { get; set; }
+
+        public ICollection<DisplayReviewViewModel> Reviews { get; set; }
     }
 }

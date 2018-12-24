@@ -1,4 +1,5 @@
 ﻿@model ShareTravelSystem.ViewModels.Offer.DetailsOfferViewModel
+
 @{
     ViewData["Title"] = "All Offers";
 }
@@ -33,4 +34,32 @@
             </div>
         </div>
     </div>
+
+
+    <form asp-controller="Review" asp-action="Create" method="post">
+        <div>
+            <textarea name="comment" style="font-family:sans-serif;font-size:1.2em;">
+        Hey... say something!
+        </textarea>
+        </div>
+        <div>
+            <input name="offerId" type="hidden" value="@Model.Id" class="form-control mt-4" placeholder="Title" />
+        </div>
+        <button class="btn btn-primary text-white" type="submit" value="Create Comment" ></button>
+    </form>
+    <hr/>
+    <h1 class="mt-5">Comments</h1>
+    <ul>
+        @if (Model.Reviews.Count == 0)
+        {
+            <li>No comments</li>
+        }
+        else
+        {
+            @foreach (var review in @Model.Reviews)
+            {
+                <li>@review.Content by @review.Author  on @review.CreateDate</li>
+            }
+        }   
+    </ul>
 </div>

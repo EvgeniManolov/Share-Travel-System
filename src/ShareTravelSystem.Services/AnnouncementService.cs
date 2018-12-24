@@ -44,16 +44,20 @@
             return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().Take(4).ToList();
         }
 
-        public IEnumerable<DisplayAnnouncementViewModel> GetAllAnnouncements()
+        public IEnumerable<DisplayAnnouncementViewModel> GetAllAnnouncements(string filter, string currentUserId)
         {
-            return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
-
+            List<DisplayAnnouncementViewModel> result = new List<DisplayAnnouncementViewModel>();
+            if (filter.ToLower() == "all")
+            {
+                result = this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
+            }
+            if (filter.ToLower() == "my")
+            {
+                result = this.db.Announcements.Where(a => a.AuthorId == currentUserId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
+            }
+            return result;
         }
 
-        public IEnumerable<DisplayAnnouncementViewModel> GetMyAnnouncements(string userId)
-        {
-            return this.db.Announcements.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
-        }
 
         public void Delete(int announcementId)
         {

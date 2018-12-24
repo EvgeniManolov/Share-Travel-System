@@ -1,44 +1,42 @@
 ﻿@model ShareTravelSystem.ViewModels.Offer.DisplayAllOffersViewModel
-@{
+@*@{
     ViewData["Title"] = "All Offers";
-}
-<div class="container">
-    <div class="card-deck">
-        @if (@Model.Offers.Count() == 0)
-        {
+}*@
 
-            <h2>No Offers</h2>
-        }
+
+<div class="container"  id="tourpackages-carousel">
+    <div class="row">
+        <div class="col-lg-12"><h1>@ViewData["Title"] <a class="btn icon-btn btn-primary pull-right" asp-controller="Offer" asp-action="Create"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span> Create New Offer</a></h1></div>
 
         @foreach (var offer in @Model.Offers)
         {
-            <div class="col-4">
-                <div class="card-body" id="offerId">
-                    <h3 class="card-header bg-primary text-white text-center mt-2" id="offerId"><strong>@offer.Type place</strong></h3>
-                    <div class="card-body">
-                        <h5 class="card-title"><strong>From :</strong> @offer.DepartureTownName <br /> <strong>To :</strong> @offer.DestinationTownName</h5>
-                        <h6 class="card-subtitle "><strong><br />On :</strong> @offer.DepartureDate</h6>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><strong>Description :</strong> <br />@offer.Description</p>
-                    </div>
-                    <ul class="list-group list-group-flush bg-primary">
-                        <li class="list-group-item"><strong>Seats :</strong> @offer.Seat</li>
-                        <li class="list-group-item"><strong>Price per seat :</strong> @offer.Price</li>
-                        <li class="list-group-item"><strong>Author :</strong> @offer.Author</li>
-                    </ul>
-                    <div class="card-body text-muted">
-                        Post on: @offer.CreateDate
-                    </div>
-                    <div class="card-footer text-muted bg-primary text-center" id="offerId">
-                        <a asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id" class="card-link text-white text-left"><strong>Preview</strong></a>
-                        <a href="#" class="card-link text-white"><strong>Chat with Author</strong></a>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 position-relative" >
+                <div class="thumbnail">
+                    <label class="position-absolute lableoffer">@offer.Type</label>
+                    <div class="caption">
+                        <div class='col-lg-12'>
+                            <span class="glyphicon glyphicon-credit-card"></span>
+                            <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+                        </div>
+                        <div class='col-lg-12 well well-add-card'>
+                            <h4>From @offer.DepartureTownName To @offer.DestinationTownName</h4>
+                        </div>
+                        <div class='col-lg-12'>
+                            <p>Description: @offer.Description</p>
+                            <p class"text-muted">On: @offer.DepartureDate</p>
+                            <p class"text-muted">Seat: @offer.Seat</p>
+                            <p class"text-muted">Price: @offer.Price</p>
+                        </div>
+                        <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id"><strong>Preview</strong></a>
+                        <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Like</button>
+                        <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
                     </div>
                 </div>
             </div>
         }
-    </div>
-</div>
+        <div class="col-lg-12"><a href="#">View Deleted Cards</a></div>
+    </div><!-- End row -->
+</div><!-- End container -->
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

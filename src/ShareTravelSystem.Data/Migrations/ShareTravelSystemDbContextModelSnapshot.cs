@@ -197,9 +197,9 @@ namespace ShareTravelSystem.Data.Migrations
 
                     b.Property<string>("Comment");
 
-                    b.Property<int>("OfferId");
+                    b.Property<DateTime>("CreateDate");
 
-                    b.Property<int>("Rate");
+                    b.Property<int>("OfferId");
 
                     b.HasKey("Id");
 

@@ -10,7 +10,7 @@
 
         IEnumerable<Town> GetAllTowns();
 
-        IEnumerable<DisplayOfferViewModel> GetAllOffers();
+        IEnumerable<DisplayOfferViewModel> GetAllOffers(string filter, string currentUserId);
 
         DetailsOfferViewModel GetOfferById(int id);
 

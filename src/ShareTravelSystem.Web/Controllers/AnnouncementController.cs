@@ -38,30 +38,30 @@
         }
 
         [HttpGet]
-        public IActionResult All(int? page)
-        {
-            var announcements = this.announcementService.GetAllAnnouncements();
-            var result = new DisplayAllAnnouncementsViewModel
-            {
-                Announcements = announcements
-            }
-            ;
-            return this.View(result);
-        }
-
-        [HttpGet]
-        public IActionResult MyAnnouncements()
+        public IActionResult All(string filter)
         {
 
             string currentUserId = this.userManager.GetUserId(this.User);
-            var announcements = this.announcementService.GetMyAnnouncements(currentUserId);
+            var announcements = this.announcementService.GetAllAnnouncements(filter, currentUserId);
+            if (filter.ToLower() == "my")
+            {
+                ViewData["Title"] = "My Announcements";
+            }
+
+            if (filter.ToLower() == "all")
+            {
+                ViewData["Title"] = "All Announcements";
+            }
+
             var result = new DisplayAllAnnouncementsViewModel
             {
                 Announcements = announcements
             }
-            ;
-            return View(result);
+          ;
+            return this.View(result);
         }
+
+
 
         [HttpGet]
         public IActionResult Details(int id)
@@ -85,7 +85,7 @@
             return this.RedirectToAction("All", "Announcement");
         }
 
-        
+
         public IActionResult Delete(int id)
         {
             this.announcementService.Delete(id);

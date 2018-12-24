@@ -39,10 +39,21 @@
         }
 
         [HttpGet]
-        public IActionResult All(int? page)
+        public IActionResult All(string filter)
         {
+            string currentUserId = this.userManager.GetUserId(this.User);
+            var offers = this.offerService.GetAllOffers(filter, currentUserId);
 
-            var offers = this.offerService.GetAllOffers();
+            if (filter.ToLower() == "my")
+            {
+                ViewData["Title"] = "My Offers";
+            }
+
+            if (filter.ToLower() == "all")
+            {
+                ViewData["Title"] = "All Offers";
+            }
+
             var result = new DisplayAllOffersViewModel
             {
                 Offers = offers

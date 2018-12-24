@@ -15,6 +15,7 @@
     using ShareTravelSystem.Common;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using ShareTravelSystem.ViewModels.Review;
 
     public class OfferService : IOfferService
     {
@@ -62,14 +63,29 @@
         public DetailsOfferViewModel GetOfferById(int offerId)
         {
             DetailsOfferViewModel offer = this.db.Offers.Where(t => t.Id == offerId).ProjectTo<DetailsOfferViewModel>().SingleOrDefault();
+            offer.Reviews = this.db.Reviews.Where(r => r.OfferId == offerId).OrderByDescending(x => x.CreateDate).Select(r => new DisplayReviewViewModel
+            {
+                Id = r.Id,
+                Content = r.Comment,
+                Author = r.Author.UserName,
+                CreateDate = r.CreateDate
+
+            }).ToList();
 
             return offer;
         }
 
-        public IEnumerable<DisplayOfferViewModel> GetAllOffers()
+        public IEnumerable<DisplayOfferViewModel> GetAllOffers(string filter, string currentUserId)
         {
-            IEnumerable<DisplayOfferViewModel> result = this.db.Offers.OrderByDescending(t => t.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
-
+            List<DisplayOfferViewModel> result = new List<DisplayOfferViewModel>();
+            if (filter.ToLower() == "all")
+            {
+                result = this.db.Offers.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
+            }
+            if (filter.ToLower() == "my")
+            {
+                result = this.db.Offers.Where(a => a.AuthorId == currentUserId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
+            }
             return result;
         }
 
