@@ -16,6 +16,7 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using ShareTravelSystem.ViewModels.Review;
+    using ShareTravelSystem.ViewModels;
 
     public class OfferService : IOfferService
     {
@@ -75,17 +76,51 @@
             return offer;
         }
 
-        public IEnumerable<DisplayOfferViewModel> GetAllOffers(string filter, string currentUserId)
+        public OfferPaginationViewModel GetAllOffers(bool privateOffers, string filter, string search, string currentUserId)
         {
-            List<DisplayOfferViewModel> result = new List<DisplayOfferViewModel>();
-            if (filter.ToLower() == "all")
+            List<DisplayOfferViewModel> offers = new List<DisplayOfferViewModel>();
+
+            if (privateOffers)
             {
-                result = this.db.Offers.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
+                offers = this.db.Offers
+                         .OrderByDescending(x => x.CreateDate)
+                         .ProjectTo<DisplayOfferViewModel>()
+                         .ToList();
             }
-            if (filter.ToLower() == "my")
+            else
             {
-                result = this.db.Offers.Where(a => a.AuthorId == currentUserId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayOfferViewModel>().ToList();
+                offers = this.db.Offers
+                         .Where(o => o.AuthorId == currentUserId)
+                         .OrderByDescending(x => x.CreateDate)
+                         .ProjectTo<DisplayOfferViewModel>()
+                         .ToList();
             }
+
+            if (filter != null && filter != "" && filter != "All")
+            {
+                offers = offers
+                         .Where(x => x.Type.ToLower() == filter.ToLower())
+                         .ToList();
+            }
+
+
+            if (search != null && search != "")
+            {
+                offers = offers.Where(x => x.DepartureTownName.ToLower().Contains(search.Trim().ToLower())
+                                || x.DestinationTownName.ToLower().Contains(search.Trim().ToLower()))
+                                .ToList();
+            }
+            var result = new OfferPaginationViewModel
+            {
+                Filter = filter,
+                Search = search,
+                PrivateOffers = privateOffers,
+                AllOffers = new DisplayAllOffersViewModel
+                {
+                    Offers = offers
+                }
+            };
+
             return result;
         }
 

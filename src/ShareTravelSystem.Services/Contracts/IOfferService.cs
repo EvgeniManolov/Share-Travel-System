@@ -1,6 +1,7 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
     using ShareTravelSystem.Data.Models;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Offer;
     using System.Collections.Generic;
 
@@ -10,7 +11,7 @@
 
         IEnumerable<Town> GetAllTowns();
 
-        IEnumerable<DisplayOfferViewModel> GetAllOffers(string filter, string currentUserId);
+        OfferPaginationViewModel GetAllOffers(bool privateOffers ,string filter, string search, string currentUserId);
 
         DetailsOfferViewModel GetOfferById(int id);
 

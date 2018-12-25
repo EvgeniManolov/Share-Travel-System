@@ -1,16 +1,35 @@
-﻿@model ShareTravelSystem.ViewModels.Offer.DisplayAllOffersViewModel
+﻿@model ShareTravelSystem.ViewModels.OfferPaginationViewModel
 @*@{
     ViewData["Title"] = "All Offers";
 }*@
 
 
-<div class="container"  id="tourpackages-carousel">
+<div class="container" id="tourpackages-carousel">
+    <form asp-controller="Offer" asp-action="All" method="get">
+        <div class="mt-3">Offers!</div>
+        <div class="row">
+            <div class="ml-3">All Offers:   @Html.RadioButton("privateOffers", true, true)</div>
+            <div class="ml-3">My Offers:   @Html.RadioButton("privateOffers", false)</div>
+        </div>
+        <div class="mt-3">Filter by offer type!</div>
+        <div class="row">
+            <div class="ml-3">Search Offers:   @Html.RadioButton("filter", "Search")</div>
+            <div class="ml-3">Suggest Offers:   @Html.RadioButton("filter", "Suggest")</div>
+            <div class="ml-3">All Offers:   @Html.RadioButton("filter", "All", true) </div>
+            @*<input class="ml-3" type="checkbox" name="offer" value="Search">Search Offers<br>
+            <input class="ml-5" type="checkbox" name="offer" value="Suggest">Suggest Offers<br>
+            <input class="ml-5" type="checkbox" name="offer" value="All" checked="checked">All Offers<br>*@
+        </div>
+        <div class="mt-2">Search by Town!</div>
+        <input name="search" type="text" value="@Model.Search">
+        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Offer")">Apply</button>
+    </form>
     <div class="row">
         <div class="col-lg-12"><h1>@ViewData["Title"] <a class="btn icon-btn btn-primary pull-right" asp-controller="Offer" asp-action="Create"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span> Create New Offer</a></h1></div>
 
-        @foreach (var offer in @Model.Offers)
+        @foreach (var offer in @Model.AllOffers.Offers)
         {
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 position-relative" >
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 position-relative">
                 <div class="thumbnail">
                     <label class="position-absolute lableoffer">@offer.Type</label>
                     <div class="caption">

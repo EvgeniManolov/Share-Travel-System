@@ -29,7 +29,7 @@ namespace ShareTravelSystem.Web.Controllers
             var asd = HttpContext.Request;
             if (page == 0) page = 1;
             int size = 10;
-            TownPaginationModel towns = this.townService.GetAllTowns(size, page);
+            TownPaginationViewModel towns = this.townService.GetAllTowns(size, page);
 
             return View(towns);
         }

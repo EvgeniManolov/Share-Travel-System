@@ -30,13 +30,13 @@
             db.SaveChanges();
         }
 
-        public TownPaginationModel GetAllTowns(int size, int page)
+        public TownPaginationViewModel GetAllTowns(int size, int page)
         {
 
             var towns = this.db.Towns.ProjectTo<DisplayTownViewModel>().ToList();
             var count = towns.Count();
             towns = towns.Skip((page - 1) * size).Take(size).ToList();
-            return new TownPaginationModel { Size = size, Page = page, Count = count, Towns = towns };
+            return new TownPaginationViewModel { Size = size, Page = page, Count = count, Towns = towns };
         }
 
         public EditTownViewModel GetTownById(int id)

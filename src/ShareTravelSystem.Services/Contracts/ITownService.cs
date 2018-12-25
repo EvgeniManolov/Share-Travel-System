@@ -4,12 +4,13 @@ using ShareTravelSystem.ViewModels.Town;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ShareTravelSystem.ViewModels;
 
 namespace ShareTravelSystem.Services.Contracts
 {
     public interface ITownService
     {
-        TownPaginationModel GetAllTowns(int size, int page);
+        TownPaginationViewModel GetAllTowns(int size, int page);
 
         void Create(CrateTownViewModel model);
 
