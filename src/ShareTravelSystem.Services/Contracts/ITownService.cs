@@ -1,10 +1,5 @@
-﻿using ShareTravelSystem.Data.Models;
-using ShareTravelSystem.ViewModels;
+﻿using ShareTravelSystem.ViewModels;
 using ShareTravelSystem.ViewModels.Town;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ShareTravelSystem.ViewModels;
 
 namespace ShareTravelSystem.Services.Contracts
 {

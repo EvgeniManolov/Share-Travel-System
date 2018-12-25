@@ -1,24 +1,21 @@
 ﻿@model ShareTravelSystem.ViewModels.OfferPaginationViewModel
 @*@{
-    ViewData["Title"] = "All Offers";
-}*@
+        ViewData["Title"] = "All Offers";
+    }*@
 
 
 <div class="container" id="tourpackages-carousel">
     <form asp-controller="Offer" asp-action="All" method="get">
         <div class="mt-3">Offers!</div>
         <div class="row">
-            <div class="ml-3">All Offers:   @Html.RadioButton("privateOffers", true, true)</div>
-            <div class="ml-3">My Offers:   @Html.RadioButton("privateOffers", false)</div>
+            <div class="ml-3">All Offers:   @Html.RadioButton("privateOffers", false, true)</div>
+            <div class="ml-3">My Offers:   @Html.RadioButton("privateOffers", true)</div>
         </div>
         <div class="mt-3">Filter by offer type!</div>
         <div class="row">
             <div class="ml-3">Search Offers:   @Html.RadioButton("filter", "Search")</div>
             <div class="ml-3">Suggest Offers:   @Html.RadioButton("filter", "Suggest")</div>
             <div class="ml-3">All Offers:   @Html.RadioButton("filter", "All", true) </div>
-            @*<input class="ml-3" type="checkbox" name="offer" value="Search">Search Offers<br>
-            <input class="ml-5" type="checkbox" name="offer" value="Suggest">Suggest Offers<br>
-            <input class="ml-5" type="checkbox" name="offer" value="All" checked="checked">All Offers<br>*@
         </div>
         <div class="mt-2">Search by Town!</div>
         <input name="search" type="text" value="@Model.Search">
@@ -53,12 +50,63 @@
                 </div>
             </div>
         }
-        <div class="col-lg-12"><a href="#">View Deleted Cards</a></div>
     </div><!-- End row -->
 </div><!-- End container -->
+
+@{
+    int itemsPerPage = Model.Size;
+    int itemsCount = Model.Count;
+
+    int currentPage = Model.Page;
+
+    int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
+    int pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
+
+    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
+
+
+    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+}
+
+<div class="text-center">
+    <a href="/Offer/All?page=@pageDown.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter">&#8678;</a>
+    <span class="btn btn-default">@Model.Page</span>
+    <a href="/Offer/All?page=@pageUp.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter">&#8680;</a>
+</div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

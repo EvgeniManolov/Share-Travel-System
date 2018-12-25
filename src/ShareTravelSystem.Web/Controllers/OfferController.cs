@@ -39,12 +39,14 @@
         }
 
         [HttpGet]
-        public IActionResult All(string filter, string search, bool privateOffers = true)
+        public IActionResult All(string filter, string search, bool privateOffers, int page)
         {
+            if (page == 0) page = 1;
+            int size = 9;
             string currentUserId = this.userManager.GetUserId(this.User);
-            var result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId);
+            var result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
 
-            ViewData["Title"] = "All Offers";
+            ViewData["Title"] = result.TitleOfPage;
 
             return this.View(result);
         }

@@ -11,7 +11,7 @@
 
         IEnumerable<Town> GetAllTowns();
 
-        OfferPaginationViewModel GetAllOffers(bool privateOffers ,string filter, string search, string currentUserId);
+        OfferPaginationViewModel GetAllOffers(bool privateOffers ,string filter, string search, string currentUserId,int page, int size);
 
         DetailsOfferViewModel GetOfferById(int id);
 

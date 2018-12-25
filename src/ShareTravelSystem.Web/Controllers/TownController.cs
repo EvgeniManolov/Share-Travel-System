@@ -26,7 +26,6 @@ namespace ShareTravelSystem.Web.Controllers
         [HttpGet]
         public IActionResult All(int page)
         {
-            var asd = HttpContext.Request;
             if (page == 0) page = 1;
             int size = 10;
             TownPaginationViewModel towns = this.townService.GetAllTowns(size, page);
@@ -35,13 +34,13 @@ namespace ShareTravelSystem.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create(string returnUrl = null)
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CrateTownViewModel model, string returnUrl = null)
+        public IActionResult Create(CrateTownViewModel model)
         {
             this.townService.Create(model);
 

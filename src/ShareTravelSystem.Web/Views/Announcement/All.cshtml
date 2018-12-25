@@ -2,8 +2,8 @@
 
 @using System.Linq;
 @*@{
-    ViewData["Title"] = "All Announcement";
-}*@
+        ViewData["Title"] = "All Announcement";
+    }*@
 <!-- Material form register -->
 <div class="container">
     <h4 class="mt-3">@ViewData["Title"]</h4>
@@ -18,15 +18,17 @@
         @foreach (var announcement in @Model.Announcements)
         {
             <div class="col-3">
-                <div class="card bg-secondary mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title "><strong>@announcement.Title</strong></h5>
-                        <p class="card-text ">@announcement.Content</p>
+                <a href="@Url.Action("Details","Announcement", new { id = announcement.Id})">
+                    <div class="card bg-secondary mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title "><strong>@announcement.Title</strong></h5>
+                            <p class="card-text ">@announcement.Content</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
-                    </div>
-                </div>
+                </a>
             </div>
         }
     </div>

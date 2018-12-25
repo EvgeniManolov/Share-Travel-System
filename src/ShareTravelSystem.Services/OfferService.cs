@@ -76,16 +76,17 @@
             return offer;
         }
 
-        public OfferPaginationViewModel GetAllOffers(bool privateOffers, string filter, string search, string currentUserId)
+        public OfferPaginationViewModel GetAllOffers(bool privateOffers, string filter, string search, string currentUserId, int page, int size)
         {
             List<DisplayOfferViewModel> offers = new List<DisplayOfferViewModel>();
-
-            if (privateOffers)
+            string titleOfPage = "";
+            if (!privateOffers)
             {
                 offers = this.db.Offers
                          .OrderByDescending(x => x.CreateDate)
                          .ProjectTo<DisplayOfferViewModel>()
                          .ToList();
+                titleOfPage = "All Offers";
             }
             else
             {
@@ -94,6 +95,7 @@
                          .OrderByDescending(x => x.CreateDate)
                          .ProjectTo<DisplayOfferViewModel>()
                          .ToList();
+                titleOfPage = "My Offers";
             }
 
             if (filter != null && filter != "" && filter != "All")
@@ -110,10 +112,18 @@
                                 || x.DestinationTownName.ToLower().Contains(search.Trim().ToLower()))
                                 .ToList();
             }
+
+
+            var count = offers.Count();
+            offers = offers.Skip((page - 1) * size).Take(size).ToList();
             var result = new OfferPaginationViewModel
             {
                 Filter = filter,
                 Search = search,
+                Size = size,
+                Page = page,
+                Count = count,
+                TitleOfPage = titleOfPage,
                 PrivateOffers = privateOffers,
                 AllOffers = new DisplayAllOffersViewModel
                 {
