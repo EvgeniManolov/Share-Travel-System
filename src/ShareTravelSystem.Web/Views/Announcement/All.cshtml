@@ -1,4 +1,4 @@
-﻿@model ShareTravelSystem.ViewModels.DisplayAllAnnouncementsViewModel
+﻿@model ShareTravelSystem.ViewModels.AnnouncementPaginationViewModel
 
 @using System.Linq;
 @*@{
@@ -6,16 +6,25 @@
     }*@
 <!-- Material form register -->
 <div class="container">
-    <h4 class="mt-3">@ViewData["Title"]</h4>
+    <form asp-controller="Announcement" asp-action="All" method="get">
+        <div class="mt-3">Filter by offer type!</div>
+        <div class="row">
+            <div class="ml-3">All Announcements:   @Html.RadioButton("privateAnnouncements", false, true)</div>
+            <div class="ml-3">My Announcements:   @Html.RadioButton("privateAnnouncements", true)</div>
+        </div>
+        <div class="mt-2">Search</div>
+        <input name="search" type="text" value="@Model.Search">
+        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Announcement")">Apply</button>
+    </form>
+    <div class="col-lg-12 mt-3"><h3>@ViewData["Title"] <a class="btn icon-btn btn-primary pull-right" asp-controller="Announcement" asp-action="Create"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span> Create New Announcement</a></h3></div>
     <hr />
     <!-- Example row of columns -->
     <div class="card-deck">
-        @if (@Model.Announcements.Count() == 0)
+        @if (@Model.AllAnnouncements.Announcements.Count() == 0)
         {
-
             <h2>No announcements</h2>
         }
-        @foreach (var announcement in @Model.Announcements)
+        @foreach (var announcement in @Model.AllAnnouncements.Announcements)
         {
             <div class="col-3">
                 <a href="@Url.Action("Details","Announcement", new { id = announcement.Id})">
@@ -34,6 +43,28 @@
     </div>
     <hr />
 </div> <!-- /container -->
+
+@{
+    int itemsPerPage = Model.Size;
+    int itemsCount = Model.Count;
+
+    int currentPage = Model.Page;
+
+    int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
+    int pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
+
+    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
+
+
+    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+}
+
+<div class="text-center">
+    <a href="/Announcement/All?page=@pageDown.ToString()&search=@Model.Search&privateAnnouncements=@Model.PrivateAnnouncements">&#8678;</a>
+    <span class="btn btn-default">@Model.Page</span>
+    <a href="/Announcement/All?page=@pageUp.ToString()&search=@Model.Search&privateAnnouncements=@Model.PrivateAnnouncements">&#8680;</a>
+</div>
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

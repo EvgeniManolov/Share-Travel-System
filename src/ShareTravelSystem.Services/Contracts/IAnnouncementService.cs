@@ -8,7 +8,7 @@
     {
         void Create(CreateAnnouncementViewModel model, string userId);
 
-        IEnumerable<DisplayAnnouncementViewModel> GetAllAnnouncements(string filter, string currentUserId);
+        AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page, int size);
 
         IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements();
 

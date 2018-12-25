@@ -38,30 +38,17 @@
         }
 
         [HttpGet]
-        public IActionResult All(string filter)
+        public IActionResult All(string search, bool privateAnnouncements, int page)
         {
-
+            if (page == 0) page = 1;
+            int size = 8;
             string currentUserId = this.userManager.GetUserId(this.User);
-            var announcements = this.announcementService.GetAllAnnouncements(filter, currentUserId);
-            if (filter.ToLower() == "my")
-            {
-                ViewData["Title"] = "My Announcements";
-            }
+            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page, size);
 
-            if (filter.ToLower() == "all")
-            {
-                ViewData["Title"] = "All Announcements";
-            }
+            ViewData["Title"] = result.TitleOfPage;
 
-            var result = new DisplayAllAnnouncementsViewModel
-            {
-                Announcements = announcements
-            }
-          ;
             return this.View(result);
         }
-
-
 
         [HttpGet]
         public IActionResult Details(int id)

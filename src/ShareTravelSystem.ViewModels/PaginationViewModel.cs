@@ -5,7 +5,6 @@ using System.Text;
 namespace ShareTravelSystem.ViewModels
 {
     public abstract class PaginationViewModel
-
     {   
         public int Size { get; set; }
 

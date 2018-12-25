@@ -44,17 +44,52 @@
             return this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().Take(4).ToList();
         }
 
-        public IEnumerable<DisplayAnnouncementViewModel> GetAllAnnouncements(string filter, string currentUserId)
+        public AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page, int size)
         {
-            List<DisplayAnnouncementViewModel> result = new List<DisplayAnnouncementViewModel>();
-            if (filter.ToLower() == "all")
+            List<DisplayAnnouncementViewModel> announcements = new List<DisplayAnnouncementViewModel>();
+            string titleOfPage = "";
+            if (!privateAnnouncements)
             {
-                result = this.db.Announcements.OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
+                announcements = this.db.Announcements
+                         .OrderByDescending(x => x.CreateDate)
+                         .ProjectTo<DisplayAnnouncementViewModel>()
+                         .ToList();
+                titleOfPage = "All Announcements";
             }
-            if (filter.ToLower() == "my")
+            else
             {
-                result = this.db.Announcements.Where(a => a.AuthorId == currentUserId).OrderByDescending(x => x.CreateDate).ProjectTo<DisplayAnnouncementViewModel>().ToList();
+                announcements = this.db.Announcements
+                         .Where(o => o.AuthorId == currentUserId)
+                         .OrderByDescending(x => x.CreateDate)
+                         .ProjectTo<DisplayAnnouncementViewModel>()
+                         .ToList();
+                titleOfPage = "My Announcements";
             }
+
+            if (search != null && search != "")
+            {
+                announcements = announcements.Where(x => x.Content.ToLower().Contains(search.Trim().ToLower())
+                                                        || x.Title.ToLower().Contains(search.Trim().ToLower()))
+                                                        .ToList();
+            }
+
+
+            var count = announcements.Count();
+            announcements = announcements.Skip((page - 1) * size).Take(size).ToList();
+            var result = new AnnouncementPaginationViewModel
+            {
+                Search = search,
+                Size = size,
+                Page = page,
+                Count = count,
+                TitleOfPage = titleOfPage,
+                PrivateAnnouncements = privateAnnouncements,
+                AllAnnouncements = new DisplayAllAnnouncementsViewModel
+                {
+                    Announcements = announcements
+                }
+            };
+
             return result;
         }
 
