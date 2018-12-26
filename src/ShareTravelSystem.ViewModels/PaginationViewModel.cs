@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels
 {
     public abstract class PaginationViewModel
     {   

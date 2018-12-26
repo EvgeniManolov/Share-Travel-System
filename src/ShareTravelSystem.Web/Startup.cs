@@ -13,8 +13,6 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using Microsoft.Extensions.Logging;
     using ShareTravelSystem.Web.Middlewares.Extensions;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Services;
     using AutoMapper;
     using ShareTravelSystem.Web.Infrastructure.Mapping;
     using ShareTravelSystem.Web.Infrastructure.Extensions;

@@ -11,7 +11,11 @@
 
 <div class="container">
     <h3 class="text-left">Manage Towns</h3>
-
+    <form asp-controller="Town" asp-action="All" method="get">
+        <div class="mt-2">Search!</div>
+        <input name="search" type="text" value="@Model.Search">
+        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Town")">Apply</button>
+    </form>
     <table class="table table-hover w-50 ">
         <thead>
             <tr>
@@ -65,9 +69,9 @@
 }
 
 <div class="text-center">
-    <a  href="/Town/All?page=@pageDown.ToString()">&#8678;</a>
+    <a  href="/Town/All?page=@pageDown.ToString()&search=@Model.Search">&#8678;</a>
     <span class="btn btn-default">@Model.Page</span>
-    <a href="/Town/All?page=@pageUp.ToString()">&#8680;</a>
+    <a href="/Town/All?page=@pageUp.ToString()&search=@Model.Search">&#8680;</a>
 </div>
 
 

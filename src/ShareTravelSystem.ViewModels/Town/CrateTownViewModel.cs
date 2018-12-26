@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels.Town
+﻿namespace ShareTravelSystem.ViewModels.Town
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class CrateTownViewModel
     {
         [Required]

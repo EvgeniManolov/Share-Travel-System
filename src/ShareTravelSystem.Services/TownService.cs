@@ -14,10 +14,10 @@
     public class TownService : ITownService
     {
         private readonly ShareTravelSystemDbContext db;
-
         private readonly UserManager<ShareTravelSystemUser> userManager;
 
-        public TownService(ShareTravelSystemDbContext db, UserManager<ShareTravelSystemUser> userManager)
+        public TownService(ShareTravelSystemDbContext db,
+                           UserManager<ShareTravelSystemUser> userManager)
         {
             this.db = db;
             this.userManager = userManager;
@@ -26,28 +26,59 @@
         public void Create(CrateTownViewModel model)
         {
             Town town = new Town { Name = model.Name };
+
             db.Towns.Add(town);
             db.SaveChanges();
         }
 
-        public TownPaginationViewModel GetAllTowns(int size, int page)
+        public TownPaginationViewModel GetAllTowns(int size, int page, string search)
         {
+            List<DisplayTownViewModel> towns = new List<DisplayTownViewModel>();
 
-            var towns = this.db.Towns.ProjectTo<DisplayTownViewModel>().ToList();
-            var count = towns.Count();
+            if (search != null && search != "")
+            {
+                towns = this.db
+                            .Towns
+                            .OrderBy(p => p.Name)
+                            .Where(t => t.Name.ToLower()
+                            .Contains(search.ToLower()))
+                            .ProjectTo<DisplayTownViewModel>()
+                            .ToList();
+            }
+            else
+            {
+                towns = this.db
+                            .Towns
+                            .OrderBy(p => p.Name)
+                            .ProjectTo<DisplayTownViewModel>()
+                            .ToList();
+            }
+
+            int count = towns.Count();
             towns = towns.Skip((page - 1) * size).Take(size).ToList();
-            return new TownPaginationViewModel { Size = size, Page = page, Count = count, Towns = towns };
+
+            TownPaginationViewModel result = new TownPaginationViewModel
+            {
+                Size = size,
+                Page = page,
+                Count = count,
+                Towns = towns,
+                Search = search
+            };
+
+            return result;
         }
 
         public EditTownViewModel GetTownById(int id)
         {
-            return this.db.Towns.Where(t => t.Id == id).Select(t => new EditTownViewModel
-            {
-                Id = t.Id,
-                Name = t.Name
-            }).FirstOrDefault();
+            return this.db
+                .Towns
+                .Where(t => t.Id == id)
+                .Select(t => new EditTownViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                }).FirstOrDefault();
         }
-
-
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ShareTravelSystem.Data.Models;
-
-namespace ShareTravelSystem.ViewModels.Offer
+﻿namespace ShareTravelSystem.ViewModels.Offer
 {
+    using System.Collections.Generic;
+
     public class DisplayEditOfferViewModel
     {
         public EditOfferViewModel OfferModel { get; set; }

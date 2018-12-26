@@ -1,9 +1,4 @@
-﻿using ShareTravelSystem.ViewModels.Offer;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels
 {
     public class AnnouncementPaginationViewModel : PaginationViewModel
     {

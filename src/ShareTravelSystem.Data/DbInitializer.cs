@@ -12,7 +12,6 @@
     {
         public static void Initialize(ShareTravelSystemDbContext context)
         {
-
             if (context.Towns.Any())
             {
                 return;

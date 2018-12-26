@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels.Review
+﻿namespace ShareTravelSystem.ViewModels.Review
 {
+    using System;
+
     public class DisplayReviewViewModel
     {
         public int Id { get; set; }

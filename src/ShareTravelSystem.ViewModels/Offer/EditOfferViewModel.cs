@@ -1,11 +1,9 @@
-﻿using ShareTravelSystem.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels.Offer
+﻿namespace ShareTravelSystem.ViewModels.Offer
 {
+    using ShareTravelSystem.Common;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class EditOfferViewModel : IMapFrom<Data.Models.Offer>
     {
         public string Type { get; set; }
