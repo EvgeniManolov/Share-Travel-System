@@ -34,13 +34,13 @@
 
             int departureTownId = this.db
                                       .Towns
-                                      .Where(t => t.Id == model.DepartureTownId)
+                                      .Where(t => t.Id == model.DepartureTownId && t.IsDeleted == false)
                                       .Select(x => x.Id)
                                       .FirstOrDefault();
 
             int destinationTownId = this.db
                                         .Towns
-                                        .Where(t => t.Id == model.DestinationTownId)
+                                        .Where(t => t.Id == model.DestinationTownId && t.IsDeleted == false)
                                         .Select(x => x.Id)
                                         .FirstOrDefault();
 
@@ -148,7 +148,7 @@
 
         public IEnumerable<Town> GetAllTowns()
         {
-            return this.db.Towns.ToList();
+            return this.db.Towns.Where(t => t.IsDeleted == false).ToList();
         }
 
         public DisplayEditOfferViewModel GetOfferToEdit(int id)
@@ -162,10 +162,31 @@
             DisplayEditOfferViewModel result = new DisplayEditOfferViewModel
             {
                 OfferModel = model,
-                Towns = this.db.Towns.ToList()
+                Towns = this.db.Towns.Where(t => t.IsDeleted == false).ToList()
             };
 
             return result;
+        }
+
+        public void EditOffer(DisplayEditOfferViewModel model)
+        {
+            Offer offer = this.db.Offers.Where(o => o.Id == model.OfferModel.Id).SingleOrDefault();
+
+            if (!Enum.TryParse(model.OfferModel.Type, true, out OfferType type))
+            {
+                throw new Exception("Invalid offer type");
+                //  return this.BadRequestErrorWithView("Invalid offer type."); -- да имплементирам errors
+            }
+            offer.Type = type;
+            offer.DepartureTownId = model.OfferModel.DepartureTownId;
+            offer.DestinationTownId = model.OfferModel.DestinationTownId;
+            offer.Seat = model.OfferModel.Seat;
+            offer.Price = model.OfferModel.Price;
+            offer.DepartureDate = model.OfferModel.DepartureDate;
+            offer.Description = model.OfferModel.Description;
+
+            this.db.SaveChanges();
+
         }
     }
 }

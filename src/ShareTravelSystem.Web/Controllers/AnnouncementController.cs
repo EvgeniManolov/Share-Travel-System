@@ -33,7 +33,7 @@
             string currentUserId = this.userManager.GetUserId(this.User);
             this.announcementService.Create(model, currentUserId);
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(AnnouncementController.All), "Announcement");
 
         }
 

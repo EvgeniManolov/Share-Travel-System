@@ -31,6 +31,20 @@
             db.SaveChanges();
         }
 
+        public void Delete(int townId)
+        {
+            Town town = this.db.Towns.Where(t => t.Id == townId).SingleOrDefault();
+            town.IsDeleted = true;
+            this.db.SaveChanges();
+        }
+
+        public void EditTownById(EditTownViewModel model)
+        {
+            Town town = this.db.Towns.Where(t => t.Id == model.Id).SingleOrDefault();
+            town.Name = model.Name;
+            this.db.SaveChanges();
+        }
+
         public TownPaginationViewModel GetAllTowns(int size, int page, string search)
         {
             List<DisplayTownViewModel> towns = new List<DisplayTownViewModel>();
@@ -40,7 +54,7 @@
                 towns = this.db
                             .Towns
                             .OrderBy(p => p.Name)
-                            .Where(t => t.Name.ToLower()
+                            .Where(t =>t.IsDeleted==false && t.Name.ToLower()
                             .Contains(search.ToLower()))
                             .ProjectTo<DisplayTownViewModel>()
                             .ToList();
@@ -50,6 +64,7 @@
                 towns = this.db
                             .Towns
                             .OrderBy(p => p.Name)
+                            .Where(t=>t.IsDeleted == false)
                             .ProjectTo<DisplayTownViewModel>()
                             .ToList();
             }

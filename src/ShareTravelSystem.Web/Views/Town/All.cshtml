@@ -1,22 +1,17 @@
 ﻿@model ShareTravelSystem.ViewModels.TownPaginationViewModel
 
 @{
-    ViewData["Title"] = "All Towns";
+    ViewData["Title"] = "Manage Towns";
     var index = 1;
-
-
-
 }
 
-
 <div class="container">
-    <h3 class="text-left">Manage Towns</h3>
+    <h3 class="text-left">@ViewData["Title"]</h3>
     <form asp-controller="Town" asp-action="All" method="get">
-        <div class="mt-2">Search!</div>
         <input name="search" type="text" value="@Model.Search">
-        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Town")">Apply</button>
+        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Town")"><strong>Search</strong></button>
     </form>
-    <table class="table table-hover w-50 ">
+    <table class="table table-hover w-50 mt-3">
         <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -32,7 +27,16 @@
                     <tr class="table-primary">
                         <td scope="row">@town.Id</td>
                         <td>@town.Name</td>
-                        <td><a href="@Url.Action("Edit","Town", new { id = town.Id})" class="btn btn-outline-danger">Edit</a></td>
+                        <td>
+                            <div class="row">
+                                <a href="@Url.Action("Edit","Town", new { id = town.Id})" class="btn btn-outline-danger">Edit</a>
+                                <form asp-controller="Town" asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@town.Id" />
+                                    <button type="submit" class="btn btn-danger ml-5">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+
                     </tr>
                 }
                 else
@@ -40,7 +44,15 @@
                     <tr class="table-secondary">
                         <th scope="row">@town.Id</th>
                         <td>@town.Name</td>
-                        <td><a href="@Url.Action("Edit","Town", new { id = town.Id})" class="btn btn-outline-danger">Edit</a></td>
+                        <td>
+                            <div class="row">
+                                <a href="@Url.Action("Edit","Town", new { id = @town.Id})" class="btn btn-outline-danger">Edit</a>
+                                <form asp-controller="Town" asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@town.Id" />
+                                    <button type="submit" class="btn btn-danger ml-5">Delete</button>
+                                </form>
+                            </div>
+                        </td>
 
                     </tr>
 
@@ -69,7 +81,7 @@
 }
 
 <div class="text-center">
-    <a  href="/Town/All?page=@pageDown.ToString()&search=@Model.Search">&#8678;</a>
+    <a href="/Town/All?page=@pageDown.ToString()&search=@Model.Search">&#8678;</a>
     <span class="btn btn-default">@Model.Page</span>
     <a href="/Town/All?page=@pageUp.ToString()&search=@Model.Search">&#8680;</a>
 </div>

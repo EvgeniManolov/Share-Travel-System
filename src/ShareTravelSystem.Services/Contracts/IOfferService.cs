@@ -11,10 +11,12 @@
 
         IEnumerable<Town> GetAllTowns();
 
-        OfferPaginationViewModel GetAllOffers(bool privateOffers ,string filter, string search, string currentUserId,int page, int size);
+        OfferPaginationViewModel GetAllOffers(bool privateOffers, string filter, string search, string currentUserId, int page, int size);
 
         DetailsOfferViewModel GetOfferById(int id);
 
         DisplayEditOfferViewModel GetOfferToEdit(int id);
+
+        void EditOffer(DisplayEditOfferViewModel model);
     }
 }

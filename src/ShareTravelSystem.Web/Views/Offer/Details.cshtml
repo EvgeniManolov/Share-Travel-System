@@ -10,56 +10,61 @@
 }
 
 <div class="Container">
-    <div class="col-4">
-        <div class="card-body" id="offerId">
-            <h3 class="card-header bg-primary text-white text-center mt-2" id="offerId"><strong>@Model.Type place</strong></h3>
-            <div class="card-body">
-                <h5 class="card-title"><strong>From :</strong> @Model.DepartureTownName <br /> <strong>To :</strong> @Model.DestinationTownName</h5>
-                <h6 class="card-subtitle "><strong><br />On :</strong> @Model.DepartureDate</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text"><strong>Description :</strong> <br />@Model.Description</p>
-            </div>
-            <ul class="list-group list-group-flush bg-primary">
-                <li class="list-group-item"><strong>Seats :</strong> @Model.Seat</li>
-                <li class="list-group-item"><strong>Price per seat :</strong> @Model.Price</li>
-                <li class="list-group-item"><strong>Rating :</strong> @Model.TotalRating</li>
-                <li class="list-group-item"><strong>Author :</strong> @Model.Author</li>
-            </ul>
-            <div class="card-body text-muted">
-                Post on: @Model.CreateDate
-            </div>
-            <div class="card-footer text-muted bg-primary text-center" id="offerId">
-                <a asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id" class="card-link text-white">Edit</a>
+    <h1>Preview of Offer    </h1>
+    <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
+        <div class="thumbnail">
+            <label class="position-absolute lableoffer">@Model.Type</label>
+            <div class="caption">
+                <div class='col-lg-12'>
+                    <span class="glyphicon glyphicon-credit-card"></span>
+                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+                </div>
+                <div class='col-lg-12 well well-add-card mt-3'>
+                    <h4>From @Model.DepartureTownName To @Model.DestinationTownName</h4>
+                </div>
+                <div class='col-lg-12'>
+                    <p class="mt-3">Description: @Model.Description</p>
+                    <p class="mt-3" class"text-muted">On: @Model.DepartureDate</p>
+                    <p class="mt-3" class"text-muted">Seat: @Model.Seat</p>
+                    <p class="mt-3" class"text-muted">Price: @Model.Price</p>
+                    <p class="mt-3" class"text-muted">Post on: @Model.CreateDate</p>
+                    <p class="mt-3" class"text-muted">Post on: @Model.Author</p>
+                    <p class="mt-3" class"text-muted">Rating: @Model.TotalRating</p>
+                </div>
+                <div class="card-footer text-muted bg-primary text-center" id="offerId">
+                    <a asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id" class="card-link text-white">Edit</a>
+                </div>
+                <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
             </div>
         </div>
     </div>
 
-
-    <form asp-controller="Review" asp-action="Create" method="post">
-        <div>
-            <textarea name="comment" style="font-family:sans-serif;font-size:1.2em;">
-        Hey... say something!
-        </textarea>
-        </div>
-        <div>
-            <input name="offerId" type="hidden" value="@Model.Id" class="form-control mt-4" placeholder="Title" />
-        </div>
-        <button class="btn btn-primary text-white" type="submit" value="Create Comment" ></button>
-    </form>
-    <hr/>
-    <h1 class="mt-5">Comments</h1>
-    <ul>
-        @if (Model.Reviews.Count == 0)
-        {
-            <li>No comments</li>
-        }
-        else
-        {
-            @foreach (var review in @Model.Reviews)
+    <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
+        <form asp-controller="Review" asp-action="Create" method="post">
+            <div>
+                <textarea class='col-lg-12' name="comment" placeholder="Comment this offer.." rows="4"></textarea>
+            </div>
+            <div>
+                <input name="offerId" type="hidden" value="@Model.Id" class="form-control mt-4" placeholder="Title" />
+            </div>
+            <button class="btn btn-primary text-white" type="submit" value="Create Comment">Add Comment</button>
+        </form>
+        <h1 class="mt-2">Comments</h1>
+        <hr />
+    </div>
+    <div>
+        <ul>
+            @if (Model.Reviews.Count == 0)
             {
-                <li>@review.Content by @review.Author  on @review.CreateDate</li>
+                <li>No comments</li>
             }
-        }   
-    </ul>
+            else
+            {
+                @foreach (var review in @Model.Reviews)
+                {
+                    <li >[ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content</li>
+                }
+            }
+        </ul>
+    </div>
 </div>

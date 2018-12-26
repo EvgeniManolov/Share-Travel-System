@@ -5,52 +5,21 @@
 }
 
 <h2>Edit Town with ID: @Model.Id</h2>
-<form>
+<form asp-controller="Town" asp-action="Edit" method="post">
     <div class="form-group row">
         <div class="col-3">
-            <input class="form-control" placeholder="Name" value="@Model.Name">
+            <input class="form-control" type="hidden" name="Id" value="@Model.Id">
+            <input class="form-control" name="Name" value="@Model.Name">
         </div>
         <div class="col-1">
-            <button type="submit" class="btn btn-outline-success">Save</button>
+            <button  type="submit" class="btn btn-outline-success">Save Changes</button>
         </div>
-        <div class="col-1">
-            <a asp-controller="Town" asp-action="Delete" data-id="@Model.Id" id="deleteId" class="btn btn-outline-success">Delete</a>
-        </div>
-        <div class="col-1">
-            <button type="submit" class="btn btn-outline-success">Back</button>
-        </div>
+        <a class="btn btn-outline-success" href="@Url.Action("All","Town")">Back</a>
     </div>
 </form>
 
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
-
-    <script type="text/javascript">
-
-        $('.deleteId').on('click', function () {
-            debugger;
-            var id = parseInt(this.getAttribute("data-id"));
-
-            $.ajax({
-                type: "POST",
-                url: "/Town/Delete/",
-                data: JSON.stringify({ id: id }),
-                contentType: "application/json; charset=utf-8",
-                processData: "true",
-                cache: false,
-            })
-                .done(function (response, textStatus, jqXHR) {
-                    // do something here
-                })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    // do something here
-                });
-
-    </script>
 }
 
-
-@*@section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-    }*@

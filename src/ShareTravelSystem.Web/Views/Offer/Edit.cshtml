@@ -18,7 +18,7 @@
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
             <form class="text-center" style="color: #757575;" method="post" asp-action="Edit">
-
+                <input type="hidden" name="OfferModel.Id" value="@Model.OfferModel.Id" />
                 <fieldset class="form-group">
                     <legend>Type Offer</legend>
                     <div class="text-center">
@@ -26,13 +26,13 @@
                         {
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Search" value="Search" checked="">
+                                    <input type="radio" class="form-check-input text-md-left" name="OfferModel.Type" id="Search" value="Search" checked="">
                                     Search place
                                 </label>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Suggest" value="Suggest">
+                                    <input type="radio" class="form-check-input text-md-left" name="OfferModel.Type" id="Suggest" value="Suggest">
                                     Suggest place
                                 </label>
                             </div>
@@ -41,13 +41,13 @@
                         {
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Search" value="Search">
+                                    <input type="radio" class="form-check-input text-md-left" name="OfferModel.Type" id="Search" value="Search">
                                     Search place
                                 </label>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input text-md-left" name="type" id="Suggest" value="Suggest" checked="">
+                                    <input type="radio" class="form-check-input text-md-left" name="OfferModel.Type" id="Suggest" value="Suggest" checked="">
                                     Suggest place
                                 </label>
                             </div>
@@ -57,14 +57,14 @@
                 <div class="form-row">
                     <div class="col">
                         <label asp-for="OfferModel.DepartureTownId"></label>
-                        <select asp-for="OfferModel.DepartureTownId" asp-items="@(new SelectList(Model.Towns.OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
+                        <select asp-for="OfferModel.DepartureTownId" asp-items="@(new SelectList(Model.Towns.Where(t=>t.IsDeleted==false).OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
                             <option value="@Model.OfferModel.DepartureTownId">@Model.OfferModel.DepartureTownName</option>
                         </select>
                         <span asp-validation-for="OfferModel.DepartureTownId" class="text-danger"></span>
                     </div>
                     <div class="col">
                         <label asp-for="OfferModel.DestinationTownId"></label>
-                        <select asp-for="OfferModel.DestinationTownId" asp-items="@(new SelectList(Model.Towns.OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
+                        <select asp-for="OfferModel.DestinationTownId" asp-items="@(new SelectList(Model.Towns.Where(t=>t.IsDeleted==false).OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
                             <option value="@Model.OfferModel.DestinationTownId">@Model.OfferModel.DestinationTownName</option>
                         </select>
                         <span asp-validation-for="OfferModel.DestinationTownId" class="text-danger"></span>
@@ -96,7 +96,11 @@
                     <textarea asp-for="OfferModel.Description" class="form-control mt-0" rows="4" value="@Model.OfferModel.Description"></textarea>
                     <span asp-validation-for="OfferModel.Description" class="text-danger"></span>
                 </div>
-                <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5" type="submit">Save Changes</button>
+                <div class="form-row">
+                    <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5 mr-2 col" type="submit">Save Changes</button>
+                    <a class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5 col" asp-controller="Offer" asp-action="Details" asp-route-id="@Model.OfferModel.Id">Back</a>
+                </div>
+                
             </form>
         </div>
     </div>

@@ -11,5 +11,9 @@
         void Create(CrateTownViewModel model);
 
         EditTownViewModel GetTownById(int townId);
+
+        void Delete(int townId);
+
+        void EditTownById(EditTownViewModel model);
     }
 }

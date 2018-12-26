@@ -216,6 +216,8 @@ namespace ShareTravelSystem.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");

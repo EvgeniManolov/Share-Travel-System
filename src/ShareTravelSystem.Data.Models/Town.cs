@@ -11,6 +11,8 @@ namespace ShareTravelSystem.Data.Models
 
         public string Name { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public ICollection<Offer> TownsAsDepartureTown { get; set; } = new List<Offer>();
 
         public ICollection<Offer> TownsAsDestinationTown { get; set; } = new List<Offer>();

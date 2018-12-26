@@ -6,6 +6,8 @@
 
     public class EditOfferViewModel : IMapFrom<Data.Models.Offer>
     {
+        public int Id { get; set; }
+
         public string Type { get; set; }
 
         [Display(Name = "Departure Town")]

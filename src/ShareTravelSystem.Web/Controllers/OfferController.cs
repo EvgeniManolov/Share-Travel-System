@@ -64,5 +64,12 @@
             var model = this.offerService.GetOfferToEdit(id);
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult Edit(DisplayEditOfferViewModel model)
+        {
+            this.offerService.EditOffer(model);
+             return this.Redirect("/offer/details?id=" + model.OfferModel.Id);
+        }
     }
 }

@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Town;
@@ -50,10 +51,17 @@
         }
 
         [HttpPost]
+        public IActionResult Edit(EditTownViewModel model)
+        {
+            this.townService.EditTownById(model);
+            return View(model);
+        }
+
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-
-            return View();
+            this.townService.Delete(id);
+            return RedirectToAction(nameof(TownController.All), "Town");
         }
     }
 }
