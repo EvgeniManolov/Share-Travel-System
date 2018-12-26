@@ -121,7 +121,8 @@
 
             if (search != null && search != "")
             {
-                offers = offers.Where(x => x.DepartureTownName.ToLower().Contains(search.Trim().ToLower()) || x.DestinationTownName.ToLower().Contains(search.Trim().ToLower()))
+                offers = offers.Where(x => x.DepartureTownName.ToLower().Contains(search.Trim().ToLower()) || x.DestinationTownName.ToLower().Contains(search.Trim().ToLower())
+                    || x.Description.ToLower().Contains(search.Trim().ToLower()))
                                 .ToList();
             }
 

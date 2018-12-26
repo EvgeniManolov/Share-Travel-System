@@ -1,8 +1,8 @@
-﻿    .card-deck .card {
-        min-width: 250px !important;
-        min-height: 250px;
-        max-height: 250px;
-    }
+﻿.card-deck .card {
+    min-width: 250px !important;
+    min-height: 250px;
+    max-height: 250px;
+}
 
     .card-deck .card:hover {
         -webkit-box-shadow: -1px 9px 40px -12px #158CBA;
@@ -11,11 +11,11 @@
     }
 
 
-    #offerId {
-        border: 5px solid #158CBA;
-        border-radius: 50px 50px;
-        margin-top: 20px;
-    }
+#offerId {
+    border: 5px solid #158CBA;
+    border-radius: 50px 50px;
+    margin-top: 20px;
+}
 
 
 .well {
@@ -79,7 +79,64 @@ p {
     margin-left: 15px;
 }
 
-.lableoffer{
-    top:0;
-   
-    }
+.lableoffer {
+    top: 0;
+}
+
+#topRow {
+    border-bottom-color: grey !important;
+    border-bottom-width: 3px;
+}
+
+#buttonId {
+    background: none !important;
+    border: none;
+    outline: none;
+}
+
+
+.table {
+    border: 3px solid #158CBA;
+    border-radius: 40px;
+}
+
+
+.shape {
+    border-style: solid;
+    border-width: 0 70px 40px 0;
+    float: right;
+    height: 0px;
+    width: 0px;
+    -ms-transform: rotate(360deg); /* IE 9 */
+    -o-transform: rotate(360deg); /* Opera 10.5 */
+    -webkit-transform: rotate(360deg); /* Safari and Chrome */
+    transform: rotate(360deg);
+}
+
+.shape-text {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    right: -40px;
+    top: 2px;
+    white-space: nowrap;
+    -ms-transform: rotate(30deg); /* IE 9 */
+    -o-transform: rotate(360deg); /* Opera 10.5 */
+    -webkit-transform: rotate(30deg); /* Safari and Chrome */
+    transform: rotate(30deg);
+}
+
+
+
+.deleteOfferCLass {
+    color: grey;
+}
+
+.editOfferCLass {
+    color: grey;
+}
+
+.deleteOfferCLass:hover {
+    color: red !important;
+}

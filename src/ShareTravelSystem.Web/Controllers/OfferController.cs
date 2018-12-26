@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Offer;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Collections.Generic;
@@ -35,7 +36,7 @@
             string currentUserId = this.userManager.GetUserId(this.User);
             this.offerService.Create(model, currentUserId);
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(OfferController.All), "Offer");
         }
 
         [HttpGet]
@@ -44,7 +45,7 @@
             if (page == 0) page = 1;
             int size = 9;
             string currentUserId = this.userManager.GetUserId(this.User);
-            var result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
+            OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
 
             ViewData["Title"] = result.TitleOfPage;
 
@@ -54,14 +55,14 @@
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var model = this.offerService.GetOfferById(id);
+            DetailsOfferViewModel model = this.offerService.GetOfferById(id);
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model = this.offerService.GetOfferToEdit(id);
+            DisplayEditOfferViewModel model = this.offerService.GetOfferToEdit(id);
             return View(model);
         }
 

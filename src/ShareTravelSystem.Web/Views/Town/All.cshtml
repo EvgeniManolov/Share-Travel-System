@@ -2,64 +2,42 @@
 
 @{
     ViewData["Title"] = "Manage Towns";
-    var index = 1;
 }
 
 <div class="container">
-    <h3 class="text-left">@ViewData["Title"]</h3>
-    <form asp-controller="Town" asp-action="All" method="get">
+    <form asp-controller="Town" asp-action="All" method="get" class="mt-3">
         <input name="search" type="text" value="@Model.Search">
-        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Town")"><strong>Search</strong></button>
+        <button type="submit" class="btn btn-primary" href="@Url.Action("All","Town")"><i class="fas fa-search-plus"></i></button>
     </form>
-    <table class="table table-hover w-50 mt-3">
-        <thead>
+    <table class="table table-hover col-5 mt-3" id="townTable">
+        <thead >
+            <tr class="bg-primary">
+                <th colspan="3">Towns</th>
+            </tr>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Actions</th>
+                <th scope="col" id="topRow">#</th>
+                <th scope="col" id="topRow">Name</th>
+                <th scope="col" id="topRow"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var town in Model.Towns)
             {
-                @if (index % 2 == 0)
-                {
-                    <tr class="table-primary">
+               
+                    <tr>
                         <td scope="row">@town.Id</td>
                         <td>@town.Name</td>
                         <td>
                             <div class="row">
-                                <a href="@Url.Action("Edit","Town", new { id = town.Id})" class="btn btn-outline-danger">Edit</a>
-                                <form asp-controller="Town" asp-action="Delete" method="post">
+                                <a href="@Url.Action("Edit","Town", new { id = town.Id})" title="Edit" class="editOfferCLass"><i class="fas fa-pencil-alt"></i></a>
+                                <form asp-controller="Town" asp-action="Delete" method="post" class="ml-3">
                                     <input type="hidden" name="id" value="@town.Id" />
-                                    <button type="submit" class="btn btn-danger ml-5">Delete</button>
+                                    <button type="submit" id="buttonId" title="Delete" class="deleteOfferCLass"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </div>
                         </td>
-
                     </tr>
-                }
-                else
-                {
-                    <tr class="table-secondary">
-                        <th scope="row">@town.Id</th>
-                        <td>@town.Name</td>
-                        <td>
-                            <div class="row">
-                                <a href="@Url.Action("Edit","Town", new { id = @town.Id})" class="btn btn-outline-danger">Edit</a>
-                                <form asp-controller="Town" asp-action="Delete" method="post">
-                                    <input type="hidden" name="id" value="@town.Id" />
-                                    <button type="submit" class="btn btn-danger ml-5">Delete</button>
-                                </form>
-                            </div>
-                        </td>
-
-                    </tr>
-
-                }
-                index++;
             }
-
         </tbody>
     </table>
 
@@ -77,15 +55,14 @@
     int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
 
 
-    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+    <p class="text-center col-6">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
 }
 
-<div class="text-center">
+<div class="text-center col-6">
     <a href="/Town/All?page=@pageDown.ToString()&search=@Model.Search">&#8678;</a>
     <span class="btn btn-default">@Model.Page</span>
     <a href="/Town/All?page=@pageUp.ToString()&search=@Model.Search">&#8680;</a>
 </div>
-
 
 
 @section Scripts {

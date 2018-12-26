@@ -4,24 +4,17 @@
     ViewData["Title"] = "Create Announcement";
 }
 
-<!-- Material form register -->
 <div class="container">
     <div class="card mt-5">
-
         <h5 class="card-header info-color white-text text-center py-4 bg-primary">
             <strong class="text-white">Create Announcement</strong>
         </h5>
-
-        <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
             <form class="text-center" style="color: #757575;" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-
-                <!-- E-mail -->
                 <div class="md-form">
                     <input asp-for="Title" class="form-control mt-4" placeholder="Title" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
-
                 <div class="md-form">
                     <textarea asp-for="Content" rows="10" class="form-control mt-4" placeholder="Content" ></textarea>
                     <span asp-validation-for="Content" class="text-danger"></span>

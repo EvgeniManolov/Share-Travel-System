@@ -5,16 +5,14 @@
 
 @{
     ViewData["Title"] = "Edit Offer";
-    var town = new Town { Id = Model.OfferModel.DepartureTownId, Name = Model.OfferModel.DepartureTownName };
 }
 
 <div class="container">
     <div class="card mt-5">
 
         <h5 class="card-header info-color white-text text-center py-4 bg-primary">
-            <strong class="text-white">Create offer</strong>
+            <strong class="text-white">@ViewData["Title"]</strong>
         </h5>
-
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
             <form class="text-center" style="color: #757575;" method="post" asp-action="Edit">
@@ -100,7 +98,6 @@
                     <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5 mr-2 col" type="submit">Save Changes</button>
                     <a class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5 col" asp-controller="Offer" asp-action="Details" asp-route-id="@Model.OfferModel.Id">Back</a>
                 </div>
-                
             </form>
         </div>
     </div>

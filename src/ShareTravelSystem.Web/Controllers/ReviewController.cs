@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.Web.Areas.Identity.Data;
+    using System;
 
     public class ReviewController : Controller
     {
@@ -25,6 +26,7 @@
         [HttpPost]
         public IActionResult Create(string comment, int offerId)
         {
+           
             string currentUserId = this.userManager.GetUserId(this.User);
             this.reviewService.CreateReview(comment, offerId, currentUserId);
             return this.Redirect("/offer/details/" + offerId);

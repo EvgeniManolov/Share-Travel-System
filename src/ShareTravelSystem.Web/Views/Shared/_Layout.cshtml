@@ -31,11 +31,11 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
-                    </li>
                     @if (this.User.Identity.IsAuthenticated)
                     {
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Announcements</a>
                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
@@ -50,20 +50,23 @@
                                 <a class="dropdown-item" href="@Url.Action("All","Offer")">All Offers</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Towns</a>
-                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                                <a class="dropdown-item" asp-controller="Town" asp-action="Create">Create Town</a>
-                                <a class="dropdown-item" asp-controller="Town" asp-action="All">All Towns</a>
-                            </div>
-                        </li>
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Towns</a>
+                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                    <a class="dropdown-item" asp-controller="Town" asp-action="Create">Create Town</a>
+                                    <a class="dropdown-item" asp-controller="Town" asp-action="All">All Towns</a>
+                                </div>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" href="#">Chat</a>
                         </li>
                     }
-                    @await Html.PartialAsync("_LoginPartial")
                 </ul>
 
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </nav>
     </header>
@@ -98,7 +101,7 @@
                 crossorigin="anonymous"
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
         </script>
-        
+
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
 

@@ -46,7 +46,7 @@
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var town = this.townService.GetTownById(id);
+            EditTownViewModel town = this.townService.GetTownById(id);
             return View(town);
         }
 
