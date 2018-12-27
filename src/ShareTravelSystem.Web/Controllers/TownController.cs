@@ -54,7 +54,8 @@
         public IActionResult Edit(EditTownViewModel model)
         {
             this.townService.EditTownById(model);
-            return View(model);
+
+            return RedirectToAction(nameof(TownController.All), "Town");
         }
 
         [HttpPost]

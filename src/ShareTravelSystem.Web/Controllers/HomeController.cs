@@ -18,13 +18,15 @@
         [HttpGet]
         public IActionResult Index()
         {
-            var announcements = this.announcementService.GetIndexAnnouncements();
-            var result = new DisplayAllAnnouncementsViewModel
-            {
-                Announcements = announcements
-            }
-            ;
-            return View(result);
+           
+                var announcements = this.announcementService.GetIndexAnnouncements();
+                var result = new DisplayAllAnnouncementsViewModel
+                {
+                    Announcements = announcements
+                }
+                ;
+                return View(result);
+          
         }
 
 

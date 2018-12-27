@@ -55,13 +55,15 @@
     int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
 
 
-    <p class="text-center col-6">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+    <p class="text-center col-7">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
 }
 
-<div class="text-center col-6">
-    <a href="/Town/All?page=@pageDown.ToString()&search=@Model.Search">&#8678;</a>
-    <span class="btn btn-default">@Model.Page</span>
-    <a href="/Town/All?page=@pageUp.ToString()&search=@Model.Search">&#8680;</a>
+<div class="text-center col-7">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="/Town/All?page=@pageDown.ToString()&search=@Model.Search" class="btn btn-outline-primary">&#8678;</a>
+        <button type="button" class="btn btn-outline-primary">@Model.Page</button>
+        <a href="/Town/All?page=@pageUp.ToString()&search=@Model.Search" class="btn btn-outline-primary">&#8680;</a>
+    </div>
 </div>
 
 

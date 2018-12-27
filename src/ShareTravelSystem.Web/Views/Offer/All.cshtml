@@ -5,22 +5,42 @@
 
 
 <div class="container" id="tourpackages-carousel">
-    <form asp-controller="Offer" asp-action="All" method="get">
-        <div class="mt-3">Offers!</div>
+    <div class="container mt-3">
         <div class="row">
-            <div class="ml-3">All Offers:   @Html.RadioButton("privateOffers", false, true)</div>
-            <div class="ml-3">My Offers:   @Html.RadioButton("privateOffers", true)</div>
+            <div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-0">
+                <div class="well">
+                    <h3 align="center" class="mb-0">Filter Offers</h3>
+                    <hr class="col-lg-6 mt-0"/>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="location1" class="control-label ml-3">Offers: </label>
+                                <div class="ml-3">All Offers  @Html.RadioButton("privateOffers", false, true)</div>
+                                <div class="ml-3">My Offers  @Html.RadioButton("privateOffers", true)</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="type1" class="control-label ml-3">Types: </label>
+                                <div class="ml-3">All Types  @Html.RadioButton("filter", "All", true) </div>
+                                <div class="ml-3">Search Types  @Html.RadioButton("filter", "Search")</div>
+                                <div class="ml-3">Suggest Types  @Html.RadioButton("filter", "Suggest")</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="location1" class="control-label ml-3">Town: </label>
+                                <input class="ml-3" name="search" type="text" value="@Model.Search">
+                            </div>
+                            <div class="mt-1 col-12 text-right mb-2">
+                                <button type="submit" class="btn btn-primary btn-sm text-white ml-5" href="@Url.Action("All","Offer")">Apply Filters</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mt-3">Filter by offer type!</div>
-        <div class="row">
-            <div class="ml-3">Search Offers:   @Html.RadioButton("filter", "Search")</div>
-            <div class="ml-3">Suggest Offers:   @Html.RadioButton("filter", "Suggest")</div>
-            <div class="ml-3">All Offers:   @Html.RadioButton("filter", "All", true) </div>
-        </div>
-        <div class="mt-2">Search by Town!</div>
-        <input name="search" type="text" value="@Model.Search">
-        <button type="submit" class="btn btn-primary text-white" href="@Url.Action("All","Offer")">Apply</button>
-    </form>
+    </div>
     <div class="row">
         <div class="col-lg-12"><h1>@ViewData["Title"] <a class="btn icon-btn btn-primary pull-right" asp-controller="Offer" asp-action="Create"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span> Create New Offer</a></h1></div>
 
@@ -72,10 +92,18 @@
     <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <a href="/Offer/All?page=@pageDown.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter">&#8678;</a>
     <span class="btn btn-default">@Model.Page</span>
     <a href="/Offer/All?page=@pageUp.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter">&#8680;</a>
+</div>*@
+
+<div class="text-center col-12">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="/Offer/All?page=@pageDown.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter" class="btn btn-outline-primary">&#8678;</a>
+        <button type="button" class="btn btn-outline-primary">@Model.Page</button>
+        <a href="/Offer/All?page=@pageUp.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter" class="btn btn-outline-primary">&#8680;</a>
+    </div>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

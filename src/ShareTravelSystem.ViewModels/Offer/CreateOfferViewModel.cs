@@ -3,44 +3,39 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateOfferViewModel 
+    public class CreateOfferViewModel
     {
+        [Required]
+        [Display(Name = "Type")]
         public string Type { get; set; }
 
+        [Required]
         [Display(Name = "DepartureName")]
         public int DepartureTownId { get; set; }
 
+        [Required]
         [Display(Name = "DestinationName")]
         public int DestinationTownId { get; set; }
 
+        [Required]
+        [Display(Name = "Seat")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a seat bigger or equal from {1}")]
         public int Seat { get; set; }
 
+        [Required]
+        [Display(Name = "Price")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter a price bigger or equal from {1}")]
         public decimal Price { get; set; }
 
+        [Required]
+        [Display(Name = "DepartureDate")]
         public DateTime DepartureDate { get; set; }
 
+        [Required]
+        [Display(Name = "Description")]
+        [StringLength(500, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
         public string Description { get; set; }
-
-        //public void Configure(Profile mapper)
-        //{
-        //    mapper.CreateMap<Offer, CreateOfferViewModel>()
-        //         .ForMember(om => om.DepartureTownName, cfg => cfg.MapFrom(o => o.DepartureTown.Name));
-        //}
-
-        //public void ConfigureMapping(Profile mapper)
-        //{
-        //    mapper.CreateMap<Order, OrderDetailsModel>()
-        //        .ForMember(om => om.Products, cfg => cfg.MapFrom(o => o.ProductOrders.Select(po =>
-        //        new ProductInOrderDetailsModel
-        //        {
-        //            Id = po.Id,
-        //            ProductOrderId = po.Id,
-        //            Name = po.Product.Name,
-        //            Image = po.Product.Images.Select(i => i.Url).FirstOrDefault(),
-        //            Price = po.Price,
-        //            Quantity = po.Quantity,
-        //            Discount = po.Discount
-        //        })));
-        //}
+        
     }
 }
+    

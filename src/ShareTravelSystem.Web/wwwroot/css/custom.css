@@ -214,3 +214,32 @@ p {
 .project-content {
     padding: 0 20px 10px;
 }
+
+/*--> change*/
+
+#map {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background: red;
+    display: block;
+}
+
+html, body {
+    height: 100%;
+}
+
+.fill {
+    min-height: 100%;
+    height: 100%;
+}
+#my-div {
+    height: 100vh; /*vh stands for view-port height, 1vh is 1% of screen height*/
+}
+
+#my-div {
+    background: url("http://www.tmb.ie/wp/wp-content/uploads/2017/04/Preventing-problems-when-travelling-with-friends2.jpg") no-repeat fixed center;
+    background-size: cover;
+}
+
+

@@ -21,14 +21,13 @@
         }
 
         [HttpGet]
-        public IActionResult Create(string returnUrl = null)
+        public IActionResult Create()
         {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CreateAnnouncementViewModel model, string returnUrl = null)
+        public IActionResult Create(CreateAnnouncementViewModel model)
         {
             string currentUserId = this.userManager.GetUserId(this.User);
             this.announcementService.Create(model, currentUserId);

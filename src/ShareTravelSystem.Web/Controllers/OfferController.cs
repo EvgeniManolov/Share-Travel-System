@@ -43,6 +43,10 @@
         public IActionResult All(string filter, string search, bool privateOffers, int page)
         {
             if (page == 0) page = 1;
+            if(filter == null)
+            {
+                filter = "All";
+            }
             int size = 8;
             string currentUserId = this.userManager.GetUserId(this.User);
             OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);

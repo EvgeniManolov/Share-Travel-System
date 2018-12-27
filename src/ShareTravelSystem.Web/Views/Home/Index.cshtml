@@ -6,7 +6,6 @@
 }
 @inject SignInManager<ShareTravelSystemUser> SignInManager
 @inject UserManager<ShareTravelSystemUser> UserManager
-<!-- Main jumbotron for a primary marketing message or call to action -->
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -20,7 +19,6 @@
     <div class="container">
         <h4 class="mt-0">Latest news</h4>
         <hr />
-        <!-- Example row of columns -->
         <div class="card-deck">
             @foreach (var announcement in @Model.Announcements)
             {
@@ -38,15 +36,11 @@
             }
         </div>
         <hr>
-    </div> <!-- /container -->
+    </div>
 }
 else
 {
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-        </div>
-    </div>
+
+    <div id="my-div">Hello World!</div>
+
 }
