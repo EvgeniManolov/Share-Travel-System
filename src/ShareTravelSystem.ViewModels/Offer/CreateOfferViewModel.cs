@@ -19,12 +19,12 @@
 
         [Required]
         [Display(Name = "Seat")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a seat bigger or equal from {1}")]
-        public int Seat { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Must greater or equal to one.")]
+        public int Seat { get; set; } 
 
         [Required]
         [Display(Name = "Price")]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter a price bigger or equal from {1}")]
+        [Range(0, int.MaxValue, ErrorMessage = "Must greater or equal to zero.")]
         public decimal Price { get; set; }
 
         [Required]

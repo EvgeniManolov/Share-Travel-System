@@ -4,13 +4,14 @@
     ViewData["Title"] = "Manage Towns";
 }
 
+@Html.ValidationSummary(false)
 <div class="container">
     <form asp-controller="Town" asp-action="All" method="get" class="mt-3">
         <input name="search" type="text" value="@Model.Search">
         <button type="submit" class="btn btn-primary" href="@Url.Action("All","Town")"><i class="fas fa-search-plus"></i></button>
     </form>
     <table class="table table-hover col-5 mt-3" id="townTable">
-        <thead >
+        <thead>
             <tr class="bg-primary">
                 <th colspan="3">Towns</th>
             </tr>
@@ -23,20 +24,20 @@
         <tbody>
             @foreach (var town in Model.Towns)
             {
-               
-                    <tr>
-                        <td scope="row">@town.Id</td>
-                        <td>@town.Name</td>
-                        <td>
-                            <div class="row">
-                                <a href="@Url.Action("Edit","Town", new { id = town.Id})" title="Edit" class="editOfferCLass"><i class="fas fa-pencil-alt"></i></a>
-                                <form asp-controller="Town" asp-action="Delete" method="post" class="ml-3">
-                                    <input type="hidden" name="id" value="@town.Id" />
-                                    <button type="submit" id="buttonId" title="Delete" class="deleteOfferCLass"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+
+                <tr>
+                    <td scope="row">@town.Id</td>
+                    <td>@town.Name</td>
+                    <td>
+                        <div class="row">
+                            <a href="@Url.Action("Edit","Town", new { id = town.Id})" title="Edit" class="editOfferCLass"><i class="fas fa-pencil-alt"></i></a>
+                            <form asp-controller="Town" asp-action="Delete" method="post" class="ml-3">
+                                <input type="hidden" name="id" value="@town.Id" />
+                                <button type="submit" id="buttonId" title="Delete" class="deleteOfferCLass"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

@@ -4,42 +4,38 @@
     ViewData["Title"] = "All Offers";
 }
 
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
-
 <div class="Container">
-    <h1>Preview of Offer</h1>
-    <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
-        <div class="thumbnail">
-            <label class="position-absolute lableoffer">@Model.Type</label>
-            <div class="caption">
-                <div class='col-lg-12'>
-                    <span class="glyphicon glyphicon-credit-card"></span>
-                    <span class="glyphicon glyphicon-trash pull-right text-primary"></span>
+    <h1 class="m-3">Preview Offer</h1>
+    <div class="col-3">
+        <div class="project project-default">
+            <div class="shape">
+                <div class="shape-text">
+                    @Model.Type
                 </div>
-                <div class='col-lg-12 well well-add-card mt-3'>
-                    <h4>From @Model.DepartureTownName To @Model.DestinationTownName</h4>
-                </div>
-                <div class='col-lg-12'>
-                    <p class="mt-3">Description: @Model.Description</p>
-                    <p class="mt-3" class"text-muted">On: @Model.DepartureDate</p>
-                    <p class="mt-3" class"text-muted">Seat: @Model.Seat</p>
-                    <p class="mt-3" class"text-muted">Price: @Model.Price</p>
-                    <p class="mt-3" class"text-muted">Post on: @Model.CreateDate</p>
-                    <p class="mt-3" class"text-muted">Post on: @Model.Author</p>
-                    <p class="mt-3" class"text-muted">Rating: @Model.TotalRating</p>
-                </div>
-                <div class="card-footer text-muted bg-primary text-center" id="offerId">
-                    <a asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id" class="card-link text-white">Edit</a>
-                </div>
+            </div>
+            <div class="project-content mt-4">
+                <h1 class="lead">
+                    From @Model.DepartureTownName <br />
+                    To @Model.DestinationTownName
+                </h1>
+                <h6 class="mt-1"> On: @Model.DepartureDate</h6>
+                <p class="mt-3">Description: @Model.Description</p>
+
+            </div>
+            <div class="project-content mb-0">
+                <p class="mt-1">Seat: @Model.Seat</p>
+                <p class="mb-1">Price: @Model.Price</p>
+                <p class="mb-1">Post on: @Model.CreateDate</p>
+                <p class="mb-1">Post by: @Model.Author</p>
+                <p class="mb-1">Rating: @Model.TotalRating</p>
+            </div>
+            <div class="mb-5">
+                <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id"><strong>Edit</strong></a>
+                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Like</button>
                 <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
             </div>
-
         </div>
     </div>
-
     <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
         <form asp-controller="Review" asp-action="Create" method="post">
             <div>
@@ -69,3 +65,9 @@
         </ul>
     </div>
 </div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

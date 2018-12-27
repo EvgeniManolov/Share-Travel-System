@@ -21,12 +21,14 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(CreateAnnouncementViewModel model)
         {
             string currentUserId = this.userManager.GetUserId(this.User);
@@ -37,6 +39,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult All(string search, bool privateAnnouncements, int page)
         {
             if (page == 0) page = 1;

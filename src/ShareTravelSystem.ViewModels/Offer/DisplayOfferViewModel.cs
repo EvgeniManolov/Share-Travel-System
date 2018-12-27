@@ -45,11 +45,5 @@
         [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
-
-        //public void Configure(Profile mapper)
-        //{
-        //    mapper.CreateMap<Offer, DisplayOfferViewModel>()
-        //         .ForMember(om => om.DepartureTownName, cfg => cfg.MapFrom(o => o.DepartureTown.Name));
-        //}
     }
 }

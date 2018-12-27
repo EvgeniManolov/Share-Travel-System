@@ -215,26 +215,8 @@ p {
     padding: 0 20px 10px;
 }
 
-/*--> change*/
-
-#map {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    background: red;
-    display: block;
-}
-
-html, body {
-    height: 100%;
-}
-
-.fill {
-    min-height: 100%;
-    height: 100%;
-}
 #my-div {
-    height: 100vh; /*vh stands for view-port height, 1vh is 1% of screen height*/
+    height:85vh; 
 }
 
 #my-div {
@@ -242,4 +224,19 @@ html, body {
     background-size: cover;
 }
 
+.wrapper{
+    text-align:center;
+}
 
+#bigbutton {
+    position: absolute;
+    top: 55%;
+}
+.jumbotron {
+    background: url("http://web.uni-miskolc.hu/files/2896/Travelling-OurLifeInTheD.jpg?width=645&height=292&crop=1") no-repeat fixed center;
+    background-size: cover;
+}
+
+.display-3{
+    text-shadow: 2px 2px #158CBA;
+}
