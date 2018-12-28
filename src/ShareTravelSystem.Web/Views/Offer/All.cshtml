@@ -10,7 +10,7 @@
             <div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-0">
                 <div class="well">
                     <h3 align="center" class="mb-0">Filter Offers</h3>
-                    <hr class="col-lg-6 mt-0"/>
+                    <hr class="col-lg-6 mt-0" />
                     <form class="form-horizontal">
                         <div class="form-group">
                             <div class="row">
@@ -43,68 +43,15 @@
     </div>
     <div class="row">
         <div class="col-lg-12"><h1>@ViewData["Title"] <a class="btn icon-btn btn-primary pull-right" asp-controller="Offer" asp-action="Create"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle"></span> Create New Offer</a></h1></div>
-
         @foreach (var offer in @Model.AllOffers.Offers)
         {
-            <div class="col-3">
-                <div class="project project-default">
-                    <div class="shape">
-                        <div class="shape-text">
-                            @offer.Type
-                        </div>
-                    </div>
-                    <div class="project-content mt-4">
-                        <h1 class="lead">
-                            From @offer.DepartureTownName <br />
-                            To @offer.DestinationTownName
-                        </h1>
-                        <h6 class="mt-1"> On: @offer.DepartureDate</h6>
-                        <p class="mt-3">Description: @offer.Description</p>
-
-                    </div>
-                    <div class="project-content mb-0">
-                        <p class="mt-1">Seat: @offer.Seat</p>
-                        <p class="mb-1">Price: @offer.Price</p>
-                    </div>
-                    <div class="mb-0">
-                        <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id"><strong>Preview</strong></a>
-                        <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Like</button>
-                        <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
-                    </div>
-                </div>
-            </div>
+            @await Html.PartialAsync("_OfferPartial", offer)
         }
-    </div><!-- End row -->
-</div><!-- End container -->
-
-@{
-    int itemsPerPage = Model.Size;
-    int itemsCount = Model.Count;
-
-    int currentPage = Model.Page;
-
-    int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
-    int pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
-
-    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
-
-
-    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
-}
-
-@*<div class="text-center">
-    <a href="/Offer/All?page=@pageDown.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter">&#8678;</a>
-    <span class="btn btn-default">@Model.Page</span>
-    <a href="/Offer/All?page=@pageUp.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter">&#8680;</a>
-</div>*@
-
-<div class="text-center col-12">
-    <div class="btn-group mb-3" role="group" aria-label="Basic example">
-        <a href="/Offer/All?page=@pageDown.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter" class="btn btn-outline-primary">&#8678;</a>
-        <button type="button" class="btn btn-outline-primary">@Model.Page</button>
-        <a href="/Offer/All?page=@pageUp.ToString()&search=@Model.Search&privateOffers=@Model.PrivateOffers&filter=@Model.Filter" class="btn btn-outline-primary">&#8680;</a>
     </div>
 </div>
+
+@await Html.PartialAsync("_PagingOffer", Model)
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

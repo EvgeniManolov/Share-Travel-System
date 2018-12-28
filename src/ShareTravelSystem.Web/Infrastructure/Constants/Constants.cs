@@ -10,7 +10,7 @@
 
         public const int AnnouncementsPerPage = 8;
         
-        public const int TownsPerPage = 8;
+        public const int TownsPerPage = 10;
 
         public const int OffersPerPage = 8;
 

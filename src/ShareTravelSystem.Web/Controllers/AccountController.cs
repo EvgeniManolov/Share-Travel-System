@@ -5,11 +5,12 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Web.Infrastructure.Constants;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    using ShareTravelSystem.Web.Infrastructure.Constants;
+    
 
     public class AccountController : BaseController
     {
@@ -34,7 +35,7 @@
         {
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            
+
             return View();
         }
 
@@ -50,7 +51,7 @@
                 var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                   // this.logger.LogInformation("User logged in.");
+                    // this.logger.LogInformation("User logged in.");
                     return RedirectToLocal(model.Email);
                 }
                 else
@@ -77,12 +78,15 @@
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ShareTravelSystemUser { UserName = model.Email,
-                                                       Email = model.Email,
-                                                       FirstName = model.FirstName,
-                                                       LastName = model.LastName,
-                                                       Address = model.Address,
-                                                       PhoneNumber = model.PhoneNumber};
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber
+                };
 
                 var result = await this.userManager.CreateAsync(user, model.Password);
 
@@ -105,7 +109,8 @@
 
             return View(model);
         }
-        
+
+
 
         private void AddErrors(IdentityResult result)
         {
@@ -120,8 +125,8 @@
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();
-           // this.logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index));
+            // this.logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         private IActionResult RedirectToLocal(string returnUrl, string userName = "")
@@ -132,7 +137,7 @@
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index));
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
     }

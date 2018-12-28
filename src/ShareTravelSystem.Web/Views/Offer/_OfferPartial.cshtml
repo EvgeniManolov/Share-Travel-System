@@ -1,0 +1,30 @@
+﻿@model ShareTravelSystem.ViewModels.Offer.DisplayOfferViewModel
+
+
+<div class="col-3">
+    <div class="project project-default">
+        <div class="shape">
+            <div class="shape-text">
+                @Model.Type
+            </div>
+        </div>
+        <div class="project-content mt-4">
+            <h1 class="lead">
+                From @Model.DepartureTownName <br />
+                To @Model.DestinationTownName
+            </h1>
+            <h6 class="mt-1"> On: @Model.DepartureDate</h6>
+            <p class="mt-3">Description: @Model.Description</p>
+
+        </div>
+        <div class="project-content mb-0">
+            <p class="mt-1">Seat: @Model.Seat</p>
+            <p class="mb-1">Price: @Model.Price</p>
+        </div>
+        <div class="mb-0">
+            <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Details" asp-route-id="@Model.Id"><strong>Preview</strong></a>
+            <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Like</button>
+            <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
+        </div>
+    </div>
+</div>
