@@ -6,7 +6,7 @@
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Models;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IAnnouncementService announcementService;
 

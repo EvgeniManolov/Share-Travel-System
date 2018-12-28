@@ -1,12 +1,13 @@
 ﻿namespace ShareTravelSystem.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System;
 
-    public class ReviewController : Controller
+    public class ReviewController : BaseController
     {
 
         private readonly IReviewService reviewService;
@@ -24,11 +25,19 @@
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(string comment, int offerId)
         {
-           
             string currentUserId = this.userManager.GetUserId(this.User);
-            this.reviewService.CreateReview(comment, offerId, currentUserId);
+            try
+            {
+                this.reviewService.CreateReview(comment, offerId, currentUserId);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.All));
+            }
             return this.Redirect("/offer/details/" + offerId);
         }
     }

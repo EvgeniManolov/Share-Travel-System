@@ -9,8 +9,9 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    
-    public class AccountController : Controller
+    using ShareTravelSystem.Web.Infrastructure.Constants;
+
+    public class AccountController : BaseController
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;
         private readonly SignInManager<ShareTravelSystemUser> signInManager;
@@ -89,11 +90,11 @@
                 {
                     if (this.userManager.Users.Count() == 1)
                     {
-                        await this.userManager.AddToRoleAsync(user, "Admin");
+                        await this.userManager.AddToRoleAsync(user, Constants.AdminRole);
                     }
                     else
                     {
-                        await this.userManager.AddToRoleAsync(user, "User");
+                        await this.userManager.AddToRoleAsync(user, Constants.UserRole);
                     }
 
                     this.signInManager.SignInAsync(user, false).Wait();
@@ -105,7 +106,6 @@
             return View(model);
         }
         
-
 
         private void AddErrors(IdentityResult result)
         {
@@ -121,7 +121,7 @@
         {
             await this.signInManager.SignOutAsync();
            // this.logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(HomeController.Index));
         }
 
         private IActionResult RedirectToLocal(string returnUrl, string userName = "")
@@ -132,7 +132,7 @@
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(HomeController.Index));
             }
         }
     }

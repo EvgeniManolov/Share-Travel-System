@@ -12,6 +12,7 @@
     using AutoMapper.QueryableExtensions;
     using ShareTravelSystem.ViewModels.Review;
     using ShareTravelSystem.ViewModels;
+    using ShareTravelSystem.Services.Infrastructure;
 
     public class OfferService : IOfferService
     {
@@ -28,8 +29,7 @@
         {
             if (!Enum.TryParse(model.Type, true, out OfferType type))
             {
-                throw new Exception("Invalid offer type");
-                //  return this.BadRequestErrorWithView("Invalid offer type."); -- да имплементирам errors
+                throw new ArgumentException(string.Format(Constants.OfferTypeDoesNotExist, model.Type));
             }
 
             int departureTownId = this.db
@@ -58,21 +58,24 @@
                 Price = model.Price
             });
 
-
             this.db.SaveChanges();
         }
 
-        public DetailsOfferViewModel GetOfferById(int offerId)
+        public DetailsOfferViewModel GetOfferById(int Id)
         {
             DetailsOfferViewModel offer = this.db
                                               .Offers
-                                              .Where(t => t.Id == offerId)
+                                              .Where(t => t.Id == Id)
                                               .ProjectTo<DetailsOfferViewModel>()
                                               .SingleOrDefault();
+            if (offer == null)
+            {
+                throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, Id));
+            }
 
             offer.Reviews = this.db
                                 .Reviews
-                                .Where(r => r.OfferId == offerId)
+                                .Where(r => r.OfferId == Id)
                                 .OrderByDescending(x => x.CreateDate)
                                 .Select(r => new DisplayReviewViewModel
                                 {
@@ -90,6 +93,7 @@
         {
             List<DisplayOfferViewModel> offers = new List<DisplayOfferViewModel>();
             string titleOfPage = "";
+            if (page == 0) page = 1;
 
             if (!privateOffers)
             {
@@ -98,7 +102,7 @@
                                 .ProjectTo<DisplayOfferViewModel>()
                                 .ToList();
 
-                titleOfPage = "All Offers";
+                titleOfPage = Constants.AllOffersTitlePageName;
             }
             else
             {
@@ -108,10 +112,10 @@
                                 .ProjectTo<DisplayOfferViewModel>()
                                 .ToList();
 
-                titleOfPage = "My Offers";
+                titleOfPage = Constants.MyOffersTitlePageName;
             }
 
-            if (filter != null && filter != "" && filter != "All")
+            if (filter != null && filter != "" && filter != Constants.FilterOfAllOffers)
             {
                 offers = offers
                          .Where(x => x.Type.ToLower() == filter.ToLower())
@@ -159,6 +163,10 @@
                                            .Where(o => o.Id == id)
                                            .ProjectTo<EditOfferViewModel>()
                                            .SingleOrDefault();
+            if (model == null)
+            {
+                throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, model.Id));
+            }
 
             DisplayEditOfferViewModel result = new DisplayEditOfferViewModel
             {
@@ -175,8 +183,7 @@
 
             if (!Enum.TryParse(model.OfferModel.Type, true, out OfferType type))
             {
-                throw new Exception("Invalid offer type");
-                //  return this.BadRequestErrorWithView("Invalid offer type."); -- да имплементирам errors
+                throw new ArgumentException(string.Format(Constants.OfferTypeDoesNotExist, model.OfferModel.Type));
             }
             offer.Type = type;
             offer.DepartureTownId = model.OfferModel.DepartureTownId;
@@ -187,7 +194,6 @@
             offer.Description = model.OfferModel.Description;
 
             this.db.SaveChanges();
-
         }
     }
 }

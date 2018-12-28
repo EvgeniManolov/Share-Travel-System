@@ -31,12 +31,12 @@
 
         [Required]
         [Display(Name = "Seat")]
-        [Range(1, int.MaxValue, ErrorMessage = "Must greater or equal to one.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Seat must greater or equal to one.")]
         public int Seat { get; set; }
 
         [Required]
         [Display(Name = "Price")]
-        [Range(0, int.MaxValue, ErrorMessage = "Must greater or equal to zero.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Price must greater or equal to zero.")]
         public decimal Price { get; set; }
 
         [Required]

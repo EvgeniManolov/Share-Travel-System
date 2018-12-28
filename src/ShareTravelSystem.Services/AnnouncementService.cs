@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Services.Infrastructure;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Announcement;
     using ShareTravelSystem.Web.Areas.Identity.Data;
@@ -48,6 +49,8 @@
 
         public AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page, int size)
         {
+
+            if (page == 0) page = 1;
             List<DisplayAnnouncementViewModel> announcements = new List<DisplayAnnouncementViewModel>();
             string titleOfPage = "";
 
@@ -100,11 +103,15 @@
         }
 
 
-        public void Delete(int announcementId)
+        public void Delete(int Id)
         {
             Announcement announcement = this.db
                                             .Announcements
-                                            .FirstOrDefault(p => p.Id == announcementId);
+                                            .FirstOrDefault(p => p.Id == Id);
+            if (announcement == null)
+            {
+                throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, Id));
+            }
 
             this.db.Announcements.Remove(announcement);
             this.db.SaveChanges();
@@ -112,20 +119,33 @@
 
         public DetailsAnnouncementViewModel DetailsAnnouncementById(int id)
         {
-            return this.db
+            DetailsAnnouncementViewModel result = this.db
                        .Announcements
                        .Where(a => a.Id == id)
                        .ProjectTo<DetailsAnnouncementViewModel>()
                        .FirstOrDefault();
+            if (result == null)
+            {
+                throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, id));
+            }
+
+            return result;
         }
 
         public EditAnnouncementViewModel EditAnnouncementById(int id)
         {
-            return this.db
+            EditAnnouncementViewModel result = this.db
                        .Announcements
                        .Where(a => a.Id == id)
                        .ProjectTo<EditAnnouncementViewModel>()
                        .FirstOrDefault();
+
+            if (result == null)
+            {
+                throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, id));
+            }
+
+            return result;
         }
 
         public void EditAnnouncement(EditAnnouncementViewModel model)
@@ -133,6 +153,10 @@
             Announcement announcement = this.db
                                             .Announcements
                                             .FirstOrDefault(p => p.Id == model.Id);
+            if (announcement == null)
+            {
+                throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, model.Id));
+            }
 
             announcement.Title = model.Title;
             announcement.Content = model.Content;

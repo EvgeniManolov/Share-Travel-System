@@ -4,13 +4,15 @@
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Web.Infrastructure.Constants;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Offer;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Collections.Generic;
     using System.Linq;
+    using System;
 
-    public class OfferController : Controller
+    public class OfferController : BaseController
     {
 
         private readonly IOfferService offerService;
@@ -23,7 +25,7 @@
         }
 
         [HttpGet]
-        public IActionResult Create(string returnUrl = null)
+        public IActionResult Create()
         {
             List<Town> towns = this.offerService.GetAllTowns().ToList();
             ViewData["Towns"] = towns;
@@ -31,50 +33,79 @@
         }
 
         [HttpPost]
-        public IActionResult Create(CreateOfferViewModel model, string returnUrl = null)
+        public IActionResult Create(CreateOfferViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             string currentUserId = this.userManager.GetUserId(this.User);
             this.offerService.Create(model, currentUserId);
-
-            return RedirectToAction(nameof(OfferController.All), "Offer");
+            return RedirectToAction(nameof(OfferController.All));
         }
 
         [HttpGet]
-        public IActionResult All(string filter, string search, bool privateOffers, int page)
+        public IActionResult All(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
         {
-            if (page == 0) page = 1;
-            if(filter == null)
-            {
-                filter = "All";
-            }
-            int size = 8;
+            int size = Constants.OffersPerPage;
             string currentUserId = this.userManager.GetUserId(this.User);
             OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
 
             ViewData["Title"] = result.TitleOfPage;
-
             return this.View(result);
         }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
-            DetailsOfferViewModel model = this.offerService.GetOfferById(id);
+            DetailsOfferViewModel model;
+            try
+            {
+                model = this.offerService.GetOfferById(id);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.All));
+            }
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            DisplayEditOfferViewModel model = this.offerService.GetOfferToEdit(id);
+            DisplayEditOfferViewModel model;
+            try
+            {
+                model = this.offerService.GetOfferToEdit(id);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.All));
+            }
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Edit(DisplayEditOfferViewModel model)
         {
-            this.offerService.EditOffer(model);
-             return this.Redirect("/offer/details?id=" + model.OfferModel.Id);
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+            try
+            {
+                this.offerService.EditOffer(model);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.All));
+            }
+
+            return this.Redirect("/offer/details?id=" + model.OfferModel.Id);
         }
     }
 }

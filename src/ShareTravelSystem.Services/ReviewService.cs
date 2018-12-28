@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Services.Infrastructure;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Models;
     using System;
@@ -12,7 +13,7 @@
         private readonly ShareTravelSystemDbContext db;
         private readonly UserManager<ShareTravelSystemUser> userManager;
 
-        public ReviewService(ShareTravelSystemDbContext db, 
+        public ReviewService(ShareTravelSystemDbContext db,
                              UserManager<ShareTravelSystemUser> userManager)
         {
             this.db = db;
@@ -21,6 +22,11 @@
 
         public void CreateReview(string comment, int offerId, string currentUserId)
         {
+            if (offerId == 0 )
+            {
+                throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, offerId));
+            }
+
             Review review = new Review
             {
                 Comment = comment,
