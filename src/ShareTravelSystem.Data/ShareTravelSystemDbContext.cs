@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Web.Areas.Identity.Data;
+    using System;
 
     public class ShareTravelSystemDbContext : IdentityDbContext<ShareTravelSystemUser>
     {
@@ -18,6 +19,7 @@
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Town> TownsAsDestination { get; set; }
         public DbSet<Town> TownsAsDeparture { get; set; }
+        public DbSet<Reaction> Reactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

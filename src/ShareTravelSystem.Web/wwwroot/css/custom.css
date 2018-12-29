@@ -240,3 +240,17 @@ p {
 .display-3{
     text-shadow: 2px 2px #158CBA;
 }
+
+#likeDislikeButton {
+    background: none !important;
+    border: none;
+    outline: none;
+}
+
+.likeOfferClass:hover {
+    color: lawngreen !important;
+}
+
+.dislikeOfferClass:hover {
+    color: red !important;
+}

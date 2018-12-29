@@ -187,6 +187,27 @@ namespace ShareTravelSystem.Data.Migrations
                     b.ToTable("Offers");
                 });
 
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Reaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Action");
+
+                    b.Property<string>("AuthorId");
+
+                    b.Property<int>("OfferId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("OfferId");
+
+                    b.ToTable("Reactions");
+                });
+
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -349,6 +370,18 @@ namespace ShareTravelSystem.Data.Migrations
                         .WithMany("TownsAsDestinationTown")
                         .HasForeignKey("DestinationTownId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Reaction", b =>
+                {
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                        .WithMany("Reactions")
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("ShareTravelSystem.Data.Models.Offer", "Offer")
+                        .WithMany("Reactions")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Review", b =>

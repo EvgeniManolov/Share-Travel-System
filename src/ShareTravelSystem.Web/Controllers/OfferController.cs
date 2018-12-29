@@ -51,7 +51,9 @@
             int size = Constants.OffersPerPage;
             string currentUserId = this.userManager.GetUserId(this.User);
             OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
+            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId);
 
+            ViewData["LikedDislikedOffersIds"] = likedOffersIds;
             ViewData["Title"] = result.TitleOfPage;
             return this.View(result);
         }
@@ -108,6 +110,42 @@
             RedirectToActionResult redirectResult = MakeRedirectResult(nameof(OfferController), nameof(OfferController.Details), model.OfferModel.Id);
 
             return redirectResult;
+        }
+
+        [HttpPost]
+        public IActionResult Like(int offerId)
+        {
+
+            string currentUserId = this.userManager.GetUserId(this.User);
+            try
+            {
+                bool result = this.offerService.AddLikeToOffer(offerId, currentUserId);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.All));
+            }
+
+            return RedirectToAction(nameof(OfferController.All));
+        }
+
+        [HttpPost]
+        public IActionResult DisLike(int offerId)
+        {
+
+            string currentUserId = this.userManager.GetUserId(this.User);
+            try
+            {
+                bool result = this.offerService.AddDisLikeToOffer(offerId, currentUserId);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.All));
+            }
+
+            return RedirectToAction(nameof(OfferController.All));
         }
     }
 }

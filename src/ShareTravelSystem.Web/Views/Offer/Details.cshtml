@@ -31,7 +31,10 @@
             </div>
             <div class="mb-5">
                 <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id"><strong>Edit</strong></a>
-                <button type="button" class="btn btn-danger btn-xs btn-update btn-add-card">Like</button>
+                <form asp-controller="Offer" asp-action="Like" method="post">
+                    <input type="hidden" name="offerId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger btn-xs btn-update btn-add-card"><i class="fas fa-thumbs-up"></i></button>
+                </form>
                 <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
             </div>
         </div>

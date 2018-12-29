@@ -12,6 +12,8 @@
 
         public const string OfferTypeDoesNotExist = "OfferType with name {0} does not exist.";
 
+        public const string AlreadyTakeActionToThisOffer = "Already take actions to offer with id: {0}.";
+
         public const string MyOffersTitlePageName = "My Offers";
 
         public const string AllOffersTitlePageName = "All Offers";

@@ -195,5 +195,58 @@
 
             this.db.SaveChanges();
         }
+
+        public bool AddLikeToOffer(int offerId, string userId)
+        {
+            Reaction isExist = this.db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId).SingleOrDefault();
+
+            if (isExist != null)
+            {
+                throw new ArgumentException(string.Format(Constants.AlreadyTakeActionToThisOffer, offerId));
+            }
+            Reaction reation = new Reaction
+            {
+                Action = true,
+                AuthorId = userId,
+                OfferId = offerId
+            };
+
+            this.db.Reactions.Add(reation);
+
+            Offer likedOffer = this.db.Offers.Where(o => o.Id == offerId).SingleOrDefault();
+            likedOffer.TotalRating++;
+
+            this.db.SaveChanges();
+            return true;
+        }
+
+        public bool AddDisLikeToOffer(int offerId, string userId)
+        {
+            Reaction isExist = this.db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId).SingleOrDefault();
+
+            if (isExist != null)
+            {
+                throw new ArgumentException(string.Format(Constants.AlreadyTakeActionToThisOffer, offerId));
+            }
+            Reaction reation = new Reaction
+            {
+                Action = false,
+                AuthorId = userId,
+                OfferId = offerId
+            };
+
+            this.db.Reactions.Add(reation);
+
+            Offer likedOffer = this.db.Offers.Where(o => o.Id == offerId).SingleOrDefault();
+            likedOffer.TotalRating--;
+
+            this.db.SaveChanges();
+            return true;
+        }
+
+        public List<int> GetLikedOrDislikedOffersIds(string currentUserId)
+        {
+            return this.db.Reactions.Where(r => r.AuthorId == currentUserId).Select(x => x.OfferId).ToList();
+        }
     }
 }

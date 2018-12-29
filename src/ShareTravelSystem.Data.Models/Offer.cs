@@ -35,5 +35,7 @@
         public decimal Price { get; set; }
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+        public ICollection<Reaction> Reactions { get; set; } = new List<Reaction>();
     }
 }

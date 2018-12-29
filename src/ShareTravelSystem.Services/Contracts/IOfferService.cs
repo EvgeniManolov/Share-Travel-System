@@ -18,5 +18,11 @@
         DisplayEditOfferViewModel GetOfferToEdit(int id);
 
         void EditOffer(DisplayEditOfferViewModel model);
+
+        bool AddLikeToOffer(int offerId, string userId);
+
+        bool AddDisLikeToOffer(int offerId, string userId);
+
+        List<int> GetLikedOrDislikedOffersIds(string currentUserId);
     }
 }
