@@ -55,17 +55,15 @@
                 <div class="form-row">
                     <div class="col">
                         <label asp-for="OfferModel.DepartureTownId"></label>
-                        <select asp-for="OfferModel.DepartureTownId" asp-items="@(new SelectList(Model.Towns.Where(t=>t.IsDeleted==false).OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
+                        <select asp-for="OfferModel.DepartureTownId" asp-items="@(new SelectList(Model.Towns.OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
                             <option value="@Model.OfferModel.DepartureTownId">@Model.OfferModel.DepartureTownName</option>
                         </select>
-                        <span asp-validation-for="OfferModel.DepartureTownId" class="text-danger"></span>
                     </div>
                     <div class="col">
                         <label asp-for="OfferModel.DestinationTownId"></label>
-                        <select asp-for="OfferModel.DestinationTownId" asp-items="@(new SelectList(Model.Towns.Where(t=>t.IsDeleted==false).OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
+                        <select asp-for="OfferModel.DestinationTownId" asp-items="@(new SelectList(Model.Towns.OrderBy(x => x.Name),"Id", "Name"))" class="form-control">
                             <option value="@Model.OfferModel.DestinationTownId">@Model.OfferModel.DestinationTownName</option>
                         </select>
-                        <span asp-validation-for="OfferModel.DestinationTownId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-row">

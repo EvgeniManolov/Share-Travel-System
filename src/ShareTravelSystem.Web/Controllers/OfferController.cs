@@ -105,7 +105,9 @@
                 return RedirectToAction(nameof(OfferController.All));
             }
 
-            return this.Redirect("/offer/details?id=" + model.OfferModel.Id);
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(OfferController), nameof(OfferController.Details), model.OfferModel.Id);
+
+            return redirectResult;
         }
     }
 }

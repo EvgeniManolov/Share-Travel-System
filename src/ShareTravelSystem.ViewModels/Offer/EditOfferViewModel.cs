@@ -13,19 +13,16 @@
         [Required]
         [Display(Name = "Type")]
         public string Type { get; set; }
-
-        [Required]
+        
         [Display(Name = "Departure Town")]
         public string DepartureTownName { get; set; }
-
         [Required]
         [Display(Name = "Departure Town")]
         public int DepartureTownId { get; set; }
-
-        [Required]
+        
         [Display(Name = "Destination Town")]
         public string DestinationTownName { get; set; }
-
+        [Required]
         [Display(Name = "Destination Town")]
         public int DestinationTownId { get; set; }
 

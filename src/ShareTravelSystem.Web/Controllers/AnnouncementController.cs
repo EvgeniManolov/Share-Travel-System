@@ -112,10 +112,10 @@
                 this.ModelState.AddModelError("Name", e.Message);
                 return this.View(model);
             }
-
-            return RedirectToAction(nameof(AnnouncementController.All));
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(AnnouncementController), nameof(AnnouncementController.Details), model.Id);
+            return redirectResult;
         }
-        
+
 
         [Authorize]
         public IActionResult Delete(int id)

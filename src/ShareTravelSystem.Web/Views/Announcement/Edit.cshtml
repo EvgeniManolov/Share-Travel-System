@@ -1,23 +1,49 @@
 ﻿@model ShareTravelSystem.ViewModels.EditAnnouncementViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Announcement";
 }
 
-<h1 class="text-center">Edit Announcement</h1>
+@*<h1 class="text-center">Edit Announcement</h1>
+    <hr class="hr-2 bg-dark" />
+    <form class="mx-auto half-width" method="post" asp-action="Edit" asp-controller="Announcement">
+        <div class="form-group">
+            <input asp-for="@Model.Title" class="form-control" value="@Model.Title" />
+            <span asp-validation-for="@Model.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="@Model.Content" class="form-control" value="@Model.Content" />
+            <span asp-validation-for="@Model.Content" class="text-danger"></span>
+        </div>
+        <hr class="hr-2 bg-dark half-width mt-4" />
+        <div class="button-holder mt-2 d-flex w-25 mx-auto justify-content-between">
+            <button type="submit" class="btn chushka-bg-color">Edit</button>
+            <a asp-controller="Announcement" asp-action="Details" asp-route-id="@Model.Id" class="btn chushka-bg-color">Cancel</a>
+        </div>
+    </form>*@
+
+<h1 class="text-center">@ViewData["Title"]</h1>
 <hr class="hr-2 bg-dark" />
-<form class="mx-auto half-width" method="post" asp-action="Edit" asp-controller="Announcement">
-    <div class="form-group">
-        <input asp-for="@Model.Title" class="form-control"  value="@Model.Title" />
-        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+<div class="container">
+    <div class="card mt-5">
+        <h5 class="card-header info-color white-text text-center py-4 bg-primary">
+            <strong class="text-white">@ViewData["Title"]</strong>
+        </h5>
+        <div class="card-body px-lg-5 pt-0">
+            <form asp-controller="Announcement" asp-action="Edit" method="post" class="text-center" style="color: #757575;">
+                <div class="md-form">
+                    <input asp-for="@Model.Title" class="form-control mt-4" placeholder="Title" value="@Model.Title" />
+                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <textarea asp-for="@Model.Content" va rows="10" class="form-control mt-4" placeholder="Content">@Model.Content</textarea>
+                    <span asp-validation-for="@Model.Content" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5 mr-2 col" type="submit">Save</button>
+                    <a asp-controller="Announcement" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0  mt-5 col">Back</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <input asp-for="@Model.Content" class="form-control"  value="@Model.Content" />
-        <span asp-validation-for="@Model.Content" class="text-danger"></span>
-    </div>
-    <hr class="hr-2 bg-dark half-width mt-4" />
-    <div class="button-holder mt-2 d-flex w-25 mx-auto justify-content-between">
-        <button type="submit" class="btn chushka-bg-color">Edit</button>
-        <a asp-controller="Announcement" asp-action="Details" asp-route-id="@Model.Id" class="btn chushka-bg-color">Cancel</a>
-    </div>
-</form>
+</div>

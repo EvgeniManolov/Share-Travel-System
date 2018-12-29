@@ -38,7 +38,11 @@
                 this.ModelState.AddModelError("Name", e.Message);
                 return RedirectToAction(nameof(OfferController.All));
             }
-            return this.Redirect("/offer/details/" + offerId);
+
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(OfferController), 
+                                                                        nameof(OfferController.Details), 
+                                                                        offerId);
+            return redirectResult;
         }
     }
 }

@@ -19,9 +19,17 @@
         }
 
 
-        protected  bool RedirectIfNotInRole(string role)
+        protected bool RedirectIfNotInRole(string role)
         {
-            return  this.User.IsInRole(role);
+            return this.User.IsInRole(role);
+        }
+
+        protected RedirectToActionResult MakeRedirectResult(string controller, string action, int id)
+        {
+            string controllerName = controller.Replace("Controller", "");
+            RedirectToActionResult result = new RedirectToActionResult(action, controllerName, new { id });
+
+            return result;
         }
     }
 }
