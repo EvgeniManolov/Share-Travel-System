@@ -118,6 +118,7 @@
 
 
         [Authorize]
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             try

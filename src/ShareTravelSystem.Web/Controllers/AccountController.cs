@@ -10,7 +10,7 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    
+
 
     public class AccountController : BaseController
     {
@@ -76,6 +76,14 @@
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            var isExist = this.userManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
+
+            if (isExist != null)
+            {
+                this.ModelState.AddModelError("Name", Constants.UserAlreadyExists);
+                return this.View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ShareTravelSystemUser

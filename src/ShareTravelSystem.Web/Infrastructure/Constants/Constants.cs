@@ -8,6 +8,8 @@
 
         public const string UserRole = "User";
 
+        public const string UserAlreadyExists = "User with this Username/Email already exists!";
+
         public const int AnnouncementsPerPage = 8;
         
         public const int TownsPerPage = 10;

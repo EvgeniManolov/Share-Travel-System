@@ -22,15 +22,17 @@
             @foreach (var announcement in @Model.Announcements)
             {
                 <div class="col-3">
-                    <div class="card bg-secondary mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title "><strong>@announcement.Title</strong></h5>
-                            <p class="card-text ">@announcement.Content</p>
+                    <a href="@Url.Action("Details","Announcement", new { id = announcement.Id})">
+                        <div class="card bg-secondary mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title "><strong>@announcement.ShortTitle</strong></h5>
+                                <p class="card-text ">@announcement.ShortContent</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             }
         </div>
@@ -39,7 +41,7 @@
 }
 else
 {
-    
-    <div id="my-div" class="wrapper"><a  class="btn btn-primary btn-lg text-white" href="/Account/Login" id="bigbutton" >TRAVEL WITH ME</a></div>
+
+    <div id="my-div" class="wrapper"><a class="btn btn-primary btn-lg text-white" href="/Account/Login" id="bigbutton">TRAVEL WITH ME</a></div>
 
 }
