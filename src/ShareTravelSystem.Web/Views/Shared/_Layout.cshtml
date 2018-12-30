@@ -51,6 +51,9 @@
                                 <a class="dropdown-item" href="@Url.Action("All","Offer")">All Offers</a>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Statistic" asp-action="StatisticByRating">Statistic</a>
+                        </li>
                         @if (this.User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">

@@ -1,0 +1,38 @@
+﻿@model ShareTravelSystem.ViewModels.Statistic.StatisticByRating
+
+@{
+    ViewData["Title"] = "Statistic of Users by Likes/DisLikes";
+}
+
+@Html.ValidationSummary(false)
+<div class="container">
+    <h1>Satistic of User by Likes/Dislikes</h1>
+    <table class="table table-hover col-5 mt-3" id="townTable">
+        <thead>
+            <tr>
+                <th scope="col" id="topRow" colspan="6">Id</th>
+                <th scope="col" id="topRow">Username</th>
+                <th scope="col" id="topRow">TotalLikes</th>
+                <th scope="col" id="topRow">TotalDisLikes</th>
+                <th scope="col" id="topRow">TotalRating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var statistic in Model.Statistics)
+            {
+                <tr>
+                    <td scope="row" colspan="6">@statistic.UserId</td>
+                    <td>@statistic.UserName</td>
+                    <td>@statistic.TotalLikes</td>
+                    <td>@statistic.TotalDisLikes</td>
+                    <td>@statistic.TotalRating</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*@await Html.PartialAsync("_PagingTown", Model)*@
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

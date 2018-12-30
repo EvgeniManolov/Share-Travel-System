@@ -3,15 +3,18 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels.Statistic;
+    using System.Collections;
+    using System.Collections.Generic;
 
     public class StatisticController : BaseController
     {
 
-        private readonly IOfferService offerService;
+        private readonly IStatisticService statisticService;
 
-        public StatisticController(IOfferService offerService)
+        public StatisticController(IStatisticService statisticService)
         {
-            this.offerService = offerService;
+            this.statisticService = statisticService;
         }
 
 
@@ -19,7 +22,8 @@
         [Authorize]
         public IActionResult StatisticByRating()
         {
-            return null;
+            StatisticByRating model = this.statisticService.GetStatisticForAllUsersByRating();
+            return this.View(model);
         }
     }
 }
