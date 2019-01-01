@@ -9,13 +9,13 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using ShareTravelSystem.Web.Models;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
     using Microsoft.Extensions.Logging;
     using ShareTravelSystem.Web.Middlewares.Extensions;
     using AutoMapper;
     using ShareTravelSystem.Web.Infrastructure.Mapping;
     using ShareTravelSystem.Web.Infrastructure.Extensions;
+    using ShareTravelSystem.Web.Models;
+    using ShareTravelSystem.Web.Areas.Identity.Data;
 
     public class Startup
     {
@@ -85,6 +85,10 @@
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                name: "areas",
+                template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

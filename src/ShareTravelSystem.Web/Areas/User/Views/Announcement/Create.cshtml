@@ -1,0 +1,30 @@
+﻿@model ShareTravelSystem.ViewModels.CreateAnnouncementViewModel
+
+@{
+    ViewData["Title"] = "Create Announcement";
+}
+
+<div class="container">
+    <div class="card mt-5">
+        <h5 class="card-header info-color white-text text-center py-4 bg-primary">
+            <strong class="text-white">Create Announcement</strong>
+        </h5>
+        <div class="card-body px-lg-5 pt-0">
+            <form asp-area="User" asp-controller ="Announcement" asp-action="Create"  method="post" class="text-center" style="color: #757575;">
+                <div class="md-form">
+                    <input asp-for="Title" class="form-control mt-4" placeholder="Title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <textarea asp-for="Content" rows="10" class="form-control mt-4" placeholder="Content" ></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

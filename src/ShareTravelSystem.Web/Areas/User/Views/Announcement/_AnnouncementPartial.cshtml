@@ -1,0 +1,15 @@
+﻿@model ShareTravelSystem.ViewModels.DisplayAnnouncementViewModel
+
+<div class="col-3">
+    <a href="@Url.Action("Details","Announcement", new { id = Model.Id})">
+        <div class="card bg-secondary mb-4">
+            <div class="card-body">
+                <h5 class="card-title "><strong>@Model.ShortTitle</strong></h5>
+                <p class="card-text ">@Model.ShortContent</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated on @Model.CreateDate by @Model.Author</small>
+            </div>
+        </div>
+    </a>
+</div>

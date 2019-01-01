@@ -1,0 +1,50 @@
+﻿@model ShareTravelSystem.ViewModels.Announcement.DetailsAnnouncementViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="ml-3">Details Announcement</h1>
+<div class="col-4 mt-3 ">
+    <div class="card bg-secondary mb-4">
+        <div class="card-body">
+            <h5 class="card-title "><strong>@Model.Title</strong></h5>
+            <p class="card-text ">@Model.Content</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated on @Model.CreateDate by @Model.Author</small>
+        </div>
+    </div>
+    <div class="row">
+        <a asp-controller="Announcement" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary ml-3">Edit</a>
+        <form asp-controller="Announcement" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-primary ml-3">Delete</button>
+        </form>
+    </div>
+    
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+
+
+@*<h1 class="text-center">Id : @Model.Id</h1>
+    <hr class="hr-2 bg-dark" />
+    <div class="product-type-holder half-width mx-auto d-flex justify-content-between">
+        <h3 class="text-center">Title: @Model.Title</h3>
+    </div>
+    <hr class="hr-2 bg-dark" />
+    <div class="product-description-holder">
+        <p class="text-center mt-4">
+            Content: @Model.Content
+        </p>
+    </div>
+    <hr class="hr-2 bg-dark" />
+    <h3 class="text-center">@Model.CreateDate</h3>
+    <h3 class="text-center">@Model.Author</h3>
+    <div class="product-action-holder mt-4 d-flex justify-content-around">
+        <a asp-controller="Announcement" asp-action="Edit" asp-route-id="@Model.Id" class="btn chushka-bg-color">Edit</a>
+        <a asp-controller="Announcement" asp-action="Delete" asp-route-id="@Model.Id" class="btn chushka-bg-color">Delete</a>
+    </div>*@

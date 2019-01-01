@@ -17,5 +17,7 @@
         public const int OffersPerPage = 8;
 
         public const string FilterOfAllOffers = "All";
+
+        public const string redirectToLoginPage = "/Account/Login";
     }
 }
