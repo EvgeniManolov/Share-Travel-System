@@ -47,9 +47,9 @@
                         .ToList();
         }
 
-        public AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page, int size)
+        public AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page)
         {
-
+            int size = Constants.AnnouncementsPerPage;
             if (page == 0) page = 1;
             List<DisplayAnnouncementViewModel> announcements = new List<DisplayAnnouncementViewModel>();
             string titleOfPage = "";

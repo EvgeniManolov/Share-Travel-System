@@ -26,9 +26,9 @@
         
         public IActionResult Index(string search, bool privateAnnouncements, int page)
         {
-            int size = Constants.AnnouncementsPerPage;
+            
             string currentUserId = this.userManager.GetUserId(this.User);
-            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page, size);
+            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page);
 
             ViewData["Title"] = result.TitleOfPage;
 

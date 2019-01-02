@@ -8,6 +8,7 @@
     using ShareTravelSystem.Web.Controllers;
     using System;
 
+    [Area("User")]
     public class ReviewController : BaseController
     {
 
@@ -37,7 +38,7 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.All));
+                return RedirectToAction(nameof(OfferController.Index));
             }
 
             RedirectToActionResult redirectResult = MakeRedirectResult(nameof(OfferController),

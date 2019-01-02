@@ -1,0 +1,11 @@
+﻿@model ShareTravelSystem.ViewModels.AnnouncementPaginationViewModel
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="row">
+            <label for="location1" class="control-label ml-3">Content: </label>
+            <input name="search" type="text" value="@Model.Search" class="ml-3">
+            <button type="submit" class="btn btn-primary text-white ml-2" href="@Url.Action("Index","Announcement")">Search</button>
+        </div>
+    </div>
+</form>

@@ -30,20 +30,14 @@
                 <p class="mb-1">Rating: @Model.TotalRating</p>
             </div>
             <div class="mb-5">
-                <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id"><strong>Edit</strong></a>
+                <form method="post">
+                    <input type="hidden" name="offerId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary btn-xs btn-update btn-add-card" asp-area="Admin" asp-controller="Offer" asp-action="Delete" asp-route-id="@Model.Id">Delete</button>
+                </form>
             </div>
         </div>
     </div>
     <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
-        <form asp-area="User" asp-controller="Review" asp-action="Create" method="post">
-            <div>
-                <textarea class='col-lg-12' name="comment" placeholder="Comment this offer.." rows="4"></textarea>
-            </div>
-            <div>
-                <input name="offerId" type="hidden" value="@Model.Id" class="form-control mt-4" />
-            </div>
-            <button class="btn btn-primary text-white" type="submit" value="Create Comment">Add Comment</button>
-        </form>
         <h1 class="mt-2">Comments</h1>
         <hr />
     </div>
@@ -57,7 +51,16 @@
             {
                 @foreach (var review in @Model.Reviews)
                 {
-                    <li>[ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content</li>
+                    <li>
+                        
+                        [ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content
+                        <div>
+                            <form method="post">
+                                <input type="hidden" name="reviewId" value="@review.Id" />
+                                <button type="submit" class="btn btn-primary btn-xs btn-update btn-add-card" asp-area="Admin" asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id">Delete</button>
+                            </form>
+                        </div>
+                    </li>
                 }
             }
         </ul>

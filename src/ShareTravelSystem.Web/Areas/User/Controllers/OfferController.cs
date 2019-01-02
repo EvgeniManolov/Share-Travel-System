@@ -11,8 +11,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ShareTravelSystem.Web.Infrastructure.Constants;
+    using Constants = Infrastructure.Constants.Constants;
 
+    [Area("User")]
     public class OfferController : BaseController
     {
         private readonly IOfferService offerService;
@@ -24,7 +25,18 @@
             this.userManager = userManager;
         }
 
-        [HttpGet]
+        public IActionResult Index(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
+        {
+            int size = Constants.OffersPerPage;
+            string currentUserId = this.userManager.GetUserId(this.User);
+            OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
+            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId);
+
+            ViewData["LikedDislikedOffersIds"] = likedOffersIds;
+            ViewData["Title"] = result.TitleOfPage;
+            return this.View(result);
+        }
+
         public IActionResult Create()
         {
             List<Town> towns = this.offerService.GetAllTowns().ToList();
@@ -42,23 +54,9 @@
 
             string currentUserId = this.userManager.GetUserId(this.User);
             this.offerService.Create(model, currentUserId);
-            return RedirectToAction(nameof(OfferController.All));
+            return RedirectToAction(nameof(OfferController.Index));
         }
 
-        [HttpGet]
-        public IActionResult All(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
-        {
-            int size = Constants.OffersPerPage;
-            string currentUserId = this.userManager.GetUserId(this.User);
-            OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
-            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId);
-
-            ViewData["LikedDislikedOffersIds"] = likedOffersIds;
-            ViewData["Title"] = result.TitleOfPage;
-            return this.View(result);
-        }
-
-        [HttpGet]
         public IActionResult Details(int id)
         {
             DetailsOfferViewModel model;
@@ -69,12 +67,11 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.All));
+                return RedirectToAction(nameof(OfferController.Index));
             }
             return View(model);
         }
 
-        [HttpGet]
         public IActionResult Edit(int id)
         {
             DisplayEditOfferViewModel model;
@@ -85,7 +82,7 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.All));
+                return RedirectToAction(nameof(OfferController.Index));
             }
             return View(model);
         }
@@ -104,7 +101,7 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.All));
+                return RedirectToAction(nameof(OfferController.Index));
             }
 
             RedirectToActionResult redirectResult = MakeRedirectResult(nameof(OfferController), nameof(OfferController.Details), model.OfferModel.Id);
@@ -124,10 +121,10 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.All));
+                return RedirectToAction(nameof(OfferController.Index));
             }
 
-            return RedirectToAction(nameof(OfferController.All));
+            return RedirectToAction(nameof(OfferController.Index));
         }
 
         [HttpPost]
@@ -142,10 +139,10 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.All));
+                return RedirectToAction(nameof(OfferController.Index));
             }
 
-            return RedirectToAction(nameof(OfferController.All));
+            return RedirectToAction(nameof(OfferController.Index));
         }
     }
 }

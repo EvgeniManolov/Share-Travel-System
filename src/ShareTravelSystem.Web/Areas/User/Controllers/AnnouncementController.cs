@@ -8,7 +8,6 @@
     using ShareTravelSystem.ViewModels.Announcement;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
-    using ShareTravelSystem.Web.Infrastructure.Constants;
     using System;
 
 
@@ -23,30 +22,25 @@
             this.announcementService = announcementService;
             this.userManager = userManager;
         }
+        
 
-        [HttpGet]
-        [Authorize]
         public IActionResult Index(string search, bool privateAnnouncements, int page)
         {
-            int size = Constants.AnnouncementsPerPage;
             string currentUserId = this.userManager.GetUserId(this.User);
-            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page, size);
+            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page);
 
             ViewData["Title"] = result.TitleOfPage;
 
             return this.View(result);
         }
 
-
-        [HttpGet]
-        [Authorize]
+        
         public IActionResult Create()
         {
             return View();
         }
-
+        
         [HttpPost]
-        [Authorize]
         public IActionResult Create(CreateAnnouncementViewModel model)
         {
             if (!ModelState.IsValid)
@@ -59,9 +53,8 @@
             return RedirectToAction(nameof(AnnouncementController.Index));
 
         }
+        
 
-        [HttpGet]
-        [Authorize]
         public IActionResult Details(int id)
         {
             DetailsAnnouncementViewModel model;
@@ -78,9 +71,8 @@
 
             return View(model);
         }
+        
 
-        [HttpGet]
-        [Authorize]
         public IActionResult Edit(int id)
         {
             EditAnnouncementViewModel model;

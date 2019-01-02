@@ -246,7 +246,26 @@
 
         public List<int> GetLikedOrDislikedOffersIds(string currentUserId)
         {
-            return this.db.Reactions.Where(r => r.AuthorId == currentUserId).Select(x => x.OfferId).ToList();
+            return this.db.Reactions
+                .Where(r => r.AuthorId == currentUserId)
+                .Select(x => x.OfferId)
+                .ToList();
+        }
+
+        public void DeleteOfferById(int id)
+        {
+            Offer offer = this.db.Offers.Where(o => o.Id == id).SingleOrDefault();
+
+            if (offer == null)
+            {
+                throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, id));
+            }
+
+            List<Review> reviews = this.db.Reviews.Where(r => r.OfferId == offer.Id).ToList();
+
+            this.db.Offers.Remove(offer);
+            this.db.Reviews.RemoveRange(reviews);
+            this.db.SaveChanges();
         }
     }
 }

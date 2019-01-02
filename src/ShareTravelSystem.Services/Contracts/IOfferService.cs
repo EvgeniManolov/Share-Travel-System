@@ -24,5 +24,7 @@
         bool AddDisLikeToOffer(int offerId, string userId);
 
         List<int> GetLikedOrDislikedOffersIds(string currentUserId);
+
+        void DeleteOfferById(int id);
     }
 }
