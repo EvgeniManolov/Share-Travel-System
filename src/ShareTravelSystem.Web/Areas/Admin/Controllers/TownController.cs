@@ -17,8 +17,7 @@
         {
             this.townService = townService;
         }
-
-        [HttpGet]
+        
         public IActionResult Index(int page, string search)
         {
             if (!RedirectIfNotInRole(Constants.AdminRole))
@@ -26,12 +25,10 @@
                 return Redirect(Constants.redirectToLoginPage);
             };
 
-            int size = Constants.TownsPerPage;
-            TownPaginationViewModel towns = this.townService.GetAllTowns(size, page, search);
+            TownPaginationViewModel towns = this.townService.GetAllTowns(page, search);
             return View(towns);
         }
-
-        [HttpGet]
+        
         public IActionResult Create()
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
@@ -69,8 +66,7 @@
 
             return RedirectToAction(nameof(TownController.Index));
         }
-
-        [HttpGet]
+        
         public IActionResult Edit(int id)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))

@@ -1,9 +1,8 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels.Statistic;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Controllers;
 
     [Area("Admin")]
@@ -15,12 +14,11 @@
         {
             this.statisticService = statisticService;
         }
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult StatisticByRating()
+        
+        
+        public IActionResult StatisticByRating(int page, string search)
         {
-            StatisticByRating model = this.statisticService.GetStatisticForAllUsersByRating();
+            StatisticByRatingPaginationViewModel model = this.statisticService.GetStatisticForAllUsersByRating(page,search);
             return this.View(model);
         }
     }

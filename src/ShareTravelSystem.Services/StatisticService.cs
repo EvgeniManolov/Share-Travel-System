@@ -1,9 +1,9 @@
 ﻿namespace ShareTravelSystem.Services
 {
-    using Microsoft.AspNetCore.Identity;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Services.Infrastructure;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Statistic;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Models;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,31 +11,38 @@
     public class StatisticService : IStatisticService
     {
         private readonly ShareTravelSystemDbContext db;
-        private readonly UserManager<ShareTravelSystemUser> userManager;
 
-        public StatisticService(ShareTravelSystemDbContext db,
-                                    UserManager<ShareTravelSystemUser> userManager)
+        public StatisticService(ShareTravelSystemDbContext db)
         {
             this.db = db;
-            this.userManager = userManager;
         }
-        public StatisticByRating GetStatisticForAllUsersByRating()
+        public StatisticByRatingPaginationViewModel GetStatisticForAllUsersByRating(int page, string search)
         {
+
+            int size = Constants.UserStatisticsPerPage;
+            if (page == 0) page = 1;
             List<DisplayStatisticByUserForRating> statistics = new List<DisplayStatisticByUserForRating>();
+
             var users = this.db.Users.Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToList();
+
+            if (search != null)
+            {
+                users = this.db.Users.Where(u => u.Email.ToLower().Contains(search.ToLower())).Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToList();
+            }
+
 
             foreach (var user in users)
             {
                 int totalDisLikes = 0;
                 int totalLikes = 0;
 
-                var offers = this.db.Offers.Where(o => o.AuthorId == user.id).Select(o => o.Id).ToList();
+                List<int> offersIds = this.db.Offers.Where(o => o.AuthorId == user.id).Select(o => o.Id).ToList();
 
-                foreach (var offer in offers)
+                foreach (var offerId in offersIds)
                 {
-                    int offerLikes = this.db.Reactions.Where(r => r.OfferId == offer && r.Action == true).Count();
+                    int offerLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action == true).Count();
 
-                    int offerDisLikes = this.db.Reactions.Where(r => r.OfferId == offer && r.Action == false).Count();
+                    int offerDisLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action == false).Count();
 
                     totalDisLikes += offerDisLikes;
                     totalLikes += offerLikes;
@@ -53,7 +60,16 @@
                 statistics.Add(statisticByUser);
             }
 
-            StatisticByRating result = new StatisticByRating { Statistics = statistics.OrderByDescending(x => x.TotalRating).ToList() };
+            int count = statistics.Count();
+            statistics = statistics.Skip((page - 1) * size).Take(size).ToList();
+
+            StatisticByRating statistic = new StatisticByRating { Statistics = statistics.OrderByDescending(x => x.TotalRating).ToList()};
+            StatisticByRatingPaginationViewModel result = new StatisticByRatingPaginationViewModel
+                                    { Search = search,
+                                      Size = size,
+                                      Page = page,
+                                      Count = count,
+                                      Statistic = statistic };
 
             return result;
         }

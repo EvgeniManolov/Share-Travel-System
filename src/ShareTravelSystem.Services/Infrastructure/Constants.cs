@@ -19,5 +19,9 @@
         public const string AllOffersTitlePageName = "All Offers";
 
         public const string FilterOfAllOffers = "All";
+
+        public const int TownsPerPage = 10;
+
+        public const int UserStatisticsPerPage = 10;
     }
 }

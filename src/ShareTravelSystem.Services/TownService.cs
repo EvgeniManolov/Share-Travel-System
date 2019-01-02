@@ -68,8 +68,10 @@
             this.db.SaveChanges();
         }
 
-        public TownPaginationViewModel GetAllTowns(int size, int page, string search)
+        public TownPaginationViewModel GetAllTowns(int page, string search)
         {
+
+            int size = Constants.TownsPerPage;
             if (page == 0) page = 1;
             List<DisplayTownViewModel> towns = new List<DisplayTownViewModel>();
 

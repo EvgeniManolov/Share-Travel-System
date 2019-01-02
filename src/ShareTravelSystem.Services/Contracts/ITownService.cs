@@ -6,7 +6,7 @@
 
     public interface ITownService
     {
-        TownPaginationViewModel GetAllTowns(int size, int page, string search);
+        TownPaginationViewModel GetAllTowns(int page, string search);
 
         void Create(CrateTownViewModel model);
 

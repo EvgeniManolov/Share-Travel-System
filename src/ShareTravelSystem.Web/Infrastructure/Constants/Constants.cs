@@ -13,11 +13,12 @@
         public const int AnnouncementsPerPage = 8;
         
         public const int TownsPerPage = 10;
-
+        
         public const int OffersPerPage = 8;
 
         public const string FilterOfAllOffers = "All";
 
         public const string redirectToLoginPage = "/Account/Login";
+        
     }
 }

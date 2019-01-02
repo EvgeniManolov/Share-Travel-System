@@ -1,4 +1,4 @@
-﻿@model ShareTravelSystem.ViewModels.Statistic.StatisticByRating
+﻿@model ShareTravelSystem.ViewModels.StatisticByRatingPaginationViewModel
 
 @{
     ViewData["Title"] = "Statistic of Users by Likes/DisLikes";
@@ -7,6 +7,7 @@
 @Html.ValidationSummary(false)
 <div class="container">
     <h1>Satistic of User by Likes/Dislikes</h1>
+    @await Html.PartialAsync("_SearchStatistic", Model)
     <table class="table table-hover col-5 mt-3" id="townTable">
         <thead>
             <tr>
@@ -18,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var statistic in Model.Statistics)
+            @foreach (var statistic in Model.Statistic.Statistics)
             {
                 <tr>
                     <td scope="row" colspan="6">@statistic.UserId</td>
@@ -30,8 +31,8 @@
             }
         </tbody>
     </table>
+    @await Html.PartialAsync("_PagingStatistic", Model)
 </div>
-@*@await Html.PartialAsync("_PagingTown", Model)*@
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
