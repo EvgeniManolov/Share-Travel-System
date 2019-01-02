@@ -1,5 +1,6 @@
 ﻿namespace ShareTravelSystem.Web.Areas.User.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Data.Models;
@@ -14,6 +15,7 @@
     using Constants = Infrastructure.Constants.Constants;
 
     [Area("User")]
+    [Authorize(Roles = "User")]
     public class OfferController : BaseController
     {
         private readonly IOfferService offerService;
@@ -37,6 +39,7 @@
             return this.View(result);
         }
 
+       
         public IActionResult Create()
         {
             List<Town> towns = this.offerService.GetAllTowns().ToList();
@@ -45,6 +48,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreateOfferViewModel model)
         {
             if (!ModelState.IsValid)
@@ -88,6 +92,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(DisplayEditOfferViewModel model)
         {
             if (!ModelState.IsValid)
@@ -104,7 +109,7 @@
                 return RedirectToAction(nameof(OfferController.Index));
             }
 
-            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(OfferController), nameof(OfferController.Details), model.OfferModel.Id);
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.User), nameof(OfferController), nameof(OfferController.Details), model.OfferModel.Id);
 
             return redirectResult;
         }

@@ -7,11 +7,11 @@
     using ShareTravelSystem.ViewModels.Announcement;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
-    using ShareTravelSystem.Web.Infrastructure.Constants;
     using System;
 
 
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AnnouncementController : BaseController
     {
         private readonly IAnnouncementService announcementService;
@@ -54,6 +54,7 @@
         
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             try

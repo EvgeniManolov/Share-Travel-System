@@ -1,5 +1,6 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
@@ -12,6 +13,7 @@
     using System.Collections.Generic;
 
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class OfferController : BaseController
     {
         private readonly IOfferService offerService;

@@ -1,39 +1,33 @@
-﻿@model ShareTravelSystem.ViewModels.Offer.DisplayOfferViewModel
+﻿@model ShareTravelSystem.ViewModels.OfferPaginationViewModel
 
+@foreach (var offer in @Model.AllOffers.Offers)
+{
+    <div class="col-3">
+        <div class="project project-default">
+            <div class="shape">
+                <div class="shape-text">
+                    @offer.Type
+                </div>
+            </div>
+            <div class="project-content mt-4">
+                <h1 class="lead">
+                    From @offer.DepartureTownName <br />
+                    To @offer.DestinationTownName
+                </h1>
+                <h6 class="mt-1"> On: @offer.DepartureDate</h6>
+                <p class="mt-3">Description: @offer.Description</p>
 
-<div class="col-3">
-    <div class="project project-default">
-        <div class="shape">
-            <div class="shape-text">
-                @Model.Type
+            </div>
+            <div class="project-content mb-0">
+                <p class="mt-1">Seat: @offer.Seat</p>
+                <p class="mb-1">Price: @offer.Price</p>
+                <p class="mb-1">TotalRating: @offer.TotalRating</p>
+            </div>
+            <div class="mb-0">
+                <div class="row ml-2 mt-5">
+                    <a class="btn bg-primary text-white" asp-controller="Offer" asp-action="Details" asp-route-id="@offer.Id"><strong>Preview</strong></a>
+                </div>
             </div>
         </div>
-        <div class="project-content mt-4">
-            <h1 class="lead">
-                From @Model.DepartureTownName <br />
-                To @Model.DestinationTownName
-            </h1>
-            <h6 class="mt-1"> On: @Model.DepartureDate</h6>
-            <p class="mt-3">Description: @Model.Description</p>
-
-        </div>
-        <div class="project-content mb-0">
-            <p class="mt-1">Seat: @Model.Seat</p>
-            <p class="mb-1">Price: @Model.Price</p>
-        </div>
-        <div class="mb-0">
-            <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Details" asp-route-id="@Model.Id"><strong>Preview</strong></a>
-
-            <form asp-controller="Offer" asp-action="Like" method="post">
-                <input type="hidden" name="offerId" value="@Model.Id" />
-                <button type="submit" class="btn btn-danger btn-xs btn-update btn-add-card"><i class="fas fa-thumbs-up"></i></button>
-            </form>
-            <form asp-controller="Offer" asp-action="DisLike" method="post">
-                <input type="hidden" name="offerId" value="@Model.Id" />
-                <button type="submit" class="btn btn-danger btn-xs btn-update btn-add-card"><i class="fas fa-thumbs-down"></i></i></button>
-            </form>
-            <span class='glyphicon glyphicon-exclamation-sign text-danger pull-right icon-style'></span>
-        </div>
     </div>
-</div>
-
+}

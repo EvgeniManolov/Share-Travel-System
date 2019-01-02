@@ -24,10 +24,10 @@
             return this.User.IsInRole(role);
         }
 
-        protected RedirectToActionResult MakeRedirectResult(string controller, string action, int id)
+        protected RedirectToActionResult MakeRedirectResult(string area, string controller, string action, int id)
         {
             string controllerName = controller.Replace("Controller", "");
-            RedirectToActionResult result = new RedirectToActionResult(action, controllerName, new { id });
+            RedirectToActionResult result = new RedirectToActionResult(action, controllerName, new { id = id, Area = area });
 
             return result;
         }

@@ -57,7 +57,11 @@
             {
                 @foreach (var review in @Model.Reviews)
                 {
-                    <li>[ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content</li>
+                    <li>
+                        <div>
+                            <a href="/User/Review/Edit?id=@review.Id&offerid=@Model.Id">[Edit]</a>[ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content
+                        </div>
+                    </li>
                 }
             }
         </ul>

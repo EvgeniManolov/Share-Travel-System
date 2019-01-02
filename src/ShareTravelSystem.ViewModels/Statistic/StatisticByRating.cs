@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels.Statistic
+﻿namespace ShareTravelSystem.ViewModels.Statistic
 {
+    using System.Collections.Generic;
+
     public class StatisticByRating
     {
         public ICollection<DisplayStatisticByUserForRating> Statistics { get; set; }

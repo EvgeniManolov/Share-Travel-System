@@ -12,6 +12,7 @@
 
 
     [Area("User")]
+    [Authorize(Roles = "User")]
     public class AnnouncementController : BaseController
     {
         private readonly IAnnouncementService announcementService;
@@ -41,6 +42,7 @@
         }
         
         [HttpPost]
+        [Authorize(Roles = "User")]
         public IActionResult Create(CreateAnnouncementViewModel model)
         {
             if (!ModelState.IsValid)
@@ -90,7 +92,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Edit(EditAnnouncementViewModel model)
         {
             if (!ModelState.IsValid)
@@ -107,7 +109,7 @@
                 this.ModelState.AddModelError("Name", e.Message);
                 return this.View(model);
             }
-            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(AnnouncementController), nameof(AnnouncementController.Details), model.Id);
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.User),nameof(AnnouncementController), nameof(AnnouncementController.Details), model.Id);
             return redirectResult;
         }
     }

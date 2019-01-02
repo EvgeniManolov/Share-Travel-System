@@ -1,6 +1,7 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
     using System;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.ViewModels;
@@ -9,6 +10,7 @@
     using ShareTravelSystem.Web.Infrastructure.Constants;
 
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class TownController : BaseController
     {
         private readonly ITownService townService;
@@ -40,6 +42,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CrateTownViewModel model)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
@@ -92,6 +95,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(EditTownViewModel model)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))

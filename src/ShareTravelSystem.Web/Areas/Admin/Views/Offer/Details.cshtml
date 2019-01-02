@@ -57,7 +57,8 @@
                         <div>
                             <form method="post">
                                 <input type="hidden" name="reviewId" value="@review.Id" />
-                                <button type="submit" class="btn btn-primary btn-xs btn-update btn-add-card" asp-area="Admin" asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id">Delete</button>
+                                <input type="hidden" name="offerId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-primary btn-xs btn-update btn-add-card" asp-area="Admin" asp-controller="Review" asp-action="Delete">Delete</button>
                             </form>
                         </div>
                     </li>

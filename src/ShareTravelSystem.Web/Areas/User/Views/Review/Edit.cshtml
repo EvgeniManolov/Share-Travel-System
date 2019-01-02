@@ -1,0 +1,27 @@
+﻿@model ShareTravelSystem.ViewModels.Review.EditReviewViewModel
+
+@{
+    ViewData["Title"] = "Edit Comment";
+}
+<h2 class="ml-5 mt-3">@ViewData["Title"]</h2>
+<form method="post" class="ml-5">
+    <div class="form-group row">
+        <div class="col-3">
+            <input class="form-control" asp-for="@Model.Id " type="hidden" name="Id" value="@Model.Id">
+            <input class="form-control" asp-for="@Model.Comment" value="@Model.Comment">
+            <span asp-validation-for="@Model.Comment" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ml-3">
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+            <a class="btn btn-outline-primary ml-3" href="@Url.Action("Index","Town")">Back</a>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+

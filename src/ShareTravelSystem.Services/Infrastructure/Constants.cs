@@ -14,6 +14,8 @@
 
         public const string AlreadyTakeActionToThisOffer = "Already take actions to offer with id: {0}.";
 
+        public const string ReviewDoesNotExist = "Review with id: {0} does not exist.";
+
         public const string MyOffersTitlePageName = "My Offers";
 
         public const string AllOffersTitlePageName = "All Offers";
@@ -22,10 +24,10 @@
 
         public const int TownsPerPage = 10;
 
-
         public const int AnnouncementsPerPage = 8;
 
         public const int UserStatisticsPerPage = 10;
+
         public const int OffersPerPage = 8;
     }
 }
