@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Announcement;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
@@ -12,7 +11,7 @@
     using System;
 
 
-    [Area("User")]
+    [Area("Admin")]
     public class AnnouncementController : BaseController
     {
         private readonly IAnnouncementService announcementService;
@@ -24,9 +23,7 @@
             this.userManager = userManager;
         }
         
-
-        [HttpGet]
-        [Authorize]
+        
         public IActionResult Index(string search, bool privateAnnouncements, int page)
         {
             int size = Constants.AnnouncementsPerPage;
@@ -37,9 +34,7 @@
 
             return this.View(result);
         }
-
-        [HttpGet]
-        [Authorize]
+        
         public IActionResult Details(int id)
         {
             DetailsAnnouncementViewModel model;
@@ -57,8 +52,7 @@
             return View(model);
         }
         
-
-        [Authorize]
+        
         [HttpPost]
         public IActionResult Delete(int id)
         {
