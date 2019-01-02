@@ -6,7 +6,7 @@
     {
         void CreateReview(string comment, int offerId, string userId);
 
-        EditReviewViewModel GetToEditReviewById(int id,int offerId);
+        EditReviewViewModel GetToEditReviewById(int id,int offerId, string currentUserId);
 
         void EditReviewById(EditReviewViewModel model);
 

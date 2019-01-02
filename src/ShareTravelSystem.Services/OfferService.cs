@@ -156,7 +156,7 @@
             return this.db.Towns.Where(t => t.IsDeleted == false).ToList();
         }
 
-        public DisplayEditOfferViewModel GetOfferToEdit(int id)
+        public DisplayEditOfferViewModel GetOfferToEdit(int id, string currentUserId)
         {
             EditOfferViewModel model = this.db
                                            .Offers
@@ -166,6 +166,12 @@
             if (model == null)
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, model.Id));
+            }
+
+            string offerAuthor = this.db.Offers.Where(o => o.Id == id).Select(x => x.AuthorId).SingleOrDefault();
+            if (offerAuthor != currentUserId)
+            {
+                throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
             }
 
             DisplayEditOfferViewModel result = new DisplayEditOfferViewModel

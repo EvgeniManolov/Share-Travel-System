@@ -77,10 +77,11 @@
 
         public IActionResult Edit(int id)
         {
+            string currentUserId = this.userManager.GetUserId(this.User);
             EditAnnouncementViewModel model;
             try
             {
-                model = this.announcementService.EditAnnouncementById(id);
+                model = this.announcementService.EditAnnouncementById(id, currentUserId);
             }
             catch (Exception e)
             {

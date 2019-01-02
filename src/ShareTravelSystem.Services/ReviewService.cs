@@ -41,7 +41,7 @@
             this.db.SaveChanges();
         }
 
-        public EditReviewViewModel GetToEditReviewById(int id, int offerId)
+        public EditReviewViewModel GetToEditReviewById(int id, int offerId, string currentUserId)
         {
             EditReviewViewModel review = this.db.Reviews.Where(r => r.Id == id).Select(e => new EditReviewViewModel
             {
@@ -55,6 +55,11 @@
                 throw new ArgumentException(string.Format(Constants.ReviewDoesNotExist, id));
             }
 
+            string reviewAuthor = this.db.Reviews.Where(r => r.Id == id).Select(x => x.AuthorId).SingleOrDefault();
+            if (reviewAuthor != currentUserId)
+            {
+                throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
+            }
             return review;
         }
 

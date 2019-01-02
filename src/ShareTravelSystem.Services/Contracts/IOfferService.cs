@@ -15,7 +15,7 @@
 
         DetailsOfferViewModel GetOfferById(int id);
 
-        DisplayEditOfferViewModel GetOfferToEdit(int id);
+        DisplayEditOfferViewModel GetOfferToEdit(int id, string currentUserId);
 
         void EditOffer(DisplayEditOfferViewModel model);
 

@@ -14,7 +14,7 @@
 
         DetailsAnnouncementViewModel DetailsAnnouncementById(int id);
 
-        EditAnnouncementViewModel EditAnnouncementById(int id);
+        EditAnnouncementViewModel EditAnnouncementById(int id, string userId);
 
         void EditAnnouncement(EditAnnouncementViewModel model);
 

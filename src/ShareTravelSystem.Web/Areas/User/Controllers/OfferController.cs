@@ -79,9 +79,10 @@
         public IActionResult Edit(int id)
         {
             DisplayEditOfferViewModel model;
+            string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = this.offerService.GetOfferToEdit(id);
+                model = this.offerService.GetOfferToEdit(id, currentUserId);
             }
             catch (Exception e)
             {

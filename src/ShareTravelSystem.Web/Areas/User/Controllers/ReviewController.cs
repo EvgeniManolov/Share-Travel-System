@@ -53,9 +53,10 @@
         public IActionResult Edit(int id, int offerId)
         {
             EditReviewViewModel model;
+            string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = this.reviewService.GetToEditReviewById(id, offerId);
+                model = this.reviewService.GetToEditReviewById(id, offerId, currentUserId);
             }
             catch (Exception e)
             {

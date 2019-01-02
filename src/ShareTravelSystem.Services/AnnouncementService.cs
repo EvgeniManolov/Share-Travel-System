@@ -112,7 +112,7 @@
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, Id));
             }
-
+            
             this.db.Announcements.Remove(announcement);
             this.db.SaveChanges();
         }
@@ -132,7 +132,7 @@
             return result;
         }
 
-        public EditAnnouncementViewModel EditAnnouncementById(int id)
+        public EditAnnouncementViewModel EditAnnouncementById(int id, string currentUserId)
         {
             EditAnnouncementViewModel result = this.db
                        .Announcements
@@ -143,6 +143,12 @@
             if (result == null)
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, id));
+            }
+
+            string announcementAuthor = this.db.Announcements.Where(a => a.Id == id).Select(r => r.AuthorId).SingleOrDefault();
+            if (announcementAuthor != currentUserId)
+            {
+                throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
             }
 
             return result;

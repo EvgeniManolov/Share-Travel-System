@@ -16,6 +16,8 @@
 
         public const string ReviewDoesNotExist = "Review with id: {0} does not exist.";
 
+        public const string NotAuthorizedForThisOperation = "User with id: {0} is not authorized for this operation.";
+
         public const string MyOffersTitlePageName = "My Offers";
 
         public const string AllOffersTitlePageName = "All Offers";

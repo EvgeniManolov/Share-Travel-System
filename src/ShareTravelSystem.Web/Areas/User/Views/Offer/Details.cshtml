@@ -29,9 +29,12 @@
                 <p class="mb-1">Post by: @Model.Author</p>
                 <p class="mb-1">Rating: @Model.TotalRating</p>
             </div>
-            <div class="mb-5">
-                <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id"><strong>Edit</strong></a>
-            </div>
+            @if (Model.Author == this.User.Identity.Name)
+            {
+                <div class="mb-5">
+                    <a class="btn btn-primary btn-xs btn-update btn-add-card" asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id"><strong>Edit</strong></a>
+                </div>
+            }
         </div>
     </div>
     <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
@@ -59,7 +62,11 @@
                 {
                     <li>
                         <div>
-                            <a href="/User/Review/Edit?id=@review.Id&offerid=@Model.Id">[Edit]</a>[ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content
+                            @if (review.Author == this.User.Identity.Name)
+                            {
+                                <a href="/User/Review/Edit?id=@review.Id&offerid=@Model.Id">[Edit]</a>
+                            }
+                            [ @review.Author on @review.CreateDate.ToLocalTime() ] : @review.Content
                         </div>
                     </li>
                 }
@@ -67,7 +74,6 @@
         </ul>
     </div>
 </div>
-
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
