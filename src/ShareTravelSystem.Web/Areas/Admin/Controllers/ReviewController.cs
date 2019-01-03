@@ -26,7 +26,7 @@
         {
             try
             {
-                this.reviewService.DeleteReviewById(reviewId, offerId);
+                this.reviewService.DeleteReview(reviewId, offerId);
             }
             catch (Exception e)
             {

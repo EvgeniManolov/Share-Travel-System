@@ -7,24 +7,24 @@
 
     public interface IOfferService
     {
-        void Create(CreateOfferViewModel model, string userId);
+        void CreateOffer(CreateOfferViewModel model, string userId);
 
         IEnumerable<Town> GetAllTowns();
 
         OfferPaginationViewModel GetAllOffers(bool privateOffers, string filter, string search, string currentUserId, int page, int size);
 
-        DetailsOfferViewModel GetOfferById(int id);
+        DetailsOfferViewModel DetailsOffer(int id);
 
         DisplayEditOfferViewModel GetOfferToEdit(int id, string currentUserId);
 
         void EditOffer(DisplayEditOfferViewModel model);
 
-        bool AddLikeToOffer(int offerId, string userId);
+        bool LikeOffer(int offerId, string userId);
 
-        bool AddDisLikeToOffer(int offerId, string userId);
+        bool DisLikeOffer(int offerId, string userId);
 
-        List<int> GetLikedOrDislikedOffersIds(string currentUserId);
+        ICollection<int> GetLikedOrDislikedOffersIds(string currentUserId);
 
-        void DeleteOfferById(int id);
+        void DeleteOffer(int id);
     }
 }

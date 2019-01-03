@@ -12,7 +12,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Constants = Infrastructure.Constants.Constants;
+    using ShareTravelSystem.Services.Infrastructure;
 
     [Area("User")]
     [Authorize(Roles = "User")]
@@ -32,7 +32,7 @@
             int size = Constants.OffersPerPage;
             string currentUserId = this.userManager.GetUserId(this.User);
             OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
-            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId);
+            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
 
             ViewData["LikedDislikedOffersIds"] = likedOffersIds;
             ViewData["Title"] = result.TitleOfPage;
@@ -57,7 +57,7 @@
             }
 
             string currentUserId = this.userManager.GetUserId(this.User);
-            this.offerService.Create(model, currentUserId);
+            this.offerService.CreateOffer(model, currentUserId);
             return RedirectToAction(nameof(OfferController.Index));
         }
 
@@ -66,7 +66,7 @@
             DetailsOfferViewModel model;
             try
             {
-                model = this.offerService.GetOfferById(id);
+                model = this.offerService.DetailsOffer(id);
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                bool result = this.offerService.AddLikeToOffer(offerId, currentUserId);
+                bool result = this.offerService.LikeOffer(offerId, currentUserId);
             }
             catch (Exception e)
             {
@@ -140,7 +140,7 @@
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                bool result = this.offerService.AddDisLikeToOffer(offerId, currentUserId);
+                bool result = this.offerService.DisLikeOffer(offerId, currentUserId);
             }
             catch (Exception e)
             {

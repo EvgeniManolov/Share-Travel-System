@@ -41,7 +41,7 @@
 
             try
             {
-                model = this.announcementService.DetailsAnnouncementById(id);
+                model = this.announcementService.DetailsAnnouncement(id);
             }
             catch (Exception e)
             {
@@ -59,7 +59,7 @@
         {
             try
             {
-                this.announcementService.Delete(id);
+                this.announcementService.DeleteAnnouncement(id);
             }
             catch (Exception e)
             {

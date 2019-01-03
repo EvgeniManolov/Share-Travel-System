@@ -6,18 +6,18 @@
 
     public interface IAnnouncementService
     {
-        void Create(CreateAnnouncementViewModel model, string userId);
+        void CreateAnnouncement(CreateAnnouncementViewModel model, string userId);
+
+        DetailsAnnouncementViewModel DetailsAnnouncement(int id);
+
+        EditAnnouncementViewModel GetAnnouncementToEdit(int id, string userId);
+
+        void EditAnnouncement(EditAnnouncementViewModel model);
+
+        void DeleteAnnouncement(int productId);
 
         AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page);
 
         IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements();
-
-        DetailsAnnouncementViewModel DetailsAnnouncementById(int id);
-
-        EditAnnouncementViewModel EditAnnouncementById(int id, string userId);
-
-        void EditAnnouncement(EditAnnouncementViewModel model);
-
-        void Delete(int productId);
     }
 }

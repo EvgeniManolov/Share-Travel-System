@@ -57,7 +57,7 @@
 
             try
             {
-                this.townService.Create(model);
+                this.townService.CreateTown(model);
             }
 
             catch (Exception e)
@@ -81,7 +81,7 @@
 
             try
             {
-                town = this.townService.GetTownById(id);
+                town = this.townService.GetTownToEdit(id);
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@
 
             try
             {
-                this.townService.EditTownById(model);
+                this.townService.EditTown(model);
             }
             catch (Exception e)
             {
@@ -131,7 +131,7 @@
 
             try
             {
-                this.townService.Delete(id);
+                this.townService.DeleteTown(id);
             }
             catch (Exception e)
             {

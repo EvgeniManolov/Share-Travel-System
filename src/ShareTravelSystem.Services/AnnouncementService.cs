@@ -25,7 +25,7 @@
             this.userManager = userManager;
         }
 
-        public void Create(CreateAnnouncementViewModel model, string userid)
+        public void CreateAnnouncement(CreateAnnouncementViewModel model, string userid)
         {
             this.db.Announcements.Add(new Announcement
             {
@@ -103,7 +103,7 @@
         }
 
 
-        public void Delete(int Id)
+        public void DeleteAnnouncement(int Id)
         {
             Announcement announcement = this.db
                                             .Announcements
@@ -117,7 +117,7 @@
             this.db.SaveChanges();
         }
 
-        public DetailsAnnouncementViewModel DetailsAnnouncementById(int id)
+        public DetailsAnnouncementViewModel DetailsAnnouncement(int id)
         {
             DetailsAnnouncementViewModel result = this.db
                        .Announcements
@@ -132,7 +132,7 @@
             return result;
         }
 
-        public EditAnnouncementViewModel EditAnnouncementById(int id, string currentUserId)
+        public EditAnnouncementViewModel GetAnnouncementToEdit(int id, string currentUserId)
         {
             EditAnnouncementViewModel result = this.db
                        .Announcements

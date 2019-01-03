@@ -6,11 +6,11 @@
     {
         void CreateReview(string comment, int offerId, string userId);
 
-        EditReviewViewModel GetToEditReviewById(int id,int offerId, string currentUserId);
+        EditReviewViewModel GetReviewToEdit(int id,int offerId, string currentUserId);
 
-        void EditReviewById(EditReviewViewModel model);
+        void EditReview(EditReviewViewModel model);
 
-        void DeleteReviewById(int reviewId, int offerId);
+        void DeleteReview(int reviewId, int offerId);
     }
 }
  

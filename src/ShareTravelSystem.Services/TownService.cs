@@ -20,7 +20,7 @@
             this.db = db;
         }
 
-        public void Create(CrateTownViewModel model)
+        public void CreateTown(CrateTownViewModel model)
         {
             string isExist = this.db.Towns.Where(t => t.Name.ToLower() == model.Name.ToLower()).Select(x => x.Name).SingleOrDefault();
 
@@ -35,7 +35,7 @@
             db.SaveChanges();
         }
 
-        public void Delete(int townId)
+        public void DeleteTown(int townId)
         {
             Town town = this.db
                 .Towns
@@ -51,7 +51,7 @@
             this.db.SaveChanges();
         }
 
-        public void EditTownById(EditTownViewModel model)
+        public void EditTown(EditTownViewModel model)
         {
             Town town = this.db
                 .Towns
@@ -110,7 +110,7 @@
             return result;
         }
 
-        public EditTownViewModel GetTownById(int id)
+        public EditTownViewModel GetTownToEdit(int id)
         {
             EditTownViewModel town = this.db
                 .Towns

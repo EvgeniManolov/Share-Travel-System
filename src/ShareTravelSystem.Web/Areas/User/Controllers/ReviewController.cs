@@ -56,7 +56,7 @@
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = this.reviewService.GetToEditReviewById(id, offerId, currentUserId);
+                model = this.reviewService.GetReviewToEdit(id, offerId, currentUserId);
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@
 
             try
             {
-                this.reviewService.EditReviewById(model);
+                this.reviewService.EditReview(model);
             }
             catch (Exception e)
             {

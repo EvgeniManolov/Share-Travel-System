@@ -11,6 +11,7 @@
     using ShareTravelSystem.Web.Controllers;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -30,7 +31,7 @@
             int size = Constants.OffersPerPage;
             string currentUserId = this.userManager.GetUserId(this.User);
             OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
-            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId);
+            List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
 
             ViewData["LikedDislikedOffersIds"] = likedOffersIds;
             ViewData["Title"] = result.TitleOfPage;
@@ -42,7 +43,7 @@
             DetailsOfferViewModel model;
             try
             {
-                model = this.offerService.GetOfferById(id);
+                model = this.offerService.DetailsOffer(id);
             }
             catch (Exception e)
             {
@@ -58,7 +59,7 @@
 
             try
             {
-                this.offerService.DeleteOfferById(id);
+                this.offerService.DeleteOffer(id);
             }
             catch (Exception e)
             {

@@ -25,7 +25,7 @@
             this.userManager = userManager;
         }
 
-        public void Create(CreateOfferViewModel model, string userId)
+        public void CreateOffer(CreateOfferViewModel model, string userId)
         {
             if (!Enum.TryParse(model.Type, true, out OfferType type))
             {
@@ -61,7 +61,7 @@
             this.db.SaveChanges();
         }
 
-        public DetailsOfferViewModel GetOfferById(int Id)
+        public DetailsOfferViewModel DetailsOffer(int Id)
         {
             DetailsOfferViewModel offer = this.db
                                               .Offers
@@ -202,7 +202,7 @@
             this.db.SaveChanges();
         }
 
-        public bool AddLikeToOffer(int offerId, string userId)
+        public bool LikeOffer(int offerId, string userId)
         {
             Reaction isExist = this.db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId).SingleOrDefault();
 
@@ -226,7 +226,7 @@
             return true;
         }
 
-        public bool AddDisLikeToOffer(int offerId, string userId)
+        public bool DisLikeOffer(int offerId, string userId)
         {
             Reaction isExist = this.db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId).SingleOrDefault();
 
@@ -250,7 +250,7 @@
             return true;
         }
 
-        public List<int> GetLikedOrDislikedOffersIds(string currentUserId)
+        public ICollection<int> GetLikedOrDislikedOffersIds(string currentUserId)
         {
             return this.db.Reactions
                 .Where(r => r.AuthorId == currentUserId)
@@ -258,7 +258,7 @@
                 .ToList();
         }
 
-        public void DeleteOfferById(int id)
+        public void DeleteOffer(int id)
         {
             Offer offer = this.db.Offers.Where(o => o.Id == id).SingleOrDefault();
 

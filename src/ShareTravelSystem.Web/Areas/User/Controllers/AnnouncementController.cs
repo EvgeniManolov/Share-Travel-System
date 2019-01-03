@@ -50,7 +50,7 @@
                 return this.View(model);
             }
             string currentUserId = this.userManager.GetUserId(this.User);
-            this.announcementService.Create(model, currentUserId);
+            this.announcementService.CreateAnnouncement(model, currentUserId);
 
             return RedirectToAction(nameof(AnnouncementController.Index));
 
@@ -63,7 +63,7 @@
 
             try
             {
-                model = this.announcementService.DetailsAnnouncementById(id);
+                model = this.announcementService.DetailsAnnouncement(id);
             }
             catch (Exception e)
             {
@@ -81,7 +81,7 @@
             EditAnnouncementViewModel model;
             try
             {
-                model = this.announcementService.EditAnnouncementById(id, currentUserId);
+                model = this.announcementService.GetAnnouncementToEdit(id, currentUserId);
             }
             catch (Exception e)
             {

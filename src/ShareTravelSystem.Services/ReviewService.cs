@@ -41,7 +41,7 @@
             this.db.SaveChanges();
         }
 
-        public EditReviewViewModel GetToEditReviewById(int id, int offerId, string currentUserId)
+        public EditReviewViewModel GetReviewToEdit(int id, int offerId, string currentUserId)
         {
             EditReviewViewModel review = this.db.Reviews.Where(r => r.Id == id).Select(e => new EditReviewViewModel
             {
@@ -64,7 +64,7 @@
         }
 
 
-        public void EditReviewById(EditReviewViewModel model)
+        public void EditReview(EditReviewViewModel model)
         {
             Review review = this.db.Reviews.Where(r => r.Id == model.Id && r.OfferId == model.OfferId).SingleOrDefault();
 
@@ -72,7 +72,7 @@
             this.db.SaveChanges();
         }
 
-        public void DeleteReviewById(int reviewId, int offerId)
+        public void DeleteReview(int reviewId, int offerId)
         {
             Review review = this.db.Reviews.Where(r => r.Id == reviewId && r.OfferId == offerId).SingleOrDefault();
 

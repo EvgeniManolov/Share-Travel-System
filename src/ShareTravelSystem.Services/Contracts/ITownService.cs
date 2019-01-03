@@ -8,12 +8,12 @@
     {
         TownPaginationViewModel GetAllTowns(int page, string search);
 
-        void Create(CrateTownViewModel model);
+        void CreateTown(CrateTownViewModel model);
 
-        EditTownViewModel GetTownById(int townId);
+        EditTownViewModel GetTownToEdit(int townId);
 
-        void Delete(int townId);
+        void DeleteTown(int townId);
 
-        void EditTownById(EditTownViewModel model);
+        void EditTown(EditTownViewModel model);
     }
 }
