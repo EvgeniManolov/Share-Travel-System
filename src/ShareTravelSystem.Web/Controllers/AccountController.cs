@@ -148,5 +148,10 @@
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

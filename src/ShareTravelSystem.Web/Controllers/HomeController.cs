@@ -14,8 +14,8 @@
         {
             this.announcementService = announcementService;
         }
+        
 
-        [HttpGet]
         public IActionResult Index()
         {
            
