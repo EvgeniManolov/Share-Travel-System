@@ -43,7 +43,7 @@
 
         public EditReviewViewModel GetReviewToEdit(int id, int offerId, string currentUserId)
         {
-            EditReviewViewModel review = this.db.Reviews.Where(r => r.Id == id).Select(e => new EditReviewViewModel
+            EditReviewViewModel review = this.db.Reviews.Where(r => r.Id == id && !r.IsDeleted).Select(e => new EditReviewViewModel
             {
                 Id = id,
                 Comment = e.Comment,
@@ -55,7 +55,7 @@
                 throw new ArgumentException(string.Format(Constants.ReviewDoesNotExist, id));
             }
 
-            string reviewAuthor = this.db.Reviews.Where(r => r.Id == id).Select(x => x.AuthorId).SingleOrDefault();
+            string reviewAuthor = this.db.Reviews.Where(r => r.Id == id && !r.IsDeleted).Select(x => x.AuthorId).SingleOrDefault();
             if (reviewAuthor != currentUserId)
             {
                 throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
@@ -66,7 +66,7 @@
 
         public void EditReview(EditReviewViewModel model)
         {
-            Review review = this.db.Reviews.Where(r => r.Id == model.Id && r.OfferId == model.OfferId).SingleOrDefault();
+            Review review = this.db.Reviews.Where(r => r.Id == model.Id && r.OfferId == model.OfferId && !r.IsDeleted).SingleOrDefault();
 
             review.Comment = model.Comment;
             this.db.SaveChanges();
@@ -74,14 +74,14 @@
 
         public void DeleteReview(int reviewId, int offerId)
         {
-            Review review = this.db.Reviews.Where(r => r.Id == reviewId && r.OfferId == offerId).SingleOrDefault();
+            Review review = this.db.Reviews.Where(r => r.Id == reviewId && r.OfferId == offerId && !r.IsDeleted).SingleOrDefault();
 
             if (review == null)
             {
                 throw new ArgumentException(string.Format(Constants.ReviewDoesNotExist, reviewId));
             }
 
-            this.db.Reviews.Remove(review);
+            review.IsDeleted = true;
             this.db.SaveChanges();
         }
     }

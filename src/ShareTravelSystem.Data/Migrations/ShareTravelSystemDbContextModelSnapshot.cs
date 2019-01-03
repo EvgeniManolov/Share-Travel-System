@@ -141,6 +141,8 @@ namespace ShareTravelSystem.Data.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
@@ -167,6 +169,8 @@ namespace ShareTravelSystem.Data.Migrations
                     b.Property<string>("Description");
 
                     b.Property<int>("DestinationTownId");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<decimal>("Price");
 
@@ -219,6 +223,8 @@ namespace ShareTravelSystem.Data.Migrations
                     b.Property<string>("Comment");
 
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<int>("OfferId");
 

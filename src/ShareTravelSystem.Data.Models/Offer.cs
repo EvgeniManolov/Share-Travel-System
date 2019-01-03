@@ -15,7 +15,7 @@
         public DateTime CreateDate { get; set; }
 
         public DateTime DepartureDate { get; set; }
-        
+
         public string Description { get; set; }
 
         public int Seat { get; set; }
@@ -33,6 +33,8 @@
         public int TotalRating { get; set; }
 
         public decimal Price { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
 

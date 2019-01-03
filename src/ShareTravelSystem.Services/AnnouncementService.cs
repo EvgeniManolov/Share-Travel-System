@@ -41,6 +41,7 @@
         public IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements()
         {
             return this.db.Announcements
+                .Where(a => !a.IsDeleted)
                         .OrderByDescending(x => x.CreateDate)
                         .ProjectTo<DisplayAnnouncementViewModel>()
                         .Take(4)
@@ -57,6 +58,7 @@
             if (!privateAnnouncements)
             {
                 announcements = this.db.Announcements
+                         .Where(a => !a.IsDeleted)
                          .OrderByDescending(x => x.CreateDate)
                          .ProjectTo<DisplayAnnouncementViewModel>()
                          .ToList();
@@ -66,7 +68,7 @@
             else
             {
                 announcements = this.db.Announcements
-                         .Where(o => o.AuthorId == currentUserId)
+                         .Where(o => o.AuthorId == currentUserId && !o.IsDeleted)
                          .OrderByDescending(x => x.CreateDate)
                          .ProjectTo<DisplayAnnouncementViewModel>()
                          .ToList();
@@ -112,8 +114,7 @@
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, Id));
             }
-            
-            this.db.Announcements.Remove(announcement);
+            announcement.IsDeleted = true;
             this.db.SaveChanges();
         }
 
@@ -121,7 +122,7 @@
         {
             DetailsAnnouncementViewModel result = this.db
                        .Announcements
-                       .Where(a => a.Id == id)
+                       .Where(a => a.Id == id && !a.IsDeleted)
                        .ProjectTo<DetailsAnnouncementViewModel>()
                        .FirstOrDefault();
             if (result == null)
@@ -136,7 +137,7 @@
         {
             EditAnnouncementViewModel result = this.db
                        .Announcements
-                       .Where(a => a.Id == id)
+                       .Where(a => a.Id == id && !a.IsDeleted)
                        .ProjectTo<EditAnnouncementViewModel>()
                        .FirstOrDefault();
 
@@ -145,7 +146,7 @@
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, id));
             }
 
-            string announcementAuthor = this.db.Announcements.Where(a => a.Id == id).Select(r => r.AuthorId).SingleOrDefault();
+            string announcementAuthor = this.db.Announcements.Where(a => a.Id == id && !a.IsDeleted).Select(r => r.AuthorId).SingleOrDefault();
             if (announcementAuthor != currentUserId)
             {
                 throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
@@ -158,7 +159,8 @@
         {
             Announcement announcement = this.db
                                             .Announcements
-                                            .FirstOrDefault(p => p.Id == model.Id);
+                                            .Where(p => p.Id == model.Id && !p.IsDeleted)
+                                            .FirstOrDefault();
             if (announcement == null)
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, model.Id));

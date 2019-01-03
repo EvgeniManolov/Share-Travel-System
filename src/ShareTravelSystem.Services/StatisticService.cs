@@ -36,7 +36,7 @@
                 int totalDisLikes = 0;
                 int totalLikes = 0;
 
-                List<int> offersIds = this.db.Offers.Where(o => o.AuthorId == user.id).Select(o => o.Id).ToList();
+                List<int> offersIds = this.db.Offers.Where(o => o.AuthorId == user.id && !o.IsDeleted).Select(o => o.Id).ToList();
 
                 foreach (var offerId in offersIds)
                 {

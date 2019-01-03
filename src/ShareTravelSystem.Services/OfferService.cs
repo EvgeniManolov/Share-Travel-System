@@ -34,13 +34,13 @@
 
             int departureTownId = this.db
                                       .Towns
-                                      .Where(t => t.Id == model.DepartureTownId && t.IsDeleted == false)
+                                      .Where(t => t.Id == model.DepartureTownId && !t.IsDeleted)
                                       .Select(x => x.Id)
                                       .FirstOrDefault();
 
             int destinationTownId = this.db
                                         .Towns
-                                        .Where(t => t.Id == model.DestinationTownId && t.IsDeleted == false)
+                                        .Where(t => t.Id == model.DestinationTownId && !t.IsDeleted)
                                         .Select(x => x.Id)
                                         .FirstOrDefault();
 
@@ -65,7 +65,7 @@
         {
             DetailsOfferViewModel offer = this.db
                                               .Offers
-                                              .Where(t => t.Id == Id)
+                                              .Where(t => t.Id == Id && !t.IsDeleted)
                                               .ProjectTo<DetailsOfferViewModel>()
                                               .SingleOrDefault();
             if (offer == null)
@@ -75,7 +75,7 @@
 
             offer.Reviews = this.db
                                 .Reviews
-                                .Where(r => r.OfferId == Id)
+                                .Where(r => r.OfferId == Id && !r.IsDeleted)
                                 .OrderByDescending(x => x.CreateDate)
                                 .Select(r => new DisplayReviewViewModel
                                 {
@@ -83,7 +83,6 @@
                                     Content = r.Comment,
                                     Author = r.Author.UserName,
                                     CreateDate = r.CreateDate
-
                                 }).ToList();
 
             return offer;
@@ -98,19 +97,20 @@
             if (!privateOffers)
             {
                 offers = this.db.Offers
-                                .OrderByDescending(x => x.CreateDate)
-                                .ProjectTo<DisplayOfferViewModel>()
-                                .ToList();
+                    .Where(o => !o.IsDeleted)
+                    .OrderByDescending(x => x.CreateDate)
+                    .ProjectTo<DisplayOfferViewModel>()
+                    .ToList();
 
                 titleOfPage = Constants.AllOffersTitlePageName;
             }
             else
             {
                 offers = this.db.Offers
-                                .Where(o => o.AuthorId == currentUserId)
-                                .OrderByDescending(x => x.CreateDate)
-                                .ProjectTo<DisplayOfferViewModel>()
-                                .ToList();
+                     .Where(o => o.AuthorId == currentUserId && !o.IsDeleted)
+                     .OrderByDescending(x => x.CreateDate)
+                     .ProjectTo<DisplayOfferViewModel>()
+                     .ToList();
 
                 titleOfPage = Constants.MyOffersTitlePageName;
             }
@@ -153,14 +153,14 @@
 
         public IEnumerable<Town> GetAllTowns()
         {
-            return this.db.Towns.Where(t => t.IsDeleted == false).ToList();
+            return this.db.Towns.Where(t => !t.IsDeleted).ToList();
         }
 
         public DisplayEditOfferViewModel GetOfferToEdit(int id, string currentUserId)
         {
             EditOfferViewModel model = this.db
                                            .Offers
-                                           .Where(o => o.Id == id)
+                                           .Where(o => o.Id == id && !o.IsDeleted)
                                            .ProjectTo<EditOfferViewModel>()
                                            .SingleOrDefault();
             if (model == null)
@@ -168,7 +168,7 @@
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, model.Id));
             }
 
-            string offerAuthor = this.db.Offers.Where(o => o.Id == id).Select(x => x.AuthorId).SingleOrDefault();
+            string offerAuthor = this.db.Offers.Where(o => o.Id == id && !o.IsDeleted).Select(x => x.AuthorId).SingleOrDefault();
             if (offerAuthor != currentUserId)
             {
                 throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
@@ -177,7 +177,7 @@
             DisplayEditOfferViewModel result = new DisplayEditOfferViewModel
             {
                 OfferModel = model,
-                Towns = this.db.Towns.Where(t => t.IsDeleted == false).ToList()
+                Towns = this.db.Towns.Where(t => !t.IsDeleted).ToList()
             };
 
             return result;
@@ -185,7 +185,7 @@
 
         public void EditOffer(DisplayEditOfferViewModel model)
         {
-            Offer offer = this.db.Offers.Where(o => o.Id == model.OfferModel.Id).SingleOrDefault();
+            Offer offer = this.db.Offers.Where(o => o.Id == model.OfferModel.Id && !o.IsDeleted).SingleOrDefault();
 
             if (!Enum.TryParse(model.OfferModel.Type, true, out OfferType type))
             {
@@ -219,7 +219,7 @@
 
             this.db.Reactions.Add(reation);
 
-            Offer likedOffer = this.db.Offers.Where(o => o.Id == offerId).SingleOrDefault();
+            Offer likedOffer = this.db.Offers.Where(o => o.Id == offerId && !o.IsDeleted).SingleOrDefault();
             likedOffer.TotalRating++;
 
             this.db.SaveChanges();
@@ -243,7 +243,7 @@
 
             this.db.Reactions.Add(reation);
 
-            Offer likedOffer = this.db.Offers.Where(o => o.Id == offerId).SingleOrDefault();
+            Offer likedOffer = this.db.Offers.Where(o => o.Id == offerId && !o.IsDeleted).SingleOrDefault();
             likedOffer.TotalRating--;
 
             this.db.SaveChanges();
@@ -260,17 +260,15 @@
 
         public void DeleteOffer(int id)
         {
-            Offer offer = this.db.Offers.Where(o => o.Id == id).SingleOrDefault();
+            Offer offer = this.db.Offers.Where(o => o.Id == id && !o.IsDeleted).SingleOrDefault();
 
             if (offer == null)
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, id));
             }
-
+            offer.IsDeleted = true;
             List<Review> reviews = this.db.Reviews.Where(r => r.OfferId == offer.Id).ToList();
-
-            this.db.Offers.Remove(offer);
-            this.db.Reviews.RemoveRange(reviews);
+            reviews.ForEach(x => { x.IsDeleted = true; });
             this.db.SaveChanges();
         }
     }

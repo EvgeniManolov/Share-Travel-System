@@ -55,10 +55,10 @@
         {
             Town town = this.db
                 .Towns
-                .Where(t => t.Id == model.Id)
+                .Where(t => t.Id == model.Id && !t.IsDeleted)
                 .SingleOrDefault();
 
-            string isExist = this.db.Towns.Where(t => t.Name == model.Name).Select(n => n.Name).SingleOrDefault();
+            string isExist = this.db.Towns.Where(t => t.Name == model.Name && !t.IsDeleted).Select(n => n.Name).SingleOrDefault();
             if (isExist != null)
             {
                 throw new ArgumentException(string.Format(Constants.TownAlreadyExists, model.Name));
@@ -80,7 +80,7 @@
                 towns = this.db
                             .Towns
                             .OrderBy(p => p.Name)
-                            .Where(t => t.IsDeleted == false && t.Name.ToLower()
+                            .Where(t => !t.IsDeleted && t.Name.ToLower()
                             .Contains(search.ToLower()))
                             .ProjectTo<DisplayTownViewModel>()
                             .ToList();
@@ -90,7 +90,7 @@
                 towns = this.db
                             .Towns
                             .OrderBy(p => p.Name)
-                            .Where(t => t.IsDeleted == false)
+                            .Where(t => !t.IsDeleted)
                             .ProjectTo<DisplayTownViewModel>()
                             .ToList();
             }
@@ -114,7 +114,7 @@
         {
             EditTownViewModel town = this.db
                 .Towns
-                .Where(t => t.Id == id)
+                .Where(t => t.Id == id && !t.IsDeleted)
                 .Select(t => new EditTownViewModel
                 {
                     Id = t.Id,

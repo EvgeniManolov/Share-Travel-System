@@ -2,7 +2,6 @@
 {
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     public class Announcement
     {
@@ -17,5 +16,7 @@
         public string AuthorId { get; set; }
 
         public ShareTravelSystemUser Author { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

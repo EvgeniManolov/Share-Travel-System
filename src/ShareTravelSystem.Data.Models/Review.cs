@@ -18,5 +18,7 @@
         public Offer Offer { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }
