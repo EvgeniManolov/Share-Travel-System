@@ -1,4 +1,4 @@
-﻿@model ShareTravelSystem.ViewModels.OfferPaginationViewModel
+﻿@model OfferPaginationViewModel
 @{
     var likedOffers = ViewData["LikedDislikedOffersIds"] as List<int>;
 }
@@ -19,7 +19,7 @@
                     To @offer.DestinationTownName
                 </h1>
                 <h6 class="mt-1"> On: @offer.DepartureDate</h6>
-                <p class="mt-3">Description: @offer.Description</p>
+                <text class="mt-3">Description: @offer.Description</text>
 
             </div>
             <div class="project-content mb-0">

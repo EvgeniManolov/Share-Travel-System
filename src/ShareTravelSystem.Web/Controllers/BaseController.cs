@@ -21,7 +21,11 @@
 
         protected bool RedirectIfNotInRole(string role)
         {
-            return this.User.IsInRole(role);
+            if (this.User != null)
+            {
+                return this.User.IsInRole(role);
+            }
+            return true;
         }
 
         protected RedirectToActionResult MakeRedirectResult(string area, string controller, string action, int id)

@@ -149,8 +149,9 @@
             }
         }
 
-        public IActionResult AccessDenied()
+        public IActionResult AccessDenied(string returnUrl)
         {
+            ViewData["url"] = returnUrl;
             return View();
         }
     }
