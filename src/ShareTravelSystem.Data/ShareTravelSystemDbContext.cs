@@ -20,6 +20,7 @@
         public DbSet<Town> TownsAsDestination { get; set; }
         public DbSet<Town> TownsAsDeparture { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

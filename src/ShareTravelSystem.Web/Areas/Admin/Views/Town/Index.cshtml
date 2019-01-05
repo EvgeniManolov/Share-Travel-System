@@ -7,7 +7,7 @@
 @Html.ValidationSummary(false)
 <div class="container">
     @await Html.PartialAsync("_SearchTown", Model)
-    <div class="col-5"><hr class="bg-primary" /></div>
+    <div class="col-5 town-table-line"><hr class="bg-primary" /></div>
     @if (Model.Towns.Count() == 0)
     {
         <h1>No Towns</h1>

@@ -1,8 +1,9 @@
 ﻿namespace ShareTravelSystem.ViewModels.Town
 {
+    using ShareTravelSystem.Common;
     using System.ComponentModel.DataAnnotations;
 
-    public class EditTownViewModel
+    public class EditTownViewModel: IMapFrom<Data.Models.Town>
     {
         [Required]
         public int Id { get; set; }

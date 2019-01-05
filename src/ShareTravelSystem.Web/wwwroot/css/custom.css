@@ -1,18 +1,20 @@
-﻿.card-deck .card {
+﻿@import url('constants.css');
+
+.card-deck .card {
     min-width: 250px !important;
     min-height: 250px;
     max-height: 250px;
 }
 
     .card-deck .card:hover {
-        -webkit-box-shadow: -1px 9px 40px -12px #158CBA;
-        -moz-box-shadow: -1px 9px 40px -12px #158CBA;
-        box-shadow: -1px 9px 40px 0px #158CBA;
+        -webkit-box-shadow: -1px 9px 40px -12px var(--header-and-footer-background);
+        -moz-box-shadow: -1px 9px 40px -12px var(--header-and-footer-background);
+        box-shadow: -1px 9px 40px 0px var(--header-and-footer-background);
     }
 
 
 #offerId {
-    border: 5px solid #158CBA;
+    border: 5px solid var(--header-and-footer-background);
     border-radius: 50px 50px;
     margin-top: 20px;
 }
@@ -96,7 +98,7 @@ p {
 
 
 .table {
-    border: 3px solid #158CBA;
+    border: 3px solid var(--header-and-footer-background);
     border-radius: 40px;
 }
 
@@ -238,7 +240,7 @@ p {
 }
 
 .display-3{
-    text-shadow: 2px 2px #158CBA;
+    text-shadow: 2px 2px var(--header-and-footer-background);
 }
 
 #likeDislikeButton {
@@ -253,5 +255,23 @@ p {
 
 .dislikeOfferClass:hover {
     color: red !important;
+}
+
+footer, nav {
+    background-color: var(--header-and-footer-background)
+}
+
+.search-bar {
+    padding: 1rem 0rem;
+}
+
+.search-bar .row {
+    align-content: center;
+    justify-content: center;
+}
+
+.town-table-line{
+    margin-left: 0;
+    margin-right: 0;
 }
 

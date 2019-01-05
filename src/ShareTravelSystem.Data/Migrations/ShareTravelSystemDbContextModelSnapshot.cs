@@ -152,6 +152,25 @@ namespace ShareTravelSystem.Data.Migrations
                     b.ToTable("Announcements");
                 });
 
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AuthorId");
+
+                    b.Property<DateTime>("CreateOn");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Offer", b =>
                 {
                     b.Property<int>("Id")
@@ -358,6 +377,13 @@ namespace ShareTravelSystem.Data.Migrations
                 {
                     b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
                         .WithMany("Announcements")
+                        .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("ShareTravelSystem.Data.Models.Message", b =>
+                {
+                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                        .WithMany("Messages")
                         .HasForeignKey("AuthorId");
                 });
 

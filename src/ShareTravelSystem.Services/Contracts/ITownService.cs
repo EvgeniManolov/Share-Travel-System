@@ -2,18 +2,18 @@
 {
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Town;
-
+    using System.Threading.Tasks;
 
     public interface ITownService
     {
-        TownPaginationViewModel GetAllTowns(int page, string search);
+        Task<TownPaginationViewModel> GetAllTowns(int page, string search);
 
-        void CreateTown(CrateTownViewModel model);
+        Task CreateTown(CrateTownViewModel model);
 
-        EditTownViewModel GetTownToEdit(int townId);
+        Task<EditTownViewModel> GetTownToEdit(int townId);
 
-        void DeleteTown(int townId);
+        Task DeleteTown(int townId);
 
-        void EditTown(EditTownViewModel model);
+        Task EditTown(EditTownViewModel model);
     }
 }

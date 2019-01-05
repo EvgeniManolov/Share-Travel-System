@@ -1,6 +1,7 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
@@ -20,18 +21,18 @@
             this.townService = townService;
         }
         
-        public  IActionResult Index(int page, string search)
+        public async Task<IActionResult> Index(int page, string search)
         {
             if (!RedirectIfNotInRole(Constants.AdminRole))
             {
                 return Redirect(Constants.redirectToLoginPage);
             };
 
-            TownPaginationViewModel towns = this.townService.GetAllTowns(page, search);
+            TownPaginationViewModel towns = await this.townService.GetAllTowns(page, search);
             return View(towns);
         }
         
-        public IActionResult Create()
+        public  IActionResult Create()
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
             {
@@ -43,7 +44,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CrateTownViewModel model)
+        public async  Task<IActionResult> Create(CrateTownViewModel model)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
             {
@@ -57,7 +58,7 @@
 
             try
             {
-                this.townService.CreateTown(model);
+               await this.townService.CreateTown(model);
             }
 
             catch (Exception e)
@@ -70,7 +71,7 @@
             return RedirectToAction(nameof(TownController.Index));
         }
         
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
             {
@@ -81,7 +82,7 @@
 
             try
             {
-                town = this.townService.GetTownToEdit(id);
+                town = await this.townService.GetTownToEdit(id);
             }
             catch (Exception e)
             {
@@ -96,7 +97,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(EditTownViewModel model)
+        public async Task<IActionResult> Edit(EditTownViewModel model)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
             {
@@ -110,7 +111,7 @@
 
             try
             {
-                this.townService.EditTown(model);
+               await this.townService.EditTown(model);
             }
             catch (Exception e)
             {
@@ -122,7 +123,7 @@
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!this.RedirectIfNotInRole(Constants.AdminRole))
             {
@@ -131,7 +132,7 @@
 
             try
             {
-                this.townService.DeleteTown(id);
+               await  this.townService.DeleteTown(id);
             }
             catch (Exception e)
             {
