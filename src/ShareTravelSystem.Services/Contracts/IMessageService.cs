@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShareTravelSystem.Services.Contracts
+﻿namespace ShareTravelSystem.Services.Contracts
 {
+    using System.Threading.Tasks;
     public interface IMessageService
     {
-        Task Create(string message, string userId);
+        Task CreateMessageAsync(string message, string userId);
     }
 }

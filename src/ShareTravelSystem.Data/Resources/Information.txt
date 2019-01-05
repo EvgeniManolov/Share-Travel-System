@@ -1,6 +1,8 @@
 ﻿1. Design
 2. Ограничил съм дисплея на анаунсмънти контент и тайтъл до определени символи , да го оставя ли так? когато напиша по-дълъг текст ми излиза извън картата(коментар, оферта, анаунсмънт ..)
-7. Да направя асинхронни методите
+
 3. Да имплементирам accountservice
 4. Exceptions?
 6. Ilogger?
+7 Da opravq komentarite na oferite v admina
+8. Kogato pytuvam ot-do edin i sushti grad mi gyrmi

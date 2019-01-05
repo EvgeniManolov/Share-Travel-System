@@ -1,9 +1,10 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
     using ShareTravelSystem.ViewModels;
+    using System.Threading.Tasks;
 
     public interface IStatisticService
     {
-        StatisticByRatingPaginationViewModel GetStatisticForAllUsersByRating(int page, string search);
+        Task<StatisticByRatingPaginationViewModel> GetStatisticForAllUsersByRatingAsync(int page, string search);
     }
 }

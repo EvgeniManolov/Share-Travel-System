@@ -5,10 +5,11 @@
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Controllers;
+    using System.Threading.Tasks;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class StatisticController: BaseController
+    public class StatisticController : BaseController
     {
         private readonly IStatisticService statisticService;
 
@@ -16,10 +17,10 @@
         {
             this.statisticService = statisticService;
         }
-        
-        public IActionResult StatisticByRating(int page, string search)
+
+        public async Task<IActionResult> StatisticByRating(int page, string search)
         {
-            StatisticByRatingPaginationViewModel model = this.statisticService.GetStatisticForAllUsersByRating(page,search);
+            StatisticByRatingPaginationViewModel model = await this.statisticService.GetStatisticForAllUsersByRatingAsync(page, search);
             return this.View(model);
         }
     }

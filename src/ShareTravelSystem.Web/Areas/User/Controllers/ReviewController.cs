@@ -8,6 +8,7 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
     using System;
+    using System.Threading.Tasks;
 
     [Area("User")]
     [Authorize(Roles = "User")]
@@ -30,12 +31,12 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(string comment, int offerId)
+        public async Task<IActionResult> Create(string comment, int offerId)
         {
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                this.reviewService.CreateReview(comment, offerId, currentUserId);
+                await this.reviewService.CreateReviewAsync(comment, offerId, currentUserId);
             }
             catch (Exception e)
             {
@@ -50,13 +51,13 @@
         }
 
 
-        public IActionResult Edit(int id, int offerId)
+        public async Task<IActionResult> Edit(int id, int offerId)
         {
             EditReviewViewModel model;
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = this.reviewService.GetReviewToEdit(id, offerId, currentUserId);
+                model = await this.reviewService.GetReviewToEditAsync(id, offerId, currentUserId);
             }
             catch (Exception e)
             {
@@ -68,13 +69,13 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
-        public IActionResult Edit(EditReviewViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditReviewViewModel model)
         {
 
             try
             {
-                this.reviewService.EditReview(model);
+                await this.reviewService.EditReviewAsync(model);
             }
             catch (Exception e)
             {

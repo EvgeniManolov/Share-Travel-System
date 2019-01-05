@@ -9,7 +9,7 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
     using System;
-
+    using System.Threading.Tasks;
 
     [Area("User")]
     [Authorize(Roles = "User")]
@@ -23,47 +23,46 @@
             this.announcementService = announcementService;
             this.userManager = userManager;
         }
-        
 
-        public IActionResult Index(string search, bool privateAnnouncements, int page)
+
+        public async Task<IActionResult> Index(string search, bool privateAnnouncements, int page)
         {
             string currentUserId = this.userManager.GetUserId(this.User);
-            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page);
+            var result = await this.announcementService.GetAllAnnouncementsAsync(privateAnnouncements, search, currentUserId, page);
 
             ViewData["Title"] = result.TitleOfPage;
 
             return this.View(result);
         }
 
-        
+
         public IActionResult Create()
         {
             return View();
         }
-        
+
         [HttpPost]
-        [Authorize(Roles = "User")]
-        public IActionResult Create(CreateAnnouncementViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateAnnouncementViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return this.View(model);
             }
             string currentUserId = this.userManager.GetUserId(this.User);
-            this.announcementService.CreateAnnouncement(model, currentUserId);
+            await this.announcementService.CreateAnnouncementAsync(model, currentUserId);
 
             return RedirectToAction(nameof(AnnouncementController.Index));
-
         }
-        
 
-        public IActionResult Details(int id)
+
+        public async Task<IActionResult> Details(int id)
         {
             DetailsAnnouncementViewModel model;
 
             try
             {
-                model = this.announcementService.DetailsAnnouncement(id);
+                model = await this.announcementService.DetailsAnnouncementAsync(id);
             }
             catch (Exception e)
             {
@@ -73,15 +72,15 @@
 
             return View(model);
         }
-        
 
-        public IActionResult Edit(int id)
+
+        public async Task<IActionResult> Edit(int id)
         {
             string currentUserId = this.userManager.GetUserId(this.User);
             EditAnnouncementViewModel model;
             try
             {
-                model = this.announcementService.GetAnnouncementToEdit(id, currentUserId);
+                model = await this.announcementService.GetAnnouncementToEditAsync(id, currentUserId);
             }
             catch (Exception e)
             {
@@ -93,8 +92,8 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
-        public IActionResult Edit(EditAnnouncementViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditAnnouncementViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -103,14 +102,14 @@
 
             try
             {
-                this.announcementService.EditAnnouncement(model);
+                await this.announcementService.EditAnnouncementAsync(model);
             }
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
                 return this.View(model);
             }
-            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.User),nameof(AnnouncementController), nameof(AnnouncementController.Details), model.Id);
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.User), nameof(AnnouncementController), nameof(AnnouncementController.Details), model.Id);
             return redirectResult;
         }
     }

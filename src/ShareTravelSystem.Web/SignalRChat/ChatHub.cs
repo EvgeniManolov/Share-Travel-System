@@ -20,7 +20,7 @@ namespace ShareTravelSystem.Web.SignalRChat
         public async Task Send(string message)
         {
             await this.messageService
-                .Create(message, this.userManager.GetUserId(this.Context.User));
+                .CreateMessageAsync(message, this.userManager.GetUserId(this.Context.User));
 
             await this.Clients.All.SendAsync("NewMessage", new Message
             {

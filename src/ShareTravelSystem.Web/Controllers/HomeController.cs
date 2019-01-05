@@ -1,6 +1,7 @@
 ﻿namespace ShareTravelSystem.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
@@ -22,10 +23,10 @@
             return this.View();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
            
-                var announcements = this.announcementService.GetIndexAnnouncements();
+                var announcements = await this.announcementService.GetIndexAnnouncementsAsync();
                 var result = new DisplayAllAnnouncementsViewModel
                 {
                     Announcements = announcements

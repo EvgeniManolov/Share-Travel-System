@@ -1,5 +1,6 @@
 ﻿namespace ShareTravelSystem.Services
 {
+    using Microsoft.EntityFrameworkCore;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.Services.Infrastructure;
     using ShareTravelSystem.ViewModels;
@@ -7,6 +8,7 @@
     using ShareTravelSystem.Web.Models;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class StatisticService : IStatisticService
     {
@@ -16,18 +18,18 @@
         {
             this.db = db;
         }
-        public StatisticByRatingPaginationViewModel GetStatisticForAllUsersByRating(int page, string search)
+        public async Task<StatisticByRatingPaginationViewModel> GetStatisticForAllUsersByRatingAsync(int page, string search)
         {
 
             int size = Constants.UserStatisticsPerPage;
             if (page == 0) page = 1;
             List<DisplayStatisticByUserForRating> statistics = new List<DisplayStatisticByUserForRating>();
 
-            var users = this.db.Users.Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToList();
+            var users = await this.db.Users.Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToListAsync();
 
             if (search != null)
             {
-                users = this.db.Users.Where(u => u.Email.ToLower().Contains(search.ToLower())).Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToList();
+                users = await this.db.Users.Where(u => u.Email.ToLower().Contains(search.ToLower())).Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToListAsync();
             }
 
 
@@ -36,7 +38,7 @@
                 int totalDisLikes = 0;
                 int totalLikes = 0;
 
-                List<int> offersIds = this.db.Offers.Where(o => o.AuthorId == user.id && !o.IsDeleted).Select(o => o.Id).ToList();
+                List<int> offersIds = await this.db.Offers.Where(o => o.AuthorId == user.id && !o.IsDeleted).Select(o => o.Id).ToListAsync();
 
                 foreach (var offerId in offersIds)
                 {

@@ -7,6 +7,7 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
     using System;
+    using System.Threading.Tasks;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -22,11 +23,12 @@
         }
 
         [HttpPost]
-        public IActionResult Delete(int reviewId, int offerId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int reviewId, int offerId)
         {
             try
             {
-                this.reviewService.DeleteReview(reviewId, offerId);
+                await this.reviewService.DeleteReviewAsync(reviewId, offerId);
             }
             catch (Exception e)
             {

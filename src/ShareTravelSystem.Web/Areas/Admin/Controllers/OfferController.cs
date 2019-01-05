@@ -12,6 +12,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
+    using X.PagedList;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -25,25 +27,25 @@
             this.offerService = offerService;
             this.userManager = userManager;
         }
-        
-        public IActionResult Index(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
+
+        public async Task<IActionResult> Index(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
         {
-            int size = Constants.OffersPerPage;
+
             string currentUserId = this.userManager.GetUserId(this.User);
-            OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
+            OfferPaginationViewModel result = await this.offerService.GetAllOffersAsync(privateOffers, filter, search, currentUserId, page);
             List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
 
             ViewData["LikedDislikedOffersIds"] = likedOffersIds;
             ViewData["Title"] = result.TitleOfPage;
             return this.View(result);
         }
-        
-        public IActionResult Details(int id)
+
+        public async Task<IActionResult> Details(int id)
         {
             DetailsOfferViewModel model;
             try
             {
-                model = this.offerService.DetailsOffer(id);
+                model = await this.offerService.DetailsOfferAsync(id);
             }
             catch (Exception e)
             {
@@ -54,12 +56,13 @@
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
 
             try
             {
-                this.offerService.DeleteOffer(id);
+                await this.offerService.DeleteOfferAsync(id);
             }
             catch (Exception e)
             {

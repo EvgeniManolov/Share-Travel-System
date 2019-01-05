@@ -13,6 +13,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using ShareTravelSystem.Services.Infrastructure;
+    using System.Threading.Tasks;
+    using X.PagedList;
 
     [Area("User")]
     [Authorize(Roles = "User")]
@@ -27,11 +29,11 @@
             this.userManager = userManager;
         }
 
-        public IActionResult Index(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
+        public async Task<IActionResult> Index(string search, bool privateOffers, int page, string filter = Constants.FilterOfAllOffers)
         {
-            int size = Constants.OffersPerPage;
+            
             string currentUserId = this.userManager.GetUserId(this.User);
-            OfferPaginationViewModel result = this.offerService.GetAllOffers(privateOffers, filter, search, currentUserId, page, size);
+            OfferPaginationViewModel result = await this.offerService.GetAllOffersAsync(privateOffers, filter, search, currentUserId, page);
             List<int> likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
 
             ViewData["LikedDislikedOffersIds"] = likedOffersIds;
@@ -39,7 +41,7 @@
             return this.View(result);
         }
 
-       
+
         public IActionResult Create()
         {
             List<Town> towns = this.offerService.GetAllTowns().ToList();
@@ -49,7 +51,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateOfferViewModel model)
+        public async Task<IActionResult> Create(CreateOfferViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -57,16 +59,24 @@
             }
 
             string currentUserId = this.userManager.GetUserId(this.User);
-            this.offerService.CreateOffer(model, currentUserId);
+            try
+            {
+                await this.offerService.CreateOfferAsync(model, currentUserId);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return RedirectToAction(nameof(OfferController.Index));
+            }
             return RedirectToAction(nameof(OfferController.Index));
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             DetailsOfferViewModel model;
             try
             {
-                model = this.offerService.DetailsOffer(id);
+                model = await this.offerService.DetailsOfferAsync(id);
             }
             catch (Exception e)
             {
@@ -76,13 +86,13 @@
             return View(model);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             DisplayEditOfferViewModel model;
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = this.offerService.GetOfferToEdit(id, currentUserId);
+                model = await this.offerService.GetOfferToEditAsync(id, currentUserId);
             }
             catch (Exception e)
             {
@@ -94,7 +104,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(DisplayEditOfferViewModel model)
+        public async Task<IActionResult> Edit(DisplayEditOfferViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -102,7 +112,7 @@
             }
             try
             {
-                this.offerService.EditOffer(model);
+                await this.offerService.EditOfferAsync(model);
             }
             catch (Exception e)
             {
@@ -116,13 +126,13 @@
         }
 
         [HttpPost]
-        public IActionResult Like(int offerId)
+        public async Task<IActionResult> Like(int offerId)
         {
 
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                bool result = this.offerService.LikeOffer(offerId, currentUserId);
+                bool result = await this.offerService.LikeOfferAsync(offerId, currentUserId);
             }
             catch (Exception e)
             {
@@ -134,13 +144,13 @@
         }
 
         [HttpPost]
-        public IActionResult DisLike(int offerId)
+        public async Task<IActionResult> DisLike(int offerId)
         {
 
             string currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                bool result = this.offerService.DisLikeOffer(offerId, currentUserId);
+                bool result = await this.offerService.DisLikeOfferAsync(offerId, currentUserId);
             }
             catch (Exception e)
             {

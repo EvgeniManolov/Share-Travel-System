@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using ShareTravelSystem.Data.Models;
-using ShareTravelSystem.Services.Contracts;
-using ShareTravelSystem.Web.Areas.Identity.Data;
-using ShareTravelSystem.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShareTravelSystem.Services
+﻿namespace ShareTravelSystem.Services
 {
-    public class MessageService: IMessageService
+    using Microsoft.AspNetCore.Identity;
+    using ShareTravelSystem.Data.Models;
+    using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Web.Areas.Identity.Data;
+    using ShareTravelSystem.Web.Models;
+    using System;
+    using System.Threading.Tasks;
+
+    public class MessageService : IMessageService
     {
         private readonly ShareTravelSystemDbContext db;
         private readonly UserManager<ShareTravelSystemUser> userManager;
@@ -22,7 +20,7 @@ namespace ShareTravelSystem.Services
             this.userManager = userManager;
         }
 
-        public async Task Create(string message, string userId)
+        public async Task CreateMessageAsync(string message, string userId)
         {
             Message currentMessage = new Message
             {
@@ -30,7 +28,7 @@ namespace ShareTravelSystem.Services
                 AuthorId = userId,
                 CreateOn = DateTime.UtcNow
             };
-           await this.db.Messages.AddAsync(currentMessage);
+            await this.db.Messages.AddAsync(currentMessage);
             await this.db.SaveChangesAsync();
         }
     }

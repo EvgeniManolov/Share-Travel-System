@@ -2,6 +2,7 @@
 {
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
     using ShareTravelSystem.Services.Infrastructure;
@@ -12,6 +13,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class AnnouncementService : IAnnouncementService
     {
@@ -25,7 +27,8 @@
             this.userManager = userManager;
         }
 
-        public void CreateAnnouncement(CreateAnnouncementViewModel model, string userid)
+
+        public async Task CreateAnnouncementAsync(CreateAnnouncementViewModel model, string userid)
         {
             this.db.Announcements.Add(new Announcement
             {
@@ -35,20 +38,21 @@
                 AuthorId = userid
             });
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
-        public IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements()
+        public async Task<IEnumerable<DisplayAnnouncementViewModel>> GetIndexAnnouncementsAsync()
         {
-            return this.db.Announcements
+            var result =  await this.db.Announcements
                 .Where(a => !a.IsDeleted)
                         .OrderByDescending(x => x.CreateDate)
                         .ProjectTo<DisplayAnnouncementViewModel>()
                         .Take(4)
-                        .ToList();
+                        .ToListAsync();
+            return result;
         }
 
-        public AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page)
+        public async Task<AnnouncementPaginationViewModel> GetAllAnnouncementsAsync(bool privateAnnouncements, string search, string currentUserId, int page)
         {
             int size = Constants.AnnouncementsPerPage;
             if (page == 0) page = 1;
@@ -57,21 +61,21 @@
 
             if (!privateAnnouncements)
             {
-                announcements = this.db.Announcements
+                announcements = await this.db.Announcements
                          .Where(a => !a.IsDeleted)
                          .OrderByDescending(x => x.CreateDate)
                          .ProjectTo<DisplayAnnouncementViewModel>()
-                         .ToList();
+                         .ToListAsync();
 
                 titleOfPage = "All Announcements";
             }
             else
             {
-                announcements = this.db.Announcements
+                announcements = await this.db.Announcements
                          .Where(o => o.AuthorId == currentUserId && !o.IsDeleted)
                          .OrderByDescending(x => x.CreateDate)
                          .ProjectTo<DisplayAnnouncementViewModel>()
-                         .ToList();
+                         .ToListAsync();
 
                 titleOfPage = "My Announcements";
             }
@@ -105,26 +109,26 @@
         }
 
 
-        public void DeleteAnnouncement(int Id)
+        public async Task DeleteAnnouncementAsync(int Id)
         {
-            Announcement announcement = this.db
+            Announcement announcement = await this.db
                                             .Announcements
-                                            .FirstOrDefault(p => p.Id == Id);
+                                            .SingleOrDefaultAsync(p => p.Id == Id);
             if (announcement == null)
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, Id));
             }
             announcement.IsDeleted = true;
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
-        public DetailsAnnouncementViewModel DetailsAnnouncement(int id)
+        public async Task<DetailsAnnouncementViewModel> DetailsAnnouncementAsync(int id)
         {
-            DetailsAnnouncementViewModel result = this.db
+            DetailsAnnouncementViewModel result = await this.db
                        .Announcements
                        .Where(a => a.Id == id && !a.IsDeleted)
                        .ProjectTo<DetailsAnnouncementViewModel>()
-                       .FirstOrDefault();
+                       .SingleOrDefaultAsync();
             if (result == null)
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, id));
@@ -133,20 +137,20 @@
             return result;
         }
 
-        public EditAnnouncementViewModel GetAnnouncementToEdit(int id, string currentUserId)
+        public async Task<EditAnnouncementViewModel> GetAnnouncementToEditAsync(int id, string currentUserId)
         {
-            EditAnnouncementViewModel result = this.db
+            EditAnnouncementViewModel result = await this.db
                        .Announcements
                        .Where(a => a.Id == id && !a.IsDeleted)
                        .ProjectTo<EditAnnouncementViewModel>()
-                       .FirstOrDefault();
+                       .SingleOrDefaultAsync();
 
             if (result == null)
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, id));
             }
 
-            string announcementAuthor = this.db.Announcements.Where(a => a.Id == id && !a.IsDeleted).Select(r => r.AuthorId).SingleOrDefault();
+            string announcementAuthor = await this.db.Announcements.Where(a => a.Id == id && !a.IsDeleted).Select(r => r.AuthorId).SingleOrDefaultAsync();
             if (announcementAuthor != currentUserId)
             {
                 throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
@@ -155,12 +159,12 @@
             return result;
         }
 
-        public void EditAnnouncement(EditAnnouncementViewModel model)
+        public async Task EditAnnouncementAsync(EditAnnouncementViewModel model)
         {
-            Announcement announcement = this.db
+            Announcement announcement = await this.db
                                             .Announcements
                                             .Where(p => p.Id == model.Id && !p.IsDeleted)
-                                            .FirstOrDefault();
+                                            .SingleOrDefaultAsync();
             if (announcement == null)
             {
                 throw new ArgumentException(string.Format(Constants.AnnouncementDoesNotExist, model.Id));
@@ -169,7 +173,7 @@
             announcement.Title = model.Title;
             announcement.Content = model.Content;
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
     }
 }

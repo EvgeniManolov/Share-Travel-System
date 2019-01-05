@@ -4,11 +4,12 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Announcement;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Controllers;
     using System;
-
+    using System.Threading.Tasks;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -24,24 +25,22 @@
         }
         
         
-        public IActionResult Index(string search, bool privateAnnouncements, int page)
+        public async Task<IActionResult> Index(string search, bool privateAnnouncements, int page)
         {
-            
             string currentUserId = this.userManager.GetUserId(this.User);
-            var result = this.announcementService.GetAllAnnouncements(privateAnnouncements, search, currentUserId, page);
+            AnnouncementPaginationViewModel result = await this.announcementService.GetAllAnnouncementsAsync(privateAnnouncements, search, currentUserId, page);
 
             ViewData["Title"] = result.TitleOfPage;
-
             return this.View(result);
         }
         
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             DetailsAnnouncementViewModel model;
 
             try
             {
-                model = this.announcementService.DetailsAnnouncement(id);
+                model = await this.announcementService.DetailsAnnouncementAsync(id);
             }
             catch (Exception e)
             {
@@ -55,11 +54,11 @@
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                this.announcementService.DeleteAnnouncement(id);
+                await this.announcementService.DeleteAnnouncementAsync(id);
             }
             catch (Exception e)
             {

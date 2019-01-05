@@ -1,16 +1,16 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
     using ShareTravelSystem.ViewModels.Review;
+    using System.Threading.Tasks;
 
     public interface IReviewService
     {
-        void CreateReview(string comment, int offerId, string userId);
+        Task CreateReviewAsync(string comment, int offerId, string userId);
 
-        EditReviewViewModel GetReviewToEdit(int id,int offerId, string currentUserId);
+        Task<EditReviewViewModel> GetReviewToEditAsync(int id, int offerId, string currentUserId);
 
-        void EditReview(EditReviewViewModel model);
+        Task EditReviewAsync(EditReviewViewModel model);
 
-        void DeleteReview(int reviewId, int offerId);
+        Task DeleteReviewAsync(int reviewId, int offerId);
     }
 }
- 

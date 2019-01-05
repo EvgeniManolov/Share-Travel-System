@@ -6,14 +6,14 @@
 
     public interface ITownService
     {
-        Task<TownPaginationViewModel> GetAllTowns(int page, string search);
+        Task<TownPaginationViewModel> GetAllTownsAsync(int page, string search);
 
-        Task CreateTown(CrateTownViewModel model);
+        Task CreateTownAsync(CrateTownViewModel model);
 
-        Task<EditTownViewModel> GetTownToEdit(int townId);
+        Task<EditTownViewModel> GetTownToEditAsync(int townId);
 
-        Task DeleteTown(int townId);
+        Task DeleteTownAsync(int townId);
 
-        Task EditTown(EditTownViewModel model);
+        Task EditTownAsync(EditTownViewModel model);
     }
 }

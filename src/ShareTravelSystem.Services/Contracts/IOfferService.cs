@@ -4,27 +4,28 @@
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Offer;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IOfferService
     {
-        void CreateOffer(CreateOfferViewModel model, string userId);
+        Task CreateOfferAsync(CreateOfferViewModel model, string userId);
 
         IEnumerable<Town> GetAllTowns();
 
-        OfferPaginationViewModel GetAllOffers(bool privateOffers, string filter, string search, string currentUserId, int page, int size);
+        Task<OfferPaginationViewModel> GetAllOffersAsync(bool privateOffers, string filter, string search, string currentUserId, int page);
 
-        DetailsOfferViewModel DetailsOffer(int id);
+        Task<DetailsOfferViewModel> DetailsOfferAsync(int id);
 
-        DisplayEditOfferViewModel GetOfferToEdit(int id, string currentUserId);
+        Task<DisplayEditOfferViewModel> GetOfferToEditAsync(int id, string currentUserId);
 
-        void EditOffer(DisplayEditOfferViewModel model);
+        Task EditOfferAsync(DisplayEditOfferViewModel model);
 
-        bool LikeOffer(int offerId, string userId);
+        Task<bool> LikeOfferAsync(int offerId, string userId);
 
-        bool DisLikeOffer(int offerId, string userId);
+        Task<bool> DisLikeOfferAsync(int offerId, string userId);
 
-        ICollection<int> GetLikedOrDislikedOffersIds(string currentUserId);
+        IEnumerable<int> GetLikedOrDislikedOffersIds(string currentUserId);
 
-        void DeleteOffer(int id);
+        Task DeleteOfferAsync(int id);
     }
 }

@@ -3,21 +3,22 @@
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.ViewModels.Announcement;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IAnnouncementService
     {
-        void CreateAnnouncement(CreateAnnouncementViewModel model, string userId);
+        Task CreateAnnouncementAsync(CreateAnnouncementViewModel model, string userId);
 
-        DetailsAnnouncementViewModel DetailsAnnouncement(int id);
+        Task<DetailsAnnouncementViewModel> DetailsAnnouncementAsync(int id);
 
-        EditAnnouncementViewModel GetAnnouncementToEdit(int id, string userId);
+        Task<EditAnnouncementViewModel> GetAnnouncementToEditAsync(int id, string userId);
 
-        void EditAnnouncement(EditAnnouncementViewModel model);
+        Task EditAnnouncementAsync(EditAnnouncementViewModel model);
 
-        void DeleteAnnouncement(int productId);
+        Task DeleteAnnouncementAsync(int Id);
 
-        AnnouncementPaginationViewModel GetAllAnnouncements(bool privateAnnouncements, string search, string currentUserId, int page);
+        Task<AnnouncementPaginationViewModel> GetAllAnnouncementsAsync(bool privateAnnouncements, string search, string userId, int page);
 
-        IEnumerable<DisplayAnnouncementViewModel> GetIndexAnnouncements();
+        Task<IEnumerable<DisplayAnnouncementViewModel>> GetIndexAnnouncementsAsync();
     }
 }

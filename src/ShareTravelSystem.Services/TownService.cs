@@ -22,7 +22,7 @@
             this.db = db;
         }
 
-        public async Task CreateTown(CrateTownViewModel model)
+        public async Task CreateTownAsync(CrateTownViewModel model)
         {
             string isExist = await this.db.Towns.Where(t => t.Name.ToLower() == model.Name.ToLower()).Select(x => x.Name).SingleOrDefaultAsync();
 
@@ -37,7 +37,7 @@
             await db.SaveChangesAsync();
         }
 
-        public async Task DeleteTown(int townId)
+        public async Task DeleteTownAsync(int townId)
         {
             Town town = await this.db
                 .Towns
@@ -53,7 +53,7 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task EditTown(EditTownViewModel model)
+        public async Task EditTownAsync(EditTownViewModel model)
         {
             Task<Town> townTask = this.db
                 .Towns
@@ -70,7 +70,7 @@
            await this.db.SaveChangesAsync();
         }
 
-        public async Task<TownPaginationViewModel> GetAllTowns(int page, string search)
+        public async Task<TownPaginationViewModel> GetAllTownsAsync(int page, string search)
         {
 
             int size = Constants.TownsPerPage;
@@ -112,7 +112,7 @@
             return result;
         }
 
-        public async Task<EditTownViewModel> GetTownToEdit(int id)
+        public async Task<EditTownViewModel> GetTownToEditAsync(int id)
         {
             EditTownViewModel town = await this.db
                 .Towns

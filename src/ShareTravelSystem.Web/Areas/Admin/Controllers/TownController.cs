@@ -23,22 +23,12 @@
         
         public async Task<IActionResult> Index(int page, string search)
         {
-            if (!RedirectIfNotInRole(Constants.AdminRole))
-            {
-                return Redirect(Constants.redirectToLoginPage);
-            };
-
-            TownPaginationViewModel towns = await this.townService.GetAllTowns(page, search);
+            TownPaginationViewModel towns = await this.townService.GetAllTownsAsync(page, search);
             return View(towns);
         }
         
         public  IActionResult Create()
         {
-            if (!this.RedirectIfNotInRole(Constants.AdminRole))
-            {
-                return Redirect(Constants.redirectToLoginPage);
-            };
-
             return View();
         }
 
@@ -46,11 +36,6 @@
         [ValidateAntiForgeryToken]
         public async  Task<IActionResult> Create(CrateTownViewModel model)
         {
-            if (!this.RedirectIfNotInRole(Constants.AdminRole))
-            {
-                return Redirect(Constants.redirectToLoginPage);
-            };
-
             if (!ModelState.IsValid)
             {
                 return this.View(model);
@@ -58,7 +43,7 @@
 
             try
             {
-               await this.townService.CreateTown(model);
+               await this.townService.CreateTownAsync(model);
             }
 
             catch (Exception e)
@@ -73,16 +58,11 @@
         
         public async Task<IActionResult> Edit(int id)
         {
-            if (!this.RedirectIfNotInRole(Constants.AdminRole))
-            {
-                return Redirect(Constants.redirectToLoginPage);
-            };
-
             EditTownViewModel town;
 
             try
             {
-                town = await this.townService.GetTownToEdit(id);
+                town = await this.townService.GetTownToEditAsync(id);
             }
             catch (Exception e)
             {
@@ -99,11 +79,6 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditTownViewModel model)
         {
-            if (!this.RedirectIfNotInRole(Constants.AdminRole))
-            {
-                return Redirect(Constants.redirectToLoginPage);
-            };
-
             if (!ModelState.IsValid)
             {
                 return this.View(model);
@@ -111,7 +86,7 @@
 
             try
             {
-               await this.townService.EditTown(model);
+               await this.townService.EditTownAsync(model);
             }
             catch (Exception e)
             {
@@ -123,16 +98,12 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!this.RedirectIfNotInRole(Constants.AdminRole))
-            {
-                return Redirect(Constants.redirectToLoginPage);
-            }
-
             try
             {
-               await  this.townService.DeleteTown(id);
+               await  this.townService.DeleteTownAsync(id);
             }
             catch (Exception e)
             {
