@@ -1,32 +1,36 @@
-﻿namespace ShareTravelSystem.Tests
-{
-    using System;
-    using Xunit;
-    using FluentAssertions;
-    using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Web.Models;
-    using ShareTravelSystem.Web.Areas.Admin.Controllers;
-    using ShareTravelSystem.Services;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.ViewModels.Town;
-    using System.Linq;
-    using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using AutoMapper;
-    using ShareTravelSystem.Web.Infrastructure.Mapping;
+﻿using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Moq;
+using ShareTravelSystem.Data.Models;
+using ShareTravelSystem.Services;
+using ShareTravelSystem.ViewModels;
+using ShareTravelSystem.ViewModels.Town;
+using ShareTravelSystem.Web.Areas.Admin.Controllers;
+using ShareTravelSystem.Web.Areas.Identity.Data;
+using ShareTravelSystem.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Xunit;
 
+namespace ShareTravelSystem.Tests.Controllers
+{
     public class TownControllerTest
     {
+
+        //private UserManager<ShareTravelSystemUser> userManager { get; set; }
         //public TownControllerTest()
         //{
-        //    TestStartup.Initialize();
+        //    //TestStartup.Initialize();
+        //    userManager= TestStartup.UserManager;
         //}
 
         [Fact]
         public void EditShouldChangeTownDataInDatabase()
         {
-            //Arrange
             ShareTravelSystemDbContext db = this.GetContext();
             TownController controller = this.GetController(db);
 
@@ -53,7 +57,6 @@
         [Fact]
         public void DeleteShouldSetFlagToTownDataInDatabase()
         {
-            //Arrange
             ShareTravelSystemDbContext db = this.GetContext();
             TownController controller = this.GetController(db);
 
@@ -74,7 +77,8 @@
         [Fact]
         public void CreateShouldCreateTownDataInDatabase()
         {
-            //Arrange
+          
+
             ShareTravelSystemDbContext db = this.GetContext();
             TownController controller = this.GetController(db);
 
@@ -94,9 +98,7 @@
 
             var controller = this.GetController(db);
 
-
             var result = controller.Index(1, null);
-
 
             result.Should().BeOfType<ViewResult>();
             result.As<ViewResult>().Model.Should().BeOfType<TownPaginationViewModel>();
@@ -121,6 +123,5 @@
 
             return new ShareTravelSystemDbContext(dbOptions);
         }
-
     }
 }

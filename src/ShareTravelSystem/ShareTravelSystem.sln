@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareTravelSystem.ViewModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareTravelSystem.Common", "..\ShareTravelSystem.Common\ShareTravelSystem.Common.csproj", "{02638AE7-47BD-4F3F-9D86-06DCCF990AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareTravelSystem.Tests", "ShareTravelSystem.Test\ShareTravelSystem.Tests.csproj", "{FAB02D8B-C9FF-4EA5-BB17-BD1435276881}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareTravelSystem.Tests", "..\ShareTravelSystem.Tests\ShareTravelSystem.Tests.csproj", "{D5A9DCEF-F983-46D9-9658-536F690EEB50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{02638AE7-47BD-4F3F-9D86-06DCCF990AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02638AE7-47BD-4F3F-9D86-06DCCF990AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02638AE7-47BD-4F3F-9D86-06DCCF990AE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAB02D8B-C9FF-4EA5-BB17-BD1435276881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAB02D8B-C9FF-4EA5-BB17-BD1435276881}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAB02D8B-C9FF-4EA5-BB17-BD1435276881}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAB02D8B-C9FF-4EA5-BB17-BD1435276881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A9DCEF-F983-46D9-9658-536F690EEB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A9DCEF-F983-46D9-9658-536F690EEB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A9DCEF-F983-46D9-9658-536F690EEB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A9DCEF-F983-46D9-9658-536F690EEB50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

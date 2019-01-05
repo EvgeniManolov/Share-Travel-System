@@ -1,26 +1,28 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using ShareTravelSystem.Data.Models;
 using ShareTravelSystem.Services;
 using ShareTravelSystem.ViewModels;
 using ShareTravelSystem.Web.Areas.Identity.Data;
-using ShareTravelSystem.Web.Areas.User.Controllers;
-using ShareTravelSystem.Web.Areas.Admin.Controllers;
 using ShareTravelSystem.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
-using System.Linq;
 
-namespace ShareTravelSystem.Tests
+namespace ShareTravelSystem.Tests.Controllers
 {
     public class AnnouncementControllerTest
     {
-        private readonly UserManager<ShareTravelSystemUser> userManager;
+        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        public AnnouncementControllerTest()
+        {
+            userManager = TestStartup.UserManager;
+        }
 
-        
         [Fact]
         public void EditShouldChangeAnnouncementDataInDatabase()
         {
@@ -75,12 +77,23 @@ namespace ShareTravelSystem.Tests
         }
 
         [Fact]
-        public void CreateShouldCreateTownDataInDatabase()
+        public void CreateShouldCreateAnnouncementDataInDatabase()
         {
-            
+
+
             //Arrange
             ShareTravelSystemDbContext db = this.GetContext();
             Web.Areas.User.Controllers.AnnouncementController controller = this.GetController(db);
+
+            var user = new ShareTravelSystemUser
+            {
+                UserName = "TestUser"
+            };
+
+            db.Users.Add(user);
+
+            db.SaveChanges();
+
 
             CreateAnnouncementViewModel announcement = new CreateAnnouncementViewModel
             {
@@ -110,6 +123,7 @@ namespace ShareTravelSystem.Tests
 
         private Web.Areas.User.Controllers.AnnouncementController GetController(ShareTravelSystemDbContext db)
         {
+
             AnnouncementService announcements = new AnnouncementService(db, userManager);
 
             Web.Areas.User.Controllers.AnnouncementController controller = new Web.Areas.User.Controllers.AnnouncementController(announcements, userManager);

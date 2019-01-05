@@ -16,7 +16,7 @@
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;
         private readonly SignInManager<ShareTravelSystemUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
         private readonly IAccountService accountsService;
 
         public AccountController(

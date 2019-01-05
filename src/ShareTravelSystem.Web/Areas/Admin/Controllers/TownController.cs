@@ -20,7 +20,7 @@
             this.townService = townService;
         }
         
-        public IActionResult Index(int page, string search)
+        public  IActionResult Index(int page, string search)
         {
             if (!RedirectIfNotInRole(Constants.AdminRole))
             {

@@ -16,6 +16,7 @@
     using ShareTravelSystem.Web.Infrastructure.Extensions;
     using ShareTravelSystem.Web.Models;
     using ShareTravelSystem.Web.Areas.Identity.Data;
+    using ShareTravelSystem.Web.SignalRChat;
 
     public class Startup
     {
@@ -56,7 +57,7 @@
                 })
                 .AddEntityFrameworkStores<ShareTravelSystemDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -82,9 +83,15 @@
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            app.UseSignalR(
+                routes =>
+                {
+                    routes.MapHub<ChatHub>("/chat");
+                });
             app.UseMvc(routes =>
             {
+                    
+
                 routes.MapRoute(
                 name: "areas",
                 template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
