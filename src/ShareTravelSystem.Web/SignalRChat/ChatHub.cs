@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using ShareTravelSystem.Services.Contracts;
 using ShareTravelSystem.Web.Areas.Identity.Data;
+using System;
 using System.Threading.Tasks;
 
 namespace ShareTravelSystem.Web.SignalRChat
@@ -25,7 +26,7 @@ namespace ShareTravelSystem.Web.SignalRChat
             await this.Clients.All.SendAsync("NewMessage", new Message
             {
                 User = this.Context.User.Identity.Name,
-                Text = message,
+                Text = message
             });
         }
     }

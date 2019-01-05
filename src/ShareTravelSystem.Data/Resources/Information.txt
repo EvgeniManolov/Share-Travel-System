@@ -2,7 +2,7 @@
 2. Ограничил съм дисплея на анаунсмънти контент и тайтъл до определени символи , да го оставя ли так? когато напиша по-дълъг текст ми излиза извън картата(коментар, оферта, анаунсмънт ..)
 
 3. Да имплементирам accountservice
-4. Exceptions?
-6. Ilogger?
-7 Da opravq komentarite na oferite v admina
+6. Ilogger?	
 8. Kogato pytuvam ot-do edin i sushti grad mi gyrmi
+9. Imam na nqkolko mesta da implementiram mapper
+10. DA izmislq kak da vkaravam data v chata

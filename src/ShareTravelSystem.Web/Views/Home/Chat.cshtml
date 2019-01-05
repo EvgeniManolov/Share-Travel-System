@@ -1,7 +1,8 @@
-﻿@{
+﻿@model DisplayAllMessagesViewModel
+@using System;
+@{
     ViewBag.Title = "Chat";
 }
-
 
 <div class="container">
     <div class="input-holder">
@@ -15,6 +16,10 @@
     </div>
     <hr style="height: 5px;" class="bg-primary" />
     <div id="messagesList" style="font-size: 32px;">
+        @foreach (var message in Model.Messages)
+        {
+            <div>[@message.CreateOn][@message.Author] : @message.Text</div>
+        }
     </div>
 </div>
 
@@ -26,10 +31,10 @@
                 .build();
         connection.on("NewMessage",
             function (message) {
-                var chatInfo = `<div>[${message.user}] ${message.text}</div>`;
-                $("#messagesList").append(chatInfo);
+                var chatInfo = `<div>Now: [${message.user}] ${message.text}</div>`;
+                $("#messagesList").prepend(chatInfo);
             });
-        $("#sendButton").click(function() {
+        $("#sendButton").click(function () {
             var message = $("#messageInput").val();
             connection.invoke("Send", message);
         });

@@ -11,29 +11,32 @@
     public class HomeController : BaseController
     {
         private readonly IAnnouncementService announcementService;
+        private readonly IMessageService messageService;
 
-        public HomeController(IAnnouncementService announcementService)
+        public HomeController(IAnnouncementService announcementService, IMessageService messageService)
         {
             this.announcementService = announcementService;
+            this.messageService = messageService;
         }
-        
 
-        public IActionResult Chat()
+
+        public async Task<IActionResult> Chat()
         {
-            return this.View();
+            var messages = await this.messageService.GetAllMessagesAsync();
+            return this.View(messages);
         }
 
         public async Task<IActionResult> Index()
         {
-           
-                var announcements = await this.announcementService.GetIndexAnnouncementsAsync();
-                var result = new DisplayAllAnnouncementsViewModel
-                {
-                    Announcements = announcements
-                }
-                ;
-                return View(result);
-          
+
+            var announcements = await this.announcementService.GetIndexAnnouncementsAsync();
+            var result = new DisplayAllAnnouncementsViewModel
+            {
+                Announcements = announcements
+            }
+            ;
+            return View(result);
+
         }
 
 

@@ -5,7 +5,7 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-0">
-                <div class="well">
+                <div class="well search-bar">
                     <h3 align="center" class="mb-0">Filter Announcements</h3>
                     <hr class="col-lg-6 mt-0" />
                     <form class="form-horizontal">
@@ -18,11 +18,9 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <label for="location1" class="control-label ml-3">Content: </label>
-                                <input name="search" type="text" value="@Model.Search" class="ml-3">
-                            </div>
-                            <div class="mt-1 col-12 text-right mb-2">
-                                <button type="submit" class="btn btn-primary text-white" href="@Url.Action("Index","Announcement")">Apply Filters</button>
+                                <label for="location1" class="control-label ml-0">Content: </label>
+                                <input name="search" type="text" value="@Model.Search" class="ml-2">
+                                <button type="submit" class="btn btn-primary text-white ml-5 mr-2" href="@Url.Action("Index","Announcement")">Apply Filters</button>
                             </div>
                         </div>
                     </form>

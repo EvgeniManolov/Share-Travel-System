@@ -1,12 +1,16 @@
 ﻿namespace ShareTravelSystem.Services
 {
+    using AutoMapper.QueryableExtensions;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using ShareTravelSystem.Data.Models;
     using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.ViewModels.Messages;
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using ShareTravelSystem.Web.Models;
     using System;
     using System.Threading.Tasks;
+    using System.Linq;
 
     public class MessageService : IMessageService
     {
@@ -30,6 +34,13 @@
             };
             await this.db.Messages.AddAsync(currentMessage);
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task<DisplayAllMessagesViewModel> GetAllMessagesAsync()
+        {
+            var messages = await this.db.Messages.OrderByDescending(x => x.CreateOn).ProjectTo<DisplayMessageViewModel>().ToListAsync();
+            DisplayAllMessagesViewModel result = new DisplayAllMessagesViewModel { Messages = messages };
+            return result;
         }
     }
 }
