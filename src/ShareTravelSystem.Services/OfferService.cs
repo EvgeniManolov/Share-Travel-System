@@ -73,18 +73,12 @@
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, Id));
             }
-            //da izpolzvam mapper
+
             offer.Reviews = await this.db
                                 .Reviews
                                 .Where(r => r.OfferId == Id && !r.IsDeleted)
                                 .OrderByDescending(x => x.CreateDate)
-                                .Select(r => new DisplayReviewViewModel
-                                {
-                                    Id = r.Id,
-                                    Content = r.Comment,
-                                    Author = r.Author.UserName,
-                                    CreateDate = r.CreateDate
-                                }).ToListAsync();
+                                .ProjectTo<DisplayReviewViewModel>().ToListAsync();
 
             return offer;
         }

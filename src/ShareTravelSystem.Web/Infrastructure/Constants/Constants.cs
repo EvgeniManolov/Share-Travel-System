@@ -4,9 +4,7 @@
     {
         public const string SolutionName = "ShareTravelSystem";
 
-        public const string AdminRole = "Admin";
-
-        public const string UserRole = "User";
+       
 
         public const string UserAlreadyExists = "User with this Username/Email already exists!";
         

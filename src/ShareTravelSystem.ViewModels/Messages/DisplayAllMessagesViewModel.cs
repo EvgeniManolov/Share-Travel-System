@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShareTravelSystem.ViewModels.Messages
+﻿namespace ShareTravelSystem.ViewModels.Messages
 {
+    using System.Collections.Generic;
+
     public class DisplayAllMessagesViewModel
     {
         public IEnumerable<DisplayMessageViewModel> Messages { get; set; }

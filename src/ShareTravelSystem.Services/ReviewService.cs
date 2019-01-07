@@ -1,5 +1,6 @@
 ﻿namespace ShareTravelSystem.Services
 {
+    using AutoMapper.QueryableExtensions;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using ShareTravelSystem.Data.Models;
@@ -45,13 +46,7 @@
 
         public async Task<EditReviewViewModel> GetReviewToEditAsync(int id, int offerId, string currentUserId)
         {
-            // da izpolzvam mapper?
-            EditReviewViewModel review = await this.db.Reviews.Where(r => r.Id == id && !r.IsDeleted).Select(e => new EditReviewViewModel
-            {
-                Id = id,
-                Comment = e.Comment,
-                OfferId = offerId
-            }).SingleOrDefaultAsync();
+            EditReviewViewModel review = await this.db.Reviews.Where(r => r.Id == id && !r.IsDeleted).ProjectTo<EditReviewViewModel>().SingleOrDefaultAsync();
 
             if (review == null)
             {

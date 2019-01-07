@@ -10,23 +10,23 @@
     using ShareTravelSystem.Web.Areas.Identity.Data;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using System;
 
     public class AccountController : BaseController
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;
         private readonly SignInManager<ShareTravelSystemUser> signInManager;
         //private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IAccountService accountsService;
+        private readonly IAccountService accountService;
 
         public AccountController(
             UserManager<ShareTravelSystemUser> userManager,
             SignInManager<ShareTravelSystemUser> signInManager,
-            IAccountService accountsService)
+            IAccountService accountService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.accountsService = accountsService;
+            this.accountService = accountService;
         }
 
         [HttpGet]
@@ -44,25 +44,32 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    // this.logger.LogInformation("User logged in.");
-                    return RedirectToLocal(model.Email);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }
+                ModelState.AddModelError(string.Empty, "Invalid login credentials.");
+                return this.View(model);
+            }
+            bool check = false;
+            try
+            {
+                check = await accountService.Login(model);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login credentials.");
+                return View(model);
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            if (check)
+            {
+                return RedirectToLocal(model.Email);
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login credentials.");
+                return View(model);
+            }
+            
         }
 
         [HttpGet]
@@ -76,46 +83,23 @@
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            var isExist = this.userManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
 
-            if (isExist != null)
+
+            if (!ModelState.IsValid)
             {
-                this.ModelState.AddModelError("Name", Constants.UserAlreadyExists);
                 return this.View(model);
             }
-
-            if (ModelState.IsValid)
+            try
             {
-                var user = new ShareTravelSystemUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Address = model.Address,
-                    PhoneNumber = model.PhoneNumber
-                };
-
-                var result = await this.userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    if (this.userManager.Users.Count() == 1)
-                    {
-                        await this.userManager.AddToRoleAsync(user, Constants.AdminRole);
-                    }
-                    else
-                    {
-                        await this.userManager.AddToRoleAsync(user, Constants.UserRole);
-                    }
-
-                    this.signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToLocal(returnUrl);
-                }
-                AddErrors(result);
+                await accountService.Register(model);
             }
 
-            return View(model);
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.View(model);
+            }
+            return RedirectToLocal(returnUrl);
         }
 
 
@@ -132,7 +116,7 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await this.signInManager.SignOutAsync();
+            await accountService.Logout();
             // this.logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }

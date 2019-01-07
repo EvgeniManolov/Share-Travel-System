@@ -6,10 +6,10 @@
 
     public interface IAccountService
     {
-        IActionResult Register(RegisterViewModel model);
+        Task<bool> Register(RegisterViewModel model);
 
-        IActionResult Login(LoginViewModel model);
+        Task<bool> Login(LoginViewModel model);
 
-        Task<IActionResult> Logout();
+        Task<bool> Logout();
     }
 }

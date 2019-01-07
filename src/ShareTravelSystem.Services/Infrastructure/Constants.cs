@@ -31,5 +31,11 @@
         public const int UserStatisticsPerPage = 10;
 
         public const int OffersPerPage = 8;
+
+        public const string AdminRole = "Admin";
+
+        public const string UserRole = "User";
+
+        public const string UserAlreadyExists = "User with this Username/Email already exists!";
     }
 }
