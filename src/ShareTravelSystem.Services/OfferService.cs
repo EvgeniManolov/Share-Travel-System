@@ -65,8 +65,7 @@
 
         public async Task<DetailsOfferViewModel> DetailsOfferAsync(int Id)
         {
-            DetailsOfferViewModel offer = await this.db
-                                              .Offers
+            DetailsOfferViewModel offer = await this.db.Offers
                                               .Where(t => t.Id == Id && !t.IsDeleted)
                                               .ProjectTo<DetailsOfferViewModel>()
                                               .SingleOrDefaultAsync();

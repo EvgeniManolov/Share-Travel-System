@@ -18,6 +18,7 @@
         {
             this.db = db;
         }
+
         public async Task<StatisticByRatingPaginationViewModel> GetStatisticForAllUsersByRatingAsync(int page, string search)
         {
 
