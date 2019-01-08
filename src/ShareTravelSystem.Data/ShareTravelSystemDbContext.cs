@@ -1,10 +1,9 @@
 ﻿namespace ShareTravelSystem.Web.Models
 {
+    using Areas.Identity.Data;
+    using Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using System;
 
     public class ShareTravelSystemDbContext : IdentityDbContext<ShareTravelSystemUser>
     {
@@ -26,12 +25,12 @@
         {
             base.OnModelCreating(builder);
             builder.Entity<Offer>()
-                        .HasOne<Town>(s => s.DepartureTown)
+                        .HasOne(s => s.DepartureTown)
                         .WithMany(g => g.TownsAsDepartureTown)
                         .HasForeignKey(s => s.DepartureTownId).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Offer>()
-                        .HasOne<Town>(s => s.DestinationTown)
+                        .HasOne(s => s.DestinationTown)
                         .WithMany(g => g.TownsAsDestinationTown)
                         .HasForeignKey(s => s.DestinationTownId).OnDelete(DeleteBehavior.Restrict);
         }

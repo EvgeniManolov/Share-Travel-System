@@ -1,6 +1,6 @@
 ﻿namespace ShareTravelSystem.Data.Models
 {
-    using ShareTravelSystem.Web.Areas.Identity.Data;
+    using Web.Areas.Identity.Data;
 
     public class Reaction
     {

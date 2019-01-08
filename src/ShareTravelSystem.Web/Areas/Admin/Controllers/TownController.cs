@@ -4,11 +4,10 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Town;
-    using ShareTravelSystem.Web.Controllers;
-    using ShareTravelSystem.Web.Infrastructure.Constants;
+    using Services.Contracts;
+    using ViewModels;
+    using ViewModels.Town;
+    using Web.Controllers;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -53,7 +52,7 @@
                 return this.View(model);
             }
 
-            return RedirectToAction(nameof(TownController.Index));
+            return RedirectToAction(nameof(Index));
         }
         
         public async Task<IActionResult> Edit(int id)
@@ -68,7 +67,7 @@
             {
                 this.ModelState.AddModelError("Name", e.Message);
 
-                return RedirectToAction(nameof(TownController.Index));
+                return RedirectToAction(nameof(Index));
 
             }
 
@@ -94,7 +93,7 @@
                 return this.View(model);
             }
 
-            return RedirectToAction(nameof(TownController.Index));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -108,10 +107,10 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(TownController.Index));
+                return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(TownController.Index));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

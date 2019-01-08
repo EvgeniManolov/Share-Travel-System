@@ -1,22 +1,22 @@
 ﻿namespace ShareTravelSystem.Web
 {
     using System;
+    using Areas.Identity.Data;
+    using AutoMapper;
+    using Infrastructure.Extensions;
+    using Infrastructure.Mapping;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using ShareTravelSystem.Web.Middlewares.Extensions;
-    using AutoMapper;
-    using ShareTravelSystem.Web.Infrastructure.Mapping;
-    using ShareTravelSystem.Web.Infrastructure.Extensions;
-    using ShareTravelSystem.Web.Models;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.SignalRChat;
+    using Middlewares.Extensions;
+    using Models;
+    using SignalRChat;
 
     public class Startup
     {

@@ -1,13 +1,13 @@
 ﻿namespace ShareTravelSystem.Web.Middlewares
 {
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Areas.Identity.Data;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using Models;
 
     public class SeedRolesMiddleware
     {

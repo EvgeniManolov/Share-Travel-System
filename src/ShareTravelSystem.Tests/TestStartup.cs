@@ -3,12 +3,12 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Moq;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Infrastructure.Mapping;
+    using Web.Areas.Identity.Data;
+    using Web.Infrastructure.Mapping;
 
     public class TestStartup
     {
-        private static bool isInitialized;
+        private static readonly bool isInitialized;
 
         private static Mock<UserManager<ShareTravelSystemUser>> userManager;
 
@@ -26,6 +26,7 @@
                 var mockUserStore = new Mock<IUserStore<ShareTravelSystemUser>>();
                 userManager = new Mock<UserManager<ShareTravelSystemUser>>(mockUserStore.Object, null, null, null, null, null, null, null, null);
             }
+
         }
 
         public static UserManager<ShareTravelSystemUser> UserManager { get { return userManager.Object; } }

@@ -1,19 +1,19 @@
 ﻿namespace ShareTravelSystem.Services
 {
-    using AutoMapper.QueryableExtensions;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Services.Infrastructure;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Announcement;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper.QueryableExtensions;
+    using Contracts;
+    using Data.Models;
+    using Infrastructure;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using ViewModels;
+    using ViewModels.Announcement;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
 
     public class AnnouncementService : IAnnouncementService
     {

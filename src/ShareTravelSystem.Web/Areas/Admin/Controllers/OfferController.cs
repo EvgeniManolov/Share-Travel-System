@@ -1,19 +1,18 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Services.Infrastructure;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Offer;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Controllers;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using X.PagedList;
+    using Identity.Data;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Contracts;
+    using Services.Infrastructure;
+    using ViewModels;
+    using ViewModels.Offer;
+    using Web.Controllers;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -50,7 +49,7 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
@@ -67,9 +66,9 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(OfferController.Index));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

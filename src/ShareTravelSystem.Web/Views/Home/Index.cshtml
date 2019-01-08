@@ -1,6 +1,6 @@
-﻿@model ShareTravelSystem.ViewModels.DisplayAllAnnouncementsViewModel
-@using Microsoft.AspNetCore.Identity
-@using ShareTravelSystem.Web.Areas.Identity.Data;
+﻿@using Microsoft.AspNetCore.Identity
+@using ShareTravelSystem.Web.Areas.Identity.Data
+@model DisplayAllAnnouncementsViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,7 +11,7 @@
 {
     <div class="jumbotron border-0">
         <div class="container">
-            @if (this.User.IsInRole("User"))
+            @if (User.IsInRole("User"))
             {
                 <h1 class="display-3">Tr@vel w1th Fr1ends!</h1>
             }
@@ -25,7 +25,7 @@
         <h4 class="mt-0">Latest news</h4>
         <hr />
         <div class="card-deck">
-            @foreach (var announcement in @Model.Announcements)
+            @foreach (var announcement in Model.Announcements)
             {
                 <div class="col-3">
                     <a href="@Url.Action("Details","Announcement", new { id = announcement.Id})">

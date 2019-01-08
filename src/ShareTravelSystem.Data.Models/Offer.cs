@@ -1,8 +1,8 @@
 ﻿namespace ShareTravelSystem.Data.Models
 {
-    using ShareTravelSystem.Web.Areas.Identity.Data;
     using System;
     using System.Collections.Generic;
+    using Web.Areas.Identity.Data;
 
     public class Offer
     {

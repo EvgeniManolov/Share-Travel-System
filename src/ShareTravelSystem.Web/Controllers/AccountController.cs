@@ -1,32 +1,29 @@
 ﻿namespace ShareTravelSystem.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Areas.Identity.Data;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using System.Threading.Tasks;
-    using System;
     using Microsoft.Extensions.Logging;
+    using Services.Infrastructure;
+    using ViewModels;
 
     public class AccountController : BaseController
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;
         private readonly SignInManager<ShareTravelSystemUser> signInManager;
-        private readonly IAccountService accountService;
         private readonly ILogger logger;
 
         public AccountController(
             UserManager<ShareTravelSystemUser> userManager,
             SignInManager<ShareTravelSystemUser> signInManager,
-            IAccountService accountService,
             ILogger<AccountController> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.accountService = accountService;
             this.logger = logger;
         }
 
@@ -46,18 +43,17 @@
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                try
+                var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
                 {
-                    await accountService.Login(model);
                     this.logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl, model.Email);
                 }
-                catch
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login atempt.");
-                    return View(model);
-                }
+
+                this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return this.View(model);
             }
+            
             return View(model);
         }
 
@@ -72,25 +68,47 @@
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            var isExist = this.userManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
 
-            if (!ModelState.IsValid)
+            if (isExist != null)
             {
-                return this.View(model);
-            }
-            try
-            {
-                await accountService.Register(model);
-            }
-            catch (Exception e)
-            {
-                this.ModelState.AddModelError("Name", e.Message);
+                this.ModelState.AddModelError("Name", Constants.UserAlreadyExists);
                 return this.View(model);
             }
 
-            return RedirectToLocal(returnUrl);
+            if (ModelState.IsValid)
+            {
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber
+                };
+
+                var result = await this.userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    if (this.userManager.Users.Count() == 1)
+                    {
+                        await this.userManager.AddToRoleAsync(user, Constants.AdminRole);
+                    }
+                    else
+                    {
+                        await this.userManager.AddToRoleAsync(user, Constants.UserRole);
+                    }
+
+                    this.signInManager.SignInAsync(user, false).Wait();
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(result);
+            }
+
+            return View(model);
         }
-
-
 
         private void AddErrors(IdentityResult result)
         {
@@ -104,9 +122,10 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await accountService.Logout();
+            await this.signInManager.SignOutAsync();
             this.logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
+
         }
 
         private IActionResult RedirectToLocal(string returnUrl, string userName = "")
@@ -115,10 +134,8 @@
             {
                 return Redirect(returnUrl);
             }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
+
+            return this.RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         public IActionResult AccessDenied(string returnUrl)

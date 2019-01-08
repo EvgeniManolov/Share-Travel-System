@@ -1,26 +1,26 @@
 ﻿namespace ShareTravelSystem.Tests.Services
 {
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using ShareTravelSystem.Services;
+    using ViewModels;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
     using Xunit;
 
     public class AnnouncementServiceTests
     {
-        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        private UserManager<ShareTravelSystemUser> UserManager { get; set; }
 
         public AnnouncementServiceTests()
         {
-            userManager = TestStartup.UserManager;
+            this.UserManager = TestStartup.UserManager;
         }
 
         [Fact]
@@ -29,7 +29,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -58,7 +58,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -94,7 +94,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -103,12 +103,12 @@
 
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
-                List<Announcement> announcements = new List<Announcement>()
+                List<Announcement> announcements = new List<Announcement>
                 { new Announcement{ Title = "Title1", Content="Content1", CreateDate=DateTime.UtcNow, Author=user},
                  new Announcement{ Title = "Title2", Content="Content2", CreateDate=DateTime.UtcNow, Author=user},
                  new Announcement{ Title = "Title3", Content="Content3", CreateDate=DateTime.UtcNow, Author=user},
                  new Announcement{ Title = "Title4", Content="Content4", CreateDate=DateTime.UtcNow, Author=user},
-                 new Announcement{ Title = "Title5", Content="Content5", CreateDate=DateTime.UtcNow, Author=user},
+                 new Announcement{ Title = "Title5", Content="Content5", CreateDate=DateTime.UtcNow, Author=user}
         };
 
                 await context.Announcements.AddRangeAsync(announcements);
@@ -132,7 +132,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -158,12 +158,49 @@
         }
 
         [Fact]
+        public async Task ShouldDeleteAnnouncementThatDoesNotExist()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
+
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = "TestUser"
+                };
+
+                Announcement announcement = new Announcement { Title = "Title", Content = "Content", CreateDate = DateTime.UtcNow, Author = user };
+
+                await context.Users.AddAsync(user);
+                await context.Announcements.AddAsync(announcement);
+                await context.SaveChangesAsync();
+
+                
+
+                // Act
+                string result = null;
+                try
+                {
+                    await announcementService.DeleteAnnouncementAsync(3);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Announcement with id: 3 does not exist.", result);
+            }
+        }
+
+        [Fact]
         public async Task ShouldDetailsAnnouncementDisplayDataAsThisInDatabase()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -190,12 +227,48 @@
         }
 
         [Fact]
+        public async Task ShouldDetailsAnnouncementThatDoesNotExistAndTakeException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
+
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = "TestUser"
+                };
+
+                Announcement announcement = new Announcement { Title = "Title", Content = "Content", CreateDate = DateTime.UtcNow, Author = user };
+
+                await context.Users.AddAsync(user);
+                await context.Announcements.AddAsync(announcement);
+                await context.SaveChangesAsync();
+
+
+                // Act
+                string result = null;
+                try
+                {
+                    var returnedModel = await announcementService.DetailsAnnouncementAsync(3);
+                }
+                catch(Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Announcement with id: 3 does not exist.", result);
+            }
+        }
+
+        [Fact]
         public async Task ShouldGetCorrectAnnouncementToEdit()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -225,7 +298,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                AnnouncementService announcementService = new AnnouncementService(context, userManager);
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {

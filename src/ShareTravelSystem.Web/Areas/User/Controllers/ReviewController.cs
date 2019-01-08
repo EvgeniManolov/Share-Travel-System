@@ -1,14 +1,14 @@
 ﻿namespace ShareTravelSystem.Web.Areas.User.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    using Identity.Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels.Review;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Controllers;
-    using System;
-    using System.Threading.Tasks;
+    using Services.Contracts;
+    using ViewModels.Review;
+    using Web.Controllers;
 
     [Area("User")]
     [Authorize(Roles = "User")]

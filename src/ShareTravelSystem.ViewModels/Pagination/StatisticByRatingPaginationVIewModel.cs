@@ -1,6 +1,6 @@
 ﻿namespace ShareTravelSystem.ViewModels
 {
-    using ShareTravelSystem.ViewModels.Statistic;
+    using Statistic;
 
     public class StatisticByRatingPaginationViewModel : PaginationViewModel
     {

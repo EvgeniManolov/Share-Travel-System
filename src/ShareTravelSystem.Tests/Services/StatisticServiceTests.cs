@@ -2,18 +2,17 @@
 
 namespace ShareTravelSystem.Tests.Services
 {
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services;
-    using ShareTravelSystem.ViewModels.Offer;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using ShareTravelSystem.Services;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
     using Xunit;
 
     public class StatisticServiceTests

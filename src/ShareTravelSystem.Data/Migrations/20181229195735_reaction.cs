@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ShareTravelSystem.Data.Migrations
+﻿namespace ShareTravelSystem.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class reaction : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

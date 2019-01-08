@@ -1,8 +1,9 @@
 ﻿namespace ShareTravelSystem.ViewModels.Town
 {
-    using ShareTravelSystem.Common;
+    using Common;
+    using Data.Models;
 
-    public class DisplayTownViewModel : IMapFrom<Data.Models.Town>
+    public class DisplayTownViewModel : IMapFrom<Town>
     {
         public int Id { get; set; }
 

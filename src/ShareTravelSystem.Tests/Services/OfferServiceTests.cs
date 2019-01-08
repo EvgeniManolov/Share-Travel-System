@@ -1,27 +1,26 @@
 ﻿namespace ShareTravelSystem.Tests.Services
 {
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services;
-    using ShareTravelSystem.ViewModels.Offer;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
+    using Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using ShareTravelSystem.Services;
+    using ViewModels.Offer;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
     using Xunit;
 
     public class OfferServiceTests
     {
-        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        private UserManager<ShareTravelSystemUser> UserManager { get; set; }
 
         public OfferServiceTests()
         {
-            userManager = TestStartup.UserManager;
+            this.UserManager = TestStartup.UserManager;
         }
 
         [Fact]
@@ -30,7 +29,7 @@
 
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -70,7 +69,7 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -120,7 +119,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
 
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -179,7 +178,7 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
                 var towns = new List<Town> { new Town { Name = "гр.асд" }, new Town { Name = "гр.асд" } };
 
                 await context.Towns.AddRangeAsync(towns);
@@ -198,7 +197,7 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -240,11 +239,134 @@
         }
 
         [Fact]
+        public async Task ShouldGetOfferToEditButWithoutToHaveAuthorizationOfThisOperation()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                OfferService offerService = new OfferService(context, this.UserManager);
+
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = "TestUser"
+                };
+
+                var user1 = new ShareTravelSystemUser
+                {
+                    UserName = "TestUser2"
+                };
+
+                var towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+
+                await context.Towns.AddRangeAsync(towns);
+                await context.Users.AddAsync(user);
+                await context.Users.AddAsync(user1);
+                await context.SaveChangesAsync();
+
+                Offer offer = new Offer
+                {
+                    Type = OfferType.Search,
+                    DepartureTownId = 1,
+                    DestinationTownId = 2,
+                    Seat = 3,
+                    Price = 5,
+                    DepartureDate = DateTime.UtcNow,
+                    Description = "Хубаво!",
+                    Author = user,
+                    TotalRating = 0,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Offers.AddAsync(offer);
+                await context.SaveChangesAsync();
+
+
+                // Act
+                string result=null;
+                try
+                {
+                    var returnedModel = await offerService.GetOfferToEditAsync(offer.Id, user1.Id);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                var exp = "User with id: " + user1.Id + " is not authorized for this operation.";
+                // Assert
+                Assert.Equal(result, exp);
+            }
+        }
+
+        [Fact]
+        public async Task ShouldEditOfferAndSeeDataInDatabase()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                OfferService offerService = new OfferService(context, this.UserManager);
+
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = "TestUser"
+                };
+
+                var towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" }, new Town { Name = "гр.Каварна" } };
+
+                await context.Towns.AddRangeAsync(towns);
+                await context.Users.AddAsync(user);
+                await context.SaveChangesAsync();
+
+                Offer offer = new Offer
+                {
+                    Type = OfferType.Search,
+                    DepartureTownId = 1,
+                    DestinationTownId = 2,
+                    Seat = 3,
+                    Price = 5,
+                    DepartureDate = DateTime.UtcNow,
+                    Description = "Хубаво!",
+                    Author = user,
+                    TotalRating = 0,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Offers.AddAsync(offer);
+                await context.SaveChangesAsync();
+
+                ICollection<Town> townsList = new List<Town>();
+                townsList = context.Towns.ToList();
+
+                EditOfferViewModel editOfferModel = new EditOfferViewModel
+                {
+                    Id = 1,
+                    Type = "Search",
+                    DepartureTownId = offer.DepartureTownId,
+                    DepartureTownName = "гр.София",
+                    DestinationTownId = offer.DestinationTownId,
+                    DestinationTownName = "гр.Варна",
+                    Seat = 4,
+                    Price = 3,
+                    DepartureDate = offer.DepartureDate,
+                    Description = offer.Description
+
+                };
+                var result = new DisplayEditOfferViewModel { OfferModel = editOfferModel, Towns = townsList };
+                // Act
+                await offerService.EditOfferAsync(result);
+
+                // Assert
+                int seatDb = await context.Offers.Select(x => x.Seat).SingleOrDefaultAsync();
+                var priceDb = await context.Offers.Select(x => x.Price).SingleOrDefaultAsync();
+                Assert.Equal(editOfferModel.Seat, seatDb);
+                Assert.Equal(editOfferModel.Price, priceDb);
+            }
+        }
+
+        [Fact]
         public async Task ShouldLikeOfferAndSeeRatingDataInDatabase()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -286,7 +408,7 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -328,7 +450,7 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, this.UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -364,6 +486,50 @@
 
                 // Assert
                 Assert.False(flag);
+            }
+        }
+
+        [Fact]
+        public async Task ShouldDeleteOfferAndSeeSetFlagInDatabase()
+        {
+
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                OfferService offerService = new OfferService(context, this.UserManager);
+
+                var user = new ShareTravelSystemUser
+                {
+                    UserName = "TestUserr"
+                };
+
+                var towns = new List<Town> { new Town { Name = "гр.Софияаа" }, new Town { Name = "гр.Варнааа" } };
+
+                await context.Users.AddAsync(user);
+                await context.Towns.AddRangeAsync(towns);
+                await context.SaveChangesAsync();
+
+                Offer offer = new Offer
+                {
+                    Type = OfferType.Search,
+                    DepartureTownId = 1,
+                    DestinationTownId = 2,
+                    Seat = 3,
+                    Price = 5,
+                    DepartureDate = DateTime.UtcNow,
+                    Description = "Хубаво!",
+                    Author = user,
+                    TotalRating = 0,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Offers.AddAsync(offer);
+                await context.SaveChangesAsync();
+
+                // Act
+                await offerService.DeleteOfferAsync(offer.Id);
+
+                // Assert
+                Assert.True(await context.Offers.Select(x => x.IsDeleted).SingleOrDefaultAsync());
             }
         }
 

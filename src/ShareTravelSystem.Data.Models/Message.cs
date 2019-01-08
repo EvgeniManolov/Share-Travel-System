@@ -1,7 +1,7 @@
 ﻿namespace ShareTravelSystem.Data.Models
 {
-    using ShareTravelSystem.Web.Areas.Identity.Data;
     using System;
+    using Web.Areas.Identity.Data;
 
     public class Message
     {

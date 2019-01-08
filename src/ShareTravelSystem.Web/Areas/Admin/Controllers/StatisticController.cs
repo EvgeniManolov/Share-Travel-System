@@ -1,11 +1,11 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.Web.Controllers;
-    using System.Threading.Tasks;
+    using Services.Contracts;
+    using ViewModels;
+    using Web.Controllers;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]

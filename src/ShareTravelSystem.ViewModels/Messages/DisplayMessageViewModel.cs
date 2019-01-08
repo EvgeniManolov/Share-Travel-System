@@ -1,9 +1,10 @@
 ﻿namespace ShareTravelSystem.ViewModels.Messages
 {
-    using ShareTravelSystem.Common;
     using System;
+    using Common;
+    using Data.Models;
 
-    public class DisplayMessageViewModel : IMapFrom<Data.Models.Message>
+    public class DisplayMessageViewModel : IMapFrom<Message>
     {
         public string Author { get; set; }
         public string Text { get; set; }

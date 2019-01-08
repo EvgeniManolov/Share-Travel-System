@@ -1,10 +1,10 @@
 ﻿namespace ShareTravelSystem.Web.Infrastructure.Extensions
 {
-    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Linq;
     using System.Reflection;
-    using ShareTravelSystem.Services.Contracts;
+    using Microsoft.Extensions.DependencyInjection;
+    using Services.Contracts;
 
     public static class ServiceCollectionExtensions
     {

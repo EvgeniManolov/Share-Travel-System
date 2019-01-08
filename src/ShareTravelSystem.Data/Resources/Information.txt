@@ -1,12 +1,9 @@
 ﻿1. Design
 2. Ограничил съм дисплея на анаунсмънти контент и тайтъл до определени символи , да го оставя ли так? когато напиша по-дълъг текст ми излиза извън картата(коментар, оферта, анаунсмънт ..)
 
-3. Да оптимизирам акаунт сървиса и да напиша тест за него
 
-10. DA izmislq kak da vkaravam data v chata
 12.Editor and display templates
 13. ако имам време да направя паджинайшън на месиджите
-14.Да пипна таблицата за статистиката
 
 https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
 https://www.pexels.com/search/travel/

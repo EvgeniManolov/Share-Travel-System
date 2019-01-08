@@ -1,6 +1,6 @@
 ﻿namespace ShareTravelSystem.ViewModels
 {
-    using ShareTravelSystem.ViewModels.Offer;
+    using Offer;
 
     public class OfferPaginationViewModel :PaginationViewModel
     {

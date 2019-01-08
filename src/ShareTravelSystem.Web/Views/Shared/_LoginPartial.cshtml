@@ -1,6 +1,5 @@
 @using Microsoft.AspNetCore.Identity
 @using ShareTravelSystem.Web.Areas.Identity.Data
-
 @inject SignInManager<ShareTravelSystemUser> SignInManager
 @inject UserManager<ShareTravelSystemUser> UserManager
 
@@ -10,7 +9,7 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-                @if (this.User.IsInRole("User"))
+                @if (User.IsInRole("User"))
                 {
                     <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
                 }

@@ -1,20 +1,20 @@
 ﻿namespace ShareTravelSystem.Services
 {
-    using Microsoft.AspNetCore.Identity;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels.Offer;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AutoMapper.QueryableExtensions;
-    using ShareTravelSystem.ViewModels.Review;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.Services.Infrastructure;
     using System.Threading.Tasks;
+    using AutoMapper.QueryableExtensions;
+    using Contracts;
+    using Data.Models;
+    using Infrastructure;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using ViewModels;
+    using ViewModels.Offer;
+    using ViewModels.Review;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
 
     public class OfferService : IOfferService
     {
@@ -48,7 +48,7 @@
 
             this.db.Offers.Add(new Offer
             {
-                AuthorId = userId.ToString(),
+                AuthorId = userId,
                 CreateDate = DateTime.UtcNow,
                 DepartureDate = model.DepartureDate,
                 Description = model.Description,

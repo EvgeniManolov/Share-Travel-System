@@ -1,7 +1,7 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
-    using ShareTravelSystem.ViewModels;
     using System.Threading.Tasks;
+    using ViewModels;
 
     public interface IStatisticService
     {

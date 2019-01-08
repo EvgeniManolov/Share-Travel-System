@@ -2,11 +2,10 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.Web.Models;
+    using Models;
+    using Services.Contracts;
+    using ViewModels;
 
     public class HomeController : BaseController
     {

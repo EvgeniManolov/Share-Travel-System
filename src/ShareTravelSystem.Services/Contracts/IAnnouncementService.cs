@@ -1,9 +1,9 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Announcement;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using ViewModels;
+    using ViewModels.Announcement;
 
     public interface IAnnouncementService
     {

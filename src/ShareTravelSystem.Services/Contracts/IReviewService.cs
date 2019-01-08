@@ -1,7 +1,7 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
-    using ShareTravelSystem.ViewModels.Review;
     using System.Threading.Tasks;
+    using ViewModels.Review;
 
     public interface IReviewService
     {

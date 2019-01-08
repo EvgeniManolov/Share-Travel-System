@@ -1,10 +1,11 @@
 ﻿namespace ShareTravelSystem.ViewModels.Offer
 {
-    using ShareTravelSystem.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Common;
+    using Data.Models;
 
-    public class EditOfferViewModel : IMapFrom<Data.Models.Offer>
+    public class EditOfferViewModel : IMapFrom<Offer>
     {
         [Required]
         [Display(Name = "Type")]

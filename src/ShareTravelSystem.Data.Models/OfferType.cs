@@ -3,6 +3,6 @@
     public enum OfferType
     {
         Suggest = 1,
-        Search = 2,
+        Search = 2
     }
 }

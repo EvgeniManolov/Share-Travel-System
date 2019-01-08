@@ -1,20 +1,19 @@
 ﻿namespace ShareTravelSystem.Web.Areas.User.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Offer;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Controllers;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ShareTravelSystem.Services.Infrastructure;
     using System.Threading.Tasks;
-    using X.PagedList;
+    using Data.Models;
+    using Identity.Data;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Contracts;
+    using Services.Infrastructure;
+    using ViewModels;
+    using ViewModels.Offer;
+    using Web.Controllers;
 
     [Area("User")]
     [Authorize(Roles = "User")]
@@ -66,9 +65,9 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(OfferController.Index));
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Details(int id)
@@ -81,7 +80,7 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
@@ -97,7 +96,7 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
@@ -117,10 +116,10 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
 
-            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.User), nameof(OfferController), nameof(OfferController.Details), model.OfferModel.Id);
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.User), nameof(OfferController), nameof(Details), model.OfferModel.Id);
 
             return redirectResult;
         }
@@ -137,10 +136,10 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(OfferController.Index));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -155,10 +154,10 @@
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OfferController.Index));
+                return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(OfferController.Index));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿namespace ShareTravelSystem.Data
 {
-    using Newtonsoft.Json;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Models;
+    using Newtonsoft.Json;
+    using Web.Models;
 
     public class DbInitializer
     {

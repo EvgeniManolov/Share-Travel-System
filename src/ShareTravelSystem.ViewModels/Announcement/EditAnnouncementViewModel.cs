@@ -1,7 +1,7 @@
 ﻿namespace ShareTravelSystem.ViewModels
 {
-    using ShareTravelSystem.Common;
     using System.ComponentModel.DataAnnotations;
+    using Common;
 
     public class EditAnnouncementViewModel : IMapFrom<Data.Models.Announcement>
     {

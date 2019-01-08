@@ -1,9 +1,9 @@
 ﻿namespace ShareTravelSystem.ViewModels.Offer
 {
-    using ShareTravelSystem.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using ShareTravelSystem.Data.Models;
+    using Common;
+    using Data.Models;
 
     public class DisplayOfferViewModel : IMapFrom<Offer>
     {

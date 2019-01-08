@@ -1,12 +1,12 @@
 ﻿namespace ShareTravelSystem.Web
 {
     using System;
+    using Data;
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.DependencyInjection;
-    using ShareTravelSystem.Web.Models;
-    using ShareTravelSystem.Data;
+    using Microsoft.Extensions.Logging;
+    using Models;
 
     public class Program
     {

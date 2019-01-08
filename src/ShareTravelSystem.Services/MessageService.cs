@@ -1,16 +1,16 @@
 ﻿namespace ShareTravelSystem.Services
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using AutoMapper.QueryableExtensions;
+    using Contracts;
+    using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.ViewModels.Messages;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
-    using System;
-    using System.Threading.Tasks;
-    using System.Linq;
+    using ViewModels.Messages;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
 
     public class MessageService : IMessageService
     {

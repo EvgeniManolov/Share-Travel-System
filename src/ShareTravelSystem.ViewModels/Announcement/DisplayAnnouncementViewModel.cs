@@ -1,8 +1,8 @@
 ﻿namespace ShareTravelSystem.ViewModels
 {
-    using ShareTravelSystem.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Common;
 
     public class DisplayAnnouncementViewModel : IMapFrom<Data.Models.Announcement>
     {
@@ -20,10 +20,8 @@
                 {
                     return this.Title.Substring(0, 50) + "...";
                 }
-                else
-                {
-                    return this.Title;
-                }
+
+                return this.Title;
             }
         }
 
@@ -40,10 +38,8 @@
                 {
                     return this.Content.Substring(0, 100) + "...";
                 }
-                else
-                {
-                    return this.Content;
-                }
+
+                return this.Content;
             }
         }
 

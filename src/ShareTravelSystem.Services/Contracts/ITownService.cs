@@ -1,8 +1,8 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Town;
     using System.Threading.Tasks;
+    using ViewModels;
+    using ViewModels.Town;
 
     public interface ITownService
     {

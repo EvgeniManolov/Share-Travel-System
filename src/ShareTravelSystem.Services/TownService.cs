@@ -1,17 +1,17 @@
 ﻿namespace ShareTravelSystem.Services
 {
-    using AutoMapper.QueryableExtensions;
-    using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Services.Infrastructure;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Town;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper.QueryableExtensions;
+    using Contracts;
+    using Data.Models;
+    using Infrastructure;
+    using Microsoft.EntityFrameworkCore;
+    using ViewModels;
+    using ViewModels.Town;
+    using Web.Models;
 
     public class TownService : ITownService
     {

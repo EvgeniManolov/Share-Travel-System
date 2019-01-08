@@ -1,10 +1,10 @@
 ﻿namespace ShareTravelSystem.Web.SignalRChat
 {
+    using System.Threading.Tasks;
+    using Areas.Identity.Data;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using System.Threading.Tasks;
+    using Services.Contracts;
 
     public class ChatHub : Hub
     {

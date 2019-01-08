@@ -1,8 +1,8 @@
 ﻿namespace ShareTravelSystem.Web.Controllers
 {
+    using Areas.Identity.Data;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
 
     public class BaseController : Controller
     {
@@ -30,7 +30,7 @@
         protected RedirectToActionResult MakeRedirectResult(string area, string controller, string action, int id)
         {
             string controllerName = controller.Replace("Controller", "");
-            RedirectToActionResult result = new RedirectToActionResult(action, controllerName, new { id = id, Area = area });
+            RedirectToActionResult result = new RedirectToActionResult(action, controllerName, new {id, Area = area });
 
             return result;
         }

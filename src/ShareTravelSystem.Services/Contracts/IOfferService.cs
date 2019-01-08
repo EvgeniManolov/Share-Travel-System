@@ -1,10 +1,10 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Offer;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Data.Models;
+    using ViewModels;
+    using ViewModels.Offer;
 
     public interface IOfferService
     {

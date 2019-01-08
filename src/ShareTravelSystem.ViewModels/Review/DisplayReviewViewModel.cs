@@ -1,10 +1,11 @@
 ﻿namespace ShareTravelSystem.ViewModels.Review
 {
-    using ShareTravelSystem.Common;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Common;
+    using Data.Models;
 
-    public class DisplayReviewViewModel: IMapFrom<Data.Models.Review>
+    public class DisplayReviewViewModel: IMapFrom<Review>
     {
         public int Id { get; set; }
 

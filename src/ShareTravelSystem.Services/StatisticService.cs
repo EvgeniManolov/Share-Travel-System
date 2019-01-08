@@ -1,14 +1,14 @@
 ﻿namespace ShareTravelSystem.Services
 {
-    using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Services.Infrastructure;
-    using ShareTravelSystem.ViewModels;
-    using ShareTravelSystem.ViewModels.Statistic;
-    using ShareTravelSystem.Web.Models;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Contracts;
+    using Infrastructure;
+    using Microsoft.EntityFrameworkCore;
+    using ViewModels;
+    using ViewModels.Statistic;
+    using Web.Models;
 
     public class StatisticService : IStatisticService
     {
@@ -43,7 +43,7 @@
 
                 foreach (var offerId in offersIds)
                 {
-                    int offerLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action == true).Count();
+                    int offerLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action).Count();
 
                     int offerDisLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action == false).Count();
 

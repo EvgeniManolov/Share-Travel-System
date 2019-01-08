@@ -4,7 +4,7 @@
     ViewData["Title"] = "Login Page";
 }
 
-<div asp-validation-summary="All"></div>
+<div asp-validation-summary="All" class="text-danger"></div>
 <div class="container">
     <div class="card mt-5">
         <h5 class="card-header info-color white-text text-center py-4 bg-primary">
@@ -12,38 +12,14 @@
         </h5>
         <div class="card-body px-lg-5 pt-0">
             <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="text-center" style="max-width:750px;margin:auto; color: #757575;">
-                @*<div class="md-form">
-            <input asp-for="Email" class="form-control mt-4" placeholder="Email" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>*@
-                @*<div class="input-container mt-4">
-            <i class="fa fa-user icon bg-primary mt-4"></i>
-            <input asp-for="Email" class="form-control mt-4" type="text" placeholder="Email">
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>*@
-                <div class="input-group mb-3 mt-5">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@@</span>
-                    </div>
-                    <input asp-for="Email" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="md-form mt-4">
+                    <input asp-for="Email" class="form-control mt-4" placeholder="Email" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                @*<div class="md-form">
-            <input asp-for="Password" class="form-control mt-4" placeholder="Password" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>*@
-                <div class="input-group mb-3 mt-5">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-key icon"></i></span>
-                    </div>
-                    <input asp-for="Password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                <div class="md-form">
+                    <input asp-for="Password" class="form-control mt-4"  placeholder="Password">
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                @*<div class="input-container">
-                    <i class="fa fa-key icon bg-primary mt-4"></i>
-                    <input asp-for="Password" class="form-control mt-4" type="text" placeholder="Password">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>*@
                 <div class="d-flex justify-content-around">
                     <div>
                         <div class="form-check mt-4">

@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using ShareTravelSystem.Services;
-using ShareTravelSystem.Web.Areas.Identity.Data;
-using ShareTravelSystem.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace ShareTravelSystem.Tests.Services
+﻿namespace ShareTravelSystem.Tests.Services
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using ShareTravelSystem.Services;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
+    using Xunit;
+
     public class MessageServiceTests
     {
         private UserManager<ShareTravelSystemUser> userManager { get; set; }

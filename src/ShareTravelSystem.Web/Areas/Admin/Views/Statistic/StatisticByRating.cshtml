@@ -2,32 +2,34 @@
 
 @{
     ViewData["Title"] = "Statistic of Users by Likes/DisLikes";
+    int index = 1;
 }
 
 @Html.ValidationSummary(false)
 <div class="container">
-    <h1>Satistic of User by Likes/Dislikes</h1>
+    <h2 class="text-left">Satistic of users by rating!</h2>
     @await Html.PartialAsync("_SearchStatistic", Model)
     <table class="table table-hover col-5 mt-3" id="townTable">
-        <thead>
+        <thead class="bg-primary">
             <tr>
-                <th scope="col" id="topRow" colspan="6">Id</th>
-                <th scope="col" id="topRow">Username</th>
-                <th scope="col" id="topRow">TotalLikes</th>
-                <th scope="col" id="topRow">TotalDisLikes</th>
-                <th scope="col" id="topRow">TotalRating</th>
+                <th scope="col" colspan="6" class="text-white">#</th>
+                <th scope="col" class="text-white">Username</th>
+                <th scope="col" class="text-white">TotalLikes</th>
+                <th scope="col" class="text-white">TotalDisLikes</th>
+                <th scope="col" class="text-white">TotalRating</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var statistic in Model.Statistic.Statistics)
             {
                 <tr>
-                    <td scope="row" colspan="6">@statistic.UserId</td>
+                    <td scope="row" colspan="6">@index</td>
                     <td>@statistic.UserName</td>
                     <td>@statistic.TotalLikes</td>
                     <td>@statistic.TotalDisLikes</td>
                     <td>@statistic.TotalRating</td>
                 </tr>
+                index++;
             }
         </tbody>
     </table>

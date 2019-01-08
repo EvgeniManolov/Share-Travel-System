@@ -1,13 +1,13 @@
 ﻿namespace ShareTravelSystem.Web.Areas.Admin.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    using Identity.Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Controllers;
-    using System;
-    using System.Threading.Tasks;
+    using Services.Contracts;
+    using Web.Controllers;
 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -36,7 +36,7 @@
                 return RedirectToAction(nameof(OfferController.Index));
             }
 
-            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Areas.Admin),
+            RedirectToActionResult redirectResult = MakeRedirectResult(nameof(Admin),
                                                                         nameof(OfferController),
                                                                         nameof(OfferController.Details),
                                                                         offerId);

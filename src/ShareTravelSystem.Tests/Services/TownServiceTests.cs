@@ -1,17 +1,17 @@
 ﻿namespace ShareTravelSystem.Tests.Services
 {
-    using ShareTravelSystem.ViewModels.Town;
-    using ShareTravelSystem.Web.Areas.Identity.Data;
-    using ShareTravelSystem.Web.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Xunit;
+    using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using ShareTravelSystem.Data.Models;
-    using ShareTravelSystem.Services;
     using Microsoft.Extensions.DependencyInjection;
+    using ShareTravelSystem.Services;
+    using ViewModels.Town;
+    using Web.Areas.Identity.Data;
+    using Web.Models;
+    using Xunit;
 
     public class TownServiceTests
     {
@@ -42,6 +42,34 @@
                 string modelTownName = model.Name;
 
                 Assert.Equal(dbTownName, modelTownName);
+            }
+        }
+
+        [Fact]
+        public async Task ShouldCreateTownWithNameThatAlreadyExistsAndTakException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                TownService townService = new TownService(context);
+
+                CrateTownViewModel model = new CrateTownViewModel { Name = "ИмеГрад" };
+                await townService.CreateTownAsync(model);
+                CrateTownViewModel model1 = new CrateTownViewModel { Name = "ИмеГрад" };
+                // Act
+                string result = null;
+                try
+                {
+                    await townService.CreateTownAsync(model1);
+                }
+                catch(Exception e)
+                {
+                    result = e.Message;
+                }
+                
+                // Assert
+                Assert.Equal("Town with name ИмеГрад already exists.", result);
+                
             }
         }
 

@@ -1,11 +1,12 @@
 ﻿namespace ShareTravelSystem.Web.Infrastructure.Mapping
 {
-    using AutoMapper;
-    using ShareTravelSystem.Common;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using AutoMapper;
+    using Common;
+    using Constants;
 
     public class AutoMapperProfile : Profile
     {
@@ -13,7 +14,7 @@
         {
             IEnumerable<Assembly> assemblies = AppDomain.CurrentDomain
                 .GetAssemblies()
-                .Where(x => x.FullName.Contains(Constants.Constants.SolutionName));
+                .Where(x => x.FullName.Contains(Constants.SolutionName));
 
             IEnumerable<Type> types = assemblies
                 .SelectMany(a => a.GetTypes().Where(t => t.IsClass && !t.IsAbstract))
