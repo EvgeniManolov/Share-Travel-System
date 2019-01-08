@@ -14,6 +14,5 @@
         public ShareTravelSystemUser Author { get; set; }
 
         public DateTime CreateOn { get; set; }
-
     }
 }

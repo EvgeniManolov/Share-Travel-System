@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.SignalR;
-using ShareTravelSystem.Services.Contracts;
-using ShareTravelSystem.Web.Areas.Identity.Data;
-using System;
-using System.Threading.Tasks;
-
-namespace ShareTravelSystem.Web.SignalRChat
+﻿namespace ShareTravelSystem.Web.SignalRChat
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.SignalR;
+    using ShareTravelSystem.Services.Contracts;
+    using ShareTravelSystem.Web.Areas.Identity.Data;
+    using System.Threading.Tasks;
+
     public class ChatHub : Hub
     {
         private readonly IMessageService messageService;
@@ -20,6 +19,11 @@ namespace ShareTravelSystem.Web.SignalRChat
         }
         public async Task Send(string message)
         {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
+
             await this.messageService
                 .CreateMessageAsync(message, this.userManager.GetUserId(this.Context.User));
 
@@ -35,6 +39,6 @@ namespace ShareTravelSystem.Web.SignalRChat
     {
         public string User { get; set; }
 
-        public string  Text { get; set; }
+        public string Text { get; set; }
     }
 }
