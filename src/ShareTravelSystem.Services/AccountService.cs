@@ -31,13 +31,12 @@
 
             if (isExist != null)
             {
-                throw new ArgumentException("Name", Constants.UserAlreadyExists);
+                throw new ArgumentException(Constants.UserAlreadyExists);
             }
             if (model.Password != model.ConfirmPassword)
             {
-                return false;
+                throw new ArgumentException(Constants.PasswordDoesnotMatch);
             }
-
 
             var user = new ShareTravelSystemUser
             {
@@ -85,7 +84,7 @@
             }
             else
             {
-                return false;
+                throw new ArgumentException("Name", Constants.InvalidLogin);
             }
         }
 

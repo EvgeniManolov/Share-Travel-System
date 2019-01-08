@@ -5,71 +5,60 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ShareTravelSystem.Services.Contracts;
-    using ShareTravelSystem.Web.Infrastructure.Constants;
     using ShareTravelSystem.ViewModels;
     using ShareTravelSystem.Web.Areas.Identity.Data;
-    using System.Linq;
     using System.Threading.Tasks;
     using System;
+    using Microsoft.Extensions.Logging;
 
     public class AccountController : BaseController
     {
         private readonly UserManager<ShareTravelSystemUser> userManager;
         private readonly SignInManager<ShareTravelSystemUser> signInManager;
-        //private readonly RoleManager<IdentityRole> roleManager;
         private readonly IAccountService accountService;
+        private readonly ILogger logger;
 
         public AccountController(
             UserManager<ShareTravelSystemUser> userManager,
             SignInManager<ShareTravelSystemUser> signInManager,
-            IAccountService accountService)
+            IAccountService accountService,
+            ILogger<AccountController> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.accountService = accountService;
+            this.logger = logger;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-            // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-            if (!ModelState.IsValid)
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid login credentials.");
-                return this.View(model);
+                try
+                {
+                    await accountService.Login(model);
+                    this.logger.LogInformation("User logged in.");
+                    return RedirectToLocal(returnUrl, model.Email);
+                }
+                catch
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login atempt.");
+                    return View(model);
+                }
             }
-            bool check = false;
-            try
-            {
-                check = await accountService.Login(model);
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login credentials.");
-                return View(model);
-            }
-
-            if (check)
-            {
-                return RedirectToLocal(model.Email);
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login credentials.");
-                return View(model);
-            }
-            
+            return View(model);
         }
 
         [HttpGet]
@@ -84,7 +73,6 @@
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-
             if (!ModelState.IsValid)
             {
                 return this.View(model);
@@ -93,12 +81,12 @@
             {
                 await accountService.Register(model);
             }
-
             catch (Exception e)
             {
                 this.ModelState.AddModelError("Name", e.Message);
                 return this.View(model);
             }
+
             return RedirectToLocal(returnUrl);
         }
 
@@ -117,7 +105,7 @@
         public async Task<IActionResult> Logout()
         {
             await accountService.Logout();
-            // this.logger.LogInformation("User logged out.");
+            this.logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

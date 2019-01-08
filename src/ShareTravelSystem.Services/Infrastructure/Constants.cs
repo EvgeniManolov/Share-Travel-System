@@ -37,5 +37,9 @@
         public const string UserRole = "User";
 
         public const string UserAlreadyExists = "User with this Username/Email already exists!";
+
+        public const string InvalidLogin = "Invalid Login! Wrong Credentils!";
+
+        public const string PasswordDoesnotMatch = "Passwords does not match!";
     }
 }

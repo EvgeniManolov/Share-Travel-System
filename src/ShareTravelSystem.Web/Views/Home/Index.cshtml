@@ -11,8 +11,14 @@
 {
     <div class="jumbotron border-0">
         <div class="container">
-            <h1 class="display-3">Tr@vel w1th Fr1ends!</h1>
-            <p></p>
+            @if (this.User.IsInRole("User"))
+            {
+                <h1 class="display-3">Tr@vel w1th Fr1ends!</h1>
+            }
+            else
+            {
+                <h1 class="display-3">Admin Panel!</h1>
+            }
         </div>
     </div>
     <div class="container">
@@ -41,7 +47,6 @@
 }
 else
 {
-
     <div id="my-div" class="wrapper"><a class="btn btn-primary btn-lg text-white" href="/Account/Login" id="bigbutton">TRAVEL WITH ME</a></div>
 
 }
