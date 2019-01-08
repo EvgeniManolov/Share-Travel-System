@@ -50,31 +50,31 @@
                     <ul class="list-group">
                         @if (Model.Reviews.Count == 0)
                         {
-                            <li>No comments</li>
+                            <div class="ml-3">No comments</div>
                         }
                         else
                         {
-                            @foreach (var review in Model.Reviews)
+                            foreach (var review in Model.Reviews)
                             {
                                 <li class="list-group-item mt-3 ml-3">
                                     <div class="row">
                                         <div class="col-xs-10 col-md-11">
                                             <div>
                                                 <text>
-                                                    <i class="fa fa-comment" style="font-size:12px"></i> @review.Comment
+                                                    <i class="fa fa-comment" style="font-size: 12px"></i> @review.Comment
                                                 </text>
                                                 <div class="row ml-0">
                                                     <div class="mic-info">
                                                         <i class="fa fa-user" title="User"></i> <text>@review.Author</text>
                                                     </div>
                                                     <div class="mic-info ml-3">
-                                                        <i class="fa fa-calendar" title="Post on" style="font-size:12px"></i><text class="ml-1">@review.CreateDate.ToLocalTime()</text>
+                                                        <i class="fa fa-calendar" title="Post on" style="font-size: 12px"></i><text class="ml-1">@review.CreateDate.ToLocalTime()</text>
                                                     </div>
                                                     <div class="ml-2">
                                                         <div>
                                                             <form method="post">
-                                                                <input type="hidden" name="reviewId" value="@review.Id" />
-                                                                <input type="hidden" name="offerId" value="@Model.Id" />
+                                                                <input type="hidden" name="reviewId" value="@review.Id"/>
+                                                                <input type="hidden" name="offerId" value="@Model.Id"/>
                                                                 <button type="submit" class="btn btn-primary" asp-area="Admin" asp-controller="Review" asp-action="Delete">Delete</button>
                                                             </form>
                                                         </div>

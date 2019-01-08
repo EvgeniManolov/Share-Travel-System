@@ -14,7 +14,7 @@
     </div>
     <hr />
     <div class="card-deck">
-        @if (Model.AllAnnouncements.Announcements.Count() == 0)
+        @if (!Model.AllAnnouncements.Announcements.Any())
         {
             <h2 class="ml-4">No announcements</h2>
         }
