@@ -13,7 +13,8 @@
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     Comment = table.Column<string>(nullable: true),
                     Rate = table.Column<int>(nullable: false),
                     AuthorId = table.Column<string>(nullable: true)
@@ -34,20 +35,19 @@
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Towns", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Towns", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Offers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<string>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     DepartureDate = table.Column<DateTime>(nullable: false),

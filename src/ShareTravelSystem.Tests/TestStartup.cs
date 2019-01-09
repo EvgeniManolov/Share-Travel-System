@@ -24,12 +24,14 @@
             if (userManager == null)
             {
                 var mockUserStore = new Mock<IUserStore<ShareTravelSystemUser>>();
-                userManager = new Mock<UserManager<ShareTravelSystemUser>>(mockUserStore.Object, null, null, null, null, null, null, null, null);
+                userManager = new Mock<UserManager<ShareTravelSystemUser>>(mockUserStore.Object, null, null, null, null,
+                    null, null, null, null);
             }
-
         }
 
-        public static UserManager<ShareTravelSystemUser> UserManager { get { return userManager.Object; } }
-
+        public static UserManager<ShareTravelSystemUser> UserManager
+        {
+            get { return userManager.Object; }
+        }
     }
 }

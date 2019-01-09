@@ -25,14 +25,14 @@
         {
             base.OnModelCreating(builder);
             builder.Entity<Offer>()
-                        .HasOne(s => s.DepartureTown)
-                        .WithMany(g => g.TownsAsDepartureTown)
-                        .HasForeignKey(s => s.DepartureTownId).OnDelete(DeleteBehavior.Restrict);
+                .HasOne(s => s.DepartureTown)
+                .WithMany(g => g.TownsAsDepartureTown)
+                .HasForeignKey(s => s.DepartureTownId).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Offer>()
-                        .HasOne(s => s.DestinationTown)
-                        .WithMany(g => g.TownsAsDestinationTown)
-                        .HasForeignKey(s => s.DestinationTownId).OnDelete(DeleteBehavior.Restrict);
+                .HasOne(s => s.DestinationTown)
+                .WithMany(g => g.TownsAsDestinationTown)
+                .HasForeignKey(s => s.DestinationTownId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

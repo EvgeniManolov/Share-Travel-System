@@ -1,5 +1,4 @@
-﻿
-namespace ShareTravelSystem.Data.Models
+﻿namespace ShareTravelSystem.Data.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;

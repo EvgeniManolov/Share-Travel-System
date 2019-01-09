@@ -17,6 +17,7 @@
             this.messageService = messageService;
             this.userManager = userManager;
         }
+
         public async Task Send(string message)
         {
             if (string.IsNullOrWhiteSpace(message))
@@ -24,12 +25,12 @@
                 return;
             }
 
-            await this.messageService
-                .CreateMessageAsync(message, this.userManager.GetUserId(this.Context.User));
+            await messageService
+                .CreateMessageAsync(message, userManager.GetUserId(Context.User));
 
-            await this.Clients.All.SendAsync("NewMessage", new Message
+            await Clients.All.SendAsync("NewMessage", new Message
             {
-                User = this.Context.User.Identity.Name,
+                User = Context.User.Identity.Name,
                 Text = message
             });
         }

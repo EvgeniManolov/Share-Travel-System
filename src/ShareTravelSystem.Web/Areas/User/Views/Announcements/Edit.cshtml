@@ -1,0 +1,29 @@
+﻿@model EditAnnouncementViewModel
+
+@{
+    ViewData["Title"] = "Edit Announcement";
+}
+
+<div class="container">
+    <div class="card mt-5">
+        <h5 class="card-header info-color white-text text-center py-4 bg-primary">
+            <strong class="text-white">@ViewData["Title"]</strong>
+        </h5>
+        <div class="card-body px-lg-5 pt-0">
+            <form asp-controller="Announcement" asp-action="Edit" method="post" class="text-center" style="color: #757575;">
+                <div class="md-form">
+                    <input asp-for="@Model.Title" class="form-control mt-4" placeholder="Title" value="@Model.Title"/>
+                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                </div>
+                <div class="md-form">
+                    <textarea asp-for="@Model.Content" va rows="10" class="form-control mt-4" placeholder="Content">@Model.Content</textarea>
+                    <span asp-validation-for="@Model.Content" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5 mr-2 col" type="submit">Save</button>
+                    <a asp-controller="Announcements" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0  mt-5 col">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

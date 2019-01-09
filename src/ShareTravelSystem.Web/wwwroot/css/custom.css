@@ -6,11 +6,11 @@
     max-height: 250px;
 }
 
-    .card-deck .card:hover {
-        -webkit-box-shadow: -1px 9px 40px -12px var(--header-and-footer-background);
-        -moz-box-shadow: -1px 9px 40px -12px var(--header-and-footer-background);
-        box-shadow: -1px 9px 40px 0px var(--header-and-footer-background);
-    }
+.card-deck .card:hover {
+    -webkit-box-shadow: -1px 9px 40px -12px var(--header-and-footer-background);
+    -moz-box-shadow: -1px 9px 40px -12px var(--header-and-footer-background);
+    box-shadow: -1px 9px 40px 0px var(--header-and-footer-background);
+}
 
 
 #offerId {
@@ -27,8 +27,8 @@
     background-color: #D9D9D9;
     border: 1px solid #D9D9D9;
     border-radius: 0px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
     padding-left: 15px;
     border: 0px;
 }
@@ -46,17 +46,11 @@
     margin-top: 20px;
 }
 
-p {
-    margin: 3px;
-}
+p { margin: 3px; }
 
-.well-add-card {
-    margin-bottom: 10px;
-}
+.well-add-card { margin-bottom: 10px; }
 
-.btn-add-card {
-    margin-top: 20px;
-}
+.btn-add-card { margin-top: 20px; }
 
 .thumbnail {
     display: block;
@@ -73,17 +67,11 @@ p {
     padding-right: 0px;
 }
 
-.btn {
-    border-radius: 0px;
-}
+.btn { border-radius: 0px; }
 
-.btn-update {
-    margin-left: 15px;
-}
+.btn-update { margin-left: 15px; }
 
-.lableoffer {
-    top: 0;
-}
+.lableoffer { top: 0; }
 
 #topRow {
     border-bottom-color: grey !important;
@@ -103,17 +91,11 @@ p {
 }
 
 
-.deleteOfferCLass {
-    color: grey;
-}
+.deleteOfferCLass { color: grey; }
 
-.editOfferCLass {
-    color: grey;
-}
+.editOfferCLass { color: grey; }
 
-.deleteOfferCLass:hover {
-    color: red !important;
-}
+.deleteOfferCLass:hover { color: red !important; }
 
 
 .shape {
@@ -155,93 +137,72 @@ p {
     overflow: hidden;
 }
 
-.project-radius {
-    border-radius: 7px;
+.project-radius { border-radius: 7px; }
+
+.project-default { border-color: #999999; }
+
+.project-default .shape {
+    border-color: transparent #999999 transparent transparent;
+    border-color: rgba(255, 255, 255, 0) #999999 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-.project-default {
-    border-color: #999999;
+.project-danger { border-color: #d9534f; }
+
+.project-danger .shape {
+    border-color: transparent #d9534f transparent transparent;
+    border-color: rgba(255, 255, 255, 0) #d9534f rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-    .project-default .shape {
-        border-color: transparent #999999 transparent transparent;
-        border-color: rgba(255,255,255,0) #999999 rgba(255,255,255,0) rgba(255,255,255,0);
-    }
+.project-success { border-color: #5cb85c; }
 
-.project-danger {
-    border-color: #d9534f;
+.project-success .shape {
+    border-color: transparent #5cb85c transparent transparent;
+    border-color: rgba(255, 255, 255, 0) #5cb85c rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-    .project-danger .shape {
-        border-color: transparent #d9534f transparent transparent;
-        border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
-    }
+.project-primary { border-color: #428bca; }
 
-.project-success {
-    border-color: #5cb85c;
+.project-primary .shape {
+    border-color: transparent #428bca transparent transparent;
+    border-color: rgba(255, 255, 255, 0) #428bca rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-    .project-success .shape {
-        border-color: transparent #5cb85c transparent transparent;
-        border-color: rgba(255,255,255,0) #5cb85c rgba(255,255,255,0) rgba(255,255,255,0);
-    }
+.project-info { border-color: #5bc0de; }
 
-.project-primary {
-    border-color: #428bca;
+.project-info .shape {
+    border-color: transparent #5bc0de transparent transparent;
+    border-color: rgba(255, 255, 255, 0) #5bc0de rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-    .project-primary .shape {
-        border-color: transparent #428bca transparent transparent;
-        border-color: rgba(255,255,255,0) #428bca rgba(255,255,255,0) rgba(255,255,255,0);
-    }
+.project-warning { border-color: #f0ad4e; }
 
-.project-info {
-    border-color: #5bc0de;
+.project-warning .shape {
+    border-color: transparent #f0ad4e transparent transparent;
+    border-color: rgba(255, 255, 255, 0) #f0ad4e rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-    .project-info .shape {
-        border-color: transparent #5bc0de transparent transparent;
-        border-color: rgba(255,255,255,0) #5bc0de rgba(255,255,255,0) rgba(255,255,255,0);
-    }
+.project-content { padding: 0 20px 10px; }
 
-.project-warning {
-    border-color: #f0ad4e;
-}
-
-    .project-warning .shape {
-        border-color: transparent #f0ad4e transparent transparent;
-        border-color: rgba(255,255,255,0) #f0ad4e rgba(255,255,255,0) rgba(255,255,255,0);
-    }
-
-.project-content {
-    padding: 0 20px 10px;
-}
-
-#my-div {
-    height:85vh; 
-}
+#my-div { height: 85vh; }
 
 #my-div {
     background: url("http://www.tmb.ie/wp/wp-content/uploads/2017/04/Preventing-problems-when-travelling-with-friends2.jpg") no-repeat fixed center;
     background-size: cover;
 }
 
-.wrapper{
-    text-align:center;
-}
+.wrapper { text-align: center; }
 
 #bigbutton {
     position: absolute;
     top: 55%;
 }
+
 .jumbotron {
     background: url("http://web.uni-miskolc.hu/files/2896/Travelling-OurLifeInTheD.jpg?width=645&height=292&crop=1") no-repeat fixed center;
     background-size: cover;
 }
 
-.display-3{
-    text-shadow: 2px 2px var(--header-and-footer-background);
-}
+.display-3 { text-shadow: 2px 2px var(--header-and-footer-background); }
 
 #likeDislikeButton {
     background: none !important;
@@ -249,30 +210,20 @@ p {
     outline: none;
 }
 
-.likeOfferClass:hover {
-    color: lawngreen !important;
-}
+.likeOfferClass:hover { color: lawngreen !important; }
 
-.dislikeOfferClass:hover {
-    color: red !important;
-}
+.dislikeOfferClass:hover { color: red !important; }
 
-footer, nav {
-    background-color: var(--header-and-footer-background)
-}
+footer, nav { background-color: var(--header-and-footer-background) }
 
-.search-bar {
-    padding: 1rem 0rem;
-}
+.search-bar { padding: 1rem 0rem; }
 
 .search-bar .row {
     align-content: center;
     justify-content: center;
 }
 
-.town-table-line{
+.town-table-line {
     margin-left: 0;
     margin-right: 0;
 }
-
-

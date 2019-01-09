@@ -9,7 +9,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using ShareTravelSystem.Services;
-    using ShareTravelSystem.ViewModels;
+    using ViewModels;
     using ViewModels.Offer;
     using Web.Areas.Identity.Data;
     using Web.Models;
@@ -21,29 +21,28 @@
 
         public OfferServiceTests()
         {
-            this.UserManager = TestStartup.UserManager;
+            UserManager = TestStartup.UserManager;
         }
 
         [Fact]
         public async Task CreateOfferAsync_WithCorrectData_WorksCorrectly()
         {
-
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUserr"
                 };
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.Софияаа" }, new Town { Name = "гр.Варнааа" } };
+                var towns = new List<Town> {new Town {Name = "гр.Софияаа"}, new Town {Name = "гр.Варнааа"}};
 
                 await context.Users.AddAsync(user);
                 await context.Towns.AddRangeAsync(towns);
                 await context.SaveChangesAsync();
 
-                CreateOfferViewModel model = new CreateOfferViewModel
+                var model = new CreateOfferViewModel
                 {
                     Type = "Search",
                     DepartureTownId = 1,
@@ -60,7 +59,7 @@
                 // Assert
                 Assert.True(await context.Offers.CountAsync() == 1);
 
-                string dbOfferAuthor = await context.Offers.Select(x => x.Author.UserName).SingleOrDefaultAsync();
+                var dbOfferAuthor = await context.Offers.Select(x => x.Author.UserName).SingleOrDefaultAsync();
                 Assert.Equal(user.UserName, dbOfferAuthor);
             }
         }
@@ -70,9 +69,9 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUserr"
                 };
@@ -80,12 +79,12 @@
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+                var towns = new List<Town> {new Town {Name = "гр.София"}, new Town {Name = "гр.Варна"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -111,7 +110,6 @@
                 Assert.Equal(offer.Type.ToString(), returnedModel.Type);
                 Assert.Equal(offer.DepartureDate, returnedModel.DepartureDate);
             }
-
         }
 
         [Fact]
@@ -119,55 +117,57 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
+                var offerService = new OfferService(context, UserManager);
 
-                OfferService offerService = new OfferService(context, this.UserManager);
-
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUserас"
                 };
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.асд" }, new Town { Name = "гр.асд" } };
+                var towns = new List<Town> {new Town {Name = "гр.асд"}, new Town {Name = "гр.асд"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                List<Offer> offers = new List<Offer> {
-                                new Offer
-                                {
-                                    Type = OfferType.Search,
-                                    DepartureTownId = 1,
-                                    DestinationTownId = 2,
-                                    Seat = 15,
-                                    Price = 15,
-                                    DepartureDate = DateTime.UtcNow,
-                                    Description = "Не!",
-                                    Author = user,
-                                    TotalRating = 0,
-                                    CreateDate = DateTime.UtcNow
-                                },
+                var offers = new List<Offer>
+                {
+                    new Offer
+                    {
+                        Type = OfferType.Search,
+                        DepartureTownId = 1,
+                        DestinationTownId = 2,
+                        Seat = 15,
+                        Price = 15,
+                        DepartureDate = DateTime.UtcNow,
+                        Description = "Не!",
+                        Author = user,
+                        TotalRating = 0,
+                        CreateDate = DateTime.UtcNow
+                    },
 
-                                 new Offer
-                                {
-                                    Type = OfferType.Search,
-                                    DepartureTownId = 1,
-                                    DestinationTownId = 2,
-                                    Seat = 7,
-                                    Price = 13,
-                                    DepartureDate = DateTime.UtcNow,
-                                    Description = "Хелоу!",
-                                    Author = user,
-                                    TotalRating = 0,
-                                    CreateDate = DateTime.UtcNow
-                                }};
+                    new Offer
+                    {
+                        Type = OfferType.Search,
+                        DepartureTownId = 1,
+                        DestinationTownId = 2,
+                        Seat = 7,
+                        Price = 13,
+                        DepartureDate = DateTime.UtcNow,
+                        Description = "Хелоу!",
+                        Author = user,
+                        TotalRating = 0,
+                        CreateDate = DateTime.UtcNow
+                    }
+                };
                 await context.Offers.AddRangeAsync(offers);
                 await context.SaveChangesAsync();
 
                 // Act
-                OfferPaginationViewModel returnedModel = await offerService.GetAllOffersAsync(false, null, null, user.Id, 0);
+                var returnedModel =
+                    await offerService.GetAllOffersAsync(false, null, null, user.Id, 0);
 
-                int size = returnedModel.AllOffers.Offers.Count();
+                var size = returnedModel.AllOffers.Offers.Count();
 
                 // Assert
                 Assert.Equal(2, size);
@@ -180,14 +180,14 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                OfferService offerService = new OfferService(context, this.UserManager);
-                List<Town> towns = new List<Town> { new Town { Name = "гр.асд" }, new Town { Name = "гр.асд" } };
+                var offerService = new OfferService(context, UserManager);
+                var towns = new List<Town> {new Town {Name = "гр.асд"}, new Town {Name = "гр.асд"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.SaveChangesAsync();
 
                 // Act
-                IEnumerable<Town> returnedTowns = offerService.GetAllTowns();
+                var returnedTowns = offerService.GetAllTowns();
 
                 // Assert
                 Assert.Equal(2, returnedTowns.Count());
@@ -199,20 +199,20 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+                var towns = new List<Town> {new Town {Name = "гр.София"}, new Town {Name = "гр.Варна"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -231,7 +231,7 @@
 
 
                 // Act
-                DisplayEditOfferViewModel returnedModel = await offerService.GetOfferToEditAsync(offer.Id, user.Id);
+                var returnedModel = await offerService.GetOfferToEditAsync(offer.Id, user.Id);
 
                 // Assert
                 Assert.Equal(offer.Id, returnedModel.OfferModel.Id);
@@ -245,23 +245,27 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser> { new ShareTravelSystemUser
+                var users = new List<ShareTravelSystemUser>
                 {
-                    UserName = "TestUser"
-                }, new ShareTravelSystemUser
-                {
-                    UserName = "TestUser2"
-                }};
+                    new ShareTravelSystemUser
+                    {
+                        UserName = "TestUser"
+                    },
+                    new ShareTravelSystemUser
+                    {
+                        UserName = "TestUser2"
+                    }
+                };
 
-                var towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+                var towns = new List<Town> {new Town {Name = "гр.София"}, new Town {Name = "гр.Варна"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -301,23 +305,25 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
-                 List<Town> towns = new List<Town> {
-                     new Town { Name = "гр.София" },
-                     new Town { Name = "гр.Варна" },
-                     new Town { Name = "гр.Каварна"} };
+                var towns = new List<Town>
+                {
+                    new Town {Name = "гр.София"},
+                    new Town {Name = "гр.Варна"},
+                    new Town {Name = "гр.Каварна"}
+                };
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -337,7 +343,7 @@
                 ICollection<Town> townsList = new List<Town>();
                 townsList = context.Towns.ToList();
 
-                EditOfferViewModel editOfferModel = new EditOfferViewModel
+                var editOfferModel = new EditOfferViewModel
                 {
                     Id = 1,
                     Type = "Search",
@@ -349,15 +355,15 @@
                     Price = 3,
                     DepartureDate = offer.DepartureDate,
                     Description = offer.Description
-
                 };
-                DisplayEditOfferViewModel result = new DisplayEditOfferViewModel { OfferModel = editOfferModel, Towns = townsList };
+                var result =
+                    new DisplayEditOfferViewModel {OfferModel = editOfferModel, Towns = townsList};
                 // Act
                 await offerService.EditOfferAsync(result);
 
                 // Assert
-                int seatDb = await context.Offers.Select(x => x.Seat).SingleOrDefaultAsync();
-                decimal priceDb = await context.Offers.Select(x => x.Price).SingleOrDefaultAsync();
+                var seatDb = await context.Offers.Select(x => x.Seat).SingleOrDefaultAsync();
+                var priceDb = await context.Offers.Select(x => x.Price).SingleOrDefaultAsync();
                 Assert.Equal(editOfferModel.Seat, seatDb);
                 Assert.Equal(editOfferModel.Price, priceDb);
             }
@@ -368,19 +374,19 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
-                List<Town> towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+                var towns = new List<Town> {new Town {Name = "гр.София"}, new Town {Name = "гр.Варна"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -398,7 +404,7 @@
                 await context.SaveChangesAsync();
 
                 // Act
-                bool returnedModel = await offerService.LikeOfferAsync(offer.Id, user.Id);
+                var returnedModel = await offerService.LikeOfferAsync(offer.Id, user.Id);
 
                 // Assert
                 Assert.Equal(1, offer.TotalRating);
@@ -410,20 +416,20 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+                var towns = new List<Town> {new Town {Name = "гр.София"}, new Town {Name = "гр.Варна"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -441,7 +447,7 @@
                 await context.SaveChangesAsync();
 
                 // Act
-                bool returnedModel = await offerService.DisLikeOfferAsync(offer.Id, user.Id);
+                var returnedModel = await offerService.DisLikeOfferAsync(offer.Id, user.Id);
 
                 // Assert
                 Assert.Equal(-1, offer.TotalRating);
@@ -453,20 +459,20 @@
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.София" }, new Town { Name = "гр.Варна" } };
+                var towns = new List<Town> {new Town {Name = "гр.София"}, new Town {Name = "гр.Варна"}};
 
                 await context.Towns.AddRangeAsync(towns);
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -482,11 +488,12 @@
 
                 await context.Offers.AddAsync(offer);
                 await context.SaveChangesAsync();
-                bool returnedModel = await offerService.DisLikeOfferAsync(offer.Id, user.Id);
+                var returnedModel = await offerService.DisLikeOfferAsync(offer.Id, user.Id);
 
 
                 // Act
-                bool flag = await context.Reactions.Where(r => r.OfferId == offer.Id).Select(o => o.Action).SingleOrDefaultAsync();
+                var flag = await context.Reactions.Where(r => r.OfferId == offer.Id).Select(o => o.Action)
+                    .SingleOrDefaultAsync();
 
                 // Assert
                 Assert.False(flag);
@@ -496,23 +503,22 @@
         [Fact]
         public async Task DeleteOfferAsync_WithCorrectId_WorksCorrectly()
         {
-
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
-                OfferService offerService = new OfferService(context, this.UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUserr"
                 };
 
-                List<Town> towns = new List<Town> { new Town { Name = "гр.Софияаа" }, new Town { Name = "гр.Варнааа" } };
+                var towns = new List<Town> {new Town {Name = "гр.Софияаа"}, new Town {Name = "гр.Варнааа"}};
 
                 await context.Users.AddAsync(user);
                 await context.Towns.AddRangeAsync(towns);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -545,7 +551,7 @@
 
             var builder = new DbContextOptionsBuilder<ShareTravelSystemDbContext>();
             builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                   .UseInternalServiceProvider(serviceProvider);
+                .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
         }

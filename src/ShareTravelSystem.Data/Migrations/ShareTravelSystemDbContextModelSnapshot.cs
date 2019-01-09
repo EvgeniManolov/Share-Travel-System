@@ -20,413 +20,421 @@ namespace ShareTravelSystem.Data.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<string>("Id")
+                    .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken();
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
+                b.Property<string>("Name")
+                    .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
+                b.Property<string>("NormalizedName")
+                    .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                b.HasIndex("NormalizedName")
+                    .IsUnique()
+                    .HasName("RoleNameIndex")
+                    .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
-                });
+                b.ToTable("AspNetRoles");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                b.Property<string>("ClaimType");
 
-                    b.Property<string>("ClaimValue");
+                b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
+                b.Property<string>("RoleId")
+                    .IsRequired();
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
-                });
+                b.ToTable("AspNetRoleClaims");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                b.Property<string>("ClaimType");
 
-                    b.Property<string>("ClaimValue");
+                b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                b.Property<string>("UserId")
+                    .IsRequired();
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
-                });
+                b.ToTable("AspNetUserClaims");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider");
+            {
+                b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey");
+                b.Property<string>("ProviderKey");
 
-                    b.Property<string>("ProviderDisplayName");
+                b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                b.Property<string>("UserId")
+                    .IsRequired();
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
-                });
+                b.ToTable("AspNetUserLogins");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId");
+            {
+                b.Property<string>("UserId");
 
-                    b.Property<string>("RoleId");
+                b.Property<string>("RoleId");
 
-                    b.HasKey("UserId", "RoleId");
+                b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
-                });
+                b.ToTable("AspNetUserRoles");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId");
+            {
+                b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name");
+                b.Property<string>("Name");
 
-                    b.Property<string>("Value");
+                b.Property<string>("Value");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
-                });
+                b.ToTable("AspNetUserTokens");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Announcement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId");
+                b.Property<string>("AuthorId");
 
-                    b.Property<string>("Content");
+                b.Property<string>("Content");
 
-                    b.Property<DateTime>("CreateDate");
+                b.Property<DateTime>("CreateDate");
 
-                    b.Property<bool>("IsDeleted");
+                b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Title");
+                b.Property<string>("Title");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                b.HasIndex("AuthorId");
 
-                    b.ToTable("Announcements");
-                });
+                b.ToTable("Announcements");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId");
+                b.Property<string>("AuthorId");
 
-                    b.Property<DateTime>("CreateOn");
+                b.Property<DateTime>("CreateOn");
 
-                    b.Property<string>("Text");
+                b.Property<string>("Text");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                b.HasIndex("AuthorId");
 
-                    b.ToTable("Messages");
-                });
+                b.ToTable("Messages");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Offer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId");
+                b.Property<string>("AuthorId");
 
-                    b.Property<DateTime>("CreateDate");
+                b.Property<DateTime>("CreateDate");
 
-                    b.Property<DateTime>("DepartureDate");
+                b.Property<DateTime>("DepartureDate");
 
-                    b.Property<int>("DepartureTownId");
+                b.Property<int>("DepartureTownId");
 
-                    b.Property<string>("Description");
+                b.Property<string>("Description");
 
-                    b.Property<int>("DestinationTownId");
+                b.Property<int>("DestinationTownId");
 
-                    b.Property<bool>("IsDeleted");
+                b.Property<bool>("IsDeleted");
 
-                    b.Property<decimal>("Price");
+                b.Property<decimal>("Price");
 
-                    b.Property<int>("Seat");
+                b.Property<int>("Seat");
 
-                    b.Property<int>("TotalRating");
+                b.Property<int>("TotalRating");
 
-                    b.Property<int>("Type");
+                b.Property<int>("Type");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                b.HasIndex("AuthorId");
 
-                    b.HasIndex("DepartureTownId");
+                b.HasIndex("DepartureTownId");
 
-                    b.HasIndex("DestinationTownId");
+                b.HasIndex("DestinationTownId");
 
-                    b.ToTable("Offers");
-                });
+                b.ToTable("Offers");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Reaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Action");
+                b.Property<bool>("Action");
 
-                    b.Property<string>("AuthorId");
+                b.Property<string>("AuthorId");
 
-                    b.Property<int>("OfferId");
+                b.Property<int>("OfferId");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                b.HasIndex("AuthorId");
 
-                    b.HasIndex("OfferId");
+                b.HasIndex("OfferId");
 
-                    b.ToTable("Reactions");
-                });
+                b.ToTable("Reactions");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId");
+                b.Property<string>("AuthorId");
 
-                    b.Property<string>("Comment");
+                b.Property<string>("Comment");
 
-                    b.Property<DateTime>("CreateDate");
+                b.Property<DateTime>("CreateDate");
 
-                    b.Property<bool>("IsDeleted");
+                b.Property<bool>("IsDeleted");
 
-                    b.Property<int>("OfferId");
+                b.Property<int>("OfferId");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                b.HasIndex("AuthorId");
 
-                    b.HasIndex("OfferId");
+                b.HasIndex("OfferId");
 
-                    b.ToTable("Reviews");
-                });
+                b.ToTable("Reviews");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Town", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsDeleted");
+                b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Towns");
-                });
+                b.ToTable("Towns");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<string>("Id")
+                    .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccessFailedCount");
+                b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Address");
+                b.Property<string>("Address");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken();
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
+                b.Property<string>("Email")
+                    .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
+                b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName");
+                b.Property<string>("LastName");
 
-                    b.Property<bool>("LockoutEnabled");
+                b.Property<bool>("LockoutEnabled");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
+                b.Property<string>("NormalizedEmail")
+                    .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
+                b.Property<string>("NormalizedUserName")
+                    .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                b.Property<string>("PasswordHash");
 
-                    b.Property<string>("PhoneNumber");
+                b.Property<string>("PhoneNumber");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("SecurityStamp");
+                b.Property<string>("SecurityStamp");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
+                b.Property<string>("UserName")
+                    .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                b.HasIndex("NormalizedEmail")
+                    .HasName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                b.HasIndex("NormalizedUserName")
+                    .IsUnique()
+                    .HasName("UserNameIndex")
+                    .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
-                });
+                b.ToTable("AspNetUsers");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+            {
+                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+            {
+                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser")
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Announcement", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
-                        .WithMany("Announcements")
-                        .HasForeignKey("AuthorId");
-                });
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                    .WithMany("Announcements")
+                    .HasForeignKey("AuthorId");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Message", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
-                        .WithMany("Messages")
-                        .HasForeignKey("AuthorId");
-                });
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                    .WithMany("Messages")
+                    .HasForeignKey("AuthorId");
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Offer", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
-                        .WithMany("Offers")
-                        .HasForeignKey("AuthorId");
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                    .WithMany("Offers")
+                    .HasForeignKey("AuthorId");
 
-                    b.HasOne("ShareTravelSystem.Data.Models.Town", "DepartureTown")
-                        .WithMany("TownsAsDepartureTown")
-                        .HasForeignKey("DepartureTownId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                b.HasOne("ShareTravelSystem.Data.Models.Town", "DepartureTown")
+                    .WithMany("TownsAsDepartureTown")
+                    .HasForeignKey("DepartureTownId")
+                    .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("ShareTravelSystem.Data.Models.Town", "DestinationTown")
-                        .WithMany("TownsAsDestinationTown")
-                        .HasForeignKey("DestinationTownId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
+                b.HasOne("ShareTravelSystem.Data.Models.Town", "DestinationTown")
+                    .WithMany("TownsAsDestinationTown")
+                    .HasForeignKey("DestinationTownId")
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Reaction", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
-                        .WithMany("Reactions")
-                        .HasForeignKey("AuthorId");
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                    .WithMany("Reactions")
+                    .HasForeignKey("AuthorId");
 
-                    b.HasOne("ShareTravelSystem.Data.Models.Offer", "Offer")
-                        .WithMany("Reactions")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                b.HasOne("ShareTravelSystem.Data.Models.Offer", "Offer")
+                    .WithMany("Reactions")
+                    .HasForeignKey("OfferId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity("ShareTravelSystem.Data.Models.Review", b =>
-                {
-                    b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
-                        .WithMany("Reviews")
-                        .HasForeignKey("AuthorId");
+            {
+                b.HasOne("ShareTravelSystem.Web.Areas.Identity.Data.ShareTravelSystemUser", "Author")
+                    .WithMany("Reviews")
+                    .HasForeignKey("AuthorId");
 
-                    b.HasOne("ShareTravelSystem.Data.Models.Offer", "Offer")
-                        .WithMany("Reviews")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                b.HasOne("ShareTravelSystem.Data.Models.Offer", "Offer")
+                    .WithMany("Reviews")
+                    .HasForeignKey("OfferId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 #pragma warning restore 612, 618
         }
     }

@@ -12,15 +12,15 @@
     {
         public static void Main(string[] args)
         {
-            IWebHost host = CreateWebHostBuilder(args).Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
-                IServiceProvider services = scope.ServiceProvider;
+                var services = scope.ServiceProvider;
 
                 try
                 {
-                    ShareTravelSystemDbContext context = services.GetRequiredService<ShareTravelSystemDbContext>();
+                    var context = services.GetRequiredService<ShareTravelSystemDbContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

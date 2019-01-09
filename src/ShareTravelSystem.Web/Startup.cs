@@ -40,21 +40,21 @@
 
             services.AddDbContext<ShareTravelSystemDbContext>(options =>
                 options.UseSqlServer(
-                    this.Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDomainServices();
             Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             services.AddAutoMapper();
 
             services.AddIdentity<ShareTravelSystemUser, IdentityRole>(
-                options =>
-                {
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireDigit = false;
-                })
+                    options =>
+                    {
+                        options.Password.RequiredLength = 6;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequireDigit = false;
+                    })
                 .AddEntityFrameworkStores<ShareTravelSystemDbContext>()
                 .AddDefaultTokenProviders();
             services.AddSignalR();
@@ -62,7 +62,8 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env ,IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider,
+            ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -84,17 +85,12 @@
 
             app.UseAuthentication();
             app.UseSignalR(
-                routes =>
-                {
-                    routes.MapHub<ChatHub>("/chat");
-                });
+                routes => { routes.MapHub<ChatHub>("/chat"); });
             app.UseMvc(routes =>
             {
-                    
-
                 routes.MapRoute(
-                name: "areas",
-                template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
                     name: "default",

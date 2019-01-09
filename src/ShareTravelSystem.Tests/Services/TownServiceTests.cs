@@ -28,9 +28,9 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                CrateTownViewModel model = new CrateTownViewModel { Name = "ИмеГрад" };
+                var model = new CrateTownViewModel {Name = "ИмеГрад"};
 
                 // Act
                 await townService.CreateTownAsync(model);
@@ -38,8 +38,8 @@
                 // Assert
                 Assert.True(await context.Towns.CountAsync() == 1);
 
-                string dbTownName = await context.Towns.Select(x => x.Name).SingleOrDefaultAsync();
-                string modelTownName = model.Name;
+                var dbTownName = await context.Towns.Select(x => x.Name).SingleOrDefaultAsync();
+                var modelTownName = model.Name;
 
                 Assert.Equal(dbTownName, modelTownName);
             }
@@ -51,11 +51,11 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                CrateTownViewModel model = new CrateTownViewModel { Name = "ИмеГрад" };
+                var model = new CrateTownViewModel {Name = "ИмеГрад"};
                 await townService.CreateTownAsync(model);
-                CrateTownViewModel model1 = new CrateTownViewModel { Name = "ИмеГрад" };
+                var model1 = new CrateTownViewModel {Name = "ИмеГрад"};
 
                 // Act
                 string result = null;
@@ -63,11 +63,11 @@
                 {
                     await townService.CreateTownAsync(model1);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     result = e.Message;
                 }
-                
+
                 // Assert
                 Assert.Equal("Town with name ИмеГрад already exists.", result);
             }
@@ -79,20 +79,20 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town = new Town { Name = "ИзтритГрад" };
+                var town = new Town {Name = "ИзтритГрад"};
                 await context.Towns.AddAsync(town);
                 await context.SaveChangesAsync();
 
-                int townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
+                var townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
 
                 // Act
                 await townService.DeleteTownAsync(townId);
 
                 // Assert
                 Assert.True(await context.Towns.Where(x => x.IsDeleted).CountAsync() == 1);
-                bool flag = await context.Towns.Select(x => x.IsDeleted).SingleOrDefaultAsync();
+                var flag = await context.Towns.Select(x => x.IsDeleted).SingleOrDefaultAsync();
                 Assert.True(flag);
             }
         }
@@ -103,13 +103,13 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town = new Town { Name = "ИзтритГрад" };
+                var town = new Town {Name = "ИзтритГрад"};
                 await context.Towns.AddAsync(town);
                 await context.SaveChangesAsync();
 
-                int townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
+                var townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
 
                 // Act
                 string result = null;
@@ -133,15 +133,15 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town = new Town { Name = "ИзтритГрад" };
+                var town = new Town {Name = "ИзтритГрад"};
                 await context.Towns.AddAsync(town);
                 await context.SaveChangesAsync();
 
-                int townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
+                var townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
 
-                EditTownViewModel editTown = new EditTownViewModel { Id = townId, Name = "ЕдитнатГрад" };
+                var editTown = new EditTownViewModel {Id = townId, Name = "ЕдитнатГрад"};
 
                 // Act
                 await townService.EditTownAsync(editTown);
@@ -149,7 +149,7 @@
                 // Assert
                 Assert.True(await context.Towns.CountAsync() == 1);
 
-                string editTownNameInDatabase = await context.Towns.Select(x => x.Name).SingleOrDefaultAsync();
+                var editTownNameInDatabase = await context.Towns.Select(x => x.Name).SingleOrDefaultAsync();
                 Assert.Equal(editTownNameInDatabase, editTown.Name);
             }
         }
@@ -160,18 +160,18 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town = new Town { Name = "ИзтритГрад" };
+                var town = new Town {Name = "ИзтритГрад"};
                 await context.Towns.AddAsync(town);
                 await context.SaveChangesAsync();
 
-                int townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
+                var townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
 
-                EditTownViewModel editTown = new EditTownViewModel { Id = townId, Name = "ИзтритГрад" };
+                var editTown = new EditTownViewModel {Id = townId, Name = "ИзтритГрад"};
 
                 // Act
-                
+
 
                 string result = null;
                 try
@@ -194,22 +194,22 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town1 = new Town { Name = "Град1" };
-                Town town2 = new Town { Name = "Град2" };
-                Town town3 = new Town { Name = "Град3" };
-                Town town4 = new Town { Name = "Град4" };
+                var town1 = new Town {Name = "Град1"};
+                var town2 = new Town {Name = "Град2"};
+                var town3 = new Town {Name = "Град3"};
+                var town4 = new Town {Name = "Град4"};
 
                 await context.Towns.AddRangeAsync(town1, town2, town3, town4);
                 await context.SaveChangesAsync();
 
                 await townService.DeleteTownAsync(town1.Id);
-                int townsInDatabase = await context.Towns.CountAsync();
+                var townsInDatabase = await context.Towns.CountAsync();
 
                 // Act
                 var result = await townService.GetAllTownsAsync(0, null);
-                int returnedActiveTownsCount = result.Towns.Count();
+                var returnedActiveTownsCount = result.Towns.Count();
 
                 // Assert
                 Assert.Equal(townsInDatabase - 1, returnedActiveTownsCount);
@@ -222,13 +222,13 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town = new Town { Name = "Таун" };
+                var town = new Town {Name = "Таун"};
                 await context.Towns.AddAsync(town);
                 await context.SaveChangesAsync();
 
-                int townId = town.Id;
+                var townId = town.Id;
 
                 // Act
                 var model = await townService.GetTownToEditAsync(townId);
@@ -245,13 +245,13 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                TownService townService = new TownService(context);
+                var townService = new TownService(context);
 
-                Town town = new Town { Name = "Таун" };
+                var town = new Town {Name = "Таун"};
                 await context.Towns.AddAsync(town);
                 await context.SaveChangesAsync();
 
-                int townId = town.Id;
+                var townId = town.Id;
 
                 // Act
                 string result = null;
@@ -277,7 +277,7 @@
 
             var builder = new DbContextOptionsBuilder<ShareTravelSystemDbContext>();
             builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                   .UseInternalServiceProvider(serviceProvider);
+                .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
         }

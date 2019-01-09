@@ -12,25 +12,27 @@
     public class SeedRolesMiddleware
     {
         private readonly RequestDelegate next;
-       
+
         public SeedRolesMiddleware(RequestDelegate next)
         {
             this.next = next;
         }
-       
-        public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider, UserManager<ShareTravelSystemUser> userManager, RoleManager<IdentityRole> roleManager)
+
+        public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider,
+            UserManager<ShareTravelSystemUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var dbContext = serviceProvider.GetService<ShareTravelSystemDbContext>();
-       
+
             if (!dbContext.Roles.Any())
             {
-                await this.SeedRoles(userManager, roleManager);
+                await SeedRoles(userManager, roleManager);
             }
-       
-            await this.next(context);
+
+            await next(context);
         }
-       
-        private async Task SeedRoles(UserManager<ShareTravelSystemUser> userManager, RoleManager<IdentityRole> roleManager)
+
+        private async Task SeedRoles(UserManager<ShareTravelSystemUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             await roleManager.CreateAsync(new IdentityRole("Admin"));
             await roleManager.CreateAsync(new IdentityRole("User"));

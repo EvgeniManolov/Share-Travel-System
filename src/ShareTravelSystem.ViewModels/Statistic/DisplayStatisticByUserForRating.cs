@@ -10,6 +10,6 @@
 
         public int TotalDisLikes { get; set; }
 
-        public int TotalRating { get; set; } 
+        public int TotalRating { get; set; }
     }
 }

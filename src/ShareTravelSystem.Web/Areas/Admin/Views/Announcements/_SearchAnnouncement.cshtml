@@ -1,0 +1,10 @@
+﻿@model AnnouncementPaginationViewModel
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="row">
+            <input name="search" type="text" value="@Model.Search" class="ml-3" placeholder="Search Announcement...">
+            <button type="submit" class="btn btn-primary text-white ml-2" href="@Url.Action("Index", "Announcements")">Search</button>
+        </div>
+    </div>
+</form>

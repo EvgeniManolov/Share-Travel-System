@@ -1,5 +1,4 @@
-﻿
-namespace ShareTravelSystem.ViewModels.Offer
+﻿namespace ShareTravelSystem.ViewModels.Offer
 {
     using System;
     using System.Collections.Generic;
@@ -12,13 +11,9 @@ namespace ShareTravelSystem.ViewModels.Offer
     {
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Type")]
-        public string Type { get; set; }
+        [Required] [Display(Name = "Type")] public string Type { get; set; }
 
-        [Required]
-        [Display(Name = "Author")]
-        public string Author { get; set; }
+        [Required] [Display(Name = "Author")] public string Author { get; set; }
 
         [Required]
         [Display(Name = "DepartureDate")]
@@ -33,9 +28,7 @@ namespace ShareTravelSystem.ViewModels.Offer
         public string Description { get; set; }
 
 
-        [Required]
-        [Display(Name = "Seat")]
-        public int Seat { get; set; }
+        [Required] [Display(Name = "Seat")] public int Seat { get; set; }
 
         [Required]
         [Display(Name = "DepartureTownName")]
@@ -45,9 +38,7 @@ namespace ShareTravelSystem.ViewModels.Offer
         [Display(Name = "DestinationTownName")]
         public string DestinationTownName { get; set; }
 
-        [Required]
-        [Display(Name = "Price")]
-        public decimal Price { get; set; }
+        [Required] [Display(Name = "Price")] public decimal Price { get; set; }
 
 
         [Required]

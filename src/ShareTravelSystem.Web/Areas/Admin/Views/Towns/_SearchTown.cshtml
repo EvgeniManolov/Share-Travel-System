@@ -1,0 +1,8 @@
+﻿@model TownPaginationViewModel
+
+<form asp-controller="Town" asp-action="Index" method="get" class="mt-3">
+    <input name="search" type="text" value="@Model.Search" placeholder="Search Town">
+    <button type="submit" class="btn btn-primary" href="@Url.Action("Index", "Towns")">
+        <i class="fas fa-search-plus"></i>
+    </button>
+</form>

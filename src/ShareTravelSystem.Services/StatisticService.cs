@@ -12,46 +12,48 @@
 
     public class StatisticService : IStatisticService
     {
-        private readonly ShareTravelSystemDbContext db;
+        private readonly ShareTravelSystemDbContext _db;
 
         public StatisticService(ShareTravelSystemDbContext db)
         {
-            this.db = db;
+            this._db = db;
         }
 
-        public async Task<StatisticByRatingPaginationViewModel> GetStatisticForAllUsersByRatingAsync(int page, string search)
+        public async Task<StatisticByRatingPaginationViewModel> GetStatisticForAllUsersByRatingAsync(int page,
+            string search)
         {
-
-            int size = Constants.UserStatisticsPerPage;
+            var size = Constants.UserStatisticsPerPage;
             if (page == 0) page = 1;
-            List<DisplayStatisticByUserForRating> statistics = new List<DisplayStatisticByUserForRating>();
+            var statistics = new List<DisplayStatisticByUserForRating>();
 
-            var users = await this.db.Users.Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToListAsync();
+            var users = await _db.Users.Select(o => new {id = o.Id, name = o.UserName}).Distinct().ToListAsync();
 
             if (search != null)
             {
-                users = await this.db.Users.Where(u => u.Email.ToLower().Contains(search.ToLower())).Select(o => new { id = o.Id, name = o.UserName }).Distinct().ToListAsync();
+                users = await _db.Users.Where(u => u.Email.ToLower().Contains(search.ToLower()))
+                    .Select(o => new {id = o.Id, name = o.UserName}).Distinct().ToListAsync();
             }
 
 
             foreach (var user in users)
             {
-                int totalDisLikes = 0;
-                int totalLikes = 0;
+                var totalDisLikes = 0;
+                var totalLikes = 0;
 
-                List<int> offersIds = await this.db.Offers.Where(o => o.AuthorId == user.id && !o.IsDeleted).Select(o => o.Id).ToListAsync();
+                var offersIds = await _db.Offers.Where(o => o.AuthorId == user.id && !o.IsDeleted)
+                    .Select(o => o.Id).ToListAsync();
 
                 foreach (var offerId in offersIds)
                 {
-                    int offerLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action).Count();
+                    var offerLikes = _db.Reactions.Count(r => r.OfferId == offerId && r.Action);
 
-                    int offerDisLikes = this.db.Reactions.Where(r => r.OfferId == offerId && r.Action == false).Count();
+                    var offerDisLikes = _db.Reactions.Count(r => r.OfferId == offerId && r.Action == false);
 
                     totalDisLikes += offerDisLikes;
                     totalLikes += offerLikes;
                 }
 
-                DisplayStatisticByUserForRating statisticByUser = new DisplayStatisticByUserForRating
+                var statisticByUser = new DisplayStatisticByUserForRating
                 {
                     UserId = user.id,
                     UserName = user.name,
@@ -63,16 +65,19 @@
                 statistics.Add(statisticByUser);
             }
 
-            int count = statistics.Count();
+            var count = statistics.Count();
             statistics = statistics.Skip((page - 1) * size).Take(size).ToList();
 
-            StatisticByRating statistic = new StatisticByRating { Statistics = statistics.OrderByDescending(x => x.TotalRating).ToList()};
-            StatisticByRatingPaginationViewModel result = new StatisticByRatingPaginationViewModel
-                                    { Search = search,
-                                      Size = size,
-                                      Page = page,
-                                      Count = count,
-                                      Statistic = statistic };
+            var statistic =
+                new StatisticByRating {Statistics = statistics.OrderByDescending(x => x.TotalRating).ToList()};
+            var result = new StatisticByRatingPaginationViewModel
+            {
+                Search = search,
+                Size = size,
+                Page = page,
+                Count = count,
+                Statistic = statistic
+            };
 
             return result;
         }

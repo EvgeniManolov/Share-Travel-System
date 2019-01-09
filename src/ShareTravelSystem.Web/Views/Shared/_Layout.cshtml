@@ -1,123 +1,122 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - ShareTravelSystem.Web</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/theme.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="~/css/theme.css"/>
+        <link rel="stylesheet" href="~/css/site.css"/>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-        <link rel="stylesheet" href="~/css/custom.css" />
+        <link rel="stylesheet" href="~/css/custom.css"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
     </environment>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Share-Travel-System</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Share-Travel-System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav mr-auto">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @if (User.IsInRole("User"))
-                        {
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Announcements</a>
-                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                                    <a class="dropdown-item" asp-area="User" asp-controller="Announcement" asp-action="Create">Create Announcement</a>
-                                    <a class="dropdown-item" asp-area="User" asp-controller="Announcement" asp-action="Index">All Announcements</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Offers</a>
-                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                                    <a class="dropdown-item" asp-area="User" asp-controller="Offer" asp-action="Create">Create Offer</a>
-                                    <a class="dropdown-item" asp-area="User" asp-controller="Offer" asp-action="Index">All Offers</a>
-                                </div>
-                            </li>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("User"))
+                     {
+                         <li class="nav-item active">
+                             <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                         </li>
+                         <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Announcements</a>
+                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                 <a class="dropdown-item" asp-area="User" asp-controller="Announcements" asp-action="Create">Create Announcement</a>
+                                 <a class="dropdown-item" asp-area="User" asp-controller="Announcements" asp-action="Index">All Announcements</a>
+                             </div>
+                         </li>
+                         <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Offers</a>
+                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                 <a class="dropdown-item" asp-area="User" asp-controller="Offers" asp-action="Create">Create Offer</a>
+                                 <a class="dropdown-item" asp-area="User" asp-controller="Offers" asp-action="Index">All Offers</a>
+                             </div>
+                         </li>
+                     }
+                    @if (User.IsInRole("Admin"))
+                     {
+                         <li class="nav-item active">
+                             <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" asp-area="Admin" asp-controller="Announcements" asp-action="Index">Announcements</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" asp-area="Admin" asp-controller="Offers" asp-action="Index">Offers</a>
+                         </li>
+                         <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Towns</a>
+                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Towns" asp-action="Create">Create Town</a>
+                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Towns" asp-action="Index">All Towns</a>
+                             </div>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" asp-area="Admin" asp-controller="Statistics" asp-action="StatisticByRating">Statistic</a>
+                         </li>
+                     }
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Chat">Chat</a>
+                    </li>
+                }
+            </ul>
 
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Announcement" asp-action="Index">Announcements</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Offer" asp-action="Index">Offers</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Towns</a>
-                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Town" asp-action="Create">Create Town</a>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Town" asp-action="Index">All Towns</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Statistic" asp-action="StatisticByRating">Statistic</a>
-                            </li>
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Chat">Chat</a>
-                        </li>
-                    }
-                </ul>
-
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
-        </nav>
-    </header>
-    <main role="main">
-        @RenderBody()
-    </main>
-
-    <footer class="border-top-0 footer text-muted">
-        <div class="container text-center">
-            <a class="text-white">&copy; 2018 - Share Travel System</a>
+            @await Html.PartialAsync("_LoginPartial")
         </div>
-    </footer>
+    </nav>
+</header>
+<main role="main">
+    @RenderBody()
+</main>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
-        </script>
+<footer class="border-top-0 footer text-muted">
+    <div class="container text-center">
+        <a class="text-white">&copy; 2018 - Share Travel System</a>
+    </div>
+</footer>
 
-    </environment>
-    <script src="~/lib/@@aspnet/signalr/dist/browser/signalr.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+    </script>
+
+</environment>
+<script src="~/lib/@@aspnet/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@RenderSection("Scripts", required: false)
 </body>
 </html>

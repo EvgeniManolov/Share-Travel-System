@@ -17,10 +17,10 @@
                 return;
             }
 
-            string jsonTownsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\towns.json");
+            var jsonTownsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\towns.json");
 
-            string jsonTowns = File.ReadAllText(jsonTownsPath);
-            List<Town> townsList = JsonConvert.DeserializeObject<List<Town>>(jsonTowns);
+            var jsonTowns = File.ReadAllText(jsonTownsPath);
+            var townsList = JsonConvert.DeserializeObject<List<Town>>(jsonTowns);
 
             context.Towns.AddRange(townsList);
             context.SaveChanges();

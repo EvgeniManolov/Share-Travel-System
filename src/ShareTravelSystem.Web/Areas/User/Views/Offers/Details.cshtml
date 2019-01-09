@@ -1,0 +1,109 @@
+﻿@model DetailsOfferViewModel
+
+@{
+    ViewData["Title"] = "All Offers";
+}
+
+<div class="Container">
+    <h1 class="m-3">Preview Offer</h1>
+    <div class="col-3">
+        <div class="project project-default">
+            <div class="shape">
+                <div class="shape-text">
+                    @Model.Type
+                </div>
+            </div>
+            <div class="project-content mt-4">
+                <h1 class="lead">
+                    From @Model.DepartureTownName <br/>
+                    To @Model.DestinationTownName
+                </h1>
+                <h6 class="mt-1"> On: @Model.DepartureDate</h6>
+                <p class="mt-3">Description: @Model.Description</p>
+
+            </div>
+            <div class="project-content mb-0">
+                <p class="mt-1">Seat: @Model.Seat</p>
+                <p class="mb-1">Price: @Model.Price</p>
+                <p class="mb-1">Post on: @Model.CreateDate</p>
+                <p class="mb-1">Post by: @Model.Author</p>
+                <p class="mb-1">Rating: @Model.TotalRating</p>
+            </div>
+            @if (Model.Author == User.Identity.Name)
+            {
+                <div class="mb-5">
+                    <a class="btn btn-primary ml-4" asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.Id">
+                        <strong>Edit</strong>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-4 col-md-4 col-lg-4 position-relative">
+        <form asp-area="User" asp-controller="Reviews" asp-action="Create" method="post">
+            <div>
+                <textarea class='col-lg-12' name="comment" placeholder="Comment this offer.." rows="4"></textarea>
+            </div>
+            <div>
+                <input name="offerId" type="hidden" value="@Model.Id" class="form-control mt-4"/>
+            </div>
+            <button class="btn btn-primary text-white" type="submit" value="Create Comment">Add Comment</button>
+        </form>
+        <hr class="bg-primary"/>
+    </div>
+    <div>
+        <div class="row">
+            <div class="panel panel-default widget col-6">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <h3 class="ml-3">
+                        Recent Comments : @Model.Reviews.Count
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        @if (Model.Reviews.Count == 0)
+                        {
+                            <li>No comments</li>
+                        }
+                        else
+                        {
+                            foreach (var review in Model.Reviews)
+                            {
+                                <li class="list-group-item mt-3 ml-3 mb-2">
+                                    <div class="row">
+                                        <div class="col-xs-10 col-md-11">
+                                            <div>
+                                                <text>
+                                                    <i class="fa fa-comment" style="font-size: 12px"></i> @review.Comment
+                                                </text>
+                                                <div class="row ml-0">
+                                                    <div class="mic-info">
+                                                        <i class="fa fa-user" title="User"></i> <text>@review.Author</text>
+                                                    </div>
+                                                    <div class="mic-info ml-3">
+                                                        <i class="fa fa-calendar" title="Post on" style="font-size: 12px"></i><text class="ml-1">@review.CreateDate.ToLocalTime()</text>
+                                                    </div>
+                                                    <div class="ml-2">
+                                                        @if (review.Author == User.Identity.Name)
+                                                        {
+                                                            <a href="/User/Reviews/Edit?id=@review.Id&offerid=@Model.Id">Edit</a>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

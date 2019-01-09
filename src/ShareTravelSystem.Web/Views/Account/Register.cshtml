@@ -12,19 +12,19 @@
         <div class="card-body px-lg-5 pt-0">
             <form class="text-center" style="color: #757575;" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                 <div class="md-form">
-                    <input asp-for="Email" class="form-control mt-4" placeholder="Email" />
+                    <input asp-for="Email" class="form-control mt-4" placeholder="Email"/>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-row">
                     <div class="col">
                         <div class="md-form">
-                            <input asp-for="Password" class="form-control mt-4" placeholder="Password" />
+                            <input asp-for="Password" class="form-control mt-4" placeholder="Password"/>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="md-form">
-                            <input asp-for="ConfirmPassword" class="form-control mt-4" placeholder="ConfirmPassword" />
+                            <input asp-for="ConfirmPassword" class="form-control mt-4" placeholder="ConfirmPassword"/>
                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
                     </div>
@@ -32,23 +32,23 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="md-form">
-                            <input asp-for="FirstName" class="form-control mt-4" placeholder="FirstName" />
+                            <input asp-for="FirstName" class="form-control mt-4" placeholder="FirstName"/>
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="md-form">
-                            <input asp-for="LastName" class="form-control mt-4" placeholder="LastName" />
+                            <input asp-for="LastName" class="form-control mt-4" placeholder="LastName"/>
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
                 <div class="md-form">
-                    <input asp-for="PhoneNumber" class="form-control mt-4" placeholder="PhoneNumber" />
+                    <input asp-for="PhoneNumber" class="form-control mt-4" placeholder="PhoneNumber"/>
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="md-form">
-                    <input asp-for="Address" class="form-control mt-4" placeholder="Address" />
+                    <input asp-for="Address" class="form-control mt-4" placeholder="Address"/>
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <button class="btn btn-outline-primary btn-rounded btn-block my-4 waves-effect z-depth-0 mt-5" type="submit">Register</button>
@@ -56,6 +56,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

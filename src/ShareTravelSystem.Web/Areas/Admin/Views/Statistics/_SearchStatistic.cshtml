@@ -1,0 +1,8 @@
+﻿@model StatisticByRatingPaginationViewModel
+
+<form asp-area="Admin" asp-controller="Statistics" asp-action="Index" method="get" class="mt-3">
+    <input name="search" type="text" value="@Model.Search" placeholder="Search user...">
+    <button type="submit" class="btn btn-primary" href="@Url.Action("StatisticByRating", "Statistics")">
+        <i class="fas fa-search-plus"></i>
+    </button>
+</form>

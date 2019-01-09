@@ -1,6 +1,6 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
-    using ShareTravelSystem.ViewModels;
+    using ViewModels;
     using System.Threading.Tasks;
 
     public interface IMessageService

@@ -18,13 +18,13 @@
 
     public class OfferService : IOfferService
     {
-        private readonly ShareTravelSystemDbContext db;
-        private readonly UserManager<ShareTravelSystemUser> userManager;
+        private readonly ShareTravelSystemDbContext _db;
+        private readonly UserManager<ShareTravelSystemUser> _userManager;
 
         public OfferService(ShareTravelSystemDbContext db, UserManager<ShareTravelSystemUser> userManager)
         {
-            this.db = db;
-            this.userManager = userManager;
+            this._db = db;
+            this._userManager = userManager;
         }
 
         public async Task CreateOfferAsync(CreateOfferViewModel model, string userId)
@@ -34,19 +34,19 @@
                 throw new ArgumentException(string.Format(Constants.OfferTypeDoesNotExist, model.Type));
             }
 
-            int departureTownId = await this.db
-                                      .Towns
-                                      .Where(t => t.Id == model.DepartureTownId && !t.IsDeleted)
-                                      .Select(x => x.Id)
-                                      .SingleOrDefaultAsync();
+            var departureTownId = await _db
+                .Towns
+                .Where(t => t.Id == model.DepartureTownId && !t.IsDeleted)
+                .Select(x => x.Id)
+                .SingleOrDefaultAsync();
 
-            int destinationTownId = await this.db
-                                        .Towns
-                                        .Where(t => t.Id == model.DestinationTownId && !t.IsDeleted)
-                                        .Select(x => x.Id)
-                                        .SingleOrDefaultAsync();
+            var destinationTownId = await _db
+                .Towns
+                .Where(t => t.Id == model.DestinationTownId && !t.IsDeleted)
+                .Select(x => x.Id)
+                .SingleOrDefaultAsync();
 
-            this.db.Offers.Add(new Offer
+            _db.Offers.Add(new Offer
             {
                 AuthorId = userId,
                 CreateDate = DateTime.UtcNow,
@@ -60,39 +60,40 @@
                 Price = model.Price
             });
 
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
-        public async Task<DetailsOfferViewModel> DetailsOfferAsync(int Id)
+        public async Task<DetailsOfferViewModel> DetailsOfferAsync(int id)
         {
-            DetailsOfferViewModel offer = await this.db.Offers
-                                              .Where(t => t.Id == Id && !t.IsDeleted)
-                                              .ProjectTo<DetailsOfferViewModel>()
-                                              .SingleOrDefaultAsync();
+            var offer = await _db.Offers
+                .Where(t => t.Id == id && !t.IsDeleted)
+                .ProjectTo<DetailsOfferViewModel>()
+                .SingleOrDefaultAsync();
             if (offer == null)
             {
-                throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, Id));
+                throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, id));
             }
 
-            offer.Reviews = await this.db
-                                .Reviews
-                                .Where(r => r.OfferId == Id && !r.IsDeleted)
-                                .OrderByDescending(x => x.CreateDate)
-                                .ProjectTo<DisplayReviewViewModel>().ToListAsync();
+            offer.Reviews = await _db
+                .Reviews
+                .Where(r => r.OfferId == id && !r.IsDeleted)
+                .OrderByDescending(x => x.CreateDate)
+                .ProjectTo<DisplayReviewViewModel>().ToListAsync();
 
             return offer;
         }
 
-        public async Task<OfferPaginationViewModel> GetAllOffersAsync(bool privateOffers, string filter, string search, string currentUserId, int page)
+        public async Task<OfferPaginationViewModel> GetAllOffersAsync(bool privateOffers, string filter, string search,
+            string currentUserId, int page)
         {
-            List<DisplayOfferViewModel> offers = new List<DisplayOfferViewModel>();
-            string titleOfPage = "";
-            int size = Constants.OffersPerPage;
+            var offers = new List<DisplayOfferViewModel>();
+            var titleOfPage = "";
+            var size = Constants.OffersPerPage;
             if (page == 0) page = 1;
 
             if (!privateOffers)
             {
-                offers = await this.db.Offers
+                offers = await _db.Offers
                     .Where(o => !o.IsDeleted)
                     .OrderByDescending(x => x.CreateDate)
                     .ProjectTo<DisplayOfferViewModel>()
@@ -102,34 +103,39 @@
             }
             else
             {
-                offers = await this.db.Offers
-                     .Where(o => o.AuthorId == currentUserId && !o.IsDeleted)
-                     .OrderByDescending(x => x.CreateDate)
-                     .ProjectTo<DisplayOfferViewModel>()
-                     .ToListAsync();
+                offers = await _db.Offers
+                    .Where(o => o.AuthorId == currentUserId && !o.IsDeleted)
+                    .OrderByDescending(x => x.CreateDate)
+                    .ProjectTo<DisplayOfferViewModel>()
+                    .ToListAsync();
 
                 titleOfPage = Constants.MyOffersTitlePageName;
             }
 
-            if (filter != null && filter != "" && filter != Constants.FilterOfAllOffers)
+            if (!string.IsNullOrEmpty(filter) && filter != Constants.FilterOfAllOffers)
             {
                 offers = offers
-                         .Where(x => x.Type.ToLower() == filter.ToLower())
-                         .ToList();
+                    .Where(x => x.Type.ToLower() == filter.ToLower())
+                    .ToList();
             }
 
 
-            if (search != null && search != "")
+            if (!string.IsNullOrEmpty(search))
             {
-                offers = offers.Where(x => x.DepartureTownName.ToLower().Contains(search.Trim().ToLower()) || x.DestinationTownName.ToLower().Contains(search.Trim().ToLower())
-                    || x.Description.ToLower().Contains(search.Trim().ToLower()))
-                                .ToList();
+                offers = offers.Where(x =>
+                        x.DepartureTownName.ToLower().Contains(search.Trim().ToLower()) || x.DestinationTownName
+                                                                                            .ToLower().Contains(search
+                                                                                                .Trim().ToLower())
+                                                                                        || x.Description.ToLower()
+                                                                                            .Contains(search.Trim()
+                                                                                                .ToLower()))
+                    .ToList();
             }
 
-            int count = offers.Count();
+            var count = offers.Count();
             offers = offers.Skip((page - 1) * size).Take(size).ToList();
 
-            OfferPaginationViewModel result = new OfferPaginationViewModel
+            var result = new OfferPaginationViewModel
             {
                 Filter = filter,
                 Search = search,
@@ -149,31 +155,32 @@
 
         public IEnumerable<Town> GetAllTowns()
         {
-            return this.db.Towns.Where(t => !t.IsDeleted).ToList();
+            return _db.Towns.Where(t => !t.IsDeleted).ToList();
         }
 
         public async Task<DisplayEditOfferViewModel> GetOfferToEditAsync(int id, string currentUserId)
         {
-            EditOfferViewModel model = await this.db
-                                           .Offers
-                                           .Where(o => o.Id == id && !o.IsDeleted)
-                                           .ProjectTo<EditOfferViewModel>()
-                                           .SingleOrDefaultAsync();
+            var model = await _db
+                .Offers
+                .Where(o => o.Id == id && !o.IsDeleted)
+                .ProjectTo<EditOfferViewModel>()
+                .SingleOrDefaultAsync();
             if (model == null)
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, model.Id));
             }
 
-            string offerAuthor = await this.db.Offers.Where(o => o.Id == id && !o.IsDeleted).Select(x => x.AuthorId).SingleOrDefaultAsync();
+            var offerAuthor = await _db.Offers.Where(o => o.Id == id && !o.IsDeleted).Select(x => x.AuthorId)
+                .SingleOrDefaultAsync();
             if (offerAuthor != currentUserId)
             {
                 throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
             }
 
-            DisplayEditOfferViewModel result = new DisplayEditOfferViewModel
+            var result = new DisplayEditOfferViewModel
             {
                 OfferModel = model,
-                Towns = this.db.Towns.Where(t => !t.IsDeleted).ToList()
+                Towns = _db.Towns.Where(t => !t.IsDeleted).ToList()
             };
 
             return result;
@@ -181,12 +188,14 @@
 
         public async Task EditOfferAsync(DisplayEditOfferViewModel model)
         {
-            Offer offer = await this.db.Offers.Where(o => o.Id == model.OfferModel.Id && !o.IsDeleted).SingleOrDefaultAsync();
+            var offer = await _db.Offers.Where(o => o.Id == model.OfferModel.Id && !o.IsDeleted)
+                .SingleOrDefaultAsync();
 
             if (!Enum.TryParse(model.OfferModel.Type, true, out OfferType type))
             {
                 throw new ArgumentException(string.Format(Constants.OfferTypeDoesNotExist, model.OfferModel.Type));
             }
+
             offer.Type = type;
             offer.DepartureTownId = model.OfferModel.DepartureTownId;
             offer.DestinationTownId = model.OfferModel.DestinationTownId;
@@ -195,60 +204,64 @@
             offer.DepartureDate = model.OfferModel.DepartureDate;
             offer.Description = model.OfferModel.Description;
 
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
         public async Task<bool> LikeOfferAsync(int offerId, string userId)
         {
-            Reaction isExist = await this.db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId).SingleOrDefaultAsync();
+            var isExist = await _db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId)
+                .SingleOrDefaultAsync();
 
             if (isExist != null)
             {
                 throw new ArgumentException(string.Format(Constants.AlreadyTakeActionToThisOffer, offerId));
             }
-            Reaction reation = new Reaction
+
+            var reation = new Reaction
             {
                 Action = true,
                 AuthorId = userId,
                 OfferId = offerId
             };
 
-            this.db.Reactions.Add(reation);
+            _db.Reactions.Add(reation);
 
-            Offer likedOffer = await this.db.Offers.Where(o => o.Id == offerId && !o.IsDeleted).SingleOrDefaultAsync();
+            var likedOffer = await _db.Offers.Where(o => o.Id == offerId && !o.IsDeleted).SingleOrDefaultAsync();
             likedOffer.TotalRating++;
 
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return true;
         }
 
         public async Task<bool> DisLikeOfferAsync(int offerId, string userId)
         {
-            Reaction isExist = await this.db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId).SingleOrDefaultAsync();
+            var isExist = await _db.Reactions.Where(r => r.AuthorId == userId && r.OfferId == offerId)
+                .SingleOrDefaultAsync();
 
             if (isExist != null)
             {
                 throw new ArgumentException(string.Format(Constants.AlreadyTakeActionToThisOffer, offerId));
             }
-            Reaction reation = new Reaction
+
+            var reation = new Reaction
             {
                 Action = false,
                 AuthorId = userId,
                 OfferId = offerId
             };
 
-            this.db.Reactions.Add(reation);
+            _db.Reactions.Add(reation);
 
-            Offer likedOffer = await this.db.Offers.Where(o => o.Id == offerId && !o.IsDeleted).SingleOrDefaultAsync();
+            var likedOffer = await _db.Offers.Where(o => o.Id == offerId && !o.IsDeleted).SingleOrDefaultAsync();
             likedOffer.TotalRating--;
 
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return true;
         }
 
         public IEnumerable<int> GetLikedOrDislikedOffersIds(string currentUserId)
         {
-            return this.db.Reactions
+            return _db.Reactions
                 .Where(r => r.AuthorId == currentUserId)
                 .Select(x => x.OfferId)
                 .ToList();
@@ -256,16 +269,17 @@
 
         public async Task DeleteOfferAsync(int id)
         {
-            Offer offer = await this.db.Offers.Where(o => o.Id == id && !o.IsDeleted).SingleOrDefaultAsync();
+            var offer = await _db.Offers.Where(o => o.Id == id && !o.IsDeleted).SingleOrDefaultAsync();
 
             if (offer == null)
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, id));
             }
+
             offer.IsDeleted = true;
-            List<Review> reviews = await this.db.Reviews.Where(r => r.OfferId == offer.Id).ToListAsync();
+            var reviews = await _db.Reviews.Where(r => r.OfferId == offer.Id).ToListAsync();
             reviews.ForEach(x => { x.IsDeleted = true; });
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
     }
 }

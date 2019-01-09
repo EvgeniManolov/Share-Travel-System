@@ -12,7 +12,8 @@
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     Action = table.Column<bool>(nullable: false),
                     OfferId = table.Column<int>(nullable: false),
                     AuthorId = table.Column<string>(nullable: true)

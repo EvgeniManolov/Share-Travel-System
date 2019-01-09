@@ -26,9 +26,9 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                MessageService messageService = new MessageService(context, UserManager);
+                var messageService = new MessageService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -41,7 +41,8 @@
 
                 // Assert
                 Assert.True(await context.Messages.CountAsync() == 1);
-                Assert.NotNull(await context.Messages.Where(x => x.Author == user && x.Text == "Съобщение").SingleOrDefaultAsync());
+                Assert.NotNull(await context.Messages.Where(x => x.Author == user && x.Text == "Съобщение")
+                    .SingleOrDefaultAsync());
             }
         }
 
@@ -51,9 +52,9 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                MessageService messageService = new MessageService(context, UserManager);
+                var messageService = new MessageService(context, UserManager);
 
-                ShareTravelSystemUser user = new ShareTravelSystemUser
+                var user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -82,7 +83,7 @@
 
             var builder = new DbContextOptionsBuilder<ShareTravelSystemDbContext>();
             builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                   .UseInternalServiceProvider(serviceProvider);
+                .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
         }

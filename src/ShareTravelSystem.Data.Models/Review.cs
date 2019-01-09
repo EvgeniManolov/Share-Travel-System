@@ -8,8 +8,8 @@
         public int Id { get; set; }
 
         public string Comment { get; set; }
-        
-        public string AuthorId { get; set; } 
+
+        public string AuthorId { get; set; }
 
         public ShareTravelSystemUser Author { get; set; }
 

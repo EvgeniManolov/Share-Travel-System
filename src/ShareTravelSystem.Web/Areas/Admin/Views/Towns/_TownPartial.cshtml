@@ -1,0 +1,19 @@
+﻿@model DisplayTownViewModel
+
+<tr>
+    <td scope="row">@Model.Id</td>
+    <td>@Model.Name</td>
+    <td>
+        <div class="row">
+            <a href="@Url.Action("Edit", "Towns", new {id = Model.Id})" title="Edit" class="editOfferCLass">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            <form asp-controller="Towns" asp-action="Delete" method="post" class="ml-3">
+                <input type="hidden" name="id" value="@Model.Id"/>
+                <button type="submit" id="buttonId" title="Delete" class="deleteOfferCLass">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+        </div>
+    </td>
+</tr>

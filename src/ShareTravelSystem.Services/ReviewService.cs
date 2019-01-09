@@ -15,25 +15,25 @@
 
     public class ReviewService : IReviewService
     {
-        private readonly ShareTravelSystemDbContext db;
-        private readonly UserManager<ShareTravelSystemUser> userManager;
+        private readonly ShareTravelSystemDbContext _db;
+        private readonly UserManager<ShareTravelSystemUser> _userManager;
 
         public ReviewService(ShareTravelSystemDbContext db,
-                             UserManager<ShareTravelSystemUser> userManager)
+            UserManager<ShareTravelSystemUser> userManager)
         {
-            this.db = db;
-            this.userManager = userManager;
+            this._db = db;
+            this._userManager = userManager;
         }
 
         public async Task CreateReviewAsync(string comment, int offerId, string currentUserId)
         {
-            var offer = await this.db.Offers.Where(x => x.Id == offerId).SingleOrDefaultAsync();
+            var offer = await _db.Offers.Where(x => x.Id == offerId).SingleOrDefaultAsync();
             if (offer == null)
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, offerId));
             }
 
-            Review review = new Review
+            var review = new Review
             {
                 Comment = comment,
                 OfferId = offerId,
@@ -41,39 +41,44 @@
                 CreateDate = DateTime.UtcNow
             };
 
-            await this.db.Reviews.AddAsync(review);
-            await this.db.SaveChangesAsync();
+            await _db.Reviews.AddAsync(review);
+            await _db.SaveChangesAsync();
         }
 
         public async Task<EditReviewViewModel> GetReviewToEditAsync(int id, int offerId, string currentUserId)
         {
-            EditReviewViewModel review = await this.db.Reviews.Where(r => r.Id == id && !r.IsDeleted).ProjectTo<EditReviewViewModel>().SingleOrDefaultAsync();
+            var review = await _db.Reviews.Where(r => r.Id == id && !r.IsDeleted)
+                .ProjectTo<EditReviewViewModel>().SingleOrDefaultAsync();
 
             if (review == null)
             {
                 throw new ArgumentException(string.Format(Constants.ReviewDoesNotExist, id));
             }
 
-            string reviewAuthor = await this.db.Reviews.Where(r => r.Id == id && !r.IsDeleted).Select(x => x.AuthorId).SingleOrDefaultAsync();
+            var reviewAuthor = await _db.Reviews.Where(r => r.Id == id && !r.IsDeleted).Select(x => x.AuthorId)
+                .SingleOrDefaultAsync();
             if (reviewAuthor != currentUserId)
             {
                 throw new ArgumentException(string.Format(Constants.NotAuthorizedForThisOperation, currentUserId));
             }
+
             return review;
         }
 
 
         public async Task EditReviewAsync(EditReviewViewModel model)
         {
-            Review review = await this.db.Reviews.Where(r => r.Id == model.Id && r.OfferId == model.OfferId && !r.IsDeleted).SingleOrDefaultAsync();
+            var review = await _db.Reviews
+                .Where(r => r.Id == model.Id && r.OfferId == model.OfferId && !r.IsDeleted).SingleOrDefaultAsync();
 
             review.Comment = model.Comment;
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
         public async Task DeleteReviewAsync(int reviewId, int offerId)
         {
-            Review review = await this.db.Reviews.Where(r => r.Id == reviewId && r.OfferId == offerId && !r.IsDeleted).SingleOrDefaultAsync();
+            var review = await _db.Reviews.Where(r => r.Id == reviewId && r.OfferId == offerId && !r.IsDeleted)
+                .SingleOrDefaultAsync();
 
             if (review == null)
             {
@@ -81,7 +86,7 @@
             }
 
             review.IsDeleted = true;
-            await this.db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
     }
 }

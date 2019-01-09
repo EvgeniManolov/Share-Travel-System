@@ -1,0 +1,41 @@
+﻿@model StatisticByRatingPaginationViewModel
+
+@{
+    ViewData["Title"] = "Statistic of Users by Likes/DisLikes";
+    var index = 1;
+}
+
+@Html.ValidationSummary(false)
+<div class="container">
+    <h2 class="text-left">Satistic of users by rating!</h2>
+    @await Html.PartialAsync("_SearchStatistic", Model)
+    <table class="table table-hover col-5 mt-3" id="townTable">
+        <thead class="bg-primary">
+        <tr>
+            <th scope="col" colspan="6" class="text-white">#</th>
+            <th scope="col" class="text-white">Username</th>
+            <th scope="col" class="text-white">TotalLikes</th>
+            <th scope="col" class="text-white">TotalDisLikes</th>
+            <th scope="col" class="text-white">TotalRating</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var statistic in Model.Statistic.Statistics)
+        {
+            <tr>
+                <td scope="row" colspan="6">@index</td>
+                <td>@statistic.UserName</td>
+                <td>@statistic.TotalLikes</td>
+                <td>@statistic.TotalDisLikes</td>
+                <td>@statistic.TotalRating</td>
+            </tr>
+            index++;
+        }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_PagingStatistic", Model)
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

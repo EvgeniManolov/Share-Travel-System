@@ -12,7 +12,8 @@
 
         IEnumerable<Town> GetAllTowns();
 
-        Task<OfferPaginationViewModel> GetAllOffersAsync(bool privateOffers, string filter, string search, string currentUserId, int page);
+        Task<OfferPaginationViewModel> GetAllOffersAsync(bool privateOffers, string filter, string search,
+            string currentUserId, int page);
 
         Task<DetailsOfferViewModel> DetailsOfferAsync(int id);
 

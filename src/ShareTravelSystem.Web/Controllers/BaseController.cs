@@ -6,11 +6,11 @@
 
     public class BaseController : Controller
     {
-        private readonly UserManager<ShareTravelSystemUser> userManager;
+        private readonly UserManager<ShareTravelSystemUser> _userManager;
 
         public BaseController(UserManager<ShareTravelSystemUser> userManager)
         {
-            this.userManager = userManager;
+            this._userManager = userManager;
         }
 
         public BaseController()
@@ -20,17 +20,13 @@
 
         protected bool RedirectIfNotInRole(string role)
         {
-            if (this.User != null)
-            {
-                return this.User.IsInRole(role);
-            }
-            return true;
+            return User == null || User.IsInRole(role);
         }
 
         protected RedirectToActionResult MakeRedirectResult(string area, string controller, string action, int id)
         {
-            string controllerName = controller.Replace("Controller", "");
-            RedirectToActionResult result = new RedirectToActionResult(action, controllerName, new {id, Area = area });
+            var controllerName = controller.Replace("Controller", "");
+            var result = new RedirectToActionResult(action, controllerName, new {id, Area = area});
 
             return result;
         }

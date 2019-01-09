@@ -1,18 +1,18 @@
 ﻿@model MessagePaginationViewModel
 
 @{
-    int itemsPerPage = Model.Size;
-    int itemsCount = Model.Count;
+    var itemsPerPage = Model.Size;
+    var itemsCount = Model.Count;
 
-    int currentPage = Model.Page;
+    var currentPage = Model.Page;
 
-    int pageUp = (double)itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
-    int pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
+    var pageUp = (double) itemsCount / (itemsPerPage * Model.Page) > 1 ? Model.Page + 1 : Model.Page;
+    var pageDown = Model.Page > 1 ? Model.Page - 1 : Model.Page;
 
-    int totalPages = (int)Math.Ceiling(((double)Model.Count / Model.Size));
+    var totalPages = (int) Math.Ceiling(((double) Model.Count / Model.Size));
 
 
-    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages )</p>
+    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages)</p>
 }
 
 <div class="text-center col-12">

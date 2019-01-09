@@ -7,22 +7,18 @@
 
     public class EditOfferViewModel : IMapFrom<Offer>
     {
-        [Required]
-        [Display(Name = "Type")]
-        public int Id { get; set; }
+        [Required] [Display(Name = "Type")] public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Type")]
-        public string Type { get; set; }
-        
-        [Display(Name = "Departure Town")]
-        public string DepartureTownName { get; set; }
+        [Required] [Display(Name = "Type")] public string Type { get; set; }
+
+        [Display(Name = "Departure Town")] public string DepartureTownName { get; set; }
+
         [Required]
         [Display(Name = "Departure Town")]
         public int DepartureTownId { get; set; }
-        
-        [Display(Name = "Destination Town")]
-        public string DestinationTownName { get; set; }
+
+        [Display(Name = "Destination Town")] public string DestinationTownName { get; set; }
+
         [Required]
         [Display(Name = "Destination Town")]
         public int DestinationTownId { get; set; }

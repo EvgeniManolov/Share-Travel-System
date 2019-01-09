@@ -28,22 +28,27 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                StatisticService statisticsService = new StatisticService(context);
+                var statisticsService = new StatisticService(context);
                 // Create Offer and users
-                OfferService offerService = new OfferService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser> {
-                    new ShareTravelSystemUser { UserName = "TestUserr" },
-                    new ShareTravelSystemUser { UserName = "TestUserr2" }};
+                var users = new List<ShareTravelSystemUser>
+                {
+                    new ShareTravelSystemUser {UserName = "TestUserr"},
+                    new ShareTravelSystemUser {UserName = "TestUserr2"}
+                };
 
-                var towns = new List<Town> { new Town { Name = "гр.Софияаа" },
-                                             new Town { Name = "гр.Варнааа" }};
+                var towns = new List<Town>
+                {
+                    new Town {Name = "гр.Софияаа"},
+                    new Town {Name = "гр.Варнааа"}
+                };
 
                 await context.Users.AddRangeAsync(users);
                 await context.Towns.AddRangeAsync(towns);
                 await context.SaveChangesAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -78,7 +83,7 @@
 
             var builder = new DbContextOptionsBuilder<ShareTravelSystemDbContext>();
             builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                   .UseInternalServiceProvider(serviceProvider);
+                .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
         }

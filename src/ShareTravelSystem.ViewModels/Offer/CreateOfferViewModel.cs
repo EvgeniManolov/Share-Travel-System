@@ -5,9 +5,7 @@
 
     public class CreateOfferViewModel
     {
-        [Required]
-        [Display(Name = "Type")]
-        public string Type { get; set; }
+        [Required] [Display(Name = "Type")] public string Type { get; set; }
 
         [Required]
         [Display(Name = "DepartureName")]
@@ -20,7 +18,7 @@
         [Required]
         [Display(Name = "Seat")]
         [Range(1, int.MaxValue, ErrorMessage = "Must greater or equal to one.")]
-        public int Seat { get; set; } 
+        public int Seat { get; set; }
 
         [Required]
         [Display(Name = "Price")]
@@ -33,9 +31,8 @@
 
         [Required]
         [Display(Name = "Description")]
-        [StringLength(500, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
+        [StringLength(500, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            MinimumLength = 4)]
         public string Description { get; set; }
-        
     }
 }
-    

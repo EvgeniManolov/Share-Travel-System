@@ -17,7 +17,8 @@
 
         Task DeleteAnnouncementAsync(int Id);
 
-        Task<AnnouncementPaginationViewModel> GetAllAnnouncementsAsync(bool privateAnnouncements, string search, string userId, int page);
+        Task<AnnouncementPaginationViewModel> GetAllAnnouncementsAsync(bool privateAnnouncements, string search,
+            string userId, int page);
 
         Task<IEnumerable<DisplayAnnouncementViewModel>> GetIndexAnnouncementsAsync();
     }

@@ -29,22 +29,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -66,7 +68,8 @@
 
                 // Assert
                 Assert.True(await context.Reviews.Where(o => o.OfferId == offer.Id).CountAsync() == 1);
-                ShareTravelSystemUser reviewAuthor = await context.Reviews.Where(x => x.OfferId == offer.Id).Select(t => t.Author).SingleOrDefaultAsync();
+                var reviewAuthor = await context.Reviews.Where(x => x.OfferId == offer.Id)
+                    .Select(t => t.Author).SingleOrDefaultAsync();
                 Assert.Equal(reviewAuthor, testUser2);
             }
         }
@@ -77,22 +80,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -113,7 +118,7 @@
                 string result = null;
                 try
                 {
-                    await  reviewService.CreateReviewAsync("TestComment", 2, testUser2.Id);
+                    await reviewService.CreateReviewAsync("TestComment", 2, testUser2.Id);
                 }
                 catch (Exception e)
                 {
@@ -131,22 +136,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -163,7 +170,7 @@
                 await context.Offers.AddAsync(offer);
                 await context.SaveChangesAsync();
 
-                Review review = new Review
+                var review = new Review
                 {
                     Comment = "TestComment",
                     Author = testUser2,
@@ -175,7 +182,7 @@
                 await context.SaveChangesAsync();
 
                 // Act
-                EditReviewViewModel model = await reviewService.GetReviewToEditAsync(review.Id, offer.Id, testUser2.Id);
+                var model = await reviewService.GetReviewToEditAsync(review.Id, offer.Id, testUser2.Id);
 
                 // Assert
                 Assert.False(review.IsDeleted);
@@ -190,22 +197,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -222,7 +231,7 @@
                 await context.Offers.AddAsync(offer);
                 await context.SaveChangesAsync();
 
-                Review review = new Review
+                var review = new Review
                 {
                     Comment = "TestComment",
                     Author = testUser2,
@@ -256,22 +265,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -288,7 +299,7 @@
                 await context.Offers.AddAsync(offer);
                 await context.SaveChangesAsync();
 
-                Review review = new Review
+                var review = new Review
                 {
                     Comment = "TestComment",
                     Author = testUser2,
@@ -299,7 +310,7 @@
                 await context.Reviews.AddAsync(review);
                 await context.SaveChangesAsync();
 
-                EditReviewViewModel model = new EditReviewViewModel
+                var model = new EditReviewViewModel
                 {
                     Id = review.Id,
                     OfferId = offer.Id,
@@ -309,7 +320,8 @@
                 // Act
                 await reviewService.EditReviewAsync(model);
 
-                Review reviewCommentDb = await context.Reviews.Where(x => x.OfferId == offer.Id && x.Author == testUser2).SingleOrDefaultAsync();
+                var reviewCommentDb = await context.Reviews
+                    .Where(x => x.OfferId == offer.Id && x.Author == testUser2).SingleOrDefaultAsync();
 
                 // Assert
                 Assert.Equal("TestCommentChange", reviewCommentDb.Comment);
@@ -322,22 +334,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -354,7 +368,7 @@
                 await context.Offers.AddAsync(offer);
                 await context.SaveChangesAsync();
 
-                Review review = new Review
+                var review = new Review
                 {
                     Comment = "TestComment",
                     Author = testUser2,
@@ -369,7 +383,8 @@
                 // Act
                 await reviewService.DeleteReviewAsync(review.Id, offer.Id);
 
-                Review deletedReviewDb = await context.Reviews.Where(x => x.OfferId == offer.Id && x.Author == testUser2).SingleOrDefaultAsync();
+                var deletedReviewDb = await context.Reviews
+                    .Where(x => x.OfferId == offer.Id && x.Author == testUser2).SingleOrDefaultAsync();
 
                 // Assert
                 Assert.NotNull(deletedReviewDb);
@@ -383,22 +398,24 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, UserManager);
-                OfferService offerService = new OfferService(context, UserManager);
+                var reviewService = new ReviewService(context, UserManager);
+                var offerService = new OfferService(context, UserManager);
 
-                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                var users = new List<ShareTravelSystemUser>
                 {
-                    new ShareTravelSystemUser{ UserName = "TestUser1" },
-                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                    new ShareTravelSystemUser {UserName = "TestUser1"},
+                    new ShareTravelSystemUser {UserName = "TestUser2"}
                 };
 
                 await context.Users.AddRangeAsync(users);
                 await context.SaveChangesAsync();
 
-                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
-                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+                var testUser1 =
+                    await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                var testUser2 =
+                    await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
 
-                Offer offer = new Offer
+                var offer = new Offer
                 {
                     Type = OfferType.Search,
                     DepartureTownId = 1,
@@ -415,7 +432,7 @@
                 await context.Offers.AddAsync(offer);
                 await context.SaveChangesAsync();
 
-                Review review = new Review
+                var review = new Review
                 {
                     Comment = "TestComment",
                     Author = testUser2,
@@ -451,7 +468,7 @@
 
             var builder = new DbContextOptionsBuilder<ShareTravelSystemDbContext>();
             builder.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                   .UseInternalServiceProvider(serviceProvider);
+                .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
         }

@@ -15,10 +15,10 @@
 
 //namespace ShareTravelSystem.Tests.Controllers
 //{
-//    public class AnnouncementControllerTest
+//    public class AnnouncementsControllerTest
 //    {
 //        private UserManager<ShareTravelSystemUser> userManager { get; set; }
-//        public AnnouncementControllerTest()
+//        public AnnouncementsControllerTest()
 //        {
 //            userManager = TestStartup.UserManager;
 //        }
@@ -28,7 +28,7 @@
 //        {
 //            //Arrange
 //            ShareTravelSystemDbContext db = this.GetContext();
-//            Web.Areas.User.Controllers.AnnouncementController controller = GetController(db);
+//            Web.Areas.User.Controllers.AnnouncementsController controller = GetController(db);
 
 //            int announcementId = 1;
 
@@ -59,7 +59,7 @@
 //        {
 //            //Arrange
 //            ShareTravelSystemDbContext db = this.GetContext();
-//            Web.Areas.Admin.Controllers.AnnouncementController adminController = this.GetAdminController(db);
+//            Web.Areas.Admin.Controllers.AnnouncementsController adminController = this.GetAdminController(db);
 
 //            int announcementId = 1;
 //            Announcement announcement = new Announcement
@@ -83,7 +83,7 @@
 
 //            //Arrange
 //            ShareTravelSystemDbContext db = this.GetContext();
-//            Web.Areas.User.Controllers.AnnouncementController controller = this.GetController(db);
+//            Web.Areas.User.Controllers.AnnouncementsController controller = this.GetController(db);
 
 //            var user = new ShareTravelSystemUser
 //            {
@@ -121,21 +121,21 @@
 
 //        //}
 
-//        private Web.Areas.User.Controllers.AnnouncementController GetController(ShareTravelSystemDbContext db)
+//        private Web.Areas.User.Controllers.AnnouncementsController GetController(ShareTravelSystemDbContext db)
 //        {
 
 //            AnnouncementService announcements = new AnnouncementService(db, userManager);
 
-//            Web.Areas.User.Controllers.AnnouncementController controller = new Web.Areas.User.Controllers.AnnouncementController(announcements, userManager);
+//            Web.Areas.User.Controllers.AnnouncementsController controller = new Web.Areas.User.Controllers.AnnouncementsController(announcements, userManager);
 
 //            return controller;
 //        }
 
-//        private Web.Areas.Admin.Controllers.AnnouncementController GetAdminController(ShareTravelSystemDbContext db)
+//        private Web.Areas.Admin.Controllers.AnnouncementsController GetAdminController(ShareTravelSystemDbContext db)
 //        {
 //            AnnouncementService announcements = new AnnouncementService(db, userManager);
 
-//            Web.Areas.Admin.Controllers.AnnouncementController controller = new Web.Areas.Admin.Controllers.AnnouncementController(announcements, userManager);
+//            Web.Areas.Admin.Controllers.AnnouncementsController controller = new Web.Areas.Admin.Controllers.AnnouncementsController(announcements, userManager);
 
 //            return controller;
 //        }
@@ -150,3 +150,4 @@
 //        }
 //    }
 //}
+

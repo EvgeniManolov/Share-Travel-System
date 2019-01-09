@@ -18,11 +18,11 @@
 
 //namespace ShareTravelSystem.Tests.Controllers
 //{
-//    public class TownControllerTest
+//    public class TownsControllerTest
 //    {
 
 //        //private UserManager<ShareTravelSystemUser> userManager { get; set; }
-//        //public TownControllerTest()
+//        //public TownsControllerTest()
 //        //{
 //        //    //TestStartup.Initialize();
 //        //    userManager= TestStartup.UserManager;
@@ -32,7 +32,7 @@
 //        public void EditShouldChangeTownDataInDatabase()
 //        {
 //            ShareTravelSystemDbContext db = this.GetContext();
-//            TownController controller = this.GetController(db);
+//            TownsController controller = this.GetController(db);
 
 //            int townId = 1;
 
@@ -58,7 +58,7 @@
 //        public void DeleteShouldSetFlagToTownDataInDatabase()
 //        {
 //            ShareTravelSystemDbContext db = this.GetContext();
-//            TownController controller = this.GetController(db);
+//            TownsController controller = this.GetController(db);
 
 //            int townId = 1;
 //            Town town = new Town
@@ -77,10 +77,10 @@
 //        [Fact]
 //        public void CreateShouldCreateTownDataInDatabase()
 //        {
-          
+
 
 //            ShareTravelSystemDbContext db = this.GetContext();
-//            TownController controller = this.GetController(db);
+//            TownsController controller = this.GetController(db);
 
 //            CrateTownViewModel town = new CrateTownViewModel
 //            {
@@ -105,12 +105,12 @@
 
 //        }
 
-//        private TownController GetController(ShareTravelSystemDbContext db)
+//        private TownsController GetController(ShareTravelSystemDbContext db)
 //        {
 
 //            TownService towns = new TownService(db);
 
-//            TownController controller = new TownController(towns);
+//            TownsController controller = new TownsController(towns);
 
 //            return controller;
 //        }
@@ -125,3 +125,4 @@
 //        }
 //    }
 //}
+

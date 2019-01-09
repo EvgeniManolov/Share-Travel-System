@@ -2,7 +2,7 @@
 {
     using Offer;
 
-    public class OfferPaginationViewModel :PaginationViewModel
+    public class OfferPaginationViewModel : PaginationViewModel
     {
         public string Filter { get; set; }
 

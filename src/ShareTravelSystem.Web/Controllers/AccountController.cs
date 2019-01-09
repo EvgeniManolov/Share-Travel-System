@@ -13,18 +13,18 @@
 
     public class AccountController : BaseController
     {
-        private readonly UserManager<ShareTravelSystemUser> userManager;
-        private readonly SignInManager<ShareTravelSystemUser> signInManager;
-        private readonly ILogger logger;
+        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly SignInManager<ShareTravelSystemUser> _signInManager;
+        private readonly ILogger _logger;
 
         public AccountController(
             UserManager<ShareTravelSystemUser> userManager,
             SignInManager<ShareTravelSystemUser> signInManager,
             ILogger<AccountController> logger)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.logger = logger;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._logger = logger;
         }
 
         [HttpGet]
@@ -43,17 +43,18 @@
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                    lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    this.logger.LogInformation("User logged in.");
+                    _logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl, model.Email);
                 }
 
-                this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return this.View(model);
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
             }
-            
+
             return View(model);
         }
 
@@ -68,12 +69,12 @@
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            var isExist = this.userManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
+            var isExist = _userManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
 
             if (isExist != null)
             {
-                this.ModelState.AddModelError("Name", Constants.UserAlreadyExists);
-                return this.View(model);
+                ModelState.AddModelError("Name", Constants.UserAlreadyExists);
+                return View(model);
             }
 
             if (ModelState.IsValid)
@@ -88,22 +89,23 @@
                     PhoneNumber = model.PhoneNumber
                 };
 
-                var result = await this.userManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    if (this.userManager.Users.Count() == 1)
+                    if (_userManager.Users.Count() == 1)
                     {
-                        await this.userManager.AddToRoleAsync(user, Constants.AdminRole);
+                        await _userManager.AddToRoleAsync(user, Constants.AdminRole);
                     }
                     else
                     {
-                        await this.userManager.AddToRoleAsync(user, Constants.UserRole);
+                        await _userManager.AddToRoleAsync(user, Constants.UserRole);
                     }
 
-                    this.signInManager.SignInAsync(user, false).Wait();
+                    _signInManager.SignInAsync(user, false).Wait();
                     return RedirectToLocal(returnUrl);
                 }
+
                 AddErrors(result);
             }
 
@@ -122,10 +124,9 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await this.signInManager.SignOutAsync();
-            this.logger.LogInformation("User logged out.");
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
-
         }
 
         private IActionResult RedirectToLocal(string returnUrl, string userName = "")
@@ -135,7 +136,7 @@
                 return Redirect(returnUrl);
             }
 
-            return this.RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         public IActionResult AccessDenied(string returnUrl)
