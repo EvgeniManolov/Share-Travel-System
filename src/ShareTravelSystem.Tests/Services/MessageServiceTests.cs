@@ -69,10 +69,10 @@
 
 
                 // Act
-                var result = await messageService.GetAllMessagesAsync();
+                var result = await messageService.GetAllMessagesAsync(null, 0);
 
                 // Assert
-                Assert.Equal(3, result.Messages.Count());
+                Assert.Equal(3, result.Messages.Messages.Count());
                 Assert.NotNull(result);
             }
         }

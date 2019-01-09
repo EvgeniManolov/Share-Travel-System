@@ -19,9 +19,9 @@
         }
 
 
-        public async Task<IActionResult> Chat()
+        public async Task<IActionResult> Chat(string search, int page)
         {
-            var messages = await this.messageService.GetAllMessagesAsync();
+            var messages = await this.messageService.GetAllMessagesAsync(search, page);
             return this.View(messages);
         }
 

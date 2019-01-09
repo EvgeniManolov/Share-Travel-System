@@ -1,11 +1,12 @@
 ﻿namespace ShareTravelSystem.Services.Contracts
 {
+    using ShareTravelSystem.ViewModels;
     using System.Threading.Tasks;
-    using ViewModels.Messages;
 
     public interface IMessageService
     {
         Task CreateMessageAsync(string message, string userId);
-        Task<DisplayAllMessagesViewModel> GetAllMessagesAsync();
+
+        Task<MessagePaginationViewModel> GetAllMessagesAsync(string search, int page);
     }
 }
