@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateAnnouncementAndSeeDataInDatabase()
+        public async Task CreateAnnouncementAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -53,7 +53,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnedFourAnnouncementsForIndexPageIfExistsMoreInDatabase()
+        public async Task GetIndexAnnouncementsAsync_WithCorrectData_ReturnsFourAnnouncementIfExistsMore()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -89,7 +89,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnedAllActiveAnnouncementsInDatabase()
+        public async Task GetAllAnnouncementsAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -127,7 +127,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteAnnouncementAndSeeSetFlagToTrueInDatabase()
+        public async Task DeleteAnnouncementAsync_WithCorrectData_SetFlagToTrue()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -158,7 +158,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteAnnouncementThatDoesNotExist()
+        public async Task DeleteAnnouncementAsync_WithWrongId_ReturnsAndCatchException()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -195,7 +195,7 @@
         }
 
         [Fact]
-        public async Task ShouldDetailsAnnouncementDisplayDataAsThisInDatabase()
+        public async Task DetailsAnnouncementAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -227,7 +227,7 @@
         }
 
         [Fact]
-        public async Task ShouldDetailsAnnouncementThatDoesNotExistAndTakeException()
+        public async Task DetailsAnnouncementAsync_WithWrongId_ReturnsAndCatchException()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -263,7 +263,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetCorrectAnnouncementToEdit()
+        public async Task GetAnnouncementToEditAsync_WithCorrectData_ReturnsCorrectAnnouncement()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -293,7 +293,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditAnnouncementAndSeeEditedDataInDatabase()
+        public async Task EditAnnouncementAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {

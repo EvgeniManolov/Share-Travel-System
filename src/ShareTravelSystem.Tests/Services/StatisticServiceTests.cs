@@ -26,7 +26,7 @@ namespace ShareTravelSystem.Tests.Services
 
 
         [Fact]
-        public async Task ShouldGetCorrectStatisticAndSeeDataInDatabase()
+        public async Task GetStatisticForAllUsersByRatingAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {

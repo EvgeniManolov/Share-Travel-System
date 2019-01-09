@@ -13,20 +13,20 @@
 
     public class MessageServiceTests
     {
-        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        private UserManager<ShareTravelSystemUser> UserManager { get; set; }
 
         public MessageServiceTests()
         {
-            userManager = TestStartup.UserManager;
+            UserManager = TestStartup.UserManager;
         }
 
         [Fact]
-        public async Task ShouldCreateMessageAndSeeDataInDatabase()
+        public async Task CreateMessageAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                MessageService messageService = new MessageService(context, userManager);
+                MessageService messageService = new MessageService(context, UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -47,14 +47,13 @@
             }
         }
 
-
         [Fact]
-        public async Task ShouldGetAllMessagesFromDatabase()
+        public async Task GetAllMessagesAsync_WithCorrectData_ReturnsAllActiveMessages()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                MessageService messageService = new MessageService(context, userManager);
+                MessageService messageService = new MessageService(context, UserManager);
 
                 var user = new ShareTravelSystemUser
                 {
@@ -90,6 +89,5 @@
 
             return builder.Options;
         }
-
     }
 }

@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateReviewAndSeeDataInDatabase()
+        public async Task CreateReviewAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -72,7 +72,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetCorrectReviewToEditDatabase()
+        public async Task GetReviewToEditAsync_WithCorrectId_ReturnsCorrectReview()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -131,7 +131,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditReviewAndSeeChangesInDatabase()
+        public async Task EditReviewAsync_WithCorrectModel_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -197,7 +197,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteReviewAndSeeChangeFlagInDatabase()
+        public async Task DeleteReviewAsync_WithCorrectId_SetFlagDeleteToTrue()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {

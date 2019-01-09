@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateOfferAndSeeDataInDatabase()
+        public async Task CreateOfferAsync_WithCorrectData_WorksCorrectly()
         {
 
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
@@ -65,7 +65,7 @@
         }
 
         [Fact]
-        public async Task ShouldDetailsOfferDisplayDataAsThisInDatabase()
+        public async Task DetailsOfferAsync_WithCorrectId_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -114,7 +114,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetAllActiveOffersInDatabase()
+        public async Task GetAllOffersAsync_WithCorrectData_ReturnsAllActiveOffers()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -173,7 +173,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetAllTownsInDatabase()
+        public async Task GetAllTowns_WithCorrectData_ReturnsAllActiveTowns()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -193,7 +193,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetCorrectOfferToEdit()
+        public async Task GetOfferToEditAsync_WithExistsId_ReturnsCorrectOffer()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -239,7 +239,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetOfferToEditButWithoutToHaveAuthorizationOfThisOperation()
+        public async Task GetOfferToEditAsync_WithWrongUserId_ReturnsAndCatchException()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -298,7 +298,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditOfferAndSeeDataInDatabase()
+        public async Task EditOfferAsync_WithCorrectModel_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -362,7 +362,7 @@
         }
 
         [Fact]
-        public async Task ShouldLikeOfferAndSeeRatingDataInDatabase()
+        public async Task LikeOfferAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -404,7 +404,7 @@
         }
 
         [Fact]
-        public async Task ShouldDisLikeOfferAndSeeRatingDataInDatabase()
+        public async Task DisLikeOfferAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -446,7 +446,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetReactionOffOfferAndSeeItInDatabase()
+        public async Task GetReactions_WithCorrectData_CountCorrectlyReactions()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -490,7 +490,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteOfferAndSeeSetFlagInDatabase()
+        public async Task DeleteOfferAsync_WithCorrectId_WorksCorrectly()
         {
 
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))

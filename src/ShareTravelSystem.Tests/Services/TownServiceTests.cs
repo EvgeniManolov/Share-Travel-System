@@ -23,7 +23,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateTownAndSeeDataInDatabase()
+        public async Task CreateTownAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -46,7 +46,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateTownWithNameThatAlreadyExistsAndTakException()
+        public async Task CreateTownAsync_WithAlreadyExistsTownName_ReturnsAndCatchException()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -56,6 +56,7 @@
                 CrateTownViewModel model = new CrateTownViewModel { Name = "ИмеГрад" };
                 await townService.CreateTownAsync(model);
                 CrateTownViewModel model1 = new CrateTownViewModel { Name = "ИмеГрад" };
+
                 // Act
                 string result = null;
                 try
@@ -74,7 +75,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteTownAndSeeDeleteFlagSetOnTrueInDatabase()
+        public async Task DeleteTownAsync_WithCorrectData_SetFlagDeleteToTrue()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -98,7 +99,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditTownAndSeeEditedDataInDatabase()
+        public async Task EditTownAsync_WithCorrectModel_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -125,7 +126,7 @@
         }
 
         [Fact]
-        public async Task ShouldAllReturnedTownsEqualToTownsInDatabase()
+        public async Task GetAllTownsAsync_WithCorrectData_ReturnsAllActiveTowns()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -153,7 +154,7 @@
         }
 
         [Fact]
-        public async Task ShouldGetCorrectTownToEdit()
+        public async Task GetTownToEditAsync_WithCorrectId_ReturnCorrectTownToEdit()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
@@ -174,8 +175,7 @@
                 Assert.Equal(model.Id, town.Id);
             }
         }
-
-
+        
         private static DbContextOptions<ShareTravelSystemDbContext> CreateNewContextOptions()
         {
             var serviceProvider = new ServiceCollection()
