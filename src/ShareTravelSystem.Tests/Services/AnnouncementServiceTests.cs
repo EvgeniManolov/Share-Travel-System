@@ -4,11 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data;
     using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using ShareTravelSystem.Services;
+    using ShareTravelSystem.ViewModels.Announcement;
     using ViewModels;
     using Web.Areas.Identity.Data;
     using Web.Models;

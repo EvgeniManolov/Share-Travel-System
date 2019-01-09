@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using ViewModels;
     using ViewModels.Announcement;
+    using ViewModels.Pagination;
 
     public interface IAnnouncementService
     {
@@ -15,7 +16,7 @@
 
         Task EditAnnouncementAsync(EditAnnouncementViewModel model);
 
-        Task DeleteAnnouncementAsync(int Id);
+        Task DeleteAnnouncementAsync(int id);
 
         Task<AnnouncementPaginationViewModel> GetAllAnnouncementsAsync(bool privateAnnouncements, string search,
             string userId, int page);

@@ -2,6 +2,7 @@
 {
     using ViewModels;
     using System.Threading.Tasks;
+    using ViewModels.Pagination;
 
     public interface IMessageService
     {

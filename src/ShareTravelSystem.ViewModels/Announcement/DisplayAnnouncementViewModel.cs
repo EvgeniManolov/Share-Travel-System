@@ -1,4 +1,4 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Announcement
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -14,12 +14,12 @@
         {
             get
             {
-                if (Title?.Length > 50)
+                if (this.Title?.Length > 50)
                 {
-                    return Title.Substring(0, 50) + "...";
+                    return this.Title.Substring(0, 50) + "...";
                 }
 
-                return Title;
+                return this.Title;
             }
         }
 
@@ -30,12 +30,12 @@
         {
             get
             {
-                if (Content?.Length > 100)
+                if (this.Content?.Length > 100)
                 {
-                    return Content.Substring(0, 100) + "...";
+                    return this.Content.Substring(0, 100) + "...";
                 }
 
-                return Content;
+                return this.Content;
             }
         }
 

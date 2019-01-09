@@ -14,16 +14,16 @@
     [Authorize(Roles = "User")]
     public class ReviewsController : BaseController
     {
-        private readonly IReviewService _reviewService;
-        private readonly IOfferService _offerService;
+        private readonly IReviewService reviewService;
+        private readonly IOfferService offerService;
         private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public ReviewsController(IReviewService reviewService,
             IOfferService offerService,
             UserManager<ShareTravelSystemUser> userManager)
         {
-            this._reviewService = reviewService;
-            this._offerService = offerService;
+            this.reviewService = reviewService;
+            this.offerService = offerService;
             this.userManager = userManager;
         }
 
@@ -32,18 +32,18 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string comment, int offerId)
         {
-            var currentUserId = userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                await _reviewService.CreateReviewAsync(comment, offerId, currentUserId);
+                await this.reviewService.CreateReviewAsync(comment, offerId, currentUserId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OffersController.Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(OffersController.Index));
             }
 
-            var redirectResult = MakeRedirectResult(nameof(Areas.User), nameof(OffersController),
+            var redirectResult = this.MakeRedirectResult(nameof(Areas.User), nameof(OffersController),
                 nameof(OffersController.Details),
                 offerId);
             return redirectResult;
@@ -53,18 +53,18 @@
         public async Task<IActionResult> Edit(int id, int offerId)
         {
             EditReviewViewModel model;
-            var currentUserId = userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = await _reviewService.GetReviewToEditAsync(id, offerId, currentUserId);
+                model = await this.reviewService.GetReviewToEditAsync(id, offerId, currentUserId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OffersController.Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(OffersController.Index));
             }
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -73,15 +73,15 @@
         {
             try
             {
-                await _reviewService.EditReviewAsync(model);
+                await this.reviewService.EditReviewAsync(model);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OffersController.Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(OffersController.Index));
             }
 
-            var redirectResult = MakeRedirectResult(nameof(Areas.User),
+            var redirectResult = this.MakeRedirectResult(nameof(Areas.User),
                 nameof(OffersController),
                 nameof(OffersController.Details),
                 model.OfferId);

@@ -1,5 +1,8 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Pagination
 {
+    using Abstract;
+    using Announcement;
+
     public class AnnouncementPaginationViewModel : PaginationViewModel
     {
         public string Search { get; set; }

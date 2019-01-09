@@ -1,5 +1,6 @@
-﻿@using ShareTravelSystem.Data.Models
-@model CreateOfferViewModel
+﻿@model CreateOfferViewModel
+
+@using ShareTravelSystem.Data.Models
 
 @{
     ViewData["Title"] = "Create Offer";
@@ -29,7 +30,7 @@
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input asp-for="Type" type="radio" class="form-check-input text-md-left"id="Suggest" value="Suggest">
+                                <input asp-for="Type" type="radio" class="form-check-input text-md-left" id="Suggest" value="Suggest">
                                 Suggest place
                             </label>
                         </div>
@@ -54,19 +55,19 @@
                 <div class="form-row">
                     <div class="col">
                         <label asp-for="Seat" class="mt-3"></label>
-                        <input asp-for="Seat" class="form-control mt-0"/>
+                        <input asp-for="Seat" class="form-control mt-0" />
                         <span asp-validation-for="Seat" class="text-danger"></span>
                     </div>
                     <div class="col">
                         <label asp-for="Price" class="mt-3"></label>
-                        <input asp-for="Price" class="form-control mt-0" type="number" min="0.00" max="10000.00" step="0.01"/>
+                        <input asp-for="Price" class="form-control mt-0" type="number" min="0.00" max="10000.00" step="0.01" />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-row mt-3">
                     <div class="col-6">
                         <label asp-for="DepartureDate" class="mt-2"></label>
-                        <input asp-for="DepartureDate" class="form-control" type="text" onfocus="(this.type = 'datetime-local')" id="date"/>
+                        <input asp-for="DepartureDate" class="form-control" type="text" onfocus="(this.type = 'datetime-local')" id="date" />
                         <span asp-validation-for="DepartureDate" class="text-danger"></span>
                     </div>
                 </div>

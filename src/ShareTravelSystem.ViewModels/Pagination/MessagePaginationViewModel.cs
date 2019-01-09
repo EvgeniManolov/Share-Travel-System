@@ -1,7 +1,8 @@
-﻿using ShareTravelSystem.ViewModels.Messages;
-
-namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Pagination
 {
+    using Abstract;
+    using Messages;
+
     public class MessagePaginationViewModel : PaginationViewModel
     {
         public string Search { get; set; }

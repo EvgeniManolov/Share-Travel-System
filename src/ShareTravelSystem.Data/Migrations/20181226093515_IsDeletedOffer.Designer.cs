@@ -7,7 +7,6 @@ namespace ShareTravelSystem.Data.Migrations
     using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Migrations;
-    using Web.Models;
 
     [DbContext(typeof(ShareTravelSystemDbContext))]
     [Migration("20181226093515_IsDeletedOffer")]

@@ -4,10 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Areas.Identity.Data;
+    using Data;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
-    using Models;
 
     public class SeedRolesMiddleware
     {

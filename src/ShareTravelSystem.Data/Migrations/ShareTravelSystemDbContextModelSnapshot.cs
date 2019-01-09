@@ -6,7 +6,6 @@ namespace ShareTravelSystem.Data.Migrations
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore.Metadata;
-    using Web.Models;
 
     [DbContext(typeof(ShareTravelSystemDbContext))]
     class ShareTravelSystemDbContextModelSnapshot : ModelSnapshot

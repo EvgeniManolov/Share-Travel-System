@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data;
     using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -55,7 +56,7 @@
 
                 var model = new CrateTownViewModel {Name = "ИмеГрад"};
                 await townService.CreateTownAsync(model);
-                var model1 = new CrateTownViewModel {Name = "ИмеГрад"};
+                var model1 = new CrateTownViewModel {Name = "ИмеГрад" };
 
                 // Act
                 string result = null;
@@ -171,8 +172,6 @@
                 var editTown = new EditTownViewModel {Id = townId, Name = "ИзтритГрад"};
 
                 // Act
-
-
                 string result = null;
                 try
                 {

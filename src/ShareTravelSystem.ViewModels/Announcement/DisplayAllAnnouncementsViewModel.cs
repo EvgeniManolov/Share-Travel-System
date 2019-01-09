@@ -1,4 +1,4 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Announcement
 {
     using System.Collections.Generic;
 

@@ -19,8 +19,7 @@
                 .Select(t => new
                 {
                     Interface = types
-                        .Where(i => i.IsAssignableFrom(t) && i.IsInterface)
-                        .FirstOrDefault(),
+                        .FirstOrDefault(i => i.IsAssignableFrom(t) && i.IsInterface),
                     Implementation = t
                 })
                 .ToDictionary(k => k.Interface, k => k.Implementation).ToList().ForEach(s =>

@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using ViewModels;
+    using ViewModels.Pagination;
     using ViewModels.Town;
 
     public interface ITownService

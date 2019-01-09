@@ -1,6 +1,7 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Pagination
 {
     using System.Collections.Generic;
+    using Abstract;
     using Town;
 
     public class TownPaginationViewModel : PaginationViewModel

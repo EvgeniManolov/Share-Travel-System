@@ -1,4 +1,4 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Account
 {
     using System.ComponentModel.DataAnnotations;
 

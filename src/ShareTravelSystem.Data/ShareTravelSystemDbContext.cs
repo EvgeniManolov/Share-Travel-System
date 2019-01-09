@@ -1,9 +1,9 @@
-﻿namespace ShareTravelSystem.Web.Models
+﻿namespace ShareTravelSystem.Data
 {
-    using Areas.Identity.Data;
-    using Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Models;
+    using Web.Areas.Identity.Data;
 
     public class ShareTravelSystemDbContext : IdentityDbContext<ShareTravelSystemUser>
     {

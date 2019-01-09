@@ -13,13 +13,13 @@
     [Authorize(Roles = "Admin")]
     public class ReviewsController : BaseController
     {
-        private readonly IReviewService _reviewService;
-        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly IReviewService reviewService;
+        private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public ReviewsController(IReviewService reviewService, UserManager<ShareTravelSystemUser> userManager)
         {
-            this._reviewService = reviewService;
-            this._userManager = userManager;
+            this.reviewService = reviewService;
+            this.userManager = userManager;
         }
 
         [HttpPost]
@@ -28,15 +28,15 @@
         {
             try
             {
-                await _reviewService.DeleteReviewAsync(reviewId, offerId);
+                await this.reviewService.DeleteReviewAsync(reviewId, offerId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(OffersController.Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(OffersController.Index));
             }
 
-            var redirectResult = MakeRedirectResult(nameof(Admin),
+            var redirectResult = this.MakeRedirectResult(nameof(Admin),
                 nameof(OffersController),
                 nameof(OffersController.Details),
                 offerId);

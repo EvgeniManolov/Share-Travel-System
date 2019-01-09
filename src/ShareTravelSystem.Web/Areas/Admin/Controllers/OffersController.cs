@@ -18,26 +18,26 @@
     [Authorize(Roles = "Admin")]
     public class OffersController : BaseController
     {
-        private readonly IOfferService _offerService;
-        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly IOfferService offerService;
+        private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public OffersController(IOfferService offerService, UserManager<ShareTravelSystemUser> userManager)
         {
-            this._offerService = offerService;
-            this._userManager = userManager;
+            this.offerService = offerService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string search, bool privateOffers, int page,
             string filter = Constants.FilterOfAllOffers)
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             var result =
-                await _offerService.GetAllOffersAsync(privateOffers, filter, search, currentUserId, page);
-            var likedOffersIds = _offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
+                await this.offerService.GetAllOffersAsync(privateOffers, filter, search, currentUserId, page);
+            var likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
 
-            ViewData["LikedDislikedOffersIds"] = likedOffersIds;
-            ViewData["Title"] = result.TitleOfPage;
-            return View(result);
+            this.ViewData["LikedDislikedOffersIds"] = likedOffersIds;
+            this.ViewData["Title"] = result.TitleOfPage;
+            return this.View(result);
         }
 
         public async Task<IActionResult> Details(int id)
@@ -45,15 +45,15 @@
             DetailsOfferViewModel model;
             try
             {
-                model = await _offerService.DetailsOfferAsync(id);
+                model = await this.offerService.DetailsOfferAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -62,15 +62,15 @@
         {
             try
             {
-                await _offerService.DeleteOfferAsync(id);
+                await this.offerService.DeleteOfferAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

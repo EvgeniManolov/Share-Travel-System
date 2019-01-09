@@ -1,4 +1,4 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Abstract
 {
     public abstract class PaginationViewModel
     {

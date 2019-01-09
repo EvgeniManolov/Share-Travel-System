@@ -6,11 +6,11 @@
 
     public class BaseController : Controller
     {
-        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public BaseController(UserManager<ShareTravelSystemUser> userManager)
         {
-            this._userManager = userManager;
+            this.userManager = userManager;
         }
 
         public BaseController()
@@ -20,7 +20,7 @@
 
         protected bool RedirectIfNotInRole(string role)
         {
-            return User == null || User.IsInRole(role);
+            return User == null || this.User.IsInRole(role);
         }
 
         protected RedirectToActionResult MakeRedirectResult(string area, string controller, string action, int id)

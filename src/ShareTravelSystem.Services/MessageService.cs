@@ -9,20 +9,21 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data;
     using ViewModels.Messages;
+    using ViewModels.Pagination;
     using Web.Areas.Identity.Data;
-    using Web.Models;
 
     public class MessageService : IMessageService
     {
-        private readonly ShareTravelSystemDbContext _db;
-        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly ShareTravelSystemDbContext db;
+        private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public MessageService(ShareTravelSystemDbContext db,
             UserManager<ShareTravelSystemUser> userManager)
         {
-            this._db = db;
-            this._userManager = userManager;
+            this.db = db;
+            this.userManager = userManager;
         }
 
         public async Task CreateMessageAsync(string message, string userId)
@@ -33,8 +34,8 @@
                 AuthorId = userId,
                 CreateOn = DateTime.UtcNow
             };
-            await _db.Messages.AddAsync(currentMessage);
-            await _db.SaveChangesAsync();
+            await this.db.Messages.AddAsync(currentMessage);
+            await this.db.SaveChangesAsync();
         }
 
         public async Task<MessagePaginationViewModel> GetAllMessagesAsync(string search, int page)
@@ -42,7 +43,7 @@
             var size = 10;
             if (page == 0) page = 1;
 
-            var messages = await _db.Messages.OrderByDescending(x => x.CreateOn)
+            var messages = await this.db.Messages.OrderByDescending(x => x.CreateOn)
                 .ProjectTo<DisplayMessageViewModel>().ToListAsync();
             if (!string.IsNullOrEmpty(search))
             {

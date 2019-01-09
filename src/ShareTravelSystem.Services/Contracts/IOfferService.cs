@@ -5,6 +5,7 @@
     using Data.Models;
     using ViewModels;
     using ViewModels.Offer;
+    using ViewModels.Pagination;
 
     public interface IOfferService
     {
@@ -21,9 +22,9 @@
 
         Task EditOfferAsync(DisplayEditOfferViewModel model);
 
-        Task<bool> LikeOfferAsync(int offerId, string userId);
+        Task<bool> LikeOfferAsync(int id, string userId);
 
-        Task<bool> DisLikeOfferAsync(int offerId, string userId);
+        Task<bool> DisLikeOfferAsync(int id, string userId);
 
         IEnumerable<int> GetLikedOrDislikedOffersIds(string currentUserId);
 

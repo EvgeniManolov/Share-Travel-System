@@ -16,57 +16,57 @@
     [Authorize(Roles = "User")]
     public class OffersController : BaseController
     {
-        private readonly IOfferService _offerService;
-        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly IOfferService offerService;
+        private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public OffersController(IOfferService offerService, UserManager<ShareTravelSystemUser> userManager)
         {
-            this._offerService = offerService;
-            this._userManager = userManager;
+            this.offerService = offerService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string search, bool privateOffers, int page,
             string filter = Constants.FilterOfAllOffers)
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             var result =
-                await _offerService.GetAllOffersAsync(privateOffers, filter, search, currentUserId, page);
-            var likedOffersIds = _offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
+                await this.offerService.GetAllOffersAsync(privateOffers, filter, search, currentUserId, page);
+            var likedOffersIds = this.offerService.GetLikedOrDislikedOffersIds(currentUserId).ToList();
 
-            ViewData["LikedDislikedOffersIds"] = likedOffersIds;
-            ViewData["Title"] = result.TitleOfPage;
-            return View(result);
+            this.ViewData["LikedDislikedOffersIds"] = likedOffersIds;
+            this.ViewData["Title"] = result.TitleOfPage;
+            return this.View(result);
         }
 
 
         public IActionResult Create()
         {
-            var towns = _offerService.GetAllTowns().ToList();
-            ViewData["Towns"] = towns;
-            return View();
+            var towns = this.offerService.GetAllTowns().ToList();
+            this.ViewData["Towns"] = towns;
+            return this.View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateOfferViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                await _offerService.CreateOfferAsync(model, currentUserId);
+                await this.offerService.CreateOfferAsync(model, currentUserId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         public async Task<IActionResult> Details(int id)
@@ -74,55 +74,55 @@
             DetailsOfferViewModel model;
             try
             {
-                model = await _offerService.DetailsOfferAsync(id);
+                model = await this.offerService.DetailsOfferAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
             DisplayEditOfferViewModel model;
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                model = await _offerService.GetOfferToEditAsync(id, currentUserId);
+                model = await this.offerService.GetOfferToEditAsync(id, currentUserId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(DisplayEditOfferViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             try
             {
-                await _offerService.EditOfferAsync(model);
+                await this.offerService.EditOfferAsync(model);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            var redirectResult = MakeRedirectResult(nameof(Areas.User), nameof(OffersController),
-                nameof(Details), model.OfferModel.Id);
+            var redirectResult = this.MakeRedirectResult(nameof(Areas.User), nameof(OffersController),
+                nameof(this.Details), model.OfferModel.Id);
 
             return redirectResult;
         }
@@ -130,35 +130,35 @@
         [HttpPost]
         public async Task<IActionResult> Like(int offerId)
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                var result = await _offerService.LikeOfferAsync(offerId, currentUserId);
+                var result = await this.offerService.LikeOfferAsync(offerId, currentUserId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [HttpPost]
         public async Task<IActionResult> DisLike(int offerId)
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             try
             {
-                var result = await _offerService.DisLikeOfferAsync(offerId, currentUserId);
+                var result = await this.offerService.DisLikeOfferAsync(offerId, currentUserId);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

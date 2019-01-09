@@ -12,46 +12,46 @@
     [Authorize(Roles = "Admin")]
     public class TownsController : BaseController
     {
-        private readonly ITownService _townService;
+        private readonly ITownService townService;
 
         public TownsController(ITownService townService)
         {
-            this._townService = townService;
+            this.townService = townService;
         }
 
         public async Task<IActionResult> Index(int page, string search)
         {
-            var towns = await _townService.GetAllTownsAsync(page, search);
-            return View(towns);
+            var towns = await this.townService.GetAllTownsAsync(page, search);
+            return this.View(towns);
         }
 
         public IActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CrateTownViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             try
             {
-                await _townService.CreateTownAsync(model);
+                await this.townService.CreateTownAsync(model);
             }
 
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
+                this.ModelState.AddModelError("Name", e.Message);
 
-                return View(model);
+                return this.View(model);
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -60,38 +60,38 @@
 
             try
             {
-                town = await _townService.GetTownToEditAsync(id);
+                town = await this.townService.GetTownToEditAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
+                this.ModelState.AddModelError("Name", e.Message);
 
-                return RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return View(town);
+            return this.View(town);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditTownViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
             try
             {
-                await _townService.EditTownAsync(model);
+                await this.townService.EditTownAsync(model);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return View(model);
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.View(model);
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [HttpPost]
@@ -100,15 +100,15 @@
         {
             try
             {
-                await _townService.DeleteTownAsync(id);
+                await this.townService.DeleteTownAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

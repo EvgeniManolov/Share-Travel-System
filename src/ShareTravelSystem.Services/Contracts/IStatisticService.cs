@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using ViewModels;
+    using ViewModels.Pagination;
 
     public interface IStatisticService
     {

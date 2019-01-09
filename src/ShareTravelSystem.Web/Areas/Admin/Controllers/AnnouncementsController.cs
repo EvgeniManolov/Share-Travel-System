@@ -7,7 +7,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Contracts;
-    using ViewModels;
     using ViewModels.Announcement;
     using Web.Controllers;
 
@@ -15,26 +14,26 @@
     [Authorize(Roles = "Admin")]
     public class AnnouncementsController : BaseController
     {
-        private readonly IAnnouncementService _announcementService;
-        private readonly UserManager<ShareTravelSystemUser> _userManager;
+        private readonly IAnnouncementService announcementService;
+        private readonly UserManager<ShareTravelSystemUser> userManager;
 
         public AnnouncementsController(IAnnouncementService announcementService,
             UserManager<ShareTravelSystemUser> userManager)
         {
-            this._announcementService = announcementService;
-            this._userManager = userManager;
+            this.announcementService = announcementService;
+            this.userManager = userManager;
         }
 
 
         public async Task<IActionResult> Index(string search, bool privateAnnouncements, int page)
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = this.userManager.GetUserId(this.User);
             var result =
-                await _announcementService.GetAllAnnouncementsAsync(privateAnnouncements, search, currentUserId,
+                await this.announcementService.GetAllAnnouncementsAsync(privateAnnouncements, search, currentUserId,
                     page);
 
-            ViewData["Title"] = result.TitleOfPage;
-            return View(result);
+            this.ViewData["Title"] = result.TitleOfPage;
+            return this.View(result);
         }
 
         public async Task<IActionResult> Details(int id)
@@ -43,15 +42,15 @@
 
             try
             {
-                model = await _announcementService.DetailsAnnouncementAsync(id);
+                model = await this.announcementService.DetailsAnnouncementAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return View(model);
+            return this.View(model);
         }
 
 
@@ -61,15 +60,15 @@
         {
             try
             {
-                await _announcementService.DeleteAnnouncementAsync(id);
+                await this.announcementService.DeleteAnnouncementAsync(id);
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("Name", e.Message);
-                return RedirectToAction(nameof(Index));
+                this.ModelState.AddModelError("Name", e.Message);
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

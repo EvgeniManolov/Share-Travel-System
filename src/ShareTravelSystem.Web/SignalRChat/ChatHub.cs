@@ -25,12 +25,12 @@
                 return;
             }
 
-            await messageService
-                .CreateMessageAsync(message, userManager.GetUserId(Context.User));
+            await this.messageService
+                .CreateMessageAsync(message, this.userManager.GetUserId(this.Context.User));
 
-            await Clients.All.SendAsync("NewMessage", new Message
+            await this.Clients.All.SendAsync("NewMessage", new Message
             {
-                User = Context.User.Identity.Name,
+                User = this.Context.User.Identity.Name,
                 Text = message
             });
         }

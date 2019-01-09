@@ -3,6 +3,7 @@
     using System;
     using Areas.Identity.Data;
     using AutoMapper;
+    using Data;
     using Infrastructure.Extensions;
     using Infrastructure.Mapping;
     using Microsoft.AspNetCore.Builder;

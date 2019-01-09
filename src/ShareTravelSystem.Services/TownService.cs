@@ -6,26 +6,27 @@
     using System.Threading.Tasks;
     using AutoMapper.QueryableExtensions;
     using Contracts;
+    using Data;
     using Data.Models;
     using Infrastructure;
     using Microsoft.EntityFrameworkCore;
     using ViewModels;
+    using ViewModels.Pagination;
     using ViewModels.Town;
-    using Web.Models;
 
     public class TownService : ITownService
     {
-        private readonly ShareTravelSystemDbContext _db;
+        private readonly ShareTravelSystemDbContext db;
 
         public TownService(ShareTravelSystemDbContext db)
         {
-            this._db = db;
+            this.db = db;
         }
 
         public async Task CreateTownAsync(CrateTownViewModel model)
         {
-            var isExist = await _db.Towns
-                .Where(t => String.Equals(t.Name, model.Name, StringComparison.CurrentCultureIgnoreCase) && t.IsDeleted)
+            var isExist = await this.db.Towns
+                .Where(t => String.Equals(t.Name, model.Name, StringComparison.CurrentCultureIgnoreCase) && !t.IsDeleted)
                 .Select(x => x.Name).SingleOrDefaultAsync();
 
             if (isExist != null)
@@ -35,13 +36,13 @@
 
             var town = new Town { Name = model.Name };
 
-            _db.Towns.Add(town);
-            await _db.SaveChangesAsync();
+            await this.db.Towns.AddAsync(town);
+            await this.db.SaveChangesAsync();
         }
 
         public async Task DeleteTownAsync(int townId)
         {
-            var town = await _db
+            var town = await this.db
                 .Towns
                 .Where(t => t.Id == townId)
                 .SingleOrDefaultAsync();
@@ -52,17 +53,17 @@
             }
 
             town.IsDeleted = true;
-            await _db.SaveChangesAsync();
+            await this.db.SaveChangesAsync();
         }
 
         public async Task EditTownAsync(EditTownViewModel model)
         {
-            var townTask = _db
+            var townTask = this.db
                 .Towns
                 .Where(t => t.Id == model.Id && !t.IsDeleted)
                 .SingleOrDefaultAsync();
 
-            var isExist = await _db.Towns.Where(t => t.Name == model.Name && !t.IsDeleted).Select(n => n.Name)
+            var isExist = await this.db.Towns.Where(t => t.Name == model.Name && !t.IsDeleted).Select(n => n.Name)
                 .SingleOrDefaultAsync();
             if (isExist != null)
             {
@@ -71,7 +72,7 @@
 
             var town = await townTask;
             town.Name = model.Name;
-            await _db.SaveChangesAsync();
+            await this.db.SaveChangesAsync();
         }
 
         public async Task<TownPaginationViewModel> GetAllTownsAsync(int page, string search)
@@ -82,7 +83,7 @@
 
             if (!string.IsNullOrEmpty(search))
             {
-                towns = await _db
+                towns = await this.db
                     .Towns
                     .OrderBy(p => p.Name)
                     .Where(t => !t.IsDeleted && t.Name.ToLower()
@@ -92,7 +93,7 @@
             }
             else
             {
-                towns = await _db
+                towns = await this.db
                     .Towns
                     .OrderBy(p => p.Name)
                     .Where(t => !t.IsDeleted)
@@ -117,7 +118,7 @@
 
         public async Task<EditTownViewModel> GetTownToEditAsync(int id)
         {
-            var town = await _db
+            var town = await this.db
                 .Towns
                 .Where(t => t.Id == id && !t.IsDeleted)
                 .ProjectTo<EditTownViewModel>()

@@ -6,7 +6,6 @@
     using System.Linq;
     using Models;
     using Newtonsoft.Json;
-    using Web.Models;
 
     public class DbInitializer
     {

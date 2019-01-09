@@ -1,5 +1,6 @@
-﻿namespace ShareTravelSystem.ViewModels
+﻿namespace ShareTravelSystem.ViewModels.Pagination
 {
+    using Abstract;
     using Offer;
 
     public class OfferPaginationViewModel : PaginationViewModel
