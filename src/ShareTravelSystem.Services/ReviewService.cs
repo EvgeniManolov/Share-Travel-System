@@ -27,7 +27,8 @@
 
         public async Task CreateReviewAsync(string comment, int offerId, string currentUserId)
         {
-            if (offerId == 0)
+            var offer = await this.db.Offers.Where(x => x.Id == offerId).SingleOrDefaultAsync();
+            if (offer == null)
             {
                 throw new ArgumentException(string.Format(Constants.OfferDoesNotExist, offerId));
             }

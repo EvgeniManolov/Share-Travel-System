@@ -31,7 +31,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -60,26 +60,27 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
-
-                CreateAnnouncementViewModel model1 = new CreateAnnouncementViewModel { Title = "Заглавие1", Content = "Съдържание1" };
-                CreateAnnouncementViewModel model2 = new CreateAnnouncementViewModel { Title = "Заглавие2", Content = "Съдържание2" };
-                CreateAnnouncementViewModel model3 = new CreateAnnouncementViewModel { Title = "Заглавие3", Content = "Съдържание3" };
-                CreateAnnouncementViewModel model4 = new CreateAnnouncementViewModel { Title = "Заглавие4", Content = "Съдържание4" };
-                CreateAnnouncementViewModel model5 = new CreateAnnouncementViewModel { Title = "Заглавие5", Content = "Съдържание5" };
+                List<CreateAnnouncementViewModel> announcements = new List<CreateAnnouncementViewModel> {
+                new CreateAnnouncementViewModel { Title = "Заглавие1", Content = "Съдържание1" },
+                new CreateAnnouncementViewModel { Title = "Заглавие2", Content = "Съдържание2" },
+                new CreateAnnouncementViewModel { Title = "Заглавие3", Content = "Съдържание3" },
+                new CreateAnnouncementViewModel { Title = "Заглавие4", Content = "Съдържание4" },
+                new CreateAnnouncementViewModel { Title = "Заглавие5", Content = "Съдържание5" }
+            };
 
                 // Act
-                await announcementService.CreateAnnouncementAsync(model1, user.Id);
-                await announcementService.CreateAnnouncementAsync(model2, user.Id);
-                await announcementService.CreateAnnouncementAsync(model3, user.Id);
-                await announcementService.CreateAnnouncementAsync(model4, user.Id);
-                await announcementService.CreateAnnouncementAsync(model5, user.Id);
+                await announcementService.CreateAnnouncementAsync(announcements[0], user.Id);
+                await announcementService.CreateAnnouncementAsync(announcements[1], user.Id);
+                await announcementService.CreateAnnouncementAsync(announcements[2], user.Id);
+                await announcementService.CreateAnnouncementAsync(announcements[3], user.Id);
+                await announcementService.CreateAnnouncementAsync(announcements[4], user.Id);
                 var returnedModel = await announcementService.GetIndexAnnouncementsAsync();
 
                 // Assert
@@ -96,7 +97,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -134,12 +135,18 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
-                Announcement announcement = new Announcement { Title = "Title", Content = "Content", CreateDate = DateTime.UtcNow, Author = user };
+                Announcement announcement = new Announcement
+                {
+                    Title = "Title",
+                    Content = "Content",
+                    CreateDate = DateTime.UtcNow,
+                    Author = user
+                };
 
                 await context.Users.AddAsync(user);
                 await context.Announcements.AddAsync(announcement);
@@ -165,7 +172,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -175,8 +182,6 @@
                 await context.Users.AddAsync(user);
                 await context.Announcements.AddAsync(announcement);
                 await context.SaveChangesAsync();
-
-                
 
                 // Act
                 string result = null;
@@ -202,7 +207,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -212,7 +217,6 @@
                 await context.Users.AddAsync(user);
                 await context.Announcements.AddAsync(announcement);
                 await context.SaveChangesAsync();
-
 
                 // Act
                 var returnedModel = await announcementService.DetailsAnnouncementAsync(announcement.Id);
@@ -234,7 +238,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -245,14 +249,13 @@
                 await context.Announcements.AddAsync(announcement);
                 await context.SaveChangesAsync();
 
-
                 // Act
                 string result = null;
                 try
                 {
                     var returnedModel = await announcementService.DetailsAnnouncementAsync(3);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     result = e.Message;
                 }
@@ -270,7 +273,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -280,7 +283,6 @@
                 await context.Users.AddAsync(user);
                 await context.Announcements.AddAsync(announcement);
                 await context.SaveChangesAsync();
-
 
                 // Act
                 var returnedModel = await announcementService.GetAnnouncementToEditAsync(announcement.Id, user.Id);
@@ -293,6 +295,75 @@
         }
 
         [Fact]
+        public async Task GetAnnouncementToEditAsync_WithWrongAnnouncementId_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
+
+                ShareTravelSystemUser user = new ShareTravelSystemUser
+                {
+                    UserName = "TestUser"
+                };
+
+                Announcement announcement = new Announcement { Title = "Title", Content = "Content", CreateDate = DateTime.UtcNow, Author = user };
+
+                await context.Users.AddAsync(user);
+                await context.Announcements.AddAsync(announcement);
+                await context.SaveChangesAsync();
+
+                //Act
+                string result = null;
+                try
+                {
+                    var returnedModel = await announcementService.GetAnnouncementToEditAsync(3, user.Id);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Announcement with id: 3 does not exist.", result);
+            }
+        }
+
+        [Fact]
+        public async Task GetAnnouncementToEditAsync_WithWrongUserId_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
+
+                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser> {
+                 new ShareTravelSystemUser { UserName = "TestUser"},
+                 new ShareTravelSystemUser{ UserName = "TestUser2" } };
+
+                Announcement announcement = new Announcement { Title = "Title", Content = "Content", CreateDate = DateTime.UtcNow, Author = users[0] };
+
+                await context.Users.AddRangeAsync(users);
+                await context.Announcements.AddAsync(announcement);
+                await context.SaveChangesAsync();
+
+                //Act
+                string result = null;
+                try
+                {
+                    var returnedModel = await announcementService.GetAnnouncementToEditAsync(announcement.Id, users[1].Id);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("User with id: " + users[1].Id + " is not authorized for this operation.", result);
+            }
+        }
+
+        [Fact]
         public async Task EditAnnouncementAsync_WithCorrectData_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
@@ -300,7 +371,7 @@
                 // Arrange
                 AnnouncementService announcementService = new AnnouncementService(context, this.UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };

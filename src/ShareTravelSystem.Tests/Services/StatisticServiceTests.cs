@@ -1,6 +1,4 @@
-﻿
-
-namespace ShareTravelSystem.Tests.Services
+﻿namespace ShareTravelSystem.Tests.Services
 {
     using System;
     using System.Collections.Generic;
@@ -17,13 +15,12 @@ namespace ShareTravelSystem.Tests.Services
 
     public class StatisticServiceTests
     {
-        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        private UserManager<ShareTravelSystemUser> UserManager { get; set; }
 
         public StatisticServiceTests()
         {
-            userManager = TestStartup.UserManager;
+            UserManager = TestStartup.UserManager;
         }
-
 
         [Fact]
         public async Task GetStatisticForAllUsersByRatingAsync_WithCorrectData_WorksCorrectly()
@@ -33,22 +30,16 @@ namespace ShareTravelSystem.Tests.Services
                 // Arrange
                 StatisticService statisticsService = new StatisticService(context);
                 // Create Offer and users
-                OfferService offerService = new OfferService(context, userManager);
+                OfferService offerService = new OfferService(context, UserManager);
 
-                var user = new ShareTravelSystemUser
-                {
-                    UserName = "TestUserr"
-                };
+                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser> {
+                    new ShareTravelSystemUser { UserName = "TestUserr" },
+                    new ShareTravelSystemUser { UserName = "TestUserr2" }};
 
-                var user2 = new ShareTravelSystemUser
-                {
-                    UserName = "TestUserr2"
-                };
+                var towns = new List<Town> { new Town { Name = "гр.Софияаа" },
+                                             new Town { Name = "гр.Варнааа" }};
 
-                var towns = new List<Town> { new Town { Name = "гр.Софияаа" }, new Town { Name = "гр.Варнааа" } };
-
-                await context.Users.AddAsync(user);
-                await context.Users.AddAsync(user2);
+                await context.Users.AddRangeAsync(users);
                 await context.Towns.AddRangeAsync(towns);
                 await context.SaveChangesAsync();
 
@@ -61,7 +52,7 @@ namespace ShareTravelSystem.Tests.Services
                     Price = 5,
                     DepartureDate = DateTime.UtcNow,
                     Description = "Хубаво!",
-                    Author = user,
+                    Author = users[0],
                     TotalRating = 0,
                     CreateDate = DateTime.UtcNow
                 };
@@ -69,7 +60,7 @@ namespace ShareTravelSystem.Tests.Services
                 await context.SaveChangesAsync();
 
                 // Act
-                var returnedModel = await offerService.LikeOfferAsync(offer.Id, user2.Id);
+                var returnedModel = await offerService.LikeOfferAsync(offer.Id, users[1].Id);
                 var statistics = await statisticsService.GetStatisticForAllUsersByRatingAsync(0, null);
                 var totalLikes = statistics.Statistic.Statistics.First().TotalLikes;
 

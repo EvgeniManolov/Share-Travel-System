@@ -15,11 +15,11 @@
 
     public class TownServiceTests
     {
-        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        private UserManager<ShareTravelSystemUser> UserManager { get; set; }
 
         public TownServiceTests()
         {
-            userManager = TestStartup.UserManager;
+            UserManager = TestStartup.UserManager;
         }
 
         [Fact]
@@ -70,7 +70,6 @@
                 
                 // Assert
                 Assert.Equal("Town with name ИмеГрад already exists.", result);
-                
             }
         }
 
@@ -99,6 +98,36 @@
         }
 
         [Fact]
+        public async Task DeleteTownAsync_WithInCorrectData_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                TownService townService = new TownService(context);
+
+                Town town = new Town { Name = "ИзтритГрад" };
+                await context.Towns.AddAsync(town);
+                await context.SaveChangesAsync();
+
+                int townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
+
+                // Act
+                string result = null;
+                try
+                {
+                    await townService.DeleteTownAsync(3);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Town with id: 3 does not exist.", result);
+            }
+        }
+
+        [Fact]
         public async Task EditTownAsync_WithCorrectModel_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
@@ -122,6 +151,40 @@
 
                 string editTownNameInDatabase = await context.Towns.Select(x => x.Name).SingleOrDefaultAsync();
                 Assert.Equal(editTownNameInDatabase, editTown.Name);
+            }
+        }
+
+        [Fact]
+        public async Task EditTownAsync_WithTownNameThatAlreadyExist_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                TownService townService = new TownService(context);
+
+                Town town = new Town { Name = "ИзтритГрад" };
+                await context.Towns.AddAsync(town);
+                await context.SaveChangesAsync();
+
+                int townId = await context.Towns.Select(x => x.Id).SingleOrDefaultAsync();
+
+                EditTownViewModel editTown = new EditTownViewModel { Id = townId, Name = "ИзтритГрад" };
+
+                // Act
+                
+
+                string result = null;
+                try
+                {
+                    await townService.EditTownAsync(editTown);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Town with name ИзтритГрад already exists.", result);
             }
         }
 
@@ -175,7 +238,37 @@
                 Assert.Equal(model.Id, town.Id);
             }
         }
-        
+
+        [Fact]
+        public async Task GetTownToEditAsync_WithInCorrectId_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                TownService townService = new TownService(context);
+
+                Town town = new Town { Name = "Таун" };
+                await context.Towns.AddAsync(town);
+                await context.SaveChangesAsync();
+
+                int townId = town.Id;
+
+                // Act
+                string result = null;
+                try
+                {
+                    var returnedModel = await townService.GetTownToEditAsync(3);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Town with id: 3 does not exist.", result);
+            }
+        }
+
         private static DbContextOptions<ShareTravelSystemDbContext> CreateNewContextOptions()
         {
             var serviceProvider = new ServiceCollection()

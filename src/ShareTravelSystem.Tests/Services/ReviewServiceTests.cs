@@ -16,11 +16,11 @@
 
     public class ReviewServiceTests
     {
-        private UserManager<ShareTravelSystemUser> userManager { get; set; }
+        private UserManager<ShareTravelSystemUser> UserManager { get; set; }
 
         public ReviewServiceTests()
         {
-            userManager = TestStartup.UserManager;
+            UserManager = TestStartup.UserManager;
         }
 
         [Fact]
@@ -29,8 +29,8 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, userManager);
-                OfferService offerService = new OfferService(context, userManager);
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
 
                 List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
                 {
@@ -72,13 +72,67 @@
         }
 
         [Fact]
+        public async Task CreateReviewAsync_WithInCorrectOfferID_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
+
+                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                {
+                    new ShareTravelSystemUser{ UserName = "TestUser1" },
+                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                };
+
+                await context.Users.AddRangeAsync(users);
+                await context.SaveChangesAsync();
+
+                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+
+                Offer offer = new Offer
+                {
+                    Type = OfferType.Search,
+                    DepartureTownId = 1,
+                    DestinationTownId = 2,
+                    Seat = 2,
+                    Price = 10,
+                    DepartureDate = DateTime.UtcNow,
+                    Description = "Здравейте!",
+                    Author = testUser1,
+                    TotalRating = 0,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Offers.AddAsync(offer);
+                await context.SaveChangesAsync();
+
+                // Act
+                string result = null;
+                try
+                {
+                    await  reviewService.CreateReviewAsync("TestComment", 2, testUser2.Id);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Offer with id: 2 does not exist.", result);
+            }
+        }
+
+        [Fact]
         public async Task GetReviewToEditAsync_WithCorrectId_ReturnsCorrectReview()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, userManager);
-                OfferService offerService = new OfferService(context, userManager);
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
 
                 List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
                 {
@@ -131,13 +185,79 @@
         }
 
         [Fact]
+        public async Task GetReviewToEditAsync_WithInCorrectId_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
+
+                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                {
+                    new ShareTravelSystemUser{ UserName = "TestUser1" },
+                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                };
+
+                await context.Users.AddRangeAsync(users);
+                await context.SaveChangesAsync();
+
+                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+
+                Offer offer = new Offer
+                {
+                    Type = OfferType.Search,
+                    DepartureTownId = 1,
+                    DestinationTownId = 2,
+                    Seat = 2,
+                    Price = 10,
+                    DepartureDate = DateTime.UtcNow,
+                    Description = "Здравейте!",
+                    Author = testUser1,
+                    TotalRating = 0,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Offers.AddAsync(offer);
+                await context.SaveChangesAsync();
+
+                Review review = new Review
+                {
+                    Comment = "TestComment",
+                    Author = testUser2,
+                    OfferId = offer.Id,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Reviews.AddAsync(review);
+                await context.SaveChangesAsync();
+
+                // Act
+
+                string result = null;
+                try
+                {
+                    var returnedModel = await reviewService.GetReviewToEditAsync(3, offer.Id, testUser2.Id);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Review with id: 3 does not exist.", result);
+            }
+        }
+
+        [Fact]
         public async Task EditReviewAsync_WithCorrectModel_WorksCorrectly()
         {
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, userManager);
-                OfferService offerService = new OfferService(context, userManager);
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
 
                 List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
                 {
@@ -202,8 +322,8 @@
             using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
             {
                 // Arrange
-                ReviewService reviewService = new ReviewService(context, userManager);
-                OfferService offerService = new OfferService(context, userManager);
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
 
                 List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
                 {
@@ -254,6 +374,72 @@
                 // Assert
                 Assert.NotNull(deletedReviewDb);
                 Assert.True(deletedReviewDb.IsDeleted);
+            }
+        }
+
+        [Fact]
+        public async Task DeleteReviewAsync_WithInCorrectId_ReturnsAndCatchException()
+        {
+            using (var context = new ShareTravelSystemDbContext(CreateNewContextOptions()))
+            {
+                // Arrange
+                ReviewService reviewService = new ReviewService(context, UserManager);
+                OfferService offerService = new OfferService(context, UserManager);
+
+                List<ShareTravelSystemUser> users = new List<ShareTravelSystemUser>
+                {
+                    new ShareTravelSystemUser{ UserName = "TestUser1" },
+                    new ShareTravelSystemUser{ UserName = "TestUser2"}
+                };
+
+                await context.Users.AddRangeAsync(users);
+                await context.SaveChangesAsync();
+
+                ShareTravelSystemUser testUser1 = await context.Users.Where(x => x.UserName == "TestUser1").SingleOrDefaultAsync();
+                ShareTravelSystemUser testUser2 = await context.Users.Where(x => x.UserName == "TestUser2").SingleOrDefaultAsync();
+
+                Offer offer = new Offer
+                {
+                    Type = OfferType.Search,
+                    DepartureTownId = 1,
+                    DestinationTownId = 2,
+                    Seat = 2,
+                    Price = 10,
+                    DepartureDate = DateTime.UtcNow,
+                    Description = "Здравейте!",
+                    Author = testUser1,
+                    TotalRating = 0,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Offers.AddAsync(offer);
+                await context.SaveChangesAsync();
+
+                Review review = new Review
+                {
+                    Comment = "TestComment",
+                    Author = testUser2,
+                    OfferId = offer.Id,
+                    CreateDate = DateTime.UtcNow
+                };
+
+                await context.Reviews.AddAsync(review);
+                await context.SaveChangesAsync();
+
+
+                // Act
+                string result = null;
+                try
+                {
+                    await reviewService.DeleteReviewAsync(3, offer.Id);
+                }
+                catch (Exception e)
+                {
+                    result = e.Message;
+                }
+
+                // Assert
+                Assert.Equal("Review with id: 3 does not exist.", result);
             }
         }
 

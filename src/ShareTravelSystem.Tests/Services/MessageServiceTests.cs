@@ -28,15 +28,13 @@
                 // Arrange
                 MessageService messageService = new MessageService(context, UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
 
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
-
-
 
                 // Act
                 await messageService.CreateMessageAsync("Съобщение", user.Id);
@@ -55,7 +53,7 @@
                 // Arrange
                 MessageService messageService = new MessageService(context, UserManager);
 
-                var user = new ShareTravelSystemUser
+                ShareTravelSystemUser user = new ShareTravelSystemUser
                 {
                     UserName = "TestUser"
                 };
@@ -66,7 +64,6 @@
                 await messageService.CreateMessageAsync("Съобщение1", user.Id);
                 await messageService.CreateMessageAsync("Съобщение2", user.Id);
                 await messageService.CreateMessageAsync("Съобщение3", user.Id);
-
 
                 // Act
                 var result = await messageService.GetAllMessagesAsync(null, 0);
