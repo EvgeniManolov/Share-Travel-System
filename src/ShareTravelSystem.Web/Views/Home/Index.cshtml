@@ -28,7 +28,7 @@
             @foreach (var announcement in Model.Announcements)
             {
                 <div class="col-3">
-                    <a href="@Url.Action("Details", "Announcement", new {id = announcement.Id})">
+                    <a href="@Url.Action("Details", "Announcements", new {id = announcement.Id})">
                         <div class="card bg-secondary mb-4">
                             <div class="card-body" style="word-wrap: break-word;">
                                 <h5 class="card-title ">
@@ -44,7 +44,6 @@
                 </div>
             }
         </div>
-        <hr>
     </div>
 }
 else
