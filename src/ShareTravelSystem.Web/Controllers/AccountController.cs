@@ -31,6 +31,10 @@
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return this.RedirectToAction(nameof(HomeController.Index), "Home");
+            }
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
             return this.View();
         }

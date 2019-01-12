@@ -25,8 +25,26 @@
         [Display(Name = "Description")]
         public string Description { get; set; }
 
+        [Required]
+        [Display(Name = "ShortDescription")]
 
-        [Required] [Display(Name = "Seat")] public int Seat { get; set; }
+
+        public string ShortDescription
+        {
+            get
+            {
+                if (this.Description?.Length >40)
+                {
+                    return this.Description.Substring(0, 40) + "...";
+                }
+
+                return this.Description;
+            }
+        }
+
+
+        [Required] [Display(Name = "Seat")]
+        public int Seat { get; set; }
 
         [Required]
         [Display(Name = "DepartureTownName")]
