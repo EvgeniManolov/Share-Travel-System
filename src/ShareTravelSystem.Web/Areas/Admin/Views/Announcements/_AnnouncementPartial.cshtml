@@ -1,17 +1,14 @@
 ﻿@model DisplayAnnouncementViewModel
 
+
 <div class="col-3">
     <a href="@Url.Action("Details", "Announcements", new {id = Model.Id})">
-        <div class="card bg-secondary mb-4">
-            <div class="card-body">
-                <h5 class="card-title ">
-                    <strong>@Model.ShortTitle</strong>
-                </h5>
-                <p class="card-text ">@Model.ShortContent</p>
+        <div class="card border-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header border-primary"><strong>@Model.ShortTitle</strong></div>
+            <div class="card-body text-primary">
+                <p class="card-text">@Model.ShortContent</p>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated on @Model.CreateDate by @Model.Author</small>
-            </div>
+            <div class="card-footer border-primary">Last updated on @Model.CreateDate by @Model.Author</div>
         </div>
     </a>
 </div>

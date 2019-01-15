@@ -15,7 +15,7 @@
     <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages)</p>
 }
 
-<div class="text-center col-12">
+<div class="text-center col-12 mb-2">
     <div class="btn-group mb-3" role="group" aria-label="Basic example">
         <a href="/Home/Chat?page=@pageDown.ToString()&search=@Model.Search" class="btn btn-outline-primary">&#8678;</a>
         <button type="button" class="btn btn-outline-primary">@Model.Page</button>

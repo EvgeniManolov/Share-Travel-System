@@ -22,23 +22,19 @@
         </div>
     </div>
     <div class="container">
-        <h4 class="mt-0">Latest news</h4>
+        <h3 class="mt-0 ml-3 text-primary">Latest news</h3>
         <hr />
         <div class="card-deck">
             @foreach (var announcement in Model.Announcements)
             {
                 <div class="col-3">
                     <a href="@Url.Action("Details", "Announcements", new {id = announcement.Id})">
-                        <div class="card bg-secondary mb-4">
-                            <div class="card-body" style="word-wrap: break-word;">
-                                <h5 class="card-title ">
-                                    <strong>@announcement.ShortTitle</strong>
-                                </h5>
-                                <p class="card-text ">@announcement.ShortContent</p>
+                        <div class="card border-primary mb-3" style="max-width: 18rem;">
+                            <div class="card-header border-primary text-primary"><strong>@announcement.ShortTitle</strong></div>
+                            <div class="card-body text-primary">
+                                <p class="card-text">@announcement.ShortContent</p>
                             </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Last updated on @announcement.CreateDate by @announcement.Author</small>
-                            </div>
+                            <footer class="text-primary ml-4 indexAnnouncementClass">Created on @announcement.CreateDate</footer>
                         </div>
                     </a>
                 </div>

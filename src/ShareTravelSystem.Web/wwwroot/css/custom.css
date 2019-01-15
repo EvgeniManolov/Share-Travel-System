@@ -227,3 +227,11 @@ footer, nav { background-color: var(--header-and-footer-background) }
     margin-left: 0;
     margin-right: 0;
 }
+
+a {
+    text-decoration: none !important;
+}
+
+.indexAnnouncementClass {
+    background-color: white !important;
+}

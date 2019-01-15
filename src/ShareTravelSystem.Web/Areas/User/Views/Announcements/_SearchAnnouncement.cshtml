@@ -1,21 +1,20 @@
 ﻿@model AnnouncementPaginationViewModel
 
-<div class="well search-bar">
-    <h3 align="center" class="mb-0">Filter Announcements</h3>
-    <hr class="col-lg-6 mt-0"/>
-    <form class="form-horizontal">
+<div class="row">
+    <form class="w-50">
         <div class="form-group">
             <div class="row">
-                <label for="location1" class="control-label ml-3">Announcements: </label>
-                <div class="ml-3">All Announcements: @Html.RadioButton("privateAnnouncements", false, true)</div>
+                <div class="ml-4">All Announcements: @Html.RadioButton("privateAnnouncements", false, true)</div>
                 <div class="ml-3">My Announcements: @Html.RadioButton("privateAnnouncements", true)</div>
+                <button type="submit" class="btn btn-primary text-white ml-3 mr-2" href="@Url.Action("Index", "Announcements")">Apply Filter</button>
             </div>
         </div>
+    </form>
+    <form class="w-50">
         <div class="form-group">
             <div class="row">
-                <label for="location1" class="control-label ml-0">Content: </label>
-                <input name="search" type="text" value="@Model.Search" class="ml-2" placeholder="Search Announcement...">
-                <button type="submit" class="btn btn-primary text-white ml-5 mr-2" href="@Url.Action("Index", "Announcements")">Apply Filters</button>
+                <input name="search" type="text" value="@Model.Search" class="ml-2" placeholder=" Search...">
+                <button type="submit" class="btn btn-primary text-white ml-3 mr-2" href="@Url.Action("Index", "Announcements")">Search</button>
             </div>
         </div>
     </form>

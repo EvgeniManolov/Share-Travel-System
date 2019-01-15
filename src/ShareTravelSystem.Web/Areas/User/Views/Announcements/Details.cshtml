@@ -3,27 +3,29 @@
     ViewData["Title"] = "Details";
 }
 <div asp-validation-summary="All"></div>
-<h1 class="ml-3">Details Announcement</h1>
-<div class="col-4 mt-3 ">
-    <div class="card bg-secondary mb-4">
-        <div class="card-body">
-            <h5 class="card-title ">
-                <strong>@Model.Title</strong>
-            </h5>
-            <p class="card-text ">@Model.Content</p>
+
+<h1 class="ml-3 text-center display-4">Details Announcement</h1>
+<div class="row justify-content-center">
+    <div class="card text-center w-75">
+        <div class="card-header">
+            <strong>@Model.Title</strong>
         </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated on @Model.CreateDate by @Model.Author</small>
+        <div class="card-body">
+            <p class="card-text">@Model.Content</p>
+        </div>
+        <div class="card-footer text-muted">
+            Last updated on @Model.CreateDate by @Model.Author
         </div>
     </div>
-    @if (Model.Author == User.Identity.Name)
-    {
-        <div class="row">
-            <a asp-controller="Announcements" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary ml-3">Edit</a>
-            <a asp-controller="Announcements" asp-action="Index" class="btn btn-primary ml-3">Back</a>
-        </div>
-    }
 </div>
+@if (Model.Author == User.Identity.Name)
+{
+    <div class="row justify-content-center mt-2">
+        <a asp-controller="Announcements" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary ml-3">Edit</a>
+        <a asp-controller="Announcements" asp-action="Index" class="btn btn-primary ml-3">Back</a>
+    </div>
+}
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

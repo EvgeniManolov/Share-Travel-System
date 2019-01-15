@@ -12,12 +12,12 @@
     var totalPages = (int) Math.Ceiling(((double) Model.Count / Model.Size));
 
 
-    <p class="text-center">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages)</p>
+    <p class="text-center p-1">Page @Model.Page of @(totalPages < 1 ? 1 : totalPages)</p>
 }
-<div class="text-center col-12">
+<div class="text-center col-12 mb-2">
     <div class="btn-group" role="group" aria-label="Basic example">
         <a href="/Admin/Announcements/Index?page=@pageDown.ToString()&search=@Model.Search" class="btn btn-outline-primary">&#8678;</a>
         <button type="button" class="btn btn-outline-primary">@Model.Page</button>
         <a href="/Admin/Announcements/Index?page=@pageUp.ToString()&search=@Model.Search" class="btn btn-outline-primary">&#8680;</a>
     </div>
-</div>
+</div>  
